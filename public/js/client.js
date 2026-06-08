@@ -500,4 +500,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('copy-link')?.addEventListener('click', copyRoomLink);
+
+  // Verlassen-Button: sauber ausloggen
+  document.getElementById('leave-btn')?.addEventListener('click', leaveRoom);
+
+  // Beim Seiten-Refresh/Closing: sauber trennen
+  window.addEventListener('beforeunload', () => {
+    if (socket) socket.disconnect();
+  });
 });
+
+// === RAUM VERLASSEN ===
+function leaveRoom() {
+  if (socket) {
+    socket.disconnect();
+  }
+  // Seite neuladen – zurück zum Login
+  window.location.reload();
+}
