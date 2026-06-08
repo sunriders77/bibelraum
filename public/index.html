@@ -66,8 +66,6 @@
         var sources = [];
         try { sources = Array.from(session.inputSources); } catch(e) {}
 
-        this.debug('VR + ' + sources.length + ' Controller');
-
         for (var i = 0; i < sources.length; i++) {
           var src = sources[i];
           if (!src || !src.gamepad || !src.gamepad.axes) continue;
@@ -90,30 +88,51 @@
           }
         }
 
-        // === Bewegung (auf diesem Entity – #player) ===
+        // Live Stick-Werte auslesen für Debug
+        var lx = leftAxes && leftAxes.length >= 2 ? (Math.abs(leftAxes[0]) > 0.12 ? leftAxes[0].toFixed(2) : '0') : '-';
+        var ly = leftAxes && leftAxes.length >= 2 ? (Math.abs(leftAxes[1]) > 0.12 ? leftAxes[1].toFixed(2) : '0') : '-';
+        var rx = rightAxes && rightAxes.length >= 2 ? (Math.abs(rightAxes[0]) > 0.12 ? rightAxes[0].toFixed(2) : '0') : '-';
+        this.debug('L(' + lx + ',' + ly + ') R(' + rx + ')');
+
+        // === Bewegung (auf #player via setAttribute – robuster) ===
+        var moved = false;
         if (leftAxes && leftAxes.length >= 2) {
-          var lx = Math.abs(leftAxes[0]) > 0.12 ? leftAxes[0] : 0;
-          var ly = Math.abs(leftAxes[1]) > 0.12 ? leftAxes[1] : 0;
-          if (lx !== 0 || ly !== 0) {
+          var m_lx = Math.abs(leftAxes[0]) > 0.15 ? leftAxes[0] : 0;
+          var m_ly = Math.abs(leftAxes[1]) > 0.15 ? leftAxes[1] : 0;
+          if (m_lx !== 0 || m_ly !== 0) {
             if (this.head && this.head.components && this.head.components.camera) {
               var cam = this.head.components.camera.camera;
-              if (cam) {
+              if (cam && cam.quaternion) {
                 this.quat.copy(cam.quaternion);
                 this.tempVec.set(0, 0, -1).applyQuaternion(this.quat);
                 this.tempVec.y = 0; this.tempVec.normalize();
                 this.tempRight.set(1, 0, 0).applyQuaternion(this.quat);
                 this.tempRight.y = 0; this.tempRight.normalize();
-                var speed = 3.5 * dt;
-                this.el.object3D.position.add(this.tempVec.clone().multiplyScalar(-ly * speed));
-                this.el.object3D.position.add(this.tempRight.clone().multiplyScalar(lx * speed));
+                var speed = 4 * dt;
+                var pos = this.el.getAttribute('position');
+                pos.x += this.tempRight.x * m_lx * speed;
+                pos.z += this.tempRight.z * m_lx * speed;
+                pos.x += this.tempVec.x * -m_ly * speed;
+                pos.z += this.tempVec.z * -m_ly * speed;
+                this.el.setAttribute('position', pos);
+                moved = true;
               }
             }
           }
         }
 
-        // === Drehung ===
-        if (rightAxes && rightAxes.length >= 2 && Math.abs(rightAxes[0]) > 0.12) {
-          this.el.object3D.rotation.y -= rightAxes[0] * 2.5 * dt;
+        // === Drehung (via setAttribute) ===
+        if (rightAxes && rightAxes.length >= 2 && Math.abs(rightAxes[0]) > 0.15) {
+          var rot = this.el.getAttribute('rotation');
+          rot.y -= rightAxes[0] * 3 * dt;
+          this.el.setAttribute('rotation', rot);
+          moved = true;
+        }
+
+        // Nur debuggen wenn Bewegung passiert
+        if (moved) {
+          var p = this.el.getAttribute('position');
+          this.debug('L(' + lx + ',' + ly + ') R(' + rx + ') → ' + p.x.toFixed(1) + ',' + p.z.toFixed(1));
         }
       },
       debug: function(msg) {
