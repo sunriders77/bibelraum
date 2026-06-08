@@ -248,6 +248,7 @@ function createRemoteAvatar(user) {
 
   container.appendChild(entity);
   remoteAvatars[user.id] = entity;
+  } // Ende else-Block
 }
 
 function removeRemoteAvatar(userId) {
