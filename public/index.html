@@ -19,6 +19,14 @@
         this.tempVec = new THREE.Vector3();
         this.tempRight = new THREE.Vector3();
         this.quat = new THREE.Quaternion();
+        // Laser-Linien nach Controller-Verbindung ausblenden
+        var scene = this.el.sceneEl;
+        scene.addEventListener('controllerconnected', function(evt) {
+          var lineEls = evt.detail.target.querySelectorAll('[line]');
+          for (var i = 0; i < lineEls.length; i++) {
+            lineEls[i].setAttribute('visible', false);
+          }
+        });
       },
       tick: function(time, timeDelta) {
         var scene = this.el.sceneEl;
@@ -133,6 +141,9 @@
       <a-camera id="camera" wasd-controls="enabled: true" look-controls="pointerLockEnabled: true">
         <a-cursor id="cursor" raycaster="objects: .clickable" color="#4CAF50" visible="false"></a-cursor>
       </a-camera>
+      <!-- Quest 3 Controller (für Sichtbarkeit + InputSources) mit unsichtbarem Laser -->
+      <a-entity laser-controls="hand: left" raycaster="far: 0.001; showLine: false"></a-entity>
+      <a-entity laser-controls="hand: right" raycaster="far: 0.001; showLine: false"></a-entity>
     </a-entity>
 
     <!-- Beleuchtung -->
