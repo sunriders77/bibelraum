@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bibelraum ✝️</title>
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <!-- Socket.IO Client -->
+  <script src="/socket.io/socket.io.js"></script>
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Namenseingabe -->
+  <div id="overlay">
+    <div id="login-box">
+      <h1>✝️ Bibelraum</h1>
+      <p>Gib deinen Namen ein und tritt ein</p>
+      <input type="text" id="name-input" placeholder="Dein Name" maxlength="20" autofocus>
+      <button id="enter-btn">Beitreten</button>
+      <p class="hint">VR-Brille? Einfach beitreten – WebXR startet automatisch.</p>
+    </div>
+    <div id="toolbar">
+      <div id="user-list">
+        <strong>👥 Anwesend:</strong>
+        <span id="user-count">0</span>
+      </div>
+      <div id="toolbar-right">
+        <button id="toggle-jitsi" title="Jitsi Meeting zeigen/verstecken">📺 Bildschirm</button>
+        <button id="copy-link" title="Link kopieren">🔗 Link kopieren</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jitsi-Seitenleiste (ausgeklappt) -->
+  <div id="jitsi-container" class="hidden">
+    <div id="jitsi-meeting"></div>
+  </div>
+
+  <!-- A-Frame Szene -->
+  <a-scene id="scene" renderer="antialias: true; colorManagement: true; alpha: true"
+    xr-mode-ui="enabled: true"
+    vr-mode-ui="enabled: true; cardVisibility: always">
+
+    <!-- Kamera / Rig -->
+    <a-entity id="camera-rig" position="0 1.6 3">
+      <a-camera id="camera" wasd-controls="enabled: true" look-controls="pointerLockEnabled: true">
+        <a-cursor id="cursor" raycaster="objects: .clickable" color="#4CAF50"></a-cursor>
+      </a-camera>
+    </a-entity>
+
+    <!-- Beleuchtung -->
+    <a-light type="ambient" color="#FFF5E6" intensity="0.6"></a-light>
+    <a-light type="directional" position="5 8 5" intensity="0.8" color="#FFE4B5"></a-light>
+    <a-light type="hemisphere" color="#87CEEB" ground-color="#8B7355" intensity="0.4"></a-light>
+
+    <!-- Boden -->
+    <a-plane position="0 0 0" width="20" height="20" rotation="-90 0 0"
+      material="color: #8B7355; roughness: 0.9; metalness: 0; src: #floor-texture; repeat: 4 4"></a-plane>
+
+    <!-- Teppich in der Mitte -->
+    <a-circle position="0 0.01 0" radius="4" color="#5C4033" roughness="0.95"
+      material="side: double; transparent: true; opacity: 0.8"></a-circle>
+
+    <!-- Wände -->
+    <!-- Rückwand -->
+    <a-plane position="0 2.5 -5" width="12" height="5"
+      material="color: #F5E6C8; roughness: 0.9; side: double"></a-plane>
+    <!-- Linke Wand -->
+    <a-plane position="-6 2.5 0" width="10" height="5" rotation="0 90 0"
+      material="color: #F0DCC0; roughness: 0.9; side: double"></a-plane>
+    <!-- Rechte Wand -->
+    <a-plane position="6 2.5 0" width="10" height="5" rotation="0 -90 0"
+      material="color: #F0DCC0; roughness: 0.9; side: double"></a-plane>
+    <!-- Decke -->
+    <a-plane position="0 5 0" width="12" height="10" rotation="-90 0 0"
+      material="color: #FFF8EE; roughness: 0.7; transparent: true; opacity: 0.3"></a-plane>
+
+    <!-- Scheinwerfer von der Decke -->
+    <a-entity position="-3 4.5 -2">
+      <a-cone radius-bottom="0.3" radius-top="0.1" height="0.3" color="#333" position="0 0 0"></a-cone>
+      <a-sphere radius="0.15" color="#FFE4B5" position="0 -0.2 0"></a-sphere>
+    </a-entity>
+    <a-entity position="3 4.5 -2">
+      <a-cone radius-bottom="0.3" radius-top="0.1" height="0.3" color="#333" position="0 0 0"></a-cone>
+      <a-sphere radius="0.15" color="#FFE4B5" position="0 -0.2 0"></a-sphere>
+    </a-entity>
+    <a-entity position="0 4.5 2">
+      <a-cone radius-bottom="0.3" radius-top="0.1" height="0.3" color="#333" position="0 0 0"></a-cone>
+      <a-sphere radius="0.15" color="#FFE4B5" position="0 -0.2 0"></a-sphere>
+    </a-entity>
+
+    <!-- Sitzkreis – 6 Stühle im Halbkreis -->
+    <!-- Stuhl 1 -->
+    <a-entity position="-2.5 0 -1.5" rotation="0 30 0">
+      <a-box depth="0.4" height="0.8" width="0.4" color="#6B4226" position="0 0.4 0"></a-box>
+      <a-box depth="0.4" height="0.1" width="0.5" color="#8B5A2B" position="0 0.85 0"></a-box>
+    </a-entity>
+    <!-- Stuhl 2 -->
+    <a-entity position="-1.5 0 -2.5" rotation="0 10 0">
+      <a-box depth="0.4" height="0.8" width="0.4" color="#6B4226" position="0 0.4 0"></a-box>
+      <a-box depth="0.4" height="0.1" width="0.5" color="#8B5A2B" position="0 0.85 0"></a-box>
+    </a-entity>
+    <!-- Stuhl 3 -->
+    <a-entity position="0 0 -3" rotation="0 0 0">
+      <a-box depth="0.4" height="0.8" width="0.4" color="#6B4226" position="0 0.4 0"></a-box>
+      <a-box depth="0.4" height="0.1" width="0.5" color="#8B5A2B" position="0 0.85 0"></a-box>
+    </a-entity>
+    <!-- Stuhl 4 -->
+    <a-entity position="1.5 0 -2.5" rotation="0 -10 0">
+      <a-box depth="0.4" height="0.8" width="0.4" color="#6B4226" position="0 0.4 0"></a-box>
+      <a-box depth="0.4" height="0.1" width="0.5" color="#8B5A2B" position="0 0.85 0"></a-box>
+    </a-entity>
+    <!-- Stuhl 5 -->
+    <a-entity position="2.5 0 -1.5" rotation="0 -30 0">
+      <a-box depth="0.4" height="0.8" width="0.4" color="#6B4226" position="0 0.4 0"></a-box>
+      <a-box depth="0.4" height="0.1" width="0.5" color="#8B5A2B" position="0 0.85 0"></a-box>
+    </a-entity>
+    <!-- Stuhl 6 – vorne links -->
+    <a-entity position="-3 0 1" rotation="0 60 0">
+      <a-box depth="0.4" height="0.8" width="0.4" color="#6B4226" position="0 0.4 0"></a-box>
+      <a-box depth="0.4" height="0.1" width="0.5" color="#8B5A2B" position="0 0.85 0"></a-box>
+    </a-entity>
+
+    <!-- Tisch in der Mitte -->
+    <a-cylinder position="0 0.3 0" radius="0.8" height="0.6" color="#5C3A1E"
+      material="roughness: 0.8; metalness: 0.1"></a-cylinder>
+    <!-- Tischplatte -->
+    <a-cylinder position="0 0.65 0" radius="0.9" height="0.1" color="#7B4F30"
+      material="roughness: 0.6"></a-cylinder>
+
+    <!-- Kreuz an der Wand -->
+    <a-entity position="0 3 -4.8">
+      <a-box depth="0.05" height="1" width="0.1" color="#8B4513" position="0 0 0"></a-box>
+      <a-box depth="0.05" height="0.1" width="0.6" color="#8B4513" position="0 -0.25 0"></a-box>
+      <a-box depth="0.05" height="0.1" width="0.1" color="#8B4513" position="0 0.35 0"></a-box>
+    </a-entity>
+
+    <!-- Bühne / Leinwand-Bereich vorne -->
+    <a-plane position="0 0.5 -4.5" width="4" height="0.1" color="#3E2723" rotation="-90 0 0"></a-plane>
+
+    <!-- Große Videoleinwand für Jitsi -->
+    <a-entity id="screen-frame" position="0 2 -4.7">
+      <!-- Rahmen -->
+      <a-box depth="0.1" height="2.5" width="3.5" color="#2C1810" position="0 0 0"></a-box>
+      <!-- Die Leinwand (Video wird per JS reingesetzt) -->
+      <a-plane id="video-screen" depth="0.01" height="2.2" width="3.2" color="#1a1a2e"
+        position="0 0 0.06" material="shader: flat; side: double"></a-plane>
+      <!-- Status-Text auf der Leinwand -->
+      <a-text id="screen-text" value="📺 Bibelstunde" position="0 0 0.08" align="center"
+        color="#888" width="3" negate="false"></a-text>
+    </a-entity>
+
+    <!-- Container für fremde Avatare -->
+    <a-entity id="remote-avatars"></a-entity>
+
+    <!-- Eigenen Avatar markieren (wird beim Start erstellt) -->
+    <a-entity id="my-avatar-container">
+      <a-entity id="my-avatar-name" text="value: ; align: center; color: #4CAF50; negate: false"
+        position="0 2.2 0" scale="0.5 0.5 0.5"></a-entity>
+    </a-entity>
+
+  </a-scene>
+
+  <!-- Styles -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    #login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(30, 20, 10, 0.95);
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,215,0,0.3);
+      pointer-events: all;
+      z-index: 1001;
+    }
+    #login-box h1 {
+      margin: 0 0 8px 0;
+      font-size: 28px;
+      color: #FFD700;
+    }
+    #login-box p {
+      color: #ccc;
+      margin: 0 0 20px 0;
+      font-size: 14px;
+    }
+    #login-box .hint {
+      color: #888;
+      font-size: 12px;
+      margin-top: 16px;
+    }
+    #name-input {
+      display: block;
+      width: 240px;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 2px solid #5C4033;
+      border-radius: 8px;
+      background: #1a1a1a;
+      color: #fff;
+      text-align: center;
+      margin: 0 auto 12px auto;
+    }
+    #name-input:focus {
+      outline: none;
+      border-color: #FFD700;
+    }
+    #enter-btn {
+      padding: 12px 40px;
+      font-size: 16px;
+      background: linear-gradient(135deg, #8B4513, #FFD700);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #enter-btn:hover {
+      background: linear-gradient(135deg, #A0522D, #FFC107);
+    }
+    #toolbar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(20, 15, 10, 0.85);
+      backdrop-filter: blur(10px);
+      padding: 10px 20px;
+      border-radius: 30px;
+      display: none;
+      align-items: center;
+      gap: 16px;
+      pointer-events: all;
+      border: 1px solid rgba(255,215,0,0.2);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    #user-list {
+      color: #ddd;
+      font-size: 14px;
+    }
+    #user-count {
+      color: #FFD700;
+      font-weight: bold;
+    }
+    #toolbar-right {
+      display: flex;
+      gap: 8px;
+    }
+    #toolbar-right button {
+      background: #3E2723;
+      border: 1px solid #6B4226;
+      color: #ddd;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    #toolbar-right button:hover {
+      background: #5C4033;
+    }
+    #jitsi-container {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      width: 320px;
+      height: 240px;
+      z-index: 999;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      border: 2px solid rgba(255,215,0,0.3);
+      pointer-events: all;
+      transition: all 0.3s ease;
+    }
+    #jitsi-container.hidden {
+      display: none;
+    }
+    #jitsi-container.resizable {
+      resize: both;
+      overflow: auto;
+    }
+    #jitsi-meeting {
+      width: 100%;
+      height: 100%;
+    }
+    .toast {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 8px;
+      z-index: 2000;
+      font-size: 14px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+  </style>
+
+  <!-- Client-Logik -->
+  <script src="/js/client.js"></script>
+</body>
+</html>

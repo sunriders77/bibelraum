@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: bibelraum
+    runtime: node
+    repo: https://github.com/DEIN-USERNAME/bibelraum
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 3000

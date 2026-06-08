@@ -1,0 +1,15 @@
+{
+  "name": "bibelraum",
+  "version": "1.0.0",
+  "description": "3D Bibelkreis-Raum – hybrid für VR-Brillen und Webcam-Teilnehmer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "socket.io": "^4.8.0",
+    "uuid": "^11.0.0"
+  }
+}
