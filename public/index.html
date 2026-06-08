@@ -109,11 +109,17 @@
           }
         }
 
-        // === DREHUNG: Rechter Stick = axes[2] ===
-        if (rightAxes && rightAxes.length >= 4 && Math.abs(rightAxes[2]) > 0.15) {
+        // === DREHUNG: Rechter Stick – axes[2] oder axes[0] je nach Achsenzahl ===
+        var turnSpeed = 0;
+        if (rightAxes && rightAxes.length >= 4) {
+          turnSpeed = rightAxes[2]; // Quest 3 Standard
+        } else if (rightAxes && rightAxes.length >= 2) {
+          turnSpeed = rightAxes[0]; // Fallback für 2-Achsen-Controller
+        }
+        if (Math.abs(turnSpeed) > 0.15) {
           try {
             var rot = this.el.getAttribute('rotation');
-            rot.y -= rightAxes[2] * 3 * dt;
+            rot.y -= turnSpeed * 5 * dt; // 5× schneller
             this.el.setAttribute('rotation', rot);
           } catch(e) { this.debug('FEHLER: ' + e.message); }
         }

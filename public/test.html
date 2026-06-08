@@ -107,10 +107,13 @@
 
         var sL = leftAxes ? 'L✓' : 'L?';
         var sR = rightAxes ? 'R✓' : 'R?';
-        var la = leftAxes ? Array.from(leftAxes).map(function(v){return v.toFixed(2)}).join(',') : '-';
-        var ra = rightAxes ? Array.from(rightAxes).map(function(v){return v.toFixed(2)}).join(',') : '-';
-
-        el.textContent = '🎮 ' + sL + sR + ' L[' + la + '] R[' + ra + ']';
+        var l2 = leftAxes && leftAxes.length >= 4 ? leftAxes[2].toFixed(2) : (leftAxes && leftAxes.length >= 2 ? leftAxes[0].toFixed(2) : '-');
+        var l3 = leftAxes && leftAxes.length >= 4 ? leftAxes[3].toFixed(2) : '-';
+        var r2 = rightAxes && rightAxes.length >= 4 ? rightAxes[2].toFixed(2) : (rightAxes && rightAxes.length >= 2 ? rightAxes[0].toFixed(2) : '-');
+        var r3 = rightAxes && rightAxes.length >= 4 ? rightAxes[3].toFixed(2) : '-';
+        var la = leftAxes ? 'L' + leftAxes.length : 'L?';
+        var ra = rightAxes ? 'R' + rightAxes.length : 'R?';
+        el.textContent = '🎮 ' + sL + sR + ' L[' + l2 + ',' + l3 + '] R[' + r2 + ',' + r3 + '] ' + la + '/' + ra;
 
         // === BEWEGUNG: Quest 3 = axes[2], axes[3] ===
         if (leftAxes && leftAxes.length >= 4) {
@@ -138,12 +141,18 @@
           }
         }
 
-        // === DREHUNG ===
-        if (rightAxes && rightAxes.length >= 4 && Math.abs(rightAxes[2]) > 0.15) {
-          el.textContent = '🔄 RECHTS: ' + rightAxes[2].toFixed(2);
+        // === DREHUNG: Rechter Stick ===
+        var turnSpeed = 0;
+        if (rightAxes && rightAxes.length >= 4) {
+          turnSpeed = rightAxes[2];
+        } else if (rightAxes && rightAxes.length >= 2) {
+          turnSpeed = rightAxes[0];
+        }
+        if (Math.abs(turnSpeed) > 0.15) {
+          el.textContent = '🔄 DREHUNG: ' + turnSpeed.toFixed(2);
           try {
             var rot = this.el.getAttribute('rotation');
-            rot.y -= rightAxes[2] * 3 * (timeDelta / 1000);
+            rot.y -= turnSpeed * 5 * (timeDelta / 1000);
             this.el.setAttribute('rotation', rot);
           } catch(e) { el.textContent = '❌ ' + e.message; }
         }
