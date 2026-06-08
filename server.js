@@ -109,6 +109,18 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Benutzer sendet Avatar-URL
+  socket.on('user:avatar', (avatarUrl) => {
+    const userData = connectedUsers.get(socket.id);
+    if (userData) {
+      userData.avatarUrl = avatarUrl || '';
+      io.emit('user:avatar-updated', {
+        id: socket.id,
+        avatarUrl: avatarUrl || ''
+      });
+    }
+  });
+
   // Benutzer meldet VR-Status
   socket.on('user:vr', (isVR) => {
     const userData = connectedUsers.get(socket.id);

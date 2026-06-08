@@ -123,7 +123,7 @@
         if (Math.abs(turnSpeed) > 0.1) {
           try {
             var rot = this.el.getAttribute('rotation');
-            rot.y -= turnSpeed * 30 * dt; // 30×
+            rot.y -= turnSpeed * 40 * dt; // 40×
             this.el.setAttribute('rotation', rot);
           } catch(e) { this.debug('FEHLER: ' + e.message); }
         }
@@ -149,8 +149,10 @@
       <h1>✝️ Bibelraum</h1>
       <p>Gib deinen Namen ein und tritt ein</p>
       <input type="text" id="name-input" placeholder="Dein Name" maxlength="20" autofocus>
+      <input type="url" id="avatar-input" placeholder="🎭 Avatar-URL (optional, von readyplayer.me)" style="width:90%;padding:10px;margin:6px 0;border:1px solid #555;border-radius:6px;background:#2a2a2a;color:#fff;font-size:14px">
       <button id="enter-btn">Beitreten</button>
       <p class="hint">VR-Brille? Einfach beitreten – WebXR startet automatisch.</p>
+      <p class="hint" style="font-size:12px;margin-top:-5px">🎭 Avatar unter <a href="https://readyplayer.me" target="_blank" style="color:#4CAF50">readyplayer.me</a> erstellen und den Link einfügen</p>
       <!-- Benutzerliste vor dem Login -->
       <div id="preview-box">
         <div id="preview-header">👥 Im Raum: <span id="preview-count">0</span></div>
