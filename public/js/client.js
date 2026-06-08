@@ -94,19 +94,10 @@ function connectSocket() {
   socket.on('user:updated', (data) => {
     updateRemoteAvatarName(data.id, data.name);
   });
-
-  // Wenn ein User seine Avatar-URL aktualisiert
-  socket.on('user:avatar-updated', (data) => {
-    if (remoteAvatars[data.id]) {
-      const oldAvatar = remoteAvatars[data.id];
-      oldAvatar.parentNode?.removeChild(oldAvatar);
-      delete remoteAvatars[data.id];
-    }
-  });
 }
 
 // === AVATAR ERSTELLEN ===
-function createOwnAvatar(name, avatarUrl) {
+function createOwnAvatar(name, avatarColor) {
   if (!myId) return;
 
   const scene = document.querySelector('a-scene');
@@ -118,47 +109,40 @@ function createOwnAvatar(name, avatarUrl) {
     container.removeChild(container.firstChild);
   }
 
-  const color = AVATAR_COLORS[myId.charCodeAt(myId.length-1) % AVATAR_COLORS.length];
+  const color = avatarColor || AVATAR_COLORS[myId.charCodeAt(myId.length-1) % AVATAR_COLORS.length];
 
   myAvatar = document.createElement('a-entity');
   myAvatar.setAttribute('id', 'my-avatar-body');
 
-  // 3D-Avatar? Jede gültige URL wird probiert (GLB, GLTF, etc.)
-  if (avatarUrl && avatarUrl.trim() !== '' && avatarUrl.trim().match(/^https?:\/\//i)) {
-    const model = document.createElement('a-gltf-model');
-    model.setAttribute('src', avatarUrl.trim());
-    model.setAttribute('position', '0 -0.9 0');
-    model.setAttribute('scale', '0.9 0.9 0.9');
-    myAvatar.appendChild(model);
-  } else {
-    // Standard-Klötzchen-Avatar
-    const body = document.createElement('a-box');
-    body.setAttribute('depth', '0.4');
-    body.setAttribute('height', '0.6');
-    body.setAttribute('width', '0.4');
-    body.setAttribute('color', color);
-    body.setAttribute('position', '0 0.3 0');
-    body.setAttribute('material', 'roughness: 0.7');
-    myAvatar.appendChild(body);
+  // Körper
+  const body = document.createElement('a-box');
+  body.setAttribute('depth', '0.4');
+  body.setAttribute('height', '0.6');
+  body.setAttribute('width', '0.4');
+  body.setAttribute('color', color);
+  body.setAttribute('position', '0 0.3 0');
+  body.setAttribute('material', 'roughness: 0.7');
+  myAvatar.appendChild(body);
 
-    const head = document.createElement('a-sphere');
-    head.setAttribute('radius', '0.18');
-    head.setAttribute('color', '#FFDCB5');
-    head.setAttribute('position', '0 0.75 0');
-    myAvatar.appendChild(head);
+  // Kopf
+  const head = document.createElement('a-sphere');
+  head.setAttribute('radius', '0.18');
+  head.setAttribute('color', '#FFDCB5');
+  head.setAttribute('position', '0 0.75 0');
+  myAvatar.appendChild(head);
 
-    const eyeL = document.createElement('a-sphere');
-    eyeL.setAttribute('radius', '0.04');
-    eyeL.setAttribute('color', '#333');
-    eyeL.setAttribute('position', '-0.08 0.78 0.17');
-    myAvatar.appendChild(eyeL);
+  // Augen
+  const eyeL = document.createElement('a-sphere');
+  eyeL.setAttribute('radius', '0.04');
+  eyeL.setAttribute('color', '#333');
+  eyeL.setAttribute('position', '-0.08 0.78 0.17');
+  myAvatar.appendChild(eyeL);
 
-    const eyeR = document.createElement('a-sphere');
-    eyeR.setAttribute('radius', '0.04');
-    eyeR.setAttribute('color', '#333');
-    eyeR.setAttribute('position', '0.08 0.78 0.17');
-    myAvatar.appendChild(eyeR);
-  }
+  const eyeR = document.createElement('a-sphere');
+  eyeR.setAttribute('radius', '0.04');
+  eyeR.setAttribute('color', '#333');
+  eyeR.setAttribute('position', '0.08 0.78 0.17');
+  myAvatar.appendChild(eyeR);
 
   container.appendChild(myAvatar);
 
@@ -184,15 +168,6 @@ function createRemoteAvatar(user) {
   const entity = document.createElement('a-entity');
   entity.setAttribute('id', `avatar-${user.id}`);
 
-  // Ready Player Me Avatar?
-  // 3D-Avatar? Jede gültige URL wird probiert (GLB, GLTF, etc.)
-  if (avatarUrl && avatarUrl.trim() !== '' && avatarUrl.trim().match(/^https?:\/\//i)) {
-    const model = document.createElement('a-gltf-model');
-    model.setAttribute('src', avatarUrl.trim());
-    model.setAttribute('position', '0 -0.9 0');
-    model.setAttribute('scale', '0.9 0.9 0.9');
-    entity.appendChild(model);
-  } else {
   entity.setAttribute('position', `${user.position.x} ${user.position.y} ${user.position.z}`);
 
   // Körper
@@ -248,7 +223,6 @@ function createRemoteAvatar(user) {
 
   container.appendChild(entity);
   remoteAvatars[user.id] = entity;
-  } // Ende else-Block
 }
 
 function removeRemoteAvatar(userId) {
@@ -436,9 +410,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = nameInput.value.trim() || 'Gast';
     myName = name;
 
-    // Avatar-URL auslesen
-    const avatarInput = document.getElementById('avatar-input');
-    const avatarUrl = avatarInput ? avatarInput.value.trim() : '';
+    // Ausgewählte Avatar-Farbe holen
+    var avatarColor = '#E57373';
+    var selected = document.querySelector('.av-choice.selected');
+    if (selected) avatarColor = selected.getAttribute('data-color') || avatarColor;
 
     loginBox.style.display = 'none';
     toolbar.style.display = 'flex';
@@ -450,13 +425,20 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('connect', () => {
       setTimeout(() => {
         socket.emit('user:name', myName);
-        socket.emit('user:avatar', avatarUrl);
-        createOwnAvatar(myName, avatarUrl);
+        createOwnAvatar(myName, avatarColor);
         initMovement();
         initPositionSync();
         checkVR();
         // Jitsi wird nur geladen wenn der Button geklickt wird
       }, 500);
+    });
+  });
+
+  // Avatar-Auswahl Klick-Handler
+  document.querySelectorAll('.av-choice').forEach(function(el) {
+    el.addEventListener('click', function() {
+      document.querySelectorAll('.av-choice').forEach(function(e) { e.classList.remove('selected'); });
+      this.classList.add('selected');
     });
   });
 

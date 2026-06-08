@@ -149,10 +149,24 @@
       <h1>✝️ Bibelraum</h1>
       <p>Gib deinen Namen ein und tritt ein</p>
       <input type="text" id="name-input" placeholder="Dein Name" maxlength="20" autofocus>
-      <input type="text" id="avatar-input" placeholder="🎭 Avatar-URL (.glb, optional)" style="width:90%;padding:10px;margin:6px 0;border:1px solid #555;border-radius:6px;background:#2a2a2a;color:#fff;font-size:14px">
+      
+      <!-- Avatar-Auswahl -->
+      <div style="margin:8px 0">
+        <div style="color:#aaa;font-size:13px;margin-bottom:4px">🎭 Wähle deinen Avatar:</div>
+        <div id="avatar-picker" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
+          <div class="av-choice selected" data-color="#E57373" style="background:#E57373" title="Rot">🔴</div>
+          <div class="av-choice" data-color="#64B5F6" style="background:#64B5F6" title="Blau">🔵</div>
+          <div class="av-choice" data-color="#81C784" style="background:#81C784" title="Grün">🟢</div>
+          <div class="av-choice" data-color="#FFB74D" style="background:#FFB74D" title="Orange">🟠</div>
+          <div class="av-choice" data-color="#BA68C8" style="background:#BA68C8" title="Lila">🟣</div>
+          <div class="av-choice" data-color="#4DD0E1" style="background:#4DD0E1" title="Cyan">🔷</div>
+          <div class="av-choice" data-color="#FF8A65" style="background:#FF8A65" title="Koralle">🟧</div>
+          <div class="av-choice" data-color="#F06292" style="background:#F06292" title="Pink">💗</div>
+        </div>
+      </div>
+
       <button id="enter-btn">Beitreten</button>
       <p class="hint">VR-Brille? Einfach beitreten – WebXR startet automatisch.</p>
-      <p class="hint" style="font-size:12px;margin-top:-5px">🎭 3D-Avatar-Link (.glb) – z.B. von <a href="https://sketchfab.com" target="_blank" style="color:#4CAF50">Sketchfab</a> oder eigene Modelle</p>
       <!-- Benutzerliste vor dem Login -->
       <div id="preview-box">
         <div id="preview-header">👥 Im Raum: <span id="preview-count">0</span></div>
