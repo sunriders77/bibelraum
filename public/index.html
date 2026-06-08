@@ -30,7 +30,7 @@
         setTimeout(function() {
           self.debugEl = document.querySelector('#debug-text');
           self.head = document.querySelector('#camera');
-          if (self.debugEl) self.debugEl.setAttribute('value', '🎮 init OK');
+          if (self.debugEl) self.debugEl.setAttribute('value', '🎮 Erst Trigger drücken!');
           if (!self.head) self.debug('KEINE KAMERA!');
         }, 1000);
 
@@ -117,20 +117,21 @@
         var sL = this.leftController ? 'L✓' : 'L?';
         var sR = this.rightController ? 'R✓' : 'R?';
 
-        var lx = '-', ly = '-', rx = '-';
-        if (leftAxes && leftAxes.length >= 2) {
-          lx = Math.abs(leftAxes[0]) > 0.12 ? leftAxes[0].toFixed(2) : '0';
-          ly = Math.abs(leftAxes[1]) > 0.12 ? leftAxes[1].toFixed(2) : '0';
+        var lx = '-', ly = '-', rx = '-', ry = '-';
+        if (leftAxes && leftAxes.length >= 4) {
+          lx = Math.abs(leftAxes[2]) > 0.12 ? leftAxes[2].toFixed(2) : '0';
+          ly = Math.abs(leftAxes[3]) > 0.12 ? leftAxes[3].toFixed(2) : '0';
         }
-        if (rightAxes && rightAxes.length >= 2) {
-          rx = Math.abs(rightAxes[0]) > 0.12 ? rightAxes[0].toFixed(2) : '0';
+        if (rightAxes && rightAxes.length >= 4) {
+          rx = Math.abs(rightAxes[2]) > 0.12 ? rightAxes[2].toFixed(2) : '0';
+          ry = Math.abs(rightAxes[3]) > 0.12 ? rightAxes[3].toFixed(2) : '0';
         }
-        this.debug(sL + sR + ' L(' + lx + ',' + ly + ') R(' + rx + ')');
+        this.debug(sL + sR + ' L(' + lx + ',' + ly + ') R(' + rx + ',' + ry + ')');
 
-        // === Bewegung ===
-        if (leftAxes && leftAxes.length >= 2) {
-          var m_lx = Math.abs(leftAxes[0]) > 0.15 ? leftAxes[0] : 0;
-          var m_ly = Math.abs(leftAxes[1]) > 0.15 ? leftAxes[1] : 0;
+        // === Bewegung (Linker Stick = axes[2], axes[3] bei Quest 3!) ===
+        if (leftAxes && leftAxes.length >= 4) {
+          var m_lx = Math.abs(leftAxes[2]) > 0.15 ? leftAxes[2] : 0;
+          var m_ly = Math.abs(leftAxes[3]) > 0.15 ? leftAxes[3] : 0;
           if (m_lx !== 0 || m_ly !== 0) {
             try {
               var cam = this.head.components.camera.camera;
@@ -152,11 +153,11 @@
           }
         }
 
-        // === Drehung ===
-        if (rightAxes && rightAxes.length >= 2 && Math.abs(rightAxes[0]) > 0.15) {
+        // === Drehung (Rechter Stick = axes[2], axes[3] bei Quest 3!) ===
+        if (rightAxes && rightAxes.length >= 4 && Math.abs(rightAxes[2]) > 0.15) {
           try {
             var rot = this.el.getAttribute('rotation');
-            rot.y -= rightAxes[0] * 3 * dt;
+            rot.y -= rightAxes[2] * 3 * dt;
             this.el.setAttribute('rotation', rot);
           } catch(e) { this.debug('Drehung: ' + e.message); }
         }
