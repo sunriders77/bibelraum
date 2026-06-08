@@ -13,67 +13,17 @@
   <!-- Socket.IO Client -->
   <script src="/socket.io/socket.io.js"></script>
 
-  <!-- VR-Controller-Steuerung für Quest 3 – nutzt A-Frames tracked-controls -->
+  <!-- VR-Controller-Steuerung für Quest 3 – DIREKT WebXR API mit axes[2]/[3] -->
   <script>
     AFRAME.registerComponent('vr-controls', {
       init: function() {
         document.getElementById('page-status').textContent = '🎮 VR-Controls init...';
-        // Alles in init initialisieren
-        this.head = null;
+        this.head = document.querySelector('#camera');
         this.tempVec = new THREE.Vector3();
         this.tempRight = new THREE.Vector3();
         this.quat = new THREE.Quaternion();
-        this.lastLog = '';
-        this.leftController = null;
-        this.rightController = null;
-        this.started = false;
-        this.debugEl = null;
-
-        // Debug und Head nach 1s suchen (wenn Szene fertig geladen)
-        var self = this;
-        setTimeout(function() {
-          self.debugEl = document.querySelector('#debug-text');
-          self.head = document.querySelector('#camera');
-          if (self.debugEl) self.debugEl.setAttribute('value', '🎮 Erst Trigger drücken!');
-          if (!self.head) self.debug('KEINE KAMERA!');
-        }, 1000);
-
-        var scene = this.el.sceneEl;
-
-        // Laser-Linien nach Controller-Verbindung ausblenden
-        scene.addEventListener('controllerconnected', function(evt) {
-          var lineEls = evt.detail.target.querySelectorAll('[line]');
-          for (var i = 0; i < lineEls.length; i++) {
-            lineEls[i].setAttribute('visible', false);
-          }
-        });
-
-        // Controller-Verbindung überwachen
-        scene.addEventListener('controllerconnected', function(evt) {
-          this.started = true;
-          var tc = evt.detail.target.components['tracked-controls'];
-          if (tc && tc.controller) {
-            var hand = evt.detail.target.getAttribute('laser-controls');
-            if (hand && hand.hand === 'left') this.leftController = tc.controller;
-            if (hand && hand.hand === 'right') this.rightController = tc.controller;
-          }
-        }.bind(this));
-
-        scene.addEventListener('controllerdisconnected', function(evt) {
-          this.leftController = null;
-          this.rightController = null;
-        }.bind(this));
       },
       tick: function(time, timeDelta) {
-        // Debug und Head sichern falls noch nicht vorhanden
-        if (!this.debugEl) this.debugEl = document.querySelector('#debug-text');
-        if (!this.head) this.head = document.querySelector('#camera');
-
-        if (!this.head) {
-          this.debug('Warte auf Kamera...');
-          return; // Kamera noch nicht da
-        }
-
         var scene = this.el.sceneEl;
         if (!scene || !scene.renderer) return;
         var dt = Math.min(timeDelta / 1000, 0.1);
@@ -81,62 +31,55 @@
         // VR-Mode prüfen
         var inVR = false;
         try { inVR = scene.is('vr-mode'); } catch(e) {}
-        if (!inVR) {
-          try { inVR = scene.renderer.xr && scene.renderer.xr.isPresenting; } catch(e) {}
-        }
-        if (!inVR) {
+        if (!inVR) try { inVR = scene.renderer.xr && scene.renderer.xr.isPresenting; } catch(e) {}
+
+        // WebXR Session
+        var session = null;
+        try {
+          var xr = scene.renderer.xr;
+          if (xr) session = (xr.getSession && xr.getSession()) || xr.session || null;
+        } catch(e) {}
+
+        if (!session || !inVR) {
           this.debug('Kein VR');
           return;
         }
 
-        // Fallback: Controller direkt aus der Szene holen
-        if (!this.leftController || !this.rightController) {
-          try {
-            var controllers = scene.querySelectorAll('[laser-controls]');
-            for (var i = 0; i < controllers.length; i++) {
-              var tc = controllers[i].components['tracked-controls'];
-              if (tc && tc.controller) {
-                var hand = controllers[i].getAttribute('laser-controls');
-                if (hand && hand.hand === 'left' && !this.leftController) {
-                  this.leftController = tc.controller;
-                }
-                if (hand && hand.hand === 'right' && !this.rightController) {
-                  this.rightController = tc.controller;
-                }
-              }
-            }
-          } catch(e) { this.debug('Fehler: ' + e.message); }
-        }
-
-        // Stick-Werte aus den Gamepad-Objekten lesen
+        // InputSources → Gamepads
+        var sources = [];
+        try { sources = Array.from(session.inputSources); } catch(e) {}
         var leftAxes = null, rightAxes = null;
-        if (this.leftController && this.leftController.axes) {
-          try { leftAxes = this.leftController.axes; } catch(e) {}
+
+        for (var i = 0; i < sources.length; i++) {
+          var src = sources[i];
+          if (!src || !src.gamepad || !src.gamepad.axes) continue;
+          var gp = src.gamepad;
+          if (src.handedness === 'left') leftAxes = gp.axes;
+          else if (src.handedness === 'right') rightAxes = gp.axes;
         }
-        if (this.rightController && this.rightController.axes) {
-          try { rightAxes = this.rightController.axes; } catch(e) {}
+        // Fallback
+        if (!leftAxes && !rightAxes && sources.length >= 2) {
+          if (sources[0].gamepad) leftAxes = sources[0].gamepad.axes;
+          if (sources[1].gamepad) rightAxes = sources[1].gamepad.axes;
+        }
+        if (!leftAxes && !rightAxes && sources.length >= 1 && sources[0].gamepad && sources[0].gamepad.axes && sources[0].gamepad.axes.length >= 4) {
+          leftAxes = [sources[0].gamepad.axes[0], sources[0].gamepad.axes[1]];
+          rightAxes = [sources[0].gamepad.axes[2], sources[0].gamepad.axes[3]];
         }
 
         // Debug
-        var sL = this.leftController ? 'L✓' : 'L?';
-        var sR = this.rightController ? 'R✓' : 'R?';
+        var sL = leftAxes ? 'L' + leftAxes.length : 'L?';
+        var sR = rightAxes ? 'R' + rightAxes.length : 'R?';
+        var lx = leftAxes && leftAxes.length >= 4 ? leftAxes[2].toFixed(2) : '-';
+        var ly = leftAxes && leftAxes.length >= 4 ? leftAxes[3].toFixed(2) : '-';
+        var rx = rightAxes && rightAxes.length >= 4 ? rightAxes[2].toFixed(2) : '-';
+        this.debug(sL + ' ' + sR + ' L(' + lx + ',' + ly + ') R(' + rx + ')');
 
-        var lx = '-', ly = '-', rx = '-', ry = '-';
-        if (leftAxes && leftAxes.length >= 4) {
-          lx = Math.abs(leftAxes[2]) > 0.12 ? leftAxes[2].toFixed(2) : '0';
-          ly = Math.abs(leftAxes[3]) > 0.12 ? leftAxes[3].toFixed(2) : '0';
-        }
-        if (rightAxes && rightAxes.length >= 4) {
-          rx = Math.abs(rightAxes[2]) > 0.12 ? rightAxes[2].toFixed(2) : '0';
-          ry = Math.abs(rightAxes[3]) > 0.12 ? rightAxes[3].toFixed(2) : '0';
-        }
-        this.debug(sL + sR + ' L(' + lx + ',' + ly + ') R(' + rx + ',' + ry + ')');
-
-        // === Bewegung (Linker Stick = axes[2], axes[3] bei Quest 3!) ===
+        // === BEWEGUNG: Linker Stick = axes[2], axes[3] bei Quest 3! ===
         if (leftAxes && leftAxes.length >= 4) {
           var m_lx = Math.abs(leftAxes[2]) > 0.15 ? leftAxes[2] : 0;
           var m_ly = Math.abs(leftAxes[3]) > 0.15 ? leftAxes[3] : 0;
-          if (m_lx !== 0 || m_ly !== 0) {
+          if (m_lx !== 0 || m_ly !== 0 && this.head) {
             try {
               var cam = this.head.components.camera.camera;
               if (cam && cam.quaternion) {
@@ -153,25 +96,22 @@
                 pos.z += this.tempVec.z * -m_ly * speed;
                 this.el.setAttribute('position', pos);
               }
-            } catch(e) { this.debug('Bewegung: ' + e.message); }
+            } catch(e) { this.debug('FEHLER: ' + e.message); }
           }
         }
 
-        // === Drehung (Rechter Stick = axes[2], axes[3] bei Quest 3!) ===
+        // === DREHUNG: Rechter Stick = axes[2] bei Quest 3! ===
         if (rightAxes && rightAxes.length >= 4 && Math.abs(rightAxes[2]) > 0.15) {
           try {
             var rot = this.el.getAttribute('rotation');
             rot.y -= rightAxes[2] * 3 * dt;
             this.el.setAttribute('rotation', rot);
-          } catch(e) { this.debug('Drehung: ' + e.message); }
+          } catch(e) { this.debug('FEHLER: ' + e.message); }
         }
       },
       debug: function(msg) {
-        if (!this.debugEl) this.debugEl = document.querySelector('#debug-text');
-        if (this.debugEl && this.debugEl.setAttribute && msg !== this.lastLog) {
-          try { this.debugEl.setAttribute('value', '🎮 ' + msg); } catch(e) {}
-          this.lastLog = msg;
-        }
+        var ps = document.getElementById('page-status');
+        if (ps) { ps.textContent = msg; }
       }
     });
   </script>
