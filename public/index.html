@@ -113,7 +113,7 @@
           }
         }
 
-        // === DREHUNG: Rechter Stick – axes[2] oder axes[0] je nach Achsenzahl ===
+        // === DREHUNG: Rechter Stick – camera-rig rotieren für saubere Achsendrehung ===
         var turnSpeed = 0;
         if (rightAxes && rightAxes.length >= 4) {
           turnSpeed = rightAxes[2]; // Quest 3 Standard
@@ -122,9 +122,12 @@
         }
         if (Math.abs(turnSpeed) > 0.1) {
           try {
-            var rot = this.el.getAttribute('rotation');
-            rot.y -= turnSpeed * 40 * dt; // 40×
-            this.el.setAttribute('rotation', rot);
+            var rig = document.getElementById('camera-rig');
+            if (rig) {
+              var rot = rig.getAttribute('rotation');
+              rot.y -= turnSpeed * 40 * dt; // 40×
+              rig.setAttribute('rotation', rot);
+            }
           } catch(e) { this.debug('FEHLER: ' + e.message); }
         }
       },
