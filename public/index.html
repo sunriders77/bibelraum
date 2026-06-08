@@ -10,21 +10,29 @@
   <!-- Socket.IO Client -->
   <script src="/socket.io/socket.io.js"></script>
 
-  <!-- VR-Controller-Steuerung für Quest 3 – nutzt A-Frames tracked-controls GAme -->
+  <!-- VR-Controller-Steuerung für Quest 3 – nutzt A-Frames tracked-controls -->
   <script>
     AFRAME.registerComponent('vr-controls', {
       init: function() {
-        // Kamera über die Szene finden
-        this.head = document.querySelector('#camera');
+        // Alles in init initialisieren
+        this.head = null;
         this.tempVec = new THREE.Vector3();
         this.tempRight = new THREE.Vector3();
         this.quat = new THREE.Quaternion();
         this.lastLog = '';
         this.leftController = null;
         this.rightController = null;
+        this.started = false;
+        this.debugEl = null;
 
-        // Debug-Anzeige (nur in VR sichtbar)
-        this.debugEl = document.querySelector('#debug-text');
+        // Debug und Head nach 1s suchen (wenn Szene fertig geladen)
+        var self = this;
+        setTimeout(function() {
+          self.debugEl = document.querySelector('#debug-text');
+          self.head = document.querySelector('#camera');
+          if (self.debugEl) self.debugEl.setAttribute('value', '🎮 init OK');
+          if (!self.head) self.debug('KEINE KAMERA!');
+        }, 1000);
 
         var scene = this.el.sceneEl;
 
@@ -38,6 +46,7 @@
 
         // Controller-Verbindung überwachen
         scene.addEventListener('controllerconnected', function(evt) {
+          this.started = true;
           var tc = evt.detail.target.components['tracked-controls'];
           if (tc && tc.controller) {
             var hand = evt.detail.target.getAttribute('laser-controls');
@@ -52,57 +61,78 @@
         }.bind(this));
       },
       tick: function(time, timeDelta) {
+        // Debug und Head sichern falls noch nicht vorhanden
+        if (!this.debugEl) this.debugEl = document.querySelector('#debug-text');
+        if (!this.head) this.head = document.querySelector('#camera');
+
+        if (!this.head) {
+          this.debug('Warte auf Kamera...');
+          return; // Kamera noch nicht da
+        }
+
         var scene = this.el.sceneEl;
+        if (!scene || !scene.renderer) return;
         var dt = Math.min(timeDelta / 1000, 0.1);
 
         // VR-Mode prüfen
-        var inVR = scene.is('vr-mode') ||
-                   (scene.renderer && scene.renderer.xr && scene.renderer.xr.isPresenting);
-
+        var inVR = false;
+        try { inVR = scene.is('vr-mode'); } catch(e) {}
+        if (!inVR) {
+          try { inVR = scene.renderer.xr && scene.renderer.xr.isPresenting; } catch(e) {}
+        }
         if (!inVR) {
           this.debug('Kein VR');
           return;
         }
 
-        // Fallback: Controller direkt aus der Szene holen wenn Events nicht feuerten
+        // Fallback: Controller direkt aus der Szene holen
         if (!this.leftController || !this.rightController) {
-          var controllers = scene.querySelectorAll('[laser-controls]');
-          for (var i = 0; i < controllers.length; i++) {
-            var tc = controllers[i].components['tracked-controls'];
-            if (tc && tc.controller) {
-              var hand = controllers[i].getAttribute('laser-controls');
-              if (hand && hand.hand === 'left' && !this.leftController) {
-                this.leftController = tc.controller;
-              }
-              if (hand && hand.hand === 'right' && !this.rightController) {
-                this.rightController = tc.controller;
+          try {
+            var controllers = scene.querySelectorAll('[laser-controls]');
+            for (var i = 0; i < controllers.length; i++) {
+              var tc = controllers[i].components['tracked-controls'];
+              if (tc && tc.controller) {
+                var hand = controllers[i].getAttribute('laser-controls');
+                if (hand && hand.hand === 'left' && !this.leftController) {
+                  this.leftController = tc.controller;
+                }
+                if (hand && hand.hand === 'right' && !this.rightController) {
+                  this.rightController = tc.controller;
+                }
               }
             }
-          }
+          } catch(e) { this.debug('Fehler: ' + e.message); }
         }
 
-        // Stick-Werte aus den native Gamepad-Objekten lesen
+        // Stick-Werte aus den Gamepad-Objekten lesen
         var leftAxes = null, rightAxes = null;
         if (this.leftController && this.leftController.axes) {
-          leftAxes = this.leftController.axes;
+          try { leftAxes = this.leftController.axes; } catch(e) {}
         }
         if (this.rightController && this.rightController.axes) {
-          rightAxes = this.rightController.axes;
+          try { rightAxes = this.rightController.axes; } catch(e) {}
         }
 
-        // Live Stick-Werte für Debug
-        var lx = leftAxes && leftAxes.length >= 2 ? (Math.abs(leftAxes[0]) > 0.12 ? leftAxes[0].toFixed(2) : '0') : '-';
-        var ly = leftAxes && leftAxes.length >= 2 ? (Math.abs(leftAxes[1]) > 0.12 ? leftAxes[1].toFixed(2) : '0') : '-';
-        var rx = rightAxes && rightAxes.length >= 2 ? (Math.abs(rightAxes[0]) > 0.12 ? rightAxes[0].toFixed(2) : '0') : '-';
-        var status = (this.leftController ? 'L✓' : 'L?') + (this.rightController ? 'R✓' : 'R?');
-        this.debug(status + ' L(' + lx + ',' + ly + ') R(' + rx + ')');
+        // Debug
+        var sL = this.leftController ? 'L✓' : 'L?';
+        var sR = this.rightController ? 'R✓' : 'R?';
+
+        var lx = '-', ly = '-', rx = '-';
+        if (leftAxes && leftAxes.length >= 2) {
+          lx = Math.abs(leftAxes[0]) > 0.12 ? leftAxes[0].toFixed(2) : '0';
+          ly = Math.abs(leftAxes[1]) > 0.12 ? leftAxes[1].toFixed(2) : '0';
+        }
+        if (rightAxes && rightAxes.length >= 2) {
+          rx = Math.abs(rightAxes[0]) > 0.12 ? rightAxes[0].toFixed(2) : '0';
+        }
+        this.debug(sL + sR + ' L(' + lx + ',' + ly + ') R(' + rx + ')');
 
         // === Bewegung ===
         if (leftAxes && leftAxes.length >= 2) {
           var m_lx = Math.abs(leftAxes[0]) > 0.15 ? leftAxes[0] : 0;
           var m_ly = Math.abs(leftAxes[1]) > 0.15 ? leftAxes[1] : 0;
           if (m_lx !== 0 || m_ly !== 0) {
-            if (this.head && this.head.components && this.head.components.camera) {
+            try {
               var cam = this.head.components.camera.camera;
               if (cam && cam.quaternion) {
                 this.quat.copy(cam.quaternion);
@@ -118,20 +148,23 @@
                 pos.z += this.tempVec.z * -m_ly * speed;
                 this.el.setAttribute('position', pos);
               }
-            }
+            } catch(e) { this.debug('Bewegung: ' + e.message); }
           }
         }
 
         // === Drehung ===
         if (rightAxes && rightAxes.length >= 2 && Math.abs(rightAxes[0]) > 0.15) {
-          var rot = this.el.getAttribute('rotation');
-          rot.y -= rightAxes[0] * 3 * dt;
-          this.el.setAttribute('rotation', rot);
+          try {
+            var rot = this.el.getAttribute('rotation');
+            rot.y -= rightAxes[0] * 3 * dt;
+            this.el.setAttribute('rotation', rot);
+          } catch(e) { this.debug('Drehung: ' + e.message); }
         }
       },
       debug: function(msg) {
+        if (!this.debugEl) this.debugEl = document.querySelector('#debug-text');
         if (this.debugEl && this.debugEl.setAttribute && msg !== this.lastLog) {
-          this.debugEl.setAttribute('value', '🎮 ' + msg);
+          try { this.debugEl.setAttribute('value', '🎮 ' + msg); } catch(e) {}
           this.lastLog = msg;
         }
       }
