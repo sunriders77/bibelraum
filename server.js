@@ -84,6 +84,40 @@ app.get('/api/bot/status', (req, res) => {
 });
 // ============================
 
+// === CHAT-SYSTEM ===
+const chatMessages = [];
+const MAX_CHAT = 100;
+
+// Chat-Nachrichten abrufen (für Telegram-Abfrage)
+app.get('/api/chat/messages', (req, res) => {
+  const since = parseInt(req.query.since) || 0;
+  const newMessages = chatMessages.filter(m => m.id > since);
+  res.json({ messages: newMessages });
+});
+
+// Chat-Nachricht von außen empfangen (für Telegram)
+app.post('/api/chat/send', (req, res) => {
+  const { key, name, text } = req.body;
+  if (key !== BOT_API_KEY) {
+    return res.status(403).json({ error: 'Ungültiger API-Key' });
+  }
+  if (!text || text.length > 500) {
+    return res.status(400).json({ error: 'Text fehlt oder zu lang' });
+  }
+  const msg = {
+    id: Date.now(),
+    name: name || 'Melanie',
+    text: text,
+    time: new Date().toLocaleTimeString('de-DE'),
+    isBot: true
+  };
+  chatMessages.push(msg);
+  if (chatMessages.length > MAX_CHAT) chatMessages.shift();
+  io.emit('chat:message', msg);
+  res.json({ ok: true });
+});
+// ============================
+
 // Hilfsfunktion: sende Benutzerliste an alle Preview-Clients
 function broadcastUserList() {
   const users = Array.from(connectedUsers.values())
@@ -181,6 +215,29 @@ io.on('connection', (socket) => {
         isVR: isVR
       });
       broadcastUserList();
+    }
+  });
+
+  // CHAT: Nachricht von einem Benutzer
+  socket.on('chat:message', (data) => {
+    const userData = connectedUsers.get(socket.id);
+    const name = userData ? userData.name : 'Gast';
+    const msg = {
+      id: Date.now(),
+      name: name,
+      text: data.text || '',
+      time: new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }),
+      isBot: false
+    };
+    chatMessages.push(msg);
+    if (chatMessages.length > MAX_CHAT) chatMessages.shift();
+    io.emit('chat:message', msg);
+    console.log(`💬 ${name}: "${msg.text}"`);
+
+    // @Melanie-Nachrichten: Bot-Sprechblase aktualisieren
+    if (data.text && data.text.toLowerCase().includes('@melanie')) {
+      botMessage = `📩 ${name}: ${data.text.replace(/@melanie/gi, '').trim()}`;
+      io.emit('bot:message', botMessage);
     }
   });
 

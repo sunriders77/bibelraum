@@ -109,6 +109,11 @@ function connectSocket() {
       }, 10000);
     }
   });
+
+  // Chat-Nachrichten
+  socket.on('chat:message', (msg) => {
+    addChatMessage(msg);
+  });
 }
 
 // === AVATAR ERSTELLEN ===
@@ -483,6 +488,27 @@ function copyRoomLink() {
   });
 }
 
+// === CHAT-FUNKTIONEN ===
+function addChatMessage(msg) {
+  const container = document.getElementById('chat-messages');
+  if (!container) return;
+
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + (msg.isBot ? 'bot' : 'user');
+  div.innerHTML = '<div class="name">' + escapeHtml(msg.name) + '<span class="time">' + (msg.time || '') + '</span></div>' + escapeHtml(msg.text);
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function sendChatMessage() {
+  const input = document.getElementById('chat-input');
+  if (!input || !input.value.trim() || !socket) return;
+  const text = input.value.trim();
+  if (text.length > 200) return;
+  socket.emit('chat:message', { text: text });
+  input.value = '';
+}
+
 // === INIT ===
 document.addEventListener('DOMContentLoaded', () => {
   // Benutzer-Vorschau starten (vor dem Login)
@@ -549,6 +575,31 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       jc.classList.remove('hidden');
       startCamOnScreen();
+    }
+  });
+
+  // Chat-Toggle
+  document.getElementById('toggle-chat')?.addEventListener('click', () => {
+    const cp = document.getElementById('chat-panel');
+    cp.classList.toggle('hidden');
+    if (!cp.classList.contains('hidden')) {
+      document.getElementById('chat-input')?.focus();
+    }
+  });
+
+  // Chat-Close
+  document.getElementById('chat-close')?.addEventListener('click', () => {
+    document.getElementById('chat-panel')?.classList.add('hidden');
+  });
+
+  // Chat-Senden per Button
+  document.getElementById('chat-send')?.addEventListener('click', sendChatMessage);
+
+  // Chat-Senden per Enter
+  document.getElementById('chat-input')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      sendChatMessage();
     }
   });
 
