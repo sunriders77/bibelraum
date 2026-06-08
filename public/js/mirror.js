@@ -1,268 +1,125 @@
 /* =========================================
    Spiegel-Komponente für A-Frame
-   Verwendet THREE.Reflector (dynamisch geladen)
+   Verwendet Planar-Reflektor mit
+   onBeforeRender (THREE.js nativ)
    ========================================= */
-
 (function() {
   'use strict';
 
-  // Reflector aus drei.js examples kompatibel machen
-  // (MIT License, Copyright © 2010-2024 three.js authors)
-  function createReflector(geometry, options) {
-
-    var THREE = window.THREE;
-
-    if (!THREE) {
-      console.error('[Spiegel] THREE nicht verfügbar!');
-      return null;
-    }
-
-    var textureWidth = options.textureWidth || 256;
-    var textureHeight = options.textureHeight || 256;
-    var clipBias = options.clipBias || 0.003;
-    var color = options.color || 0x8899AA;
-
-    // RenderTarget
-    var renderTarget = new THREE.WebGLRenderTarget(textureWidth, textureHeight);
-    renderTarget.texture.magFilter = THREE.LinearFilter;
-    renderTarget.texture.minFilter = THREE.LinearFilter;
-    renderTarget.texture.generateMipmaps = false;
-
-    // Material
-    var material = new THREE.MeshBasicMaterial({
-      map: renderTarget.texture,
-      side: THREE.DoubleSide,
-      toneMapped: false
-    });
-
-    var reflector = new THREE.Mesh(geometry, material);
-    reflector.renderOrder = 0;
-
-    // Hilfsobjekte
-    var tempCamera = new THREE.PerspectiveCamera();
-    var tempVec3 = new THREE.Vector3();
-    var tempVec3b = new THREE.Vector3();
-    var tempQuat = new THREE.Quaternion();
-    var tempMat4 = new THREE.Matrix4();
-    var tempPlane = new THREE.Plane();
-    var normalMatrix = new THREE.Matrix3();
-    var clipPlane = new THREE.Plane();
-    var viewport = new THREE.Vector4();
-
-    var matrix = new THREE.Matrix4();
-    var lookTarget = new THREE.Vector3();
-
-    // Speichere Referenzen
-    reflector.__renderTarget = renderTarget;
-    reflector.__tempCamera = tempCamera;
-    reflector.__tempVec3 = tempVec3;
-    reflector.__tempVec3b = tempVec3b;
-    reflector.__tempQuat = tempQuat;
-    reflector.__tempMat4 = tempMat4;
-    reflector.__tempPlane = tempPlane;
-    reflector.__normalMatrix = normalMatrix;
-    reflector.__clipPlane = clipPlane;
-    reflector.__viewport = viewport;
-    reflector.__matrix = matrix;
-    reflector.__lookTarget = lookTarget;
-    reflector.__clipBias = clipBias;
-    reflector.__color = new THREE.Color(color);
-    reflector.__material = material;
-    reflector.__textureWidth = textureWidth;
-    reflector.__textureHeight = textureHeight;
-
-    reflector.update = function(renderer, scene, camera) {
-      if (!camera || !renderer) return;
-
-      // Welt-Matrix des Spiegels
-      reflector.updateWorldMatrix(true, false);
-
-      var mirrorWorldPos = tempVec3;
-      reflector.getWorldPosition(mirrorWorldPos);
-
-      var mirrorWorldQuat = tempQuat;
-      reflector.getWorldQuaternion(mirrorWorldQuat);
-
-      // Normale = Spiegels Blickrichtung (lokale +Z)
-      var normal = tempVec3b.set(0, 0, 1).applyQuaternion(mirrorWorldQuat).normalize();
-
-      // Distanz von Kamera zur Spiegel-Ebene
-      var camPos = camera.position;
-      var d = -mirrorWorldPos.dot(normal);
-      var cameraDist = camPos.dot(normal) + d;
-
-      // Spiegele Kamera-Position an der Ebene
-      var mirrorCamPos = tempVec3b.copy(normal).multiplyScalar(-2 * cameraDist).add(camPos);
-
-      // Spiegele Up-Vektor
-      var up = new THREE.Vector3(0, 1, 0);
-      var upDist = up.dot(normal);
-      var mirrorUp = new THREE.Vector3().copy(normal).multiplyScalar(-2 * upDist).add(up);
-
-      tempCamera.position.copy(mirrorCamPos);
-      tempCamera.up.copy(mirrorUp);
-
-      // Blickrichtung: vom gespiegelten Punkt zur Spiegel-Mitte
-      lookTarget.copy(mirrorWorldPos);
-
-      // Korrektur: der LookAt-Vektor muss auch gespiegelt werden
-      var lookDir = lookTarget.clone().sub(mirrorCamPos).normalize();
-      var mirroredLookDir = lookDir.clone().sub(normal.clone().multiplyScalar(2 * lookDir.dot(normal))).normalize();
-      lookTarget.copy(mirrorCamPos).add(mirroredLookDir);
-
-      tempCamera.lookAt(lookTarget);
-
-      // FOV anpassen
-      tempCamera.fov = camera.fov || 60;
-      tempCamera.aspect = textureWidth / textureHeight;
-      tempCamera.near = camera.near || 0.1;
-      tempCamera.far = camera.far || 100;
-      tempCamera.updateProjectionMatrix();
-
-      // Clipping-Plane: alles hinter dem Spiegel wegschneiden
-      clipPlane.set(normal, d + clipBias);
-      clipPlane.applyMatrix4(reflector.matrixWorld);
-
-      var clipNormal = clipPlane.normal;
-      var clipConstant = clipPlane.constant;
-
-      // Clip-Plane in View-Space
-      var viewClipPlane = tempPlane;
-      viewClipPlane.copy(clipPlane);
-      viewClipPlane.applyMatrix4(tempCamera.matrixWorldInverse);
-
-      // Spiegel die Clip-Plane
-      var q = new THREE.Vector4(
-        viewClipPlane.normal.x,
-        viewClipPlane.normal.y,
-        viewClipPlane.normal.z,
-        -viewClipPlane.constant
-      );
-
-      // Für 3D-Grafik: spiegeln der Clip-Distanz
-      var clipPlaneCamera = new THREE.Vector4();
-      var projectionMatrix = tempCamera.projectionMatrix;
-      clipPlaneCamera.x = (Math.sign(q.x) || 1) / projectionMatrix.elements[0];
-      clipPlaneCamera.y = (Math.sign(q.y) || 1) / projectionMatrix.elements[5];
-      clipPlaneCamera.z = -1.0;
-      clipPlaneCamera.w = (1.0 + THREE.ImageUtils ? 0 : clipBias);
-
-      // Shader-Clip-Plane setzen (via Uniform)
-      // In MeshBasicMaterial nutzen wir stattdessen OpenGL Clip Planes
-      renderer.clipPlane = clipPlane;
-
-      // Viewport sichern
-      viewport.copy(renderer.getViewport(new THREE.Vector4()));
-
-      // Rendern
-      var oldAutoClear = renderer.autoClear;
-      renderer.autoClear = true;
-      renderer.setRenderTarget(renderTarget);
-      renderer.state.buffers.depth.setMask(true);
-      if (renderer.clipPlane) {
-        renderer.render(scene, tempCamera);
-      }
-      renderer.setRenderTarget(null);
-      renderer.autoClear = oldAutoClear;
-
-      // Viewport wiederherstellen
-      renderer.setViewport(viewport);
-
-      // Alpha auf Material setzen für Transparenz-Effekt
-      material.opacity = 0.85;
-      material.transparent = true;
-    };
-
-    reflector.dispose = function() {
-      renderTarget.dispose();
-      geometry.dispose();
-      material.dispose();
-    };
-
-    return reflector;
-  }
-
-  // =========================================
-  // A-Frame Mirror Component
-  // =========================================
-
-  var mirrorComponent = {
+  AFRAME.registerComponent('mirror', {
     schema: {
       width: { default: 1.0 },
-      height: { default: 2.0 },
+      height: { default: 2.2 },
       resolution: { default: 256 },
-      clipBias: { default: 0.003 },
-      color: { default: '#8899AA' }
+      clipBias: { default: 0.005 },
+      color: { default: '#AABBCC' }
     },
 
     init: function() {
       var data = this.data;
       var el = this.el;
-      var scene = el.sceneEl;
-      var renderer = scene.renderer;
+      var THREE = window.THREE;
 
-      // Plane-Geometrie erstellen
+      // RenderTarget
+      var res = data.resolution;
+      this.renderTarget = new THREE.WebGLRenderTarget(res, Math.round(res * data.height / data.width));
+      this.renderTarget.texture.magFilter = THREE.LinearFilter;
+      this.renderTarget.texture.minFilter = THREE.LinearFilter;
+      this.renderTarget.texture.generateMipmaps = false;
+
+      // Plane-Geometrie
       var geometry = new THREE.PlaneGeometry(data.width, data.height);
 
-      // Reflector erstellen
-      this.reflector = createReflector(geometry, {
-        textureWidth: data.resolution,
-        textureHeight: data.resolution,
-        clipBias: data.clipBias,
-        color: data.color
+      // Material mit RenderTarget-Textur
+      var material = new THREE.MeshBasicMaterial({
+        map: this.renderTarget.texture,
+        side: THREE.DoubleSide,
+        toneMapped: false
       });
 
-      if (this.reflector) {
-        el.setObject3D('mesh', this.reflector);
-        this.frameCount = 0;
-        this.updateEvery = 3; // Jedes 3. Frame updaten
-        console.log('[Spiegel] ✅ Erstellt (' + data.width + '×' + data.height + 'm)');
-      } else {
-        // Fallback: einfache graue Plane
-        var fallbackGeo = new THREE.PlaneGeometry(data.width, data.height);
-        var fallbackMat = new THREE.MeshBasicMaterial({
-          color: 0x334466,
-          transparent: true,
-          opacity: 0.4
-        });
-        el.setObject3D('mesh', new THREE.Mesh(fallbackGeo, fallbackMat));
-        console.warn('[Spiegel] ⚠️ Fallback verwendet');
-      }
-    },
+      this.mesh = new THREE.Mesh(geometry, material);
+      el.setObject3D('mesh', this.mesh);
 
-    tick: function() {
-      if (!this.reflector) return;
+      // Hilfsobjekte (einmal anlegen, wiederverwenden)
+      var tempVec3 = new THREE.Vector3();
+      var tempVec3b = new THREE.Vector3();
+      var tempQuat = new THREE.Quaternion();
+      var viewerCam = new THREE.PerspectiveCamera(60, data.width / data.height, 0.01, 100);
+      var lookTarget = new THREE.Vector3();
+      var upVec = new THREE.Vector3(0, 1, 0);
+      var normal = new THREE.Vector3();
 
-      // Nur jedes N. Frame updaten (Performance)
-      this.frameCount++;
-      if (this.frameCount % this.updateEvery !== 0) return;
+      var self = this;
 
-      var scene = this.el.sceneEl;
-      var renderer = scene.renderer;
-      var camera = scene.camera;
+      // === onBeforeRender: WIRD VON THREE.js NATIV AUFGERUFEN ===
+      // Kein zusätzliches render(), kein Flackern!
+      this.mesh.onBeforeRender = function(renderer, scene, camera) {
+        if (!camera || !camera.parent) return;
 
-      if (!camera || !camera.parent) return;
+        // In VR die richtige Kamera holen
+        var activeCam = camera;
+        if (renderer.xr && renderer.xr.isPresenting) {
+          try {
+            var xrCam = renderer.xr.getCamera();
+            if (xrCam && xrCam.cameras && xrCam.cameras.length > 0) {
+              activeCam = xrCam.cameras[0];
+            }
+          } catch(e) {}
+        }
 
-      // In VR: die tatsächliche gerenderte Kamera
-      var activeCam = camera;
-      if (renderer.xr && renderer.xr.isPresenting) {
-        try {
-          var xrCam = renderer.xr.getCamera();
-          if (xrCam) activeCam = xrCam;
-        } catch(e) {}
-      }
+        // Welt-Position und -Rotation des Spiegels
+        self.mesh.getWorldPosition(tempVec3);
+        self.mesh.getWorldQuaternion(tempQuat);
 
-      this.reflector.update(renderer, scene.object3D, activeCam);
+        // Normale = lokale +Z Richtung (Spiegel zeigt nach vorne)
+        normal.set(0, 0, 1).applyQuaternion(tempQuat).normalize();
+
+        // Kamera-Position an der Spiegel-Ebene spiegeln
+        var camPos = activeCam.position;
+        var dist = camPos.clone().sub(tempVec3).dot(normal);
+        var mirrorPos = tempVec3b.copy(camPos).sub(normal.clone().multiplyScalar(2 * dist));
+
+        // Up-Vektor spiegeln
+        var upDist = upVec.dot(normal);
+        var mirrorUp = tempVec3b.copy(upVec).sub(normal.clone().multiplyScalar(2 * upDist));
+
+        viewerCam.position.copy(mirrorPos);
+        viewerCam.up.copy(mirrorUp);
+
+        // Blickrichtung berechnen
+        var lookDir = tempVec3.clone().sub(mirrorPos).normalize();
+        var mirroredLook = lookDir.clone().sub(normal.clone().multiplyScalar(2 * lookDir.dot(normal)));
+        lookTarget.copy(mirrorPos).add(mirroredLook);
+        viewerCam.lookAt(lookTarget);
+
+        // Kameraparameter
+        viewerCam.aspect = self.data.width / self.data.height;
+        viewerCam.updateProjectionMatrix();
+
+        // Viewport sichern + RenderTarget render
+        var oldVR = renderer.xr.isPresenting;
+        if (oldVR) renderer.xr.isPresenting = false;
+
+        renderer.setRenderTarget(self.renderTarget);
+        renderer.render(scene, viewerCam);
+        renderer.setRenderTarget(null);
+
+        if (oldVR) renderer.xr.isPresenting = true;
+      };
+
+      console.log('[Spiegel] ✅ ' + data.width + '×' + data.height + 'm @ ' + res + 'px');
     },
 
     remove: function() {
-      if (this.reflector) {
-        this.reflector.dispose();
+      if (this.mesh) {
+        this.mesh.onBeforeRender = null;
+        this.el.removeObject3D('mesh');
+      }
+      if (this.renderTarget) {
+        this.renderTarget.dispose();
       }
     }
-  };
+  });
 
-  AFRAME.registerComponent('mirror', mirrorComponent);
   console.log('[Spiegel] 🪞 Mirror-Komponente registriert');
-
 })();
