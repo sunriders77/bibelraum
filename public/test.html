@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bibelraum VR-Test</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: #222; }
+    #status {
+      position: fixed; top: 0; left: 0; z-index: 99999;
+      background: #ff4444; color: white;
+      padding: 15px 25px; font-size: 28px; font-family: Arial, sans-serif;
+      width: 100%; text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="status">⏳ Lade...</div>
+
+  <script>
+    document.getElementById('status').textContent = '📥 Lade A-Frame...';
+  </script>
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"
+          onload="document.getElementById('status').textContent = '✅ A-Frame geladen. Registriere Controls...'"
+          onerror="document.getElementById('status').textContent = '❌ A-Frame FEHLER! Netzwerk?'">
+  </script>
+
+  <!-- VR-Controls -->
+  <script>
+    document.getElementById('status').textContent = '🔄 Registriere vr-controls...';
+
+    try {
+      AFRAME.registerComponent('vr-controls', {
+        init: function() {
+          document.getElementById('status').textContent = '🎮 INIT VR-CONTROLS!';
+          this.head = document.querySelector('#cam');
+          this.tempVec = new THREE.Vector3();
+          this.tempRight = new THREE.Vector3();
+          this.quat = new THREE.Quaternion();
+          this.lastLog = '';
+          this.leftCtrl = null;
+          this.rightCtrl = null;
+
+          document.getElementById('status').textContent = '🎮 Head = ' + (this.head ? 'JA' : 'NEIN');
+
+          var scene = this.el.sceneEl;
+          scene.addEventListener('enter-vr', function() {
+            document.getElementById('status').textContent = '🎮 VR-MODE AKTIV!';
+          });
+          scene.addEventListener('controllerconnected', function(evt) {
+            document.getElementById('status').textContent = '🎮 Controller connected!';
+            var tc = evt.detail.target.components['tracked-controls'];
+            if (tc && tc.controller) {
+              var h = evt.detail.target.getAttribute('laser-controls');
+              if (h && h.hand === 'left') this.leftCtrl = tc.controller;
+              if (h && h.hand === 'right') this.rightCtrl = tc.controller;
+            }
+          }.bind(this));
+        },
+        tick: function(t, dt) {
+          var status = document.getElementById('status');
+          var scene = this.el.sceneEl;
+          if (!scene) return;
+
+          // Fallback Controller
+          if (!this.leftCtrl || !this.rightCtrl) {
+            var els = scene.querySelectorAll('[laser-controls]');
+            for (var i = 0; i < els.length; i++) {
+              var tc = els[i].components['tracked-controls'];
+              if (tc && tc.controller) {
+                var h = els[i].getAttribute('laser-controls');
+                if (h && h.hand === 'left' && !this.leftCtrl) this.leftCtrl = tc.controller;
+                if (h && h.hand === 'right' && !this.rightCtrl) this.rightCtrl = tc.controller;
+              }
+            }
+          }
+
+          var leftAxes = this.leftCtrl && this.leftCtrl.axes ? this.leftCtrl.axes : null;
+          var rightAxes = this.rightCtrl && this.rightCtrl.axes ? this.rightCtrl.axes : null;
+
+          var sL = this.leftCtrl ? 'L✓' : 'L?';
+          var sR = this.rightCtrl ? 'R✓' : 'R?';
+          var lx = leftAxes && leftAxes.length >= 4 ? leftAxes[2].toFixed(2) : '-';
+          var ly = leftAxes && leftAxes.length >= 4 ? leftAxes[3].toFixed(2) : '-';
+          var rx = rightAxes && rightAxes.length >= 4 ? rightAxes[2].toFixed(2) : '-';
+          var ry = rightAxes && rightAxes.length >= 4 ? rightAxes[3].toFixed(2) : '-';
+          status.textContent = '🎮 ' + sL + sR + ' ' + lx + ',' + ly + ' | ' + rx + ',' + ry;
+
+          // Bewegung testen
+          if (leftAxes && leftAxes.length >= 4 && (Math.abs(leftAxes[2]) > 0.15 || Math.abs(leftAxes[3]) > 0.15)) {
+            status.textContent = '🎮 BEWEGUNG! ' + leftAxes[2].toFixed(2) + ',' + leftAxes[3].toFixed(2);
+          }
+        }
+      });
+      document.getElementById('status').textContent = '✅ VR-Controls registriert!';
+    } catch(e) {
+      document.getElementById('status').textContent = '❌ REGISTER FEHLER: ' + e.message;
+    }
+  </script>
+
+  <!-- A-Frame Szene minmal -->
+  <a-scene id="scene" xr-mode-ui="enabled: true" vr-mode-ui="enabled: true">
+    <a-entity id="player" position="0 0 0" vr-controls>
+      <a-entity id="rig" position="0 1.6 0">
+        <a-camera id="cam" look-controls>
+          <a-cursor visible="false"></a-cursor>
+        </a-camera>
+        <a-entity laser-controls="hand: left"></a-entity>
+        <a-entity laser-controls="hand: right"></a-entity>
+      </a-entity>
+    </a-entity>
+
+    <!-- Boden -->
+    <a-plane rotation="-90 0 0" width="30" height="30" color="#333333"></a-plane>
+
+    <!-- Grid -->
+    <a-grid position="0 0.01 0"></a-grid>
+
+    <!-- Würfel zum Testen -->
+    <a-box position="0 1 -3" color="#FF4444" width="0.5" height="0.5" depth="0.5"></a-box>
+
+    <a-light type="ambient" intensity="0.6"></a-light>
+    <a-light type="directional" position="1 5 3" intensity="0.8"></a-light>
+
+    <!-- Debug-Text -->
+    <a-text id="debug-text" value="🎮 Test" position="0 1.5 -2" color="#00FF00" align="center" width="8" opacity="0.9"></a-text>
+  </a-scene>
+</body>
+</html>

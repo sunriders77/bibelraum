@@ -6,7 +6,10 @@
   <title>Bibelraum ✝️</title>
 
   <!-- A-Frame -->
-  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"
+          onload="document.getElementById('page-status').textContent = '✅ A-Frame OK'"
+          onerror="document.getElementById('page-status').textContent = '❌ A-Frame FEHLER!'">
+  </script>
   <!-- Socket.IO Client -->
   <script src="/socket.io/socket.io.js"></script>
 
@@ -14,6 +17,7 @@
   <script>
     AFRAME.registerComponent('vr-controls', {
       init: function() {
+        document.getElementById('page-status').textContent = '🎮 VR-Controls init...';
         // Alles in init initialisieren
         this.head = null;
         this.tempVec = new THREE.Vector3();
@@ -171,10 +175,14 @@
       }
     });
   </script>
+  <script>document.getElementById('page-status').textContent = '✅ VR-Controls registriert';</script>
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+  <!-- STATUS-ANZEIGE (sofort sichtbar, noch vor A-Frame) -->
+  <div id="page-status" style="position:fixed;top:0;left:0;z-index:99999;background:#ff4444;color:white;padding:12px 20px;font-size:24px;font-family:Arial,sans-serif;width:100%;text-align:center">⏳ Lade...</div>
+
   <!-- Namenseingabe -->
   <div id="overlay">
     <div id="login-box">
