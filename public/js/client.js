@@ -123,8 +123,8 @@ function createOwnAvatar(name, avatarUrl) {
   myAvatar = document.createElement('a-entity');
   myAvatar.setAttribute('id', 'my-avatar-body');
 
-  // Ready Player Me Avatar? (URL endet auf .glb)
-  if (avatarUrl && avatarUrl.trim() !== '' && avatarUrl.match(/\.glb$/i)) {
+  // 3D-Avatar? Jede gültige URL wird probiert (GLB, GLTF, etc.)
+  if (avatarUrl && avatarUrl.trim() !== '' && avatarUrl.trim().match(/^https?:\/\//i)) {
     const model = document.createElement('a-gltf-model');
     model.setAttribute('src', avatarUrl.trim());
     model.setAttribute('position', '0 -0.9 0');
@@ -185,8 +185,8 @@ function createRemoteAvatar(user) {
   entity.setAttribute('id', `avatar-${user.id}`);
 
   // Ready Player Me Avatar?
-  const avatarUrl = user.avatarUrl || '';
-  if (avatarUrl && avatarUrl.trim() !== '' && avatarUrl.match(/\.glb$/i)) {
+  // 3D-Avatar? Jede gültige URL wird probiert (GLB, GLTF, etc.)
+  if (avatarUrl && avatarUrl.trim() !== '' && avatarUrl.trim().match(/^https?:\/\//i)) {
     const model = document.createElement('a-gltf-model');
     model.setAttribute('src', avatarUrl.trim());
     model.setAttribute('position', '0 -0.9 0');
