@@ -123,7 +123,7 @@
         if (Math.abs(turnSpeed) > 0.1) {
           try {
             var rot = this.el.getAttribute('rotation');
-            rot.y -= turnSpeed * 25 * dt; // 25×
+            rot.y -= turnSpeed * 30 * dt; // 30×
             this.el.setAttribute('rotation', rot);
           } catch(e) { this.debug('FEHLER: ' + e.message); }
         }
