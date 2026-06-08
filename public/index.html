@@ -10,92 +10,94 @@
   <!-- Socket.IO Client -->
   <script src="/socket.io/socket.io.js"></script>
 
-  <!-- VR-Controller-Steuerung für Quest 3 – direkt über WebXR Gamepad API -->
+  <!-- VR-Controller-Steuerung für Quest 3 – nutzt A-Frames tracked-controls GAme -->
   <script>
     AFRAME.registerComponent('vr-controls', {
       init: function() {
-        // Kamera über die Szene finden (nicht nur innerhalb des Entities)
+        // Kamera über die Szene finden
         this.head = document.querySelector('#camera');
         this.tempVec = new THREE.Vector3();
         this.tempRight = new THREE.Vector3();
         this.quat = new THREE.Quaternion();
         this.lastLog = '';
+        this.leftController = null;
+        this.rightController = null;
 
         // Debug-Anzeige (nur in VR sichtbar)
         this.debugEl = document.querySelector('#debug-text');
 
-        // Laser-Linien nach Controller-Verbindung ausblenden
         var scene = this.el.sceneEl;
+
+        // Laser-Linien nach Controller-Verbindung ausblenden
         scene.addEventListener('controllerconnected', function(evt) {
           var lineEls = evt.detail.target.querySelectorAll('[line]');
           for (var i = 0; i < lineEls.length; i++) {
             lineEls[i].setAttribute('visible', false);
           }
         });
+
+        // Controller-Verbindung überwachen
+        scene.addEventListener('controllerconnected', function(evt) {
+          var tc = evt.detail.target.components['tracked-controls'];
+          if (tc && tc.controller) {
+            var hand = evt.detail.target.getAttribute('laser-controls');
+            if (hand && hand.hand === 'left') this.leftController = tc.controller;
+            if (hand && hand.hand === 'right') this.rightController = tc.controller;
+          }
+        }.bind(this));
+
+        scene.addEventListener('controllerdisconnected', function(evt) {
+          this.leftController = null;
+          this.rightController = null;
+        }.bind(this));
       },
       tick: function(time, timeDelta) {
         var scene = this.el.sceneEl;
         var dt = Math.min(timeDelta / 1000, 0.1);
 
-        // Prüfe VR-Mode über mehrere Wege
+        // VR-Mode prüfen
         var inVR = scene.is('vr-mode') ||
-                   (scene.renderer && scene.renderer.xr && scene.renderer.xr.isPresenting !== undefined &&
-                    scene.renderer.xr.isPresenting);
+                   (scene.renderer && scene.renderer.xr && scene.renderer.xr.isPresenting);
 
         if (!inVR) {
           this.debug('Kein VR');
           return;
         }
 
-        // WebXR Session holen
-        var session = null;
-        try {
-          if (scene.renderer && scene.renderer.xr) {
-            session = scene.renderer.xr.getSession && scene.renderer.xr.getSession();
-            if (!session && scene.renderer.xr.session) session = scene.renderer.xr.session;
+        // Fallback: Controller direkt aus der Szene holen wenn Events nicht feuerten
+        if (!this.leftController || !this.rightController) {
+          var controllers = scene.querySelectorAll('[laser-controls]');
+          for (var i = 0; i < controllers.length; i++) {
+            var tc = controllers[i].components['tracked-controls'];
+            if (tc && tc.controller) {
+              var hand = controllers[i].getAttribute('laser-controls');
+              if (hand && hand.hand === 'left' && !this.leftController) {
+                this.leftController = tc.controller;
+              }
+              if (hand && hand.hand === 'right' && !this.rightController) {
+                this.rightController = tc.controller;
+              }
+            }
           }
-        } catch(e) {}
-
-        if (!session) {
-          this.debug('VR an – keine Session');
-          return;
         }
 
-        // Alle InputSources sammeln
+        // Stick-Werte aus den native Gamepad-Objekten lesen
         var leftAxes = null, rightAxes = null;
-        var sources = [];
-        try { sources = Array.from(session.inputSources); } catch(e) {}
-
-        for (var i = 0; i < sources.length; i++) {
-          var src = sources[i];
-          if (!src || !src.gamepad || !src.gamepad.axes) continue;
-          var gp = src.gamepad;
-          if (src.handedness === 'left') leftAxes = gp.axes;
-          else if (src.handedness === 'right') rightAxes = gp.axes;
+        if (this.leftController && this.leftController.axes) {
+          leftAxes = this.leftController.axes;
+        }
+        if (this.rightController && this.rightController.axes) {
+          rightAxes = this.rightController.axes;
         }
 
-        // Fallback: 2 Quellen → #1 links, #2 rechts
-        if (!leftAxes && !rightAxes && sources.length >= 2) {
-          leftAxes = sources[0].gamepad ? sources[0].gamepad.axes : null;
-          rightAxes = sources[1].gamepad ? sources[1].gamepad.axes : null;
-        }
-        // Fallback: 1 Quelle mit 4 Achsen
-        if (!leftAxes && !rightAxes && sources.length >= 1) {
-          var gp = sources[0].gamepad;
-          if (gp && gp.axes && gp.axes.length >= 4) {
-            leftAxes = [gp.axes[0], gp.axes[1]];
-            rightAxes = [gp.axes[2], gp.axes[3]];
-          }
-        }
-
-        // Live Stick-Werte auslesen für Debug
+        // Live Stick-Werte für Debug
         var lx = leftAxes && leftAxes.length >= 2 ? (Math.abs(leftAxes[0]) > 0.12 ? leftAxes[0].toFixed(2) : '0') : '-';
         var ly = leftAxes && leftAxes.length >= 2 ? (Math.abs(leftAxes[1]) > 0.12 ? leftAxes[1].toFixed(2) : '0') : '-';
         var rx = rightAxes && rightAxes.length >= 2 ? (Math.abs(rightAxes[0]) > 0.12 ? rightAxes[0].toFixed(2) : '0') : '-';
-        this.debug('L(' + lx + ',' + ly + ') R(' + rx + ')');
+        var status = (this.leftController ? 'L✓' : 'L?') + (this.rightController ? 'R✓' : 'R?');
+        this.debug(status + ' L(' + lx + ',' + ly + ') R(' + rx + ')');
 
-        // === Bewegung (auf #player via setAttribute – robuster) ===
-        var moved = false;
+        // === Bewegung ===
         if (leftAxes && leftAxes.length >= 2) {
           var m_lx = Math.abs(leftAxes[0]) > 0.15 ? leftAxes[0] : 0;
           var m_ly = Math.abs(leftAxes[1]) > 0.15 ? leftAxes[1] : 0;
@@ -115,24 +117,16 @@
                 pos.x += this.tempVec.x * -m_ly * speed;
                 pos.z += this.tempVec.z * -m_ly * speed;
                 this.el.setAttribute('position', pos);
-                moved = true;
               }
             }
           }
         }
 
-        // === Drehung (via setAttribute) ===
+        // === Drehung ===
         if (rightAxes && rightAxes.length >= 2 && Math.abs(rightAxes[0]) > 0.15) {
           var rot = this.el.getAttribute('rotation');
           rot.y -= rightAxes[0] * 3 * dt;
           this.el.setAttribute('rotation', rot);
-          moved = true;
-        }
-
-        // Nur debuggen wenn Bewegung passiert
-        if (moved) {
-          var p = this.el.getAttribute('position');
-          this.debug('L(' + lx + ',' + ly + ') R(' + rx + ') → ' + p.x.toFixed(1) + ',' + p.z.toFixed(1));
         }
       },
       debug: function(msg) {
