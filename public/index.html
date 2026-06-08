@@ -14,11 +14,16 @@
   <script>
     AFRAME.registerComponent('vr-controls', {
       init: function() {
-        this.head = this.el.querySelector('[camera]');
-        this.velocity = new THREE.Vector3();
+        // Kamera über die Szene finden (nicht nur innerhalb des Entities)
+        this.head = document.querySelector('#camera');
         this.tempVec = new THREE.Vector3();
         this.tempRight = new THREE.Vector3();
         this.quat = new THREE.Quaternion();
+        this.lastLog = '';
+
+        // Debug-Anzeige (nur in VR sichtbar)
+        this.debugEl = document.querySelector('#debug-text');
+
         // Laser-Linien nach Controller-Verbindung ausblenden
         var scene = this.el.sceneEl;
         scene.addEventListener('controllerconnected', function(evt) {
@@ -30,37 +35,53 @@
       },
       tick: function(time, timeDelta) {
         var scene = this.el.sceneEl;
-        if (!scene.is('vr-mode')) return;
         var dt = Math.min(timeDelta / 1000, 0.1);
 
-        // Direkter Zugriff auf WebXR Session
-        var renderer = scene.renderer;
-        if (!renderer || !renderer.xr) return;
-        var session = renderer.xr.getSession && renderer.xr.getSession();
-        if (!session) return;
+        // Prüfe VR-Mode über mehrere Wege
+        var inVR = scene.is('vr-mode') ||
+                   (scene.renderer && scene.renderer.xr && scene.renderer.xr.isPresenting !== undefined &&
+                    scene.renderer.xr.isPresenting);
 
-        // Alle Gamepads aus den InputSources sammeln
+        if (!inVR) {
+          this.debug('Kein VR');
+          return;
+        }
+
+        // WebXR Session holen
+        var session = null;
+        try {
+          if (scene.renderer && scene.renderer.xr) {
+            session = scene.renderer.xr.getSession && scene.renderer.xr.getSession();
+            if (!session && scene.renderer.xr.session) session = scene.renderer.xr.session;
+          }
+        } catch(e) {}
+
+        if (!session) {
+          this.debug('VR an – keine Session');
+          return;
+        }
+
+        // Alle InputSources sammeln
         var leftAxes = null, rightAxes = null;
-        var sources = Array.from(session.inputSources);
+        var sources = [];
+        try { sources = Array.from(session.inputSources); } catch(e) {}
+
+        this.debug('VR + ' + sources.length + ' Controller');
 
         for (var i = 0; i < sources.length; i++) {
           var src = sources[i];
           if (!src || !src.gamepad || !src.gamepad.axes) continue;
           var gp = src.gamepad;
-          // Versuche anhand der Handedness zuzuordnen
-          if (src.handedness === 'left' || src.handedness === 'left-hand') {
-            leftAxes = gp.axes;
-          } else if (src.handedness === 'right' || src.handedness === 'right-hand') {
-            rightAxes = gp.axes;
-          }
+          if (src.handedness === 'left') leftAxes = gp.axes;
+          else if (src.handedness === 'right') rightAxes = gp.axes;
         }
 
-        // Fallback: 2 Gamepads → erstes links, zweites rechts
+        // Fallback: 2 Quellen → #1 links, #2 rechts
         if (!leftAxes && !rightAxes && sources.length >= 2) {
           leftAxes = sources[0].gamepad ? sources[0].gamepad.axes : null;
           rightAxes = sources[1].gamepad ? sources[1].gamepad.axes : null;
         }
-        // Fallback: Nur 1 Gamepad mit 4 Achsen (Quest 3 liefert manchmal beide Sticks in einem)
+        // Fallback: 1 Quelle mit 4 Achsen
         if (!leftAxes && !rightAxes && sources.length >= 1) {
           var gp = sources[0].gamepad;
           if (gp && gp.axes && gp.axes.length >= 4) {
@@ -69,28 +90,36 @@
           }
         }
 
-        // === Linker Stick: Bewegung in Blickrichtung ===
+        // === Bewegung (auf diesem Entity – #player) ===
         if (leftAxes && leftAxes.length >= 2) {
           var lx = Math.abs(leftAxes[0]) > 0.12 ? leftAxes[0] : 0;
           var ly = Math.abs(leftAxes[1]) > 0.12 ? leftAxes[1] : 0;
-          if (lx !== 0 || ly !== 0 && this.head) {
-            var cam = this.head.components.camera ? this.head.components.camera.camera : null;
-            if (cam) {
-              this.quat.copy(cam.quaternion);
-              this.tempVec.set(0, 0, -1).applyQuaternion(this.quat);
-              this.tempVec.y = 0; this.tempVec.normalize();
-              this.tempRight.set(1, 0, 0).applyQuaternion(this.quat);
-              this.tempRight.y = 0; this.tempRight.normalize();
-              var speed = 3.5 * dt;
-              this.el.object3D.position.add(this.tempVec.clone().multiplyScalar(-ly * speed));
-              this.el.object3D.position.add(this.tempRight.clone().multiplyScalar(lx * speed));
+          if (lx !== 0 || ly !== 0) {
+            if (this.head && this.head.components && this.head.components.camera) {
+              var cam = this.head.components.camera.camera;
+              if (cam) {
+                this.quat.copy(cam.quaternion);
+                this.tempVec.set(0, 0, -1).applyQuaternion(this.quat);
+                this.tempVec.y = 0; this.tempVec.normalize();
+                this.tempRight.set(1, 0, 0).applyQuaternion(this.quat);
+                this.tempRight.y = 0; this.tempRight.normalize();
+                var speed = 3.5 * dt;
+                this.el.object3D.position.add(this.tempVec.clone().multiplyScalar(-ly * speed));
+                this.el.object3D.position.add(this.tempRight.clone().multiplyScalar(lx * speed));
+              }
             }
           }
         }
 
-        // === Rechter Stick: Drehung ===
+        // === Drehung ===
         if (rightAxes && rightAxes.length >= 2 && Math.abs(rightAxes[0]) > 0.12) {
           this.el.object3D.rotation.y -= rightAxes[0] * 2.5 * dt;
+        }
+      },
+      debug: function(msg) {
+        if (this.debugEl && this.debugEl.setAttribute && msg !== this.lastLog) {
+          this.debugEl.setAttribute('value', '🎮 ' + msg);
+          this.lastLog = msg;
         }
       }
     });
@@ -136,15 +165,20 @@
     xr-mode-ui="enabled: true"
     vr-mode-ui="enabled: true; cardVisibility: always">
 
-    <!-- Kamera / Rig -->
-    <a-entity id="camera-rig" position="0 1.6 3" vr-controls>
-      <a-camera id="camera" wasd-controls="enabled: true" look-controls="pointerLockEnabled: true">
-        <a-cursor id="cursor" raycaster="objects: .clickable" color="#4CAF50" visible="false"></a-cursor>
-      </a-camera>
-      <!-- Quest 3 Controller (für Sichtbarkeit + InputSources) mit unsichtbarem Laser -->
-      <a-entity laser-controls="hand: left" raycaster="far: 0.001; showLine: false"></a-entity>
-      <a-entity laser-controls="hand: right" raycaster="far: 0.001; showLine: false"></a-entity>
+    <!-- Kamera / Rig – Player-Container für VR-Bewegung -->
+    <a-entity id="player" position="0 0 0" vr-controls>
+      <a-entity id="camera-rig" position="0 1.6 3">
+        <a-camera id="camera" wasd-controls="enabled: true" look-controls="pointerLockEnabled: true">
+          <a-cursor id="cursor" raycaster="objects: .clickable" color="#4CAF50" visible="false"></a-cursor>
+        </a-camera>
+        <!-- Quest 3 Controller (für Sichtbarkeit + InputSources) mit unsichtbarem Laser -->
+        <a-entity laser-controls="hand: left" raycaster="far: 0.001"></a-entity>
+        <a-entity laser-controls="hand: right" raycaster="far: 0.001"></a-entity>
+      </a-entity>
     </a-entity>
+
+    <!-- Debug-Anzeige für VR (schwebt vor dem Spieler) -->
+    <a-text id="debug-text" value="🎮 Starte VR..." position="0 2 -2" color="#00FF00" align="center" width="6" opacity="0.8"></a-text>
 
     <!-- Beleuchtung -->
     <a-light type="ambient" color="#FFF5E6" intensity="0.6"></a-light>
