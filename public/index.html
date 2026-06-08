@@ -7,50 +7,10 @@
 
   <!-- A-Frame -->
   <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <!-- A-Frame Extras (VR-Controller-Steuerung für Quest-Sticks) -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
   <!-- Socket.IO Client -->
   <script src="/socket.io/socket.io.js"></script>
-
-  <!-- VR-Locomotion (Stick-Steuerung ohne Extra-Libs) -->
-  <script>
-    AFRAME.registerComponent('vr-locomotion', {
-      init: function() {
-        this.velocity = new THREE.Vector3();
-        this.direction = new THREE.Vector3();
-        this.head = this.el.querySelector('[camera]');
-      },
-      tick: function(time, delta) {
-        if (!this.el.sceneEl.is('vr-mode')) return;
-        const dt = delta / 1000;
-        const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
-        for (let i = 0; i < gamepads.length; i++) {
-          const gp = gamepads[i];
-          if (!gp || !gp.axes || gp.axes.length < 4) continue;
-          const stickX = gp.axes[0] || 0;
-          const stickY = gp.axes[1] || 0;
-          const rotX = gp.axes[2] || 0;
-          // Bewegung mit linkem Stick
-          if (Math.abs(stickX) > 0.1 || Math.abs(stickY) > 0.1) {
-            const camera = this.head ? this.head.components.camera.camera : null;
-            if (camera) {
-              const forward = new THREE.Vector3(0, 0, -1);
-              forward.applyQuaternion(camera.quaternion);
-              forward.y = 0; forward.normalize();
-              const right = new THREE.Vector3(1, 0, 0);
-              right.applyQuaternion(camera.quaternion);
-              right.y = 0; right.normalize();
-              const speed = 3 * dt;
-              this.el.object3D.position.add(forward.multiplyScalar(-stickY * speed));
-              this.el.object3D.position.add(right.multiplyScalar(stickX * speed));
-            }
-          }
-          // Drehung mit rechtem Stick
-          if (Math.abs(rotX) > 0.1) {
-            this.el.object3D.rotation.y -= rotX * 2 * dt;
-          }
-        }
-      }
-    });
-  </script>
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -93,13 +53,13 @@
     vr-mode-ui="enabled: true; cardVisibility: always">
 
     <!-- Kamera / Rig -->
-    <a-entity id="camera-rig" position="0 1.6 3" vr-locomotion>
+    <a-entity id="camera-rig" position="0 1.6 3" movement-controls="speed: 0.05">
       <a-camera id="camera" wasd-controls="enabled: true" look-controls="pointerLockEnabled: true">
         <a-cursor id="cursor" raycaster="objects: .clickable" color="#4CAF50"></a-cursor>
       </a-camera>
-      <!-- VR-Controller (einfach, ohne Extra-Libs) -->
-      <a-entity laser-controls="hand: left"></a-entity>
-      <a-entity laser-controls="hand: right"></a-entity>
+      <!-- Quest 3 Controller -->
+      <a-entity oculus-touch-controls="hand: left" laser-controls="hand: left"></a-entity>
+      <a-entity oculus-touch-controls="hand: right" laser-controls="hand: right"></a-entity>
     </a-entity>
 
     <!-- Beleuchtung -->
@@ -222,6 +182,10 @@
       padding: 0;
       overflow: hidden;
       font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    /* Cursor in VR ausblenden */
+    body.a-enter-vr .a-cursor {
+      display: none;
     }
     #overlay {
       position: fixed;
