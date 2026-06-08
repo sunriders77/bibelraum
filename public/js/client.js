@@ -94,6 +94,21 @@ function connectSocket() {
   socket.on('user:updated', (data) => {
     updateRemoteAvatarName(data.id, data.name);
   });
+
+  // Bot-Nachrichten (Sprechblase)
+  socket.on('bot:message', (text) => {
+    const bubble = document.getElementById('bot-bubble');
+    if (bubble) {
+      bubble.setAttribute('value', '💬 ' + text);
+      // Nach 10 Sekunden zurück zur Standard-Meldung
+      setTimeout(() => {
+        const b = document.getElementById('bot-bubble');
+        if (b && b.getAttribute('value') === '💬 ' + text) {
+          b.setAttribute('value', '🤖');
+        }
+      }, 10000);
+    }
+  });
 }
 
 // === AVATAR ERSTELLEN ===
@@ -163,7 +178,8 @@ function createRemoteAvatar(user) {
   const container = document.getElementById('remote-avatars');
   if (!container) return;
 
-  const color = AVATAR_COLORS[user.id.charCodeAt(user.id.length-1) % AVATAR_COLORS.length];
+  // Bot bekommt feste Farbe (pink), andere User per ID
+  const color = user.isBot ? '#F06292' : AVATAR_COLORS[user.id.charCodeAt(user.id.length-1) % AVATAR_COLORS.length];
 
   const entity = document.createElement('a-entity');
   entity.setAttribute('id', `avatar-${user.id}`);
@@ -202,6 +218,7 @@ function createRemoteAvatar(user) {
 
   // Namenslabel
   const label = document.createElement('a-text');
+  label.setAttribute('id', `label-${user.id}`);
   label.setAttribute('value', user.name || 'Gast');
   label.setAttribute('align', 'center');
   label.setAttribute('color', color);
@@ -210,6 +227,22 @@ function createRemoteAvatar(user) {
   label.setAttribute('scale', '0.4 0.4 0.4');
   label.setAttribute('width', '4');
   entity.appendChild(label);
+
+  // Bot-Sprechblase (zweite Textzeile)
+  if (user.isBot) {
+    const bubble = document.createElement('a-text');
+    bubble.setAttribute('id', 'bot-bubble');
+    bubble.setAttribute('value', '💬 ...');
+    bubble.setAttribute('align', 'center');
+    bubble.setAttribute('color', '#FFFFFF');
+    bubble.setAttribute('negate', 'false');
+    bubble.setAttribute('position', '0 1.6 0');
+    bubble.setAttribute('scale', '0.35 0.35 0.35');
+    bubble.setAttribute('width', '5');
+    bubble.setAttribute('material', 'color: #F06292; transparent: true; opacity: 0.8');
+    bubble.setAttribute('side', 'double');
+    entity.appendChild(bubble);
+  }
 
   // VR-Badge
   if (user.isVR) {

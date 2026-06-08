@@ -12,6 +12,9 @@ const PORT = process.env.PORT || 3000;
 // Trust Proxy für Render.com
 app.set('trust proxy', 1);
 
+// JSON body parser für Bot-API
+app.use(express.json());
+
 // Statische Dateien aus dem public-Ordner
 app.use(express.static('public'));
 
@@ -24,12 +27,71 @@ app.get('/', (req, res) => {
 const connectedUsers = new Map();
 const previewClients = new Set();
 
+// === BOT: Melanie ===
+const BOT_API_KEY = process.env.BOT_KEY || 'melanie2024';
+const BOT_ID = 'bot-melanie';
+let botMessage = '👋 Hallo, ich bin Melanie!';
+
+// Bot-User in der User-Liste
+const botUser = {
+  id: BOT_ID,
+  name: '🤖 Melanie (Bot)',
+  position: { x: 0, y: 1.0, z: -3 },
+  rotation: { x: 0, y: 0, z: 0 },
+  isBot: true,
+  isVR: false
+};
+connectedUsers.set(BOT_ID, botUser);
+
+// Bot-Nachrichten-API
+app.post('/api/bot/say', (req, res) => {
+  const { key, text } = req.body;
+  if (key !== BOT_API_KEY) {
+    return res.status(403).json({ error: 'Ungültiger API-Key' });
+  }
+  if (!text || text.length > 500) {
+    return res.status(400).json({ error: 'Text fehlt oder zu lang (max 500)' });
+  }
+  botMessage = text;
+  io.emit('bot:message', text);
+  console.log(`🤖 Bot-Nachricht: "${text}"`);
+  res.json({ ok: true, message: text });
+});
+
+// Auch per GET (einfacher von CLI)
+app.get('/api/bot/say', (req, res) => {
+  const key = req.query.key;
+  const text = req.query.text || req.query.msg;
+  if (key !== BOT_API_KEY) {
+    return res.status(403).json({ error: 'Ungültiger API-Key' });
+  }
+  if (!text || text.length > 500) {
+    return res.status(400).json({ error: 'Text fehlt oder zu lang' });
+  }
+  botMessage = text;
+  io.emit('bot:message', text);
+  console.log(`🤖 Bot-Nachricht: "${text}"`);
+  res.json({ ok: true, message: text });
+});
+
+// Bot-Daten abrufbar
+app.get('/api/bot/status', (req, res) => {
+  res.json({
+    name: botUser.name,
+    position: botUser.position,
+    message: botMessage
+  });
+});
+// ============================
+
 // Hilfsfunktion: sende Benutzerliste an alle Preview-Clients
 function broadcastUserList() {
-  const users = Array.from(connectedUsers.values()).map(u => ({
-    name: u.name,
-    isVR: u.isVR
-  }));
+  const users = Array.from(connectedUsers.values())
+    .filter(u => !u.isBot) // Bot nicht in der Preview-Liste
+    .map(u => ({
+      name: u.name,
+      isVR: u.isVR
+    }));
   for (const sid of previewClients) {
     const sock = io.sockets.sockets.get(sid);
     if (sock) {
