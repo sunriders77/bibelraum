@@ -119,7 +119,7 @@
         if (Math.abs(turnSpeed) > 0.1) {
           try {
             var rot = this.el.getAttribute('rotation');
-            rot.y -= turnSpeed * 10 * dt; // 10× schneller!
+            rot.y -= turnSpeed * 20 * dt; // 20× schneller!
             this.el.setAttribute('rotation', rot);
           } catch(e) { this.debug('FEHLER: ' + e.message); }
         }
@@ -135,8 +135,9 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <!-- STATUS-ANZEIGE (sofort sichtbar, noch vor A-Frame) -->
-  <div id="page-status" style="position:fixed;top:0;left:0;z-index:99999;background:#ff4444;color:white;padding:12px 20px;font-size:24px;font-family:Arial,sans-serif;width:100%;text-align:center">⏳ Lade...</div>
+  <!-- STATUS-ANZEIGE (sofort sichtbar, blendet nach 5s aus) -->
+  <div id="page-status" style="position:fixed;top:0;left:0;z-index:99999;background:#444;color:#0f0;padding:12px 20px;font-size:24px;font-family:Arial,sans-serif;width:100%;text-align:center;transition:opacity 1s">⏳ Lade...</div>
+  <script>setTimeout(function(){var s=document.getElementById('page-status');if(s)s.style.opacity='0';},5000);</script>
 
   <!-- Namenseingabe -->
   <div id="overlay">
