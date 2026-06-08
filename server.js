@@ -20,10 +20,43 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-// Aktive Benutzer im Raum
+// Aktive Benutzer im Raum + Preview-Verbindungen
 const connectedUsers = new Map();
+const previewClients = new Set();
+
+// Hilfsfunktion: sende Benutzerliste an alle Preview-Clients
+function broadcastUserList() {
+  const users = Array.from(connectedUsers.values()).map(u => ({
+    name: u.name,
+    isVR: u.isVR
+  }));
+  for (const sid of previewClients) {
+    const sock = io.sockets.sockets.get(sid);
+    if (sock) {
+      sock.emit('users:list', users);
+    } else {
+      previewClients.delete(sid);
+    }
+  }
+}
 
 io.on('connection', (socket) => {
+  const isPreview = socket.handshake.query.preview === 'true';
+
+  if (isPreview) {
+    // Preview-Client (nur für Login-Benutzerliste)
+    console.log(`👁️ Preview-Client verbunden: ${socket.id}`);
+    previewClients.add(socket.id);
+    broadcastUserList();
+
+    socket.on('disconnect', () => {
+      console.log(`👁️ Preview-Client getrennt: ${socket.id}`);
+      previewClients.delete(socket.id);
+    });
+    return;
+  }
+
+  // Normaler Raum-Client
   console.log(`🔵 Benutzer verbunden: ${socket.id}`);
 
   // Benutzer initialisieren
@@ -47,6 +80,7 @@ io.on('connection', (socket) => {
 
   // Allen anderen den neuen Benutzer melden
   socket.broadcast.emit('user:joined', user);
+  broadcastUserList();
 
   // Benutzer aktualisiert seine Position
   socket.on('user:move', (data) => {
@@ -71,6 +105,7 @@ io.on('connection', (socket) => {
         id: socket.id,
         name: name
       });
+      broadcastUserList();
     }
   });
 
@@ -83,6 +118,7 @@ io.on('connection', (socket) => {
         id: socket.id,
         isVR: isVR
       });
+      broadcastUserList();
     }
   });
 
@@ -91,6 +127,7 @@ io.on('connection', (socket) => {
     console.log(`🔴 Benutzer getrennt: ${socket.id}`);
     connectedUsers.delete(socket.id);
     io.emit('user:left', socket.id);
+    broadcastUserList();
   });
 });
 

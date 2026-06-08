@@ -21,7 +21,41 @@ const AVATAR_COLORS = [
   '#4DD0E1', '#FF8A65', '#AED581', '#F06292', '#7986CB'
 ];
 
-// === SOCKET.IO VERBINDUNG ===
+// geteilte Socket-Instanz für die Login-Benutzerliste
+let previewSocket = null;
+
+// === BENUTZERLISTE VOR DEM LOGIN ===
+function startUserPreview() {
+  // Socket nur für die Benutzerliste (ohne Raum beizutreten)
+  previewSocket = io({ query: { preview: 'true' } });
+
+  previewSocket.on('users:list', (users) => {
+    const list = document.getElementById('preview-user-list');
+    if (!list) return;
+    if (users.length === 0) {
+      list.innerHTML = '<li style="color:#888">👥 Noch niemand da</li>';
+    } else {
+      list.innerHTML = users.map(u =>
+        `<li>${u.isVR ? '🥽 ' : ''}${escapeHtml(u.name)}</li>`
+      ).join('');
+    }
+    // Auch den Counter aktualisieren
+    const countEl = document.getElementById('preview-count');
+    if (countEl) countEl.textContent = users.length;
+  });
+
+  previewSocket.on('connect', () => {
+    console.log('📋 Benutzer-Vorschau verbunden');
+  });
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// === SOCKET.IO VERBINDUNG (für den Raum) ===
 function connectSocket() {
   socket = io();
 
@@ -287,7 +321,7 @@ function checkVR() {
   });
 }
 
-// === JITSI INTEGRATION (für PC-Overlay + 3D-Leinwand in VR) ===
+// === JITSI INTEGRATION ===
 let jitsiInitialized = false;
 
 function initJitsi() {
@@ -301,8 +335,6 @@ function initJitsi() {
   script.src = 'https://meet.jit.si/external_api.js';
   script.onload = () => {
     const domain = 'meet.jit.si';
-
-    // === 1. Jitsi für PC-Overlay ===
     const options = {
       roomName: roomName,
       parentNode: document.querySelector('#jitsi-meeting'),
@@ -324,63 +356,16 @@ function initJitsi() {
     try {
       new JitsiMeetExternalAPI(domain, options);
       jitsiInitialized = true;
-      console.log('📺 Jitsi (PC) gestartet');
+      console.log('📺 Jitsi gestartet');
     } catch(e) {
-      console.warn('Jitsi PC konnte nicht gestartet werden:', e);
+      console.warn('Jitsi konnte nicht gestartet werden:', e);
     }
-
-    // === 2. Jitsi für 3D-Leinwand (VR) ===
-    const options3d = {
-      roomName: roomName,
-      parentNode: document.querySelector('#jitsi-meeting-3d'),
-      configOverrides: {
-        startWithAudioMuted: true,
-        startWithVideoMuted: true,
-        disableDeepLinking: true,
-        disableSimulcast: false,
-        toolbarButtons: ['microphone', 'camera', 'hangup'],
-        doNotStoreRoom: true
-      },
-      interfaceConfigOverrides: {
-        SHOW_JITSI_WATERMARK: false,
-        SHOW_WATERMARK_FOR_GUESTS: false,
-        TOOLBAR_ALWAYS_VISIBLE: false,
-        DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
-        DISABLE_FOCUS_INDICATOR: true
-      }
-    };
-    try {
-      new JitsiMeetExternalAPI(domain, options3d);
-      console.log('📺 Jitsi (3D-Leinwand) gestartet');
-    } catch(e) {
-      console.warn('Jitsi 3D konnte nicht gestartet werden:', e);
-    }
-
-    // 3D-Leinwand mit HTML-Shader aktivieren
-    activateVideoScreenInVR();
   };
   document.body.appendChild(script);
 }
 
 function generateRoomCode() {
   return 'bibel' + Math.random().toString(36).substring(2, 8).toUpperCase();
-}
-
-function activateVideoScreenInVR() {
-  const screen = document.getElementById('video-screen');
-  if (!screen) return;
-
-  // Warten bis die Jitsi-3D-Instanz geladen ist
-  setTimeout(() => {
-    const container3d = document.getElementById('jitsi-3d-container');
-    if (container3d) {
-      screen.setAttribute('material', 'shader: html; src: #jitsi-3d-container; width: 640; height: 480');
-      // Status-Text ausblenden
-      const text = document.getElementById('screen-text');
-      if (text) text.setAttribute('visible', 'false');
-      console.log('📺 3D-Leinwand aktiviert – Jitsi jetzt auch in VR sichtbar!');
-    }
-  }, 3000); // 3s warten bis Jitsi geladen ist
 }
 
 // === UI-STEUERUNG ===
@@ -411,6 +396,9 @@ function copyRoomLink() {
 
 // === INIT ===
 document.addEventListener('DOMContentLoaded', () => {
+  // Benutzer-Vorschau starten (vor dem Login)
+  startUserPreview();
+
   // Login
   const loginBox = document.getElementById('login-box');
   const nameInput = document.getElementById('name-input');
