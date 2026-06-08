@@ -256,7 +256,7 @@ function updateAvatarPosition() {
   myAvatar.setAttribute('position', `0 -1.1 0`); // Relativ zum Rig
 }
 
-// === BEWEGUNGSSTEUERUNG ===
+// === BEWEGUNGSSTEUERUNG (via A-Frame movement-controls) ===
 function initMovement() {
   cameraRig = document.getElementById('camera-rig');
   camera = document.getElementById('camera');
@@ -265,58 +265,9 @@ function initMovement() {
     setTimeout(initMovement, 500);
     return;
   }
-
-  // WASD-Tasten
-  document.addEventListener('keydown', (e) => {
-    switch(e.key.toLowerCase()) {
-      case 'w': moveState.forward = true; e.preventDefault(); break;
-      case 's': moveState.backward = true; e.preventDefault(); break;
-      case 'a': moveState.left = true; e.preventDefault(); break;
-      case 'd': moveState.right = true; e.preventDefault(); break;
-    }
-  });
-
-  document.addEventListener('keyup', (e) => {
-    switch(e.key.toLowerCase()) {
-      case 'w': moveState.forward = false; e.preventDefault(); break;
-      case 's': moveState.backward = false; e.preventDefault(); break;
-      case 'a': moveState.left = false; e.preventDefault(); break;
-      case 'd': moveState.right = false; e.preventDefault(); break;
-    }
-  });
-
-  // Bewegungs-Tick
-  setInterval(() => {
-    if (!cameraRig) return;
-
-    const pos = cameraRig.getAttribute('position');
-    const rot = cameraRig.getAttribute('rotation');
-    const speed = 0.05;
-    const yaw = rot.y * Math.PI / 180;
-
-    if (moveState.forward) {
-      pos.x -= Math.sin(yaw) * speed;
-      pos.z -= Math.cos(yaw) * speed;
-    }
-    if (moveState.backward) {
-      pos.x += Math.sin(yaw) * speed;
-      pos.z += Math.cos(yaw) * speed;
-    }
-    if (moveState.left) {
-      pos.x -= Math.cos(yaw) * speed;
-      pos.z += Math.sin(yaw) * speed;
-    }
-    if (moveState.right) {
-      pos.x += Math.cos(yaw) * speed;
-      pos.z -= Math.sin(yaw) * speed;
-    }
-
-    // Im Raum bleiben
-    pos.x = Math.max(-5.5, Math.min(5.5, pos.x));
-    pos.z = Math.max(-4.5, Math.min(4.5, pos.z));
-
-    cameraRig.setAttribute('position', pos);
-  }, 16); // ~60fps
+  // Bewegung läuft komplett über das movement-controls am camera-rig
+  // (unterstützt WASD + Maus am PC UND VR-Controller-Sticks auf Quest)
+  console.log('🕹️ Bewegung bereit (movement-controls)');
 }
 
 // === VR-ERKENNUNG ===
