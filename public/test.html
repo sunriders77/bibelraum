@@ -36,24 +36,53 @@
         this.tempVec = new THREE.Vector3();
         this.tempRight = new THREE.Vector3();
         this.quat = new THREE.Quaternion();
-        this.lastAxes = '';
+        this.inVR = false;
+
+        // Auf VR-Ereignisse hören
+        var scene = this.el.sceneEl;
+        scene.addEventListener('enter-vr', function() {
+          document.getElementById('status').textContent = '🎮 ENTER-VR!';
+          this.inVR = true;
+        }.bind(this));
+        scene.addEventListener('exit-vr', function() {
+          this.inVR = false;
+        }.bind(this));
       },
       tick: function(time, timeDelta) {
         var el = document.getElementById('status');
         var scene = this.el.sceneEl;
         if (!scene || !scene.renderer) return;
 
-        // === WEG 1: Direkt WebXR Session ===
+        // === WebXR Session auf mehreren Wegen holen ===
         var session = null;
         try {
           var xr = scene.renderer.xr;
           if (xr) {
-            session = (xr.getSession && xr.getSession()) || xr.session || null;
+            session = xr.session || (xr.getSession && xr.getSession()) || null;
+          }
+          // Fallback: direkt über navigator.xr
+          if (!session && window.xrSession) {
+            session = window.xrSession;
           }
         } catch(e) {}
 
+        // Status prüfen: enteder VR-Event ODER Session vorhanden
+        var isActive = this.inVR || session !== null;
+
+        if (!isActive) {
+          el.textContent = '🎮 VR: warte... (' + (session ? 'Session✓' : 'Session?') + ')';
+          return;
+        }
+
+        // Session holen falls nicht schon geschehen
         if (!session) {
-          el.textContent = '🎮 VR aus oder keine Session';
+          try {
+            var xr = scene.renderer.xr;
+            if (xr) session = xr.session || (xr.getSession && xr.getSession()) || null;
+          } catch(e) {}
+        }
+        if (!session) {
+          el.textContent = '🎮 VR aktiv, aber keine Session';
           return;
         }
 
@@ -70,7 +99,7 @@
           else if (src.handedness === 'right') rightAxes = gp.axes;
         }
 
-        // Fallback: 2 Quellen
+        // Fallback
         if (!leftAxes && !rightAxes && sources.length >= 2) {
           if (sources[0].gamepad) leftAxes = sources[0].gamepad.axes;
           if (sources[1].gamepad) rightAxes = sources[1].gamepad.axes;
@@ -78,24 +107,18 @@
 
         var sL = leftAxes ? 'L✓' : 'L?';
         var sR = rightAxes ? 'R✓' : 'R?';
-
-        // Debug ALLE Achsen
         var la = leftAxes ? Array.from(leftAxes).map(function(v){return v.toFixed(2)}).join(',') : '-';
         var ra = rightAxes ? Array.from(rightAxes).map(function(v){return v.toFixed(2)}).join(',') : '-';
 
-        var axesStr = 'L[' + la + '] R[' + ra + ']';
-        if (axesStr !== this.lastAxes) {
-          el.textContent = '🎮 ' + sL + sR + ' ' + sources.length + 'src ' + axesStr;
-          this.lastAxes = axesStr;
-        }
+        el.textContent = '🎮 ' + sL + sR + ' L[' + la + '] R[' + ra + ']';
 
-        // === BEWEGUNG MIT axes[2], axes[3] ===
+        // === BEWEGUNG: Quest 3 = axes[2], axes[3] ===
         if (leftAxes && leftAxes.length >= 4) {
           var lx = Math.abs(leftAxes[2]) > 0.15 ? leftAxes[2] : 0;
           var ly = Math.abs(leftAxes[3]) > 0.15 ? leftAxes[3] : 0;
-          if (lx !== 0 || ly !== 0) {
-            el.textContent = '🏃 BEWEGUNG! ' + lx.toFixed(2) + ',' + ly.toFixed(2);
-            if (this.head) {
+          if (lx !== 0 || ly !== 0 && this.head) {
+            el.textContent = '🏃 LINKS: ' + lx.toFixed(2) + ',' + ly.toFixed(2);
+            try {
               var cam = this.head.components.camera && this.head.components.camera.camera;
               if (cam && cam.quaternion) {
                 this.quat.copy(cam.quaternion);
@@ -111,35 +134,39 @@
                 pos.z += this.tempVec.z * -ly * s;
                 this.el.setAttribute('position', pos);
               }
-            }
+            } catch(e) { el.textContent = '❌ ' + e.message; }
           }
         }
 
-        // === DREHUNG MIT axes[2] ===
+        // === DREHUNG ===
         if (rightAxes && rightAxes.length >= 4 && Math.abs(rightAxes[2]) > 0.15) {
-          el.textContent = '🔄 DREHUNG! ' + rightAxes[2].toFixed(2);
-          var rot = this.el.getAttribute('rotation');
-          rot.y -= rightAxes[2] * 3 * (timeDelta / 1000);
-          this.el.setAttribute('rotation', rot);
+          el.textContent = '🔄 RECHTS: ' + rightAxes[2].toFixed(2);
+          try {
+            var rot = this.el.getAttribute('rotation');
+            rot.y -= rightAxes[2] * 3 * (timeDelta / 1000);
+            this.el.setAttribute('rotation', rot);
+          } catch(e) { el.textContent = '❌ ' + e.message; }
         }
       }
     });
     document.getElementById('status').textContent = '✅ vr-test registriert';
   </script>
 
-  <!-- Minimale Szene -->
+  <!-- Minimale Szene mit laser-controls (für Controller-Sichtbarkeit!) -->
   <a-scene id="scene" xr-mode-ui="enabled: true" vr-mode-ui="enabled: true">
     <a-entity id="player" position="0 0 0" vr-test>
       <a-entity id="rig" position="0 1.6 0">
         <a-camera id="cam" look-controls>
           <a-cursor visible="false"></a-cursor>
         </a-camera>
+        <a-entity laser-controls="hand: left" raycaster="far: 0.01"></a-entity>
+        <a-entity laser-controls="hand: right" raycaster="far: 0.01"></a-entity>
       </a-entity>
     </a-entity>
 
     <a-plane rotation="-90 0 0" width="30" height="30" color="#333"></a-plane>
     <a-grid position="0 0.01 0"></a-grid>
-    <a-box position="0 1 -3" color="#FF4444" width="0.5" height="0.5" depth="0.5"></a-box>
+    <a-box id="ziel" position="0 1 -3" color="#FF4444" width="0.5" height="0.5" depth="0.5"></a-box>
     <a-light type="ambient" intensity="0.6"></a-light>
     <a-light type="directional" position="1 5 3" intensity="0.8"></a-light>
   </a-scene>

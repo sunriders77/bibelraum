@@ -13,7 +13,7 @@
   <!-- Socket.IO Client -->
   <script src="/socket.io/socket.io.js"></script>
 
-  <!-- VR-Controller-Steuerung für Quest 3 – DIREKT WebXR API mit axes[2]/[3] -->
+  <!-- VR-Controller-Steuerung für Quest 3 – DIREKT WebXR API + enter-vr Event -->
   <script>
     AFRAME.registerComponent('vr-controls', {
       init: function() {
@@ -22,26 +22,40 @@
         this.tempVec = new THREE.Vector3();
         this.tempRight = new THREE.Vector3();
         this.quat = new THREE.Quaternion();
+        this.inVR = false;
+
+        // Auf VR-Ereignisse hören
+        var scene = this.el.sceneEl;
+        scene.addEventListener('enter-vr', function() {
+          this.inVR = true;
+          this.debug('🎮 ENTER-VR!');
+        }.bind(this));
+        scene.addEventListener('exit-vr', function() {
+          this.inVR = false;
+        }.bind(this));
       },
       tick: function(time, timeDelta) {
         var scene = this.el.sceneEl;
         if (!scene || !scene.renderer) return;
         var dt = Math.min(timeDelta / 1000, 0.1);
 
-        // VR-Mode prüfen
-        var inVR = false;
-        try { inVR = scene.is('vr-mode'); } catch(e) {}
-        if (!inVR) try { inVR = scene.renderer.xr && scene.renderer.xr.isPresenting; } catch(e) {}
-
-        // WebXR Session
+        // WebXR Session auf mehreren Wegen holen
         var session = null;
         try {
           var xr = scene.renderer.xr;
-          if (xr) session = (xr.getSession && xr.getSession()) || xr.session || null;
+          if (xr) session = xr.session || (xr.getSession && xr.getSession()) || null;
         } catch(e) {}
 
-        if (!session || !inVR) {
-          this.debug('Kein VR');
+        var isActive = this.inVR || session !== null;
+        if (!isActive) {
+          this.debug('🎮 VR: warte...');
+          return;
+        }
+        if (!session) {
+          try { var xr = scene.renderer.xr; if (xr) session = xr.session || (xr.getSession && xr.getSession()) || null; } catch(e) {}
+        }
+        if (!session) {
+          this.debug('🎮 VR aktiv, keine Session');
           return;
         }
 
@@ -57,14 +71,9 @@
           if (src.handedness === 'left') leftAxes = gp.axes;
           else if (src.handedness === 'right') rightAxes = gp.axes;
         }
-        // Fallback
         if (!leftAxes && !rightAxes && sources.length >= 2) {
           if (sources[0].gamepad) leftAxes = sources[0].gamepad.axes;
           if (sources[1].gamepad) rightAxes = sources[1].gamepad.axes;
-        }
-        if (!leftAxes && !rightAxes && sources.length >= 1 && sources[0].gamepad && sources[0].gamepad.axes && sources[0].gamepad.axes.length >= 4) {
-          leftAxes = [sources[0].gamepad.axes[0], sources[0].gamepad.axes[1]];
-          rightAxes = [sources[0].gamepad.axes[2], sources[0].gamepad.axes[3]];
         }
 
         // Debug
@@ -75,7 +84,7 @@
         var rx = rightAxes && rightAxes.length >= 4 ? rightAxes[2].toFixed(2) : '-';
         this.debug(sL + ' ' + sR + ' L(' + lx + ',' + ly + ') R(' + rx + ')');
 
-        // === BEWEGUNG: Linker Stick = axes[2], axes[3] bei Quest 3! ===
+        // === BEWEGUNG: Linker Stick = axes[2], axes[3] ===
         if (leftAxes && leftAxes.length >= 4) {
           var m_lx = Math.abs(leftAxes[2]) > 0.15 ? leftAxes[2] : 0;
           var m_ly = Math.abs(leftAxes[3]) > 0.15 ? leftAxes[3] : 0;
@@ -100,7 +109,7 @@
           }
         }
 
-        // === DREHUNG: Rechter Stick = axes[2] bei Quest 3! ===
+        // === DREHUNG: Rechter Stick = axes[2] ===
         if (rightAxes && rightAxes.length >= 4 && Math.abs(rightAxes[2]) > 0.15) {
           try {
             var rot = this.el.getAttribute('rotation');
