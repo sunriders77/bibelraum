@@ -336,20 +336,24 @@ function checkVR() {
   });
 }
 
-// === JITSI INTEGRATION ===
+// === JITSI INTEGRATION (für PC-Overlay + 3D-Leinwand in VR) ===
 let jitsiInitialized = false;
 
 function initJitsi() {
   const container = document.getElementById('jitsi-container');
   if (!container) return;
 
+  const roomName = 'Bibelraum-' + generateRoomCode();
+
   // Lade Jitsi External API
   const script = document.createElement('script');
   script.src = 'https://meet.jit.si/external_api.js';
   script.onload = () => {
     const domain = 'meet.jit.si';
+
+    // === 1. Jitsi für PC-Overlay ===
     const options = {
-      roomName: 'Bibelraum-' + generateRoomCode(),
+      roomName: roomName,
       parentNode: document.querySelector('#jitsi-meeting'),
       configOverrides: {
         startWithAudioMuted: false,
@@ -367,14 +371,42 @@ function initJitsi() {
       }
     };
     try {
-      const jitsiApi = new JitsiMeetExternalAPI(domain, options);
+      new JitsiMeetExternalAPI(domain, options);
       jitsiInitialized = true;
-
-      // Video-Track in A-Frame Leinwand projizieren (fortgeschritten)
-      setupVideoScreen();
+      console.log('📺 Jitsi (PC) gestartet');
     } catch(e) {
-      console.warn('Jitsi konnte nicht gestartet werden:', e);
+      console.warn('Jitsi PC konnte nicht gestartet werden:', e);
     }
+
+    // === 2. Jitsi für 3D-Leinwand (VR) ===
+    const options3d = {
+      roomName: roomName,
+      parentNode: document.querySelector('#jitsi-meeting-3d'),
+      configOverrides: {
+        startWithAudioMuted: true,
+        startWithVideoMuted: true,
+        disableDeepLinking: true,
+        disableSimulcast: false,
+        toolbarButtons: ['microphone', 'camera', 'hangup'],
+        doNotStoreRoom: true
+      },
+      interfaceConfigOverrides: {
+        SHOW_JITSI_WATERMARK: false,
+        SHOW_WATERMARK_FOR_GUESTS: false,
+        TOOLBAR_ALWAYS_VISIBLE: false,
+        DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
+        DISABLE_FOCUS_INDICATOR: true
+      }
+    };
+    try {
+      new JitsiMeetExternalAPI(domain, options3d);
+      console.log('📺 Jitsi (3D-Leinwand) gestartet');
+    } catch(e) {
+      console.warn('Jitsi 3D konnte nicht gestartet werden:', e);
+    }
+
+    // 3D-Leinwand mit HTML-Shader aktivieren
+    activateVideoScreenInVR();
   };
   document.body.appendChild(script);
 }
@@ -383,9 +415,21 @@ function generateRoomCode() {
   return 'bibel' + Math.random().toString(36).substring(2, 8).toUpperCase();
 }
 
-function setupVideoScreen() {
-  // Platzhalter – später können wir hier WebRTC-Tracks auf die Leinwand projizieren
-  console.log('📺 Videoleinwand bereit');
+function activateVideoScreenInVR() {
+  const screen = document.getElementById('video-screen');
+  if (!screen) return;
+
+  // Warten bis die Jitsi-3D-Instanz geladen ist
+  setTimeout(() => {
+    const container3d = document.getElementById('jitsi-3d-container');
+    if (container3d) {
+      screen.setAttribute('material', 'shader: html; src: #jitsi-3d-container; width: 640; height: 480');
+      // Status-Text ausblenden
+      const text = document.getElementById('screen-text');
+      if (text) text.setAttribute('visible', 'false');
+      console.log('📺 3D-Leinwand aktiviert – Jitsi jetzt auch in VR sichtbar!');
+    }
+  }, 3000); // 3s warten bis Jitsi geladen ist
 }
 
 // === UI-STEUERUNG ===

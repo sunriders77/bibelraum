@@ -9,6 +9,8 @@
   <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
   <!-- A-Frame Extras (VR-Controller, Bewegung) -->
   <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
+  <!-- A-Frame HTML Shader (HTML/Iframe in 3D-Textur für VR) -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe-html-shader@0.2.2/dist/aframe-html-shader.min.js"></script>
   <!-- Socket.IO Client -->
   <script src="/socket.io/socket.io.js"></script>
 
@@ -36,9 +38,14 @@
     </div>
   </div>
 
-  <!-- Jitsi-Seitenleiste (ausgeklappt) -->
+  <!-- Jitsi-Seitenleiste für PC (ausgeklappt) -->
   <div id="jitsi-container" class="hidden">
     <div id="jitsi-meeting"></div>
+  </div>
+
+  <!-- Jitsi-Container für die 3D-Leinwand in VR (unsichtbar platziert) -->
+  <div id="jitsi-3d-container">
+    <div id="jitsi-meeting-3d"></div>
   </div>
 
   <!-- A-Frame Szene -->
@@ -155,14 +162,14 @@
     <!-- Bühne / Leinwand-Bereich vorne -->
     <a-plane position="0 0.5 -4.5" width="4" height="0.1" color="#3E2723" rotation="-90 0 0"></a-plane>
 
-    <!-- Große Videoleinwand für Jitsi -->
+    <!-- Große Videoleinwand für Jitsi (auch in VR sichtbar) -->
     <a-entity id="screen-frame" position="0 2 -4.7">
       <!-- Rahmen -->
       <a-box depth="0.1" height="2.5" width="3.5" color="#2C1810" position="0 0 0"></a-box>
-      <!-- Die Leinwand (Video wird per JS reingesetzt) -->
+      <!-- Die Leinwand - zeigt Jitsi via HTML-Shader (funktioniert auch in VR!) -->
       <a-plane id="video-screen" depth="0.01" height="2.2" width="3.2" color="#1a1a2e"
         position="0 0 0.06" material="shader: flat; side: double"></a-plane>
-      <!-- Status-Text auf der Leinwand -->
+      <!-- Status-Text (verschwindet wenn Video aktiv) -->
       <a-text id="screen-text" value="📺 Bibelstunde" position="0 0 0.08" align="center"
         color="#888" width="3" negate="false"></a-text>
     </a-entity>
@@ -315,6 +322,21 @@
       overflow: auto;
     }
     #jitsi-meeting {
+      width: 100%;
+      height: 100%;
+    }
+    /* Jitsi für 3D-Leinwand (unsichtbar positioniert, aber gerendert für Shader) */
+    #jitsi-3d-container {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      width: 640px;
+      height: 480px;
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    #jitsi-meeting-3d {
       width: 100%;
       height: 100%;
     }
