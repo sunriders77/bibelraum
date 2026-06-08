@@ -148,11 +148,11 @@
         } else if (rightAxes && rightAxes.length >= 2) {
           turnSpeed = rightAxes[0];
         }
-        if (Math.abs(turnSpeed) > 0.15) {
+        if (Math.abs(turnSpeed) > 0.1) {
           el.textContent = '🔄 DREHUNG: ' + turnSpeed.toFixed(2);
           try {
             var rot = this.el.getAttribute('rotation');
-            rot.y -= turnSpeed * 5 * (timeDelta / 1000);
+            rot.y -= turnSpeed * 10 * (timeDelta / 1000);
             this.el.setAttribute('rotation', rot);
           } catch(e) { el.textContent = '❌ ' + e.message; }
         }

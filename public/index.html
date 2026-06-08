@@ -116,10 +116,10 @@
         } else if (rightAxes && rightAxes.length >= 2) {
           turnSpeed = rightAxes[0]; // Fallback für 2-Achsen-Controller
         }
-        if (Math.abs(turnSpeed) > 0.15) {
+        if (Math.abs(turnSpeed) > 0.1) {
           try {
             var rot = this.el.getAttribute('rotation');
-            rot.y -= turnSpeed * 5 * dt; // 5× schneller
+            rot.y -= turnSpeed * 10 * dt; // 10× schneller!
             this.el.setAttribute('rotation', rot);
           } catch(e) { this.debug('FEHLER: ' + e.message); }
         }
