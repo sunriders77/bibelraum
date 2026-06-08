@@ -152,7 +152,7 @@
           el.textContent = '🔄 DREHUNG: ' + turnSpeed.toFixed(2);
           try {
             var rot = this.el.getAttribute('rotation');
-            rot.y -= turnSpeed * 10 * (timeDelta / 1000);
+            rot.y -= turnSpeed * 20 * (timeDelta / 1000);
             this.el.setAttribute('rotation', rot);
           } catch(e) { el.textContent = '❌ ' + e.message; }
         }
