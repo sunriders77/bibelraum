@@ -423,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initMovement();
         initPositionSync();
         checkVR();
-        initJitsi();
+        // Jitsi wird nur geladen wenn der Button geklickt wird
       }, 500);
     });
   });
@@ -435,6 +435,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Toolbar-Buttons
   document.getElementById('toggle-jitsi')?.addEventListener('click', () => {
     const jc = document.getElementById('jitsi-container');
+    // Jitsi beim ersten Klick laden
+    if (!jitsiInitialized) {
+      initJitsi();
+    }
     jc.classList.toggle('hidden');
   });
 

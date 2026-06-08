@@ -7,8 +7,6 @@
 
   <!-- A-Frame -->
   <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-  <!-- A-Frame Extras (VR-Controller, Bewegung) -->
-  <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
   <!-- Socket.IO Client -->
   <script src="/socket.io/socket.io.js"></script>
 
@@ -53,22 +51,13 @@
     vr-mode-ui="enabled: true; cardVisibility: always">
 
     <!-- Kamera / Rig -->
-    <a-entity id="camera-rig" position="0 1.6 3" movement-controls="speed: 0.05">
-      <a-camera id="camera" look-controls="pointerLockEnabled: true">
+    <a-entity id="camera-rig" position="0 1.6 3">
+      <a-camera id="camera" wasd-controls="enabled: true" look-controls="pointerLockEnabled: true">
         <a-cursor id="cursor" raycaster="objects: .clickable" color="#4CAF50"></a-cursor>
       </a-camera>
-      <!-- Linker Controller -->
-      <a-entity hand-controls="hand: left" oculus-touch-controls="hand: left"
-        raycaster="objects: .clickable; far: 10; showLine: true"
-        cursor="fuse: false; rayOrigin: mouse">
-        <a-sphere radius="0.02" color="#FFD700" position="0 0 -0.05"></a-sphere>
-      </a-entity>
-      <!-- Rechter Controller -->
-      <a-entity hand-controls="hand: right" oculus-touch-controls="hand: right"
-        raycaster="objects: .clickable; far: 10; showLine: true"
-        cursor="fuse: false; rayOrigin: mouse">
-        <a-sphere radius="0.02" color="#FFD700" position="0 0 -0.05"></a-sphere>
-      </a-entity>
+      <!-- VR-Controller (einfach, ohne Extra-Libs) -->
+      <a-entity laser-controls="hand: left"></a-entity>
+      <a-entity laser-controls="hand: right"></a-entity>
     </a-entity>
 
     <!-- Beleuchtung -->
