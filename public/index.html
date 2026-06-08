@@ -329,9 +329,9 @@
     <a-entity id="screen-frame" position="0 2 -4.7">
       <!-- Rahmen -->
       <a-box depth="0.1" height="2.5" width="3.5" color="#2C1810" position="0 0 0"></a-box>
-      <!-- Die Leinwand - zeigt Jitsi via HTML-Shader (funktioniert auch in VR!) -->
+      <!-- Die Leinwand - zeigt Webcam in VR (wenn aktiv) -->
       <a-plane id="video-screen" depth="0.01" height="2.2" width="3.2" color="#1a1a2e"
-        position="0 0 0.06" material="shader: flat; side: double"></a-plane>
+        position="0 0 0.06" material="side: double"></a-plane>
       <!-- Status-Text (verschwindet wenn Video aktiv) -->
       <a-text id="screen-text" value="📺 Bibelstunde" position="0 0 0.08" align="center"
         color="#888" width="3" negate="false"></a-text>

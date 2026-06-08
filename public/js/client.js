@@ -357,6 +357,61 @@ function checkVR() {
 
 // === JITSI INTEGRATION ===
 let jitsiInitialized = false;
+let localCamStream = null;
+let vrCamVideo = null;
+
+// Starte lokale Webcam auf der 3D-Leinwand (für VR!)
+function startCamOnScreen() {
+  if (localCamStream) return;
+
+  navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 360 }, audio: false })
+    .then(function(stream) {
+      localCamStream = stream;
+
+      // Verstecktes Video-Element
+      vrCamVideo = document.createElement('video');
+      vrCamVideo.id = 'vr-cam-video';
+      vrCamVideo.srcObject = stream;
+      vrCamVideo.autoplay = true;
+      vrCamVideo.playsInline = true;
+      vrCamVideo.muted = true;
+      vrCamVideo.style.display = 'none';
+      document.body.appendChild(vrCamVideo);
+
+      vrCamVideo.onloadedmetadata = function() {
+        vrCamVideo.play();
+        var screen = document.getElementById('video-screen');
+        if (screen) {
+          screen.setAttribute('material', 'src', '#vr-cam-video');
+        }
+        var text = document.getElementById('screen-text');
+        if (text) text.setAttribute('value', '📺 Kamera aktiv');
+        showToast('📹 Kamera auf der Leinwand aktiv!');
+      };
+    })
+    .catch(function(err) {
+      console.warn('Kamera nicht verfügbar:', err);
+      showToast('⚠️ Kamera nicht verfügbar');
+    });
+}
+
+function stopCamOnScreen() {
+  if (vrCamVideo) {
+    vrCamVideo.srcObject = null;
+    vrCamVideo.remove();
+    vrCamVideo = null;
+  }
+  if (localCamStream) {
+    localCamStream.getTracks().forEach(function(t) { t.stop(); });
+    localCamStream = null;
+  }
+  var screen = document.getElementById('video-screen');
+  if (screen) {
+    screen.setAttribute('material', 'src', '');
+  }
+  var text = document.getElementById('screen-text');
+  if (text) text.setAttribute('value', '📺 Bibelstunde');
+}
 
 function initJitsi() {
   const container = document.getElementById('jitsi-container');
@@ -482,11 +537,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // Toolbar-Buttons
   document.getElementById('toggle-jitsi')?.addEventListener('click', () => {
     const jc = document.getElementById('jitsi-container');
-    // Jitsi beim ersten Klick laden
-    if (!jitsiInitialized) {
-      initJitsi();
+    const isActive = !jc.classList.contains('hidden');
+    if (isActive) {
+      // Ausschalten: Jitsi-Seitenleiste aus + Kamera aus
+      jc.classList.add('hidden');
+      stopCamOnScreen();
+    } else {
+      // Einschalten: Jitsi starten + Kamera auf Leinwand
+      if (!jitsiInitialized) {
+        initJitsi();
+      }
+      jc.classList.remove('hidden');
+      startCamOnScreen();
     }
-    jc.classList.toggle('hidden');
   });
 
   document.getElementById('copy-link')?.addEventListener('click', copyRoomLink);
