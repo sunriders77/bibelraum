@@ -7,10 +7,68 @@
 
   <!-- A-Frame -->
   <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-  <!-- A-Frame Extras (VR-Controller-Steuerung für Quest-Sticks) -->
-  <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
   <!-- Socket.IO Client -->
   <script src="/socket.io/socket.io.js"></script>
+
+  <!-- Eigene Stick-Steuerung für Quest 3 (nutzt A-Frames tracked-controls) -->
+  <script>
+    AFRAME.registerComponent('stick-controls', {
+      init: function() {
+        this.head = this.el.querySelector('[camera]');
+        this.forward = new THREE.Vector3();
+        this.right = new THREE.Vector3();
+      },
+      tick: function(t, dt) {
+        var scene = this.el.sceneEl;
+        if (!scene.is('vr-mode')) return;
+        var d = dt / 1000;
+
+        var controllers = scene.querySelectorAll('[laser-controls]');
+        var leftAxes = null, rightAxes = null;
+
+        for (var i = 0; i < controllers.length; i++) {
+          var tc = controllers[i].components['tracked-controls'];
+          if (!tc || !tc.axis || tc.axis.length < 2) continue;
+          var hand = controllers[i].getAttribute('laser-controls');
+          if (hand && hand.hand === 'left') leftAxes = tc.axis;
+          else if (hand && hand.hand === 'right') rightAxes = tc.axis;
+        }
+
+        // Standard-Fallback: Erster Controller links, zweiter rechts
+        if (!leftAxes && !rightAxes && controllers.length >= 2) {
+          var tc0 = controllers[0].components['tracked-controls'];
+          var tc1 = controllers[1].components['tracked-controls'];
+          if (tc0 && tc0.axis) leftAxes = tc0.axis;
+          if (tc1 && tc1.axis) rightAxes = tc1.axis;
+        }
+
+        // Linker Stick: Bewegung in Blickrichtung
+        if (leftAxes) {
+          var lx = Math.abs(leftAxes[0]) > 0.1 ? leftAxes[0] : 0;
+          var ly = Math.abs(leftAxes[1]) > 0.1 ? leftAxes[1] : 0;
+          if (lx !== 0 || ly !== 0) {
+            var cam = this.head.components.camera.camera;
+            if (cam) {
+              this.forward.set(0, 0, -1);
+              this.forward.applyQuaternion(cam.quaternion);
+              this.forward.y = 0; this.forward.normalize();
+              this.right.set(1, 0, 0);
+              this.right.applyQuaternion(cam.quaternion);
+              this.right.y = 0; this.right.normalize();
+              var speed = 3 * d;
+              this.el.object3D.position.add(this.forward.clone().multiplyScalar(-ly * speed));
+              this.el.object3D.position.add(this.right.clone().multiplyScalar(lx * speed));
+            }
+          }
+        }
+
+        // Rechter Stick: Drehung
+        if (rightAxes && Math.abs(rightAxes[0]) > 0.1) {
+          this.el.object3D.rotation.y -= rightAxes[0] * 2 * d;
+        }
+      }
+    });
+  </script>
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -53,13 +111,13 @@
     vr-mode-ui="enabled: true; cardVisibility: always">
 
     <!-- Kamera / Rig -->
-    <a-entity id="camera-rig" position="0 1.6 3" movement-controls="speed: 0.05">
+    <a-entity id="camera-rig" position="0 1.6 3" stick-controls>
       <a-camera id="camera" wasd-controls="enabled: true" look-controls="pointerLockEnabled: true">
         <a-cursor id="cursor" raycaster="objects: .clickable" color="#4CAF50"></a-cursor>
       </a-camera>
       <!-- Quest 3 Controller -->
-      <a-entity oculus-touch-controls="hand: left" laser-controls="hand: left"></a-entity>
-      <a-entity oculus-touch-controls="hand: right" laser-controls="hand: right"></a-entity>
+      <a-entity laser-controls="hand: left"></a-entity>
+      <a-entity laser-controls="hand: right"></a-entity>
     </a-entity>
 
     <!-- Beleuchtung -->
