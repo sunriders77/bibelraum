@@ -93,6 +93,10 @@
               var cam = this.head.components.camera.camera;
               if (cam && cam.quaternion) {
                 this.quat.copy(cam.quaternion);
+                // Welt-Quaternion holen (inkl. Player-Rotation)
+                if (cam.getWorldQuaternion) {
+                  cam.getWorldQuaternion(this.quat);
+                }
                 this.tempVec.set(0, 0, -1).applyQuaternion(this.quat);
                 this.tempVec.y = 0; this.tempVec.normalize();
                 this.tempRight.set(1, 0, 0).applyQuaternion(this.quat);
