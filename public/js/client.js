@@ -637,6 +637,19 @@ function setupLocalVideo(userName, track) {
     if (gridScreen) {
       gridScreen.setAttribute('material', 'src: #lk-video-' + userName + '; side: double; transparent: false');
       console.log('🎯 Video direkt auf Leinwand gesetzt: #lk-video-' + userName);
+      // ★ ColorSpace der Video-Textur auf sRGB setzen!
+      setTimeout(function() {
+        try {
+          var mat = gridScreen.components.material.material;
+          if (mat && mat.map) {
+            mat.map.premultiplyAlpha = false;
+            if (mat.map.colorSpace) mat.map.colorSpace = 'srgb';
+            else if (mat.map.encoding) mat.map.encoding = 3001;
+            mat.map.needsUpdate = true;
+            console.log('🎨 ColorSpace korrigiert: srgb');
+          }
+        } catch(e) { console.warn('ColorSpace-Fix fehlgeschlagen:', e); }
+      }, 500);
     }
   } catch(e) {
     console.warn('⚠️ Lokaler Video-Track nicht verfügbar:', e);
