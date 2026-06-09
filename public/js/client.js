@@ -450,14 +450,25 @@ async function joinLiveKitRoom(userName) {
     // Auf lokalen Track warten (Polling als Backup, falls Event schon gefeuert)
     for (var attempts = 0; attempts < 30; attempts++) {
       if (localVideoReady) break;
-      var pubs = room.localParticipant.videoTrackPublications;
-      for (var j = 0; j < pubs.length; j++) {
-        var pub = pubs[j];
-        if (pub && pub.track && pub.track.mediaStreamTrack && pub.track.kind === 'video') {
-          console.log('📹 Lokaler Track gefunden (Polling)');
-          setupLocalVideo(userName, pub.track);
-          localVideoReady = true;
-          break;
+      var pubIter = room.localParticipant.videoTrackPublications;
+      // Kann Map (LiveKit 2.x) oder Array sein – beide verarbeiten
+      if (pubIter.forEach) {
+        pubIter.forEach(function(pub) {
+          if (pub && pub.track && pub.track.mediaStreamTrack && pub.track.kind === 'video') {
+            console.log('📹 Lokaler Track gefunden (Polling)');
+            setupLocalVideo(userName, pub.track);
+            localVideoReady = true;
+          }
+        });
+      } else {
+        for (var j = 0; j < pubIter.length; j++) {
+          var pub = pubIter[j];
+          if (pub && pub.track && pub.track.mediaStreamTrack && pub.track.kind === 'video') {
+            console.log('📹 Lokaler Track gefunden (Polling)');
+            setupLocalVideo(userName, pub.track);
+            localVideoReady = true;
+            break;
+          }
         }
       }
       if (localVideoReady) break;
