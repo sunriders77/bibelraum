@@ -91,7 +91,7 @@ const LIVEKIT_API_SECRET = process.env.LIVEKIT_API_SECRET || '';
 const LIVEKIT_HOST = process.env.LIVEKIT_HOST || process.env.LIVEKIT_URL || '';
 
 // LiveKit-Token ausstellen (wird vom Client aufgerufen)
-app.get('/api/livekit/token', (req, res) => {
+app.get('/api/livekit/token', async (req, res) => {
   const { name, room } = req.query;
   if (!name || !room) {
     return res.status(400).json({ error: 'Name und Raum benötigt' });
@@ -105,7 +105,7 @@ app.get('/api/livekit/token', (req, res) => {
       ttl: '1h',
     });
     at.addGrant({ roomJoin: true, room: room, canPublish: true, canSubscribe: true });
-    const token = at.toJwt();
+    const token = await at.toJwt();
     res.json({ token, host: LIVEKIT_HOST, room });
   } catch (e) {
     res.status(500).json({ error: e.message });
