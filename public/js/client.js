@@ -360,106 +360,347 @@ function checkVR() {
   });
 }
 
-// === JITSI INTEGRATION ===
-let jitsiInitialized = false;
-let localCamStream = null;
-let vrCamVideo = null;
+// === LIVEKIT INTEGRATION ===
+let livekitRoom = null;
+let livekitParticipantTracks = {}; // identity -> { video: HTMLVideoElement, name: string }
+let localStream = null;
+let livekitConnected = false;
+let canvasAnimFrame = null;
 
-// Starte lokale Webcam auf der 3D-Leinwand (für VR!)
-function startCamOnScreen() {
-  if (localCamStream) return;
+// LiveKit-Raum beitreten
+async function joinLiveKitRoom(userName) {
+  if (livekitConnected) return;
 
-  navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 360 }, audio: false })
-    .then(function(stream) {
-      localCamStream = stream;
+  try {
+    const roomName = 'bibelraum-' + (myId ? myId.slice(0, 6) : 'default');
 
-      // Verstecktes Video-Element
-      vrCamVideo = document.createElement('video');
-      vrCamVideo.id = 'vr-cam-video';
-      vrCamVideo.srcObject = stream;
-      vrCamVideo.autoplay = true;
-      vrCamVideo.playsInline = true;
-      vrCamVideo.muted = true;
-      vrCamVideo.style.display = 'none';
-      document.body.appendChild(vrCamVideo);
+    // Token vom Server holen
+    const resp = await fetch(`/api/livekit/token?name=${encodeURIComponent(userName)}&room=${encodeURIComponent(roomName)}`);
+    const data = await resp.json();
 
-      vrCamVideo.onloadedmetadata = function() {
-        vrCamVideo.play();
-        var screen = document.getElementById('video-screen');
-        if (screen) {
-          screen.setAttribute('material', 'src', '#vr-cam-video');
-        }
-        var text = document.getElementById('screen-text');
-        if (text) text.setAttribute('value', '📺 Kamera aktiv');
-        showToast('📹 Kamera auf der Leinwand aktiv!');
-      };
-    })
-    .catch(function(err) {
-      console.warn('Kamera nicht verfügbar:', err);
-      showToast('⚠️ Kamera nicht verfügbar');
+    if (data.error) {
+      showToast('⚠️ LiveKit-Fehler: ' + data.error);
+      return;
+    }
+
+    const room = new LivekitClient.Room({
+      adaptiveStream: true,
+      dynacast: true,
+      videoCaptureDefaults: { resolution: LivekitClient.VideoPresets.h360 },
     });
+
+    room.on('participantConnected', (participant) => {
+      console.log('👤 LiveKit: ' + participant.identity + ' beigetreten');
+      addLiveKitParticipant(participant);
+    });
+
+    room.on('participantDisconnected', (participant) => {
+      console.log('👤 LiveKit: ' + participant.identity + ' verlassen');
+      removeLiveKitParticipant(participant.identity);
+    });
+
+    room.on('trackSubscribed', (track, publication, participant) => {
+      console.log('📹 LiveKit Track subscribed: ' + track.kind + ' von ' + participant.identity);
+      if (track.kind === 'video' || track.kind === 'audio') {
+        const videoEl = document.createElement('video');
+        videoEl.id = 'lk-video-' + participant.identity;
+        videoEl.srcObject = new MediaStream([track]);
+        videoEl.autoplay = true;
+        videoEl.playsInline = true;
+        videoEl.muted = true;
+        videoEl.style.display = 'none';
+        document.body.appendChild(videoEl);
+
+        if (!livekitParticipantTracks[participant.identity]) {
+          livekitParticipantTracks[participant.identity] = { video: null, name: participant.identity };
+        }
+        livekitParticipantTracks[participant.identity].video = videoEl;
+        livekitParticipantTracks[participant.identity].name = participant.identity;
+
+        // Auch zur Desktop-Galerie hinzufügen
+        addToDesktopGrid(participant.identity, videoEl);
+      }
+    });
+
+    room.on('trackUnsubscribed', (track, publication, participant) => {
+      console.log('📹 LiveKit Track unsubscribed: ' + participant.identity);
+      removeLiveKitParticipant(participant.identity);
+    });
+
+    // Eigene Kamera + Mikrofon
+    const localVideo = new LivekitClient.LocalVideoTrack();
+    const localAudio = new LivekitClient.LocalAudioTrack();
+
+    await room.connect(data.host, data.token);
+    console.log('✅ LiveKit verbunden: ' + roomName);
+
+    // Lokale Webcam publishen
+    const camPub = await room.localParticipant.enableCameraAndMicrophone();
+    console.log('📷 Kamera publisht');
+
+    // Lokales Video-Element für die eigene Vorschau in der Desktop-Galerie
+    if (room.localParticipant.videoTrackPublications.size > 0) {
+      const trackPub = Array.from(room.localParticipant.videoTrackPublications.values())[0];
+      if (trackPub && trackPub.track) {
+        const localVideoEl = document.createElement('video');
+        localVideoEl.id = 'lk-video-' + userName;
+        localVideoEl.srcObject = new MediaStream([trackPub.track.mediaStreamTrack]);
+        localVideoEl.autoplay = true;
+        localVideoEl.playsInline = true;
+        localVideoEl.muted = true;
+        localVideoEl.style.display = 'none';
+        document.body.appendChild(localVideoEl);
+
+        if (!livekitParticipantTracks[userName]) {
+          livekitParticipantTracks[userName] = { video: null, name: userName };
+        }
+        livekitParticipantTracks[userName].video = localVideoEl;
+        livekitParticipantTracks[userName].name = userName;
+
+        addToDesktopGrid(userName, localVideoEl);
+      }
+    }
+
+    // Bereits verbundene Teilnehmer abholen
+    room.remoteParticipants.forEach((participant) => {
+      addLiveKitParticipant(participant);
+    });
+
+    livekitRoom = room;
+    livekitConnected = true;
+
+    // Canvas-Rendering starten
+    startVideoGridRendering();
+
+    // Desktop-Galerie anzeigen
+    const lkContainer = document.getElementById('livekit-container');
+    if (lkContainer) lkContainer.classList.remove('hidden');
+
+    showToast('📹 Kamera aktiv – ' + Object.keys(livekitParticipantTracks).length + ' Teilnehmer');
+
+    // Status-Text auf der Content-Leinwand
+    var screenText = document.getElementById('screen-text');
+    if (screenText) screenText.setAttribute('value', '📺 Live: ' + userName);
+  } catch (e) {
+    console.error('LiveKit-Fehler:', e);
+    showToast('⚠️ LiveKit-Fehler: ' + e.message);
+  }
+}
+
+function addLiveKitParticipant(participant) {
+  if (!livekitParticipantTracks[participant.identity]) {
+    livekitParticipantTracks[participant.identity] = { video: null, name: participant.identity };
+  }
+}
+
+function removeLiveKitParticipant(identity) {
+  delete livekitParticipantTracks[identity];
+
+  // Video-Element entfernen
+  const vid = document.getElementById('lk-video-' + identity);
+  if (vid) vid.remove();
+
+  // Aus Desktop-Galerie entfernen
+  const tile = document.getElementById('lk-tile-' + identity);
+  if (tile) tile.remove();
+
+  updateGridText();
+}
+
+function addToDesktopGrid(identity, videoEl) {
+  const grid = document.getElementById('livekit-grid');
+  if (!grid) return;
+
+  const tile = document.createElement('div');
+  tile.id = 'lk-tile-' + identity;
+  tile.style.cssText = 'width:50%;height:50%;position:relative;background:#222;overflow:hidden;border-radius:4px;';
+
+  const clone = videoEl.cloneNode(false);
+  clone.id = 'lk-tile-video-' + identity;
+  clone.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+  clone.autoplay = true;
+  clone.playsInline = true;
+  clone.muted = true;
+  tile.appendChild(clone);
+
+  // Mikrofon-Status
+  const micBadge = document.createElement('div');
+  micBadge.id = 'lk-mic-' + identity;
+  micBadge.style.cssText = 'position:absolute;bottom:4px;right:4px;font-size:14px;background:rgba(0,0,0,0.6);padding:2px 6px;border-radius:4px;';
+  micBadge.textContent = '🟢';
+  tile.appendChild(micBadge);
+
+  const nameLabel = document.createElement('div');
+  nameLabel.style.cssText = 'position:absolute;bottom:4px;left:4px;font-size:11px;color:#fff;background:rgba(0,0,0,0.6);padding:2px 6px;border-radius:4px;';
+  nameLabel.textContent = identity;
+  tile.appendChild(nameLabel);
+
+  grid.appendChild(tile);
+
+  // Video-Element synchronisieren
+  setTimeout(() => {
+    const cv = document.getElementById('lk-tile-video-' + identity);
+    if (cv && videoEl.srcObject) {
+      cv.srcObject = videoEl.srcObject;
+    }
+  }, 200);
+}
+
+function updateGridText() {
+  const count = Object.keys(livekitParticipantTracks).length;
+  const gridText = document.getElementById('grid-text');
+  if (gridText) {
+    gridText.setAttribute('value', count > 0 ? '📹 ' + count + ' Teilnehmer' : '📹 Webcams');
+  }
+}
+
+// LiveKit-Raum verlassen
+async function leaveLiveKitRoom() {
+  if (canvasAnimFrame) {
+    cancelAnimationFrame(canvasAnimFrame);
+    canvasAnimFrame = null;
+  }
+
+  if (livekitRoom) {
+    await livekitRoom.disconnect();
+    livekitRoom = null;
+  }
+
+  livekitConnected = false;
+  livekitParticipantTracks = {};
+
+  // Alle LiveKit-Video-Elemente entfernen
+  document.querySelectorAll('[id^="lk-video-"], [id^="lk-tile-"]').forEach(el => el.remove());
+
+  // Desktop-Galerie ausblenden
+  const lkContainer = document.getElementById('livekit-container');
+  if (lkContainer) lkContainer.classList.add('hidden');
+
+  // Canvas leeren
+  const canvas = document.getElementById('video-grid-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#1a1a2e';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
+  var screenText = document.getElementById('screen-text');
+  if (screenText) screenText.setAttribute('value', '📺 Bibelstunde');
+
+  updateGridText();
+}
+
+// === VIDEO-RASTER AUF CANVAS ZEICHNEN (für die 3D-Leinwand) ===
+function startVideoGridRendering() {
+  const canvas = document.getElementById('video-grid-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+
+  function render() {
+    if (!livekitConnected) return;
+
+    const participants = Object.entries(livekitParticipantTracks).filter(([id, p]) => p.video !== null);
+    const count = participants.length;
+
+    ctx.fillStyle = '#1a1a2e';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    if (count === 0) {
+      ctx.fillStyle = '#555';
+      ctx.font = '24px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('📹 Kamera einschalten...', canvas.width/2, canvas.height/2);
+      canvasAnimFrame = requestAnimationFrame(render);
+      return;
+    }
+
+    // Raster-Berechnung
+    const cols = Math.ceil(Math.sqrt(count));
+    const rows = Math.ceil(count / cols);
+    const cellW = canvas.width / cols;
+    const cellH = canvas.height / rows;
+
+    participants.forEach(([identity, p], index) => {
+      const col = index % cols;
+      const row = Math.floor(index / cols);
+      const x = col * cellW;
+      const y = row * cellH;
+
+      // Video zeichnen (falls verfügbar)
+      if (p.video && p.video.readyState >= 2) {
+        try {
+          // Seitenverhältnis beibehalten
+          const vidRatio = p.video.videoWidth / p.video.videoHeight;
+          const cellRatio = cellW / cellH;
+          let sx, sy, sw, sh;
+          if (vidRatio > cellRatio) {
+            sh = p.video.videoHeight;
+            sw = sh * cellRatio;
+            sx = (p.video.videoWidth - sw) / 2;
+            sy = 0;
+          } else {
+            sw = p.video.videoWidth;
+            sh = sw / cellRatio;
+            sx = 0;
+            sy = (p.video.videoHeight - sh) / 2;
+          }
+          ctx.drawImage(p.video, sx, sy, sw, sh, x, y, cellW, cellH);
+        } catch(e) {}
+      } else {
+        // Platzhalter
+        ctx.fillStyle = '#333';
+        ctx.fillRect(x + 4, y + 4, cellW - 8, cellH - 8);
+      }
+
+      // Rahmen
+      ctx.strokeStyle = '#FFD700';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(x + 2, y + 2, cellW - 4, cellH - 4);
+
+      // Namenslabel
+      ctx.fillStyle = 'rgba(0,0,0,0.6)';
+      ctx.fillRect(x + 4, y + cellH - 30, cellW - 8, 26);
+      ctx.fillStyle = '#fff';
+      ctx.font = '14px Arial';
+      ctx.textAlign = 'left';
+      ctx.fillText(p.name, x + 10, y + cellH - 10);
+    });
+
+    canvasAnimFrame = requestAnimationFrame(render);
+  }
+
+  // Canvas-Texture für A-Frame aktualisieren
+  function updateTexture() {
+    const gridScreen = document.getElementById('video-grid-screen');
+    if (gridScreen && gridScreen.components && gridScreen.components.material) {
+      const mat = gridScreen.components.material.material;
+      if (mat && mat.map) {
+        mat.map.needsUpdate = true;
+      }
+    }
+  }
+
+  // Doppelte Aktualisierung: Canvas zeichnen + Texture-Update
+  function renderLoop() {
+    render();
+    updateTexture();
+    // A-Frame braucht expliziten Texture-Refresh
+    setTimeout(updateTexture, 50);
+  }
+
+  renderLoop();
+  updateGridText();
+}
+
+// === LOKALE WEBCAM FÜR DIE CONTENT-LEINWAND (vorne) ===
+function startCamOnScreen() {
+  // Wird jetzt von LiveKit übernommen
+  // Die Content-Leinwand zeigt den Namen des aktiven Sprechers
 }
 
 function stopCamOnScreen() {
-  if (vrCamVideo) {
-    vrCamVideo.srcObject = null;
-    vrCamVideo.remove();
-    vrCamVideo = null;
-  }
-  if (localCamStream) {
-    localCamStream.getTracks().forEach(function(t) { t.stop(); });
-    localCamStream = null;
-  }
-  var screen = document.getElementById('video-screen');
-  if (screen) {
-    screen.setAttribute('material', 'src', '');
-  }
-  var text = document.getElementById('screen-text');
-  if (text) text.setAttribute('value', '📺 Bibelstunde');
-}
-
-function initJitsi() {
-  const container = document.getElementById('jitsi-container');
-  if (!container) return;
-
-  const roomName = 'Bibelraum-' + generateRoomCode();
-
-  // Lade Jitsi External API
-  const script = document.createElement('script');
-  script.src = 'https://meet.jit.si/external_api.js';
-  script.onload = () => {
-    const domain = 'meet.jit.si';
-    const options = {
-      roomName: roomName,
-      parentNode: document.querySelector('#jitsi-meeting'),
-      configOverrides: {
-        startWithAudioMuted: false,
-        startWithVideoMuted: false,
-        disableDeepLinking: true,
-        disableSimulcast: false,
-        toolbarButtons: ['microphone', 'camera', 'desktop', 'fullscreen', 'fodeviceselection', 'hangup'],
-        doNotStoreRoom: true
-      },
-      interfaceConfigOverrides: {
-        SHOW_JITSI_WATERMARK: false,
-        SHOW_WATERMARK_FOR_GUESTS: false,
-        TOOLBAR_ALWAYS_VISIBLE: true,
-        DISABLE_JOIN_LEAVE_NOTIFICATIONS: true
-      }
-    };
-    try {
-      new JitsiMeetExternalAPI(domain, options);
-      jitsiInitialized = true;
-      console.log('📺 Jitsi gestartet');
-    } catch(e) {
-      console.warn('Jitsi konnte nicht gestartet werden:', e);
-    }
-  };
-  document.body.appendChild(script);
-}
-
-function generateRoomCode() {
-  return 'bibel' + Math.random().toString(36).substring(2, 8).toUpperCase();
+  // Wird jetzt von LiveKit übernommen
 }
 
 // === UI-STEUERUNG ===
@@ -561,20 +802,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Toolbar-Buttons
-  document.getElementById('toggle-jitsi')?.addEventListener('click', () => {
-    const jc = document.getElementById('jitsi-container');
-    const isActive = !jc.classList.contains('hidden');
-    if (isActive) {
-      // Ausschalten: Jitsi-Seitenleiste aus + Kamera aus
-      jc.classList.add('hidden');
+  document.getElementById('toggle-cam')?.addEventListener('click', () => {
+    if (livekitConnected) {
+      leaveLiveKitRoom();
+      document.getElementById('toggle-cam').textContent = '📹 Kamera';
       stopCamOnScreen();
     } else {
-      // Einschalten: Jitsi starten + Kamera auf Leinwand
-      if (!jitsiInitialized) {
-        initJitsi();
-      }
-      jc.classList.remove('hidden');
-      startCamOnScreen();
+      joinLiveKitRoom(myName);
+      document.getElementById('toggle-cam').textContent = '📹 Aus';
     }
   });
 
@@ -616,6 +851,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // === RAUM VERLASSEN ===
 function leaveRoom() {
+  leaveLiveKitRoom();
   if (socket) {
     socket.disconnect();
   }

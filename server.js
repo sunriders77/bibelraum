@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const { v4: uuidv4 } = require('uuid');
+const { AccessToken } = require('livekit-server-sdk');
 
 const app = express();
 const server = http.createServer(app);
@@ -81,6 +82,34 @@ app.get('/api/bot/status', (req, res) => {
     position: botUser.position,
     message: botMessage
   });
+});
+// ============================
+
+// === LIVEKIT KONFIGURATION ===
+const LIVEKIT_API_KEY = process.env.LIVEKIT_API_KEY || '';
+const LIVEKIT_API_SECRET = process.env.LIVEKIT_API_SECRET || '';
+const LIVEKIT_HOST = process.env.LIVEKIT_HOST || '';
+
+// LiveKit-Token ausstellen (wird vom Client aufgerufen)
+app.get('/api/livekit/token', (req, res) => {
+  const { name, room } = req.query;
+  if (!name || !room) {
+    return res.status(400).json({ error: 'Name und Raum benötigt' });
+  }
+  if (!LIVEKIT_API_KEY || !LIVEKIT_API_SECRET || !LIVEKIT_HOST) {
+    return res.status(500).json({ error: 'LiveKit nicht konfiguriert – LIVEKIT_API_KEY, LIVEKIT_API_SECRET und LIVEKIT_HOST in Render Umgebungsvariablen setzen' });
+  }
+  try {
+    const at = new AccessToken(LIVEKIT_API_KEY, LIVEKIT_API_SECRET, {
+      identity: name,
+      ttl: '1h',
+    });
+    at.addGrant({ roomJoin: true, room: room, canPublish: true, canSubscribe: true });
+    const token = at.toJwt();
+    res.json({ token, host: LIVEKIT_HOST, room });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 // ============================
 

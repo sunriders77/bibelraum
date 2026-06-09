@@ -1,0 +1,894 @@
+2026.05.20-16:45:28: 
+
+utility service module version=1.2 pid=24664 (2026/05/20  16:45:28) (X64)
+
+2026.05.20-16:45:28: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.20-17:53:03: 
+
+utility service module version=1.2 pid=8740 (2026/05/20  17:53:03) (X64)
+
+2026.05.20-17:53:03: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.21-13:40:37: 
+
+utility service module version=1.2 pid=22184 (2026/05/21  13:40:37) (X64)
+
+2026.05.21-13:40:37: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.22-10:47:03: 
+
+utility service module version=1.2 pid=22160 (2026/05/22  10:47:03) (X64)
+
+2026.05.22-10:47:03: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.22-11:15:15: Download_CheckDownload: ID(0), Check Ping Invalid(true), time(29).
+2026.05.22-11:15:16: Download_GetDownloadFileLenth : result(305203155), url_err(0).
+2026.05.22-11:15:16: Download : GetNetworkNotFull IP(d115.dvdfab.cn), Result(1:-678337457
+).
+2026.05.22-11:15:16: Download_CheckDownload: ID(0), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.22-11:15:16: Download_CheckDownload: ID(1), Check Ping Invalid(true), time(29).
+2026.05.22-11:15:17: Download_GetDownloadFileLenth : result(305203155), url_err(0).
+2026.05.22-11:15:17: Download : GetNetworkNotFull IP(d17.dvdfab.cn), Result(1:
+1435461
+).
+2026.05.22-11:15:17: Download_CheckDownload: ID(1), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.22-11:15:18: Download_CheckDownload: ID(2), Check Ping Invalid(true), time(27).
+2026.05.22-11:15:18: Download_GetDownloadFileLenth : result(305203155), url_err(0).
+2026.05.22-11:15:19: Download : GetNetworkNotFull IP(d171.dvdfab.cn), Result(1:
+121853
+).
+2026.05.22-11:15:19: Download_CheckDownload: ID(2), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.22-11:15:19: Download_CheckDownload: ID(3), Check Ping Invalid(true), time(31).
+2026.05.22-11:15:20: Download_GetDownloadFileLenth : result(305203155), url_err(0).
+2026.05.22-11:15:20: Download : GetNetworkNotFull IP(d18.dvdfab.cn), Result(1:
+2598071
+).
+2026.05.22-11:15:20: Download_CheckDownload: ID(3), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.22-11:15:21: Download_CheckDownload: ID(4), Check Ping Invalid(true), time(29).
+2026.05.22-11:15:22: Download_GetDownloadFileLenth : result(305203155), url_err(0).
+2026.05.22-11:15:22: Download : GetNetworkNotFull IP(d217.dvdfab.cn), Result(1:
+1426007
+).
+2026.05.22-11:15:22: Download_CheckDownload: ID(4), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.22-11:15:22: Download_CheckDownload: ID(5), Check Ping Invalid(true), time(27).
+2026.05.22-11:15:23: Download_GetDownloadFileLenth : result(305203155), url_err(0).
+2026.05.22-11:15:23: Download : GetNetworkNotFull IP(d207.dvdfab.cn), Result(1:
+1824278
+).
+2026.05.22-11:15:23: Download_CheckDownload: ID(5), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.22-11:15:23: Download_CheckDownload: ID(6), Check Ping Invalid(true), time(26).
+2026.05.22-11:15:24: Download_GetDownloadFileLenth : result(305203155), url_err(0).
+2026.05.22-11:15:24: Download : GetNetworkNotFull IP(d223.dvdfab.cn), Result(1:
+1975916
+).
+2026.05.22-11:15:24: Download_CheckDownload: ID(6), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.22-11:15:24: Download_CheckDownload: ID(7), Check Ping Invalid(true), time(28).
+2026.05.22-11:15:25: Download_GetDownloadFileLenth : result(305203155), url_err(0).
+2026.05.22-11:15:26: Download : GetNetworkNotFull IP(d145.dvdfab.cn), Result(1:1678455
+).
+2026.05.22-11:15:26: Download_CheckDownload: ID(7), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.22-11:15:26: Download_CheckDownload: ID(8), Check Ping Invalid(true), time(28).
+2026.05.22-11:15:27: Download_GetDownloadFileLenth : result(305203155), url_err(0).
+2026.05.22-11:15:27: Download : GetNetworkNotFull IP(d74.dvdfab.cn), Result(1:1052805
+).
+2026.05.22-11:15:27: Download_CheckDownload: ID(8), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.22-11:15:27: Download_GetDownloadFileLenth : result(305203155), url_err(0).
+2026.05.22-11:15:27: Download_CloseFile.
+2026.05.22-11:15:27: Download_BeginDownload : OpenFile(0xe0a2c500), FileSize(305203155), Mutex(0x940).
+2026.05.22-11:15:27: Download_BeginDownloadItem : id(0) thread(0x98c) start(0) end(30520314).
+2026.05.22-11:15:27: Download_BeginDownloadItem : id(1) thread(0x94c) start(30520315) end(61040629).
+2026.05.22-11:15:27: Download_BeginDownloadItem : id(2) thread(0x990) start(61040630) end(91560944).
+2026.05.22-11:15:27: Download_BeginDownloadItem : id(3) thread(0x984) start(91560945) end(122081259).
+2026.05.22-11:15:27: Download_BeginDownloadItem : id(4) thread(0x988) start(122081260) end(152601574).
+2026.05.22-11:15:27: Download_BeginDownloadItem : id(5) thread(0x9c8) start(152601575) end(183121889).
+2026.05.22-11:15:27: Download_BeginDownloadItem : id(6) thread(0x914) start(183121890) end(213642204).
+2026.05.22-11:15:27: Download_BeginDownloadItem : id(7) thread(0x9ec) start(213642205) end(244162519).
+2026.05.22-11:15:27: Download_BeginDownloadItem : id(8) thread(0x974) start(244162520) end(274682834).
+2026.05.22-11:15:27: Download_BeginDownloadItem : id(9) thread(0xa08) start(274682835) end(305203154).
+2026.05.22-11:15:27: Download_InitDownload : start download dispatch, thread handle(0x9fc).
+2026.05.22-11:15:27: Download_Dispatch Begining.
+2026.05.22-11:15:38: Thread_Download_Internal: curl request MAYBE errors, id(6) http code(206) .
+2026.05.22-11:15:38: Download_CheckFinish (6): begin.
+2026.05.22-11:15:38: Download_CheckFinish (6): continue. now wait (0).
+2026.05.22-11:15:38: Download_Internal Finish (6) OK.
+2026.05.22-11:15:40: Download_Dispatch: Found large download item (9) with remain size (26085970) bytes
+2026.05.22-11:15:40: Download_Dispatch: Split item (9) original range (274682835-305203154), to (274682835-292160168) and new (292160169-305203154)
+2026.05.22-11:15:40: Download_BeginDownloadItem : id(10) thread(0x9f4) start(292160169) end(305203154).
+2026.05.22-11:15:46: Thread_Download_Internal: curl request MAYBE errors, id(0) http code(206) .
+2026.05.22-11:15:46: Download_CheckFinish (0): begin.
+2026.05.22-11:15:46: Download_CheckFinish (0): continue. now wait (1).
+2026.05.22-11:15:46: Download_Internal Finish (0) OK.
+2026.05.22-11:15:46: Thread_Download_Internal: curl request MAYBE errors, id(10) http code(206) .
+2026.05.22-11:15:46: Download_CheckFinish (10): begin.
+2026.05.22-11:15:46: Download_CheckFinish (10): continue. now wait (1).
+2026.05.22-11:15:46: Download_Internal Finish (10) OK.
+2026.05.22-11:15:48: Download_Dispatch: Found large download item (3) with remain size (17158891) bytes
+2026.05.22-11:15:48: Download_Dispatch: Split item (3) original range (91560945-122081259), to (91560945-113501813) and new (113501814-122081259)
+2026.05.22-11:15:48: Download_BeginDownloadItem : id(11) thread(0x534) start(113501814) end(122081259).
+2026.05.22-11:15:48: Download_Dispatch: Found large download item (4) with remain size (12735846) bytes
+2026.05.22-11:15:48: Download_Dispatch: Split item (4) original range (122081260-152601574), to (122081260-146233650) and new (146233651-152601574)
+2026.05.22-11:15:48: Download_BeginDownloadItem : id(12) thread(0x928) start(146233651) end(152601574).
+2026.05.22-11:15:48: Thread_Download_Internal: curl request MAYBE errors, id(8) http code(206) .
+2026.05.22-11:15:48: Download_CheckFinish (8): begin.
+2026.05.22-11:15:48: Download_CheckFinish (8): continue. now wait (1).
+2026.05.22-11:15:48: Download_Internal Finish (8) OK.
+2026.05.22-11:15:49: Thread_Download_Internal: curl write partial range, id(4) http result(23)
+2026.05.22-11:15:49: Download_CheckFinish (4): begin.
+2026.05.22-11:15:49: Download_CheckFinish (4): continue. now wait (1).
+2026.05.22-11:15:49: Download_Internal Finish (4): Partial range download complete. result(23) start(122081260) end(146233650) url(d74.dvdfab.cn) .
+2026.05.22-11:15:50: Download_Dispatch: Found large download item (11) with remain size (8010744) bytes
+2026.05.22-11:15:50: Download_Dispatch: Split item (11) original range (113501814-122081259), to (113501814-118075886) and new (118075887-122081259)
+2026.05.22-11:15:50: Download_BeginDownloadItem : id(13) thread(0xa18) start(118075887) end(122081259).
+2026.05.22-11:15:50: Download_Dispatch: Item (4) completed at pos (146233651)
+2026.05.22-11:15:50: Download_Dispatch: Found large download item (9) with remain size (7176360) bytes
+2026.05.22-11:15:50: Download_Dispatch: Split item (9) original range (274682835-292160168), to (274682835-288571987) and new (288571988-292160168)
+2026.05.22-11:15:50: Download_BeginDownloadItem : id(14) thread(0xa0c) start(288571988) end(292160168).
+2026.05.22-11:15:50: Thread_Download_Internal: curl request MAYBE errors, id(5) http code(206) .
+2026.05.22-11:15:50: Download_CheckFinish (5): begin.
+2026.05.22-11:15:50: Download_CheckFinish (5): continue. now wait (1).
+2026.05.22-11:15:50: Download_Internal Finish (5) OK.
+2026.05.22-11:15:50: Thread_Download_Internal: curl request MAYBE errors, id(12) http code(206) .
+2026.05.22-11:15:50: Download_CheckFinish (12): begin.
+2026.05.22-11:15:50: Download_CheckFinish (12): continue. now wait (1).
+2026.05.22-11:15:50: Download_Internal Finish (12) OK.
+2026.05.22-11:15:51: Thread_Download_Internal: curl write partial range, id(11) http result(23)
+2026.05.22-11:15:51: Download_CheckFinish (11): begin.
+2026.05.22-11:15:51: Download_CheckFinish (11): continue. now wait (1).
+2026.05.22-11:15:51: Download_Internal Finish (11): Partial range download complete. result(23) start(113501814) end(118075886) url(d171.dvdfab.cn) .
+2026.05.22-11:15:52: Thread_Download_Internal: curl request MAYBE errors, id(13) http code(206) .
+2026.05.22-11:15:52: Download_CheckFinish (13): begin.
+2026.05.22-11:15:52: Thread_Download_Internal: curl request MAYBE errors, id(14) http code(206) .
+2026.05.22-11:15:52: Download_CheckFinish (13): continue. now wait (1).
+2026.05.22-11:15:52: Download_CheckFinish (14): begin.
+2026.05.22-11:15:52: Download_Internal Finish (13) OK.
+2026.05.22-11:15:52: Download_CheckFinish (14): continue. now wait (1).
+2026.05.22-11:15:52: Download_Internal Finish (14) OK.
+2026.05.22-11:15:52: Download_Dispatch: Found large download item (9) with remain size (3047507) bytes
+2026.05.22-11:15:52: Download_Dispatch: Split item (9) original range (274682835-288571987), to (274682835-287048233) and new (287048234-288571987)
+2026.05.22-11:15:52: Thread_Download_Internal: curl request MAYBE errors, id(7) http code(206) .
+2026.05.22-11:15:52: Download_BeginDownloadItem : id(15) thread(0xa3c) start(287048234) end(288571987).
+2026.05.22-11:15:52: Download_CheckFinish (7): begin.
+2026.05.22-11:15:52: Download_Dispatch: Found large download item (3) with remain size (2337141) bytes
+2026.05.22-11:15:52: Download_CheckFinish (7): continue. now wait (1).
+2026.05.22-11:15:52: Download_Dispatch: Split item (3) original range (91560945-113501813), to (91560945-112333242) and new (112333243-113501813)
+2026.05.22-11:15:52: Download_Internal Finish (7) OK.
+2026.05.22-11:15:52: Download_BeginDownloadItem : id(16) thread(0xa30) start(112333243) end(113501813).
+2026.05.22-11:15:52: Download_Dispatch: Found large download item (2) with remain size (1913392) bytes
+2026.05.22-11:15:52: Download_Dispatch: Split item (2) original range (61040630-91560944), to (61040630-90604247) and new (90604248-91560944)
+2026.05.22-11:15:52: Download_BeginDownloadItem : id(17) thread(0xa64) start(90604248) end(91560944).
+2026.05.22-11:15:52: Download_Dispatch: Found large download item (1) with remain size (1658357) bytes
+2026.05.22-11:15:52: Download_Dispatch: Split item (1) original range (30520315-61040629), to (30520315-60211450) and new (60211451-61040629)
+2026.05.22-11:15:52: Download_BeginDownloadItem : id(18) thread(0x5b8) start(60211451) end(61040629).
+2026.05.22-11:15:52: Download_Dispatch: Found large download item (15) with remain size (1523753) bytes
+2026.05.22-11:15:52: Download_Dispatch: Split item (15) original range (287048234-288571987), to (287048234-287810110) and new (287810111-288571987)
+2026.05.22-11:15:52: Download_BeginDownloadItem : id(19) thread(0xa50) start(287810111) end(288571987).
+2026.05.22-11:15:52: Download_Dispatch: Found large download item (9) with remain size (1425449) bytes
+2026.05.22-11:15:52: Download_Dispatch: Split item (9) original range (274682835-287048233), to (274682835-286335508) and new (286335509-287048233)
+2026.05.22-11:15:52: Download_BeginDownloadItem : id(20) thread(0x824) start(286335509) end(287048233).
+2026.05.22-11:15:52: Download_Dispatch: Item (11) completed at pos (118075887)
+2026.05.22-11:15:52: Thread_Download_Internal: curl write partial range, id(2) http result(23)
+2026.05.22-11:15:52: Download_CheckFinish (2): begin.
+2026.05.22-11:15:52: Download_CheckFinish (2): continue. now wait (1).
+2026.05.22-11:15:52: Download_Internal Finish (2): Partial range download complete. result(23) start(61040630) end(90604247) url(d207.dvdfab.cn) .
+2026.05.22-11:15:52: Thread_Download_Internal: curl write partial range, id(3) http result(23)
+2026.05.22-11:15:52: Download_CheckFinish (3): begin.
+2026.05.22-11:15:52: Download_CheckFinish (3): continue. now wait (1).
+2026.05.22-11:15:52: Download_Internal Finish (3): Partial range download complete. result(23) start(91560945) end(112333242) url(d145.dvdfab.cn) .
+2026.05.22-11:15:52: Thread_Download_Internal: curl write partial range, id(1) http result(23)
+2026.05.22-11:15:52: Download_CheckFinish (1): begin.
+2026.05.22-11:15:52: Download_CheckFinish (1): continue. now wait (9).
+2026.05.22-11:15:52: Download_Internal Finish (1): Partial range download complete. result(23) start(30520315) end(60211450) url(d171.dvdfab.cn) .
+2026.05.22-11:15:53: Thread_Download_Internal: curl request MAYBE errors, id(17) http code(206) .
+2026.05.22-11:15:53: Thread_Download_Internal: curl request MAYBE errors, id(16) http code(206) .
+2026.05.22-11:15:53: Download_CheckFinish (17): begin.
+2026.05.22-11:15:53: Thread_Download_Internal: curl write partial range, id(15) http result(23)
+2026.05.22-11:15:53: Download_CheckFinish (16): begin.
+2026.05.22-11:15:53: Download_CheckFinish (17): continue. now wait (9).
+2026.05.22-11:15:53: Download_CheckFinish (15): begin.
+2026.05.22-11:15:53: Download_Internal Finish (17) OK.
+2026.05.22-11:15:53: Download_CheckFinish (16): continue. now wait (9).
+2026.05.22-11:15:53: Download_Internal Finish (16) OK.
+2026.05.22-11:15:53: Download_CheckFinish (15): continue. now wait (9).
+2026.05.22-11:15:53: Download_Internal Finish (15): Partial range download complete. result(23) start(287048234) end(287810110) url(d207.dvdfab.cn) .
+2026.05.22-11:15:53: Thread_Download_Internal: curl write partial range, id(9) http result(23)
+2026.05.22-11:15:53: Thread_Download_Internal: curl request MAYBE errors, id(18) http code(206) .
+2026.05.22-11:15:53: Thread_Download_Internal: curl request MAYBE errors, id(19) http code(206) .
+2026.05.22-11:15:53: Download_CheckFinish (9): begin.
+2026.05.22-11:15:53: Download_CheckFinish (18): begin.
+2026.05.22-11:15:53: Download_CheckFinish (19): begin.
+2026.05.22-11:15:53: Thread_Download_Internal: curl request MAYBE errors, id(20) http code(206) .
+2026.05.22-11:15:53: Download_CheckFinish (9): continue. now wait (20).
+2026.05.22-11:15:53: Download_CheckFinish (20): begin.
+2026.05.22-11:15:53: Download_Internal Finish (9): Partial range download complete. result(23) start(274682835) end(286335508) url(d74.dvdfab.cn) .
+2026.05.22-11:15:54: Download_Dispatch: Item (1) completed at pos (60211451)
+2026.05.22-11:15:54: Download_Dispatch: Item (2) completed at pos (90604248)
+2026.05.22-11:15:54: Download_Dispatch: Item (3) completed at pos (112333243)
+2026.05.22-11:15:54: Download_Dispatch: Item (9) completed at pos (286335509)
+2026.05.22-11:15:54: Download_Dispatch: Item (15) completed at pos (287810111)
+2026.05.22-11:15:55: Download_CheckFinish (18): Finish download.
+2026.05.22-11:15:55: Download_CloseFile.
+2026.05.22-11:15:56: CloseFile 0.
+2026.05.22-11:15:56: Download_Internal Finish (18) OK.
+2026.05.22-11:15:56: Download_Internal Finish (19) OK.
+2026.05.22-11:15:56: Download_Internal Finish (20) OK.
+2026.05.22-11:15:58: Download_Dispatch Endding.
+2026.05.22-11:18:08: 
+
+utility service module version=1.2 pid=25784 (2026/05/22  11:18:08) (X64)
+
+2026.05.22-11:18:08: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.22-11:26:18: 
+
+utility service module version=1.2 pid=1844 (2026/05/22  11:26:18) (X64)
+
+2026.05.22-11:26:18: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.22-19:27:37: 
+
+utility service module version=1.2 pid=54588 (2026/05/22  19:27:37) (X64)
+
+2026.05.22-19:27:37: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.23-19:59:56: 
+
+utility service module version=1.2 pid=26052 (2026/05/23  19:59:56) (X64)
+
+2026.05.23-19:59:56: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.23-20:04:53: 
+
+utility service module version=1.2 pid=22180 (2026/05/23  20:04:53) (X64)
+
+2026.05.23-20:04:53: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.24-18:49:03: 
+
+utility service module version=1.2 pid=21924 (2026/05/24  18:49:03) (X64)
+
+2026.05.24-18:49:03: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.24-18:54:53: 
+
+utility service module version=1.2 pid=21944 (2026/05/24  18:54:53) (X64)
+
+2026.05.24-18:54:53: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.25-14:56:09: 
+
+utility service module version=1.2 pid=19144 (2026/05/25  14:56:09) (X64)
+
+2026.05.25-14:56:09: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.25-22:20:22: 
+
+utility service module version=1.2 pid=21344 (2026/05/25  22:20:22) (X64)
+
+2026.05.25-22:20:22: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.26-23:51:47: 
+
+utility service module version=1.2 pid=11360 (2026/05/26  23:51:47) (X64)
+
+2026.05.26-23:51:47: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.28-13:29:37: 
+
+utility service module version=1.2 pid=96964 (2026/05/28  13:29:37) (X64)
+
+2026.05.28-13:29:37: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.28-13:29:55: Download_CheckDownload: ID(0), Check Ping Invalid(true), time(34).
+2026.05.28-13:29:56: Download_GetDownloadFileLenth : result(272284066), url_err(0).
+2026.05.28-13:29:57: Download : GetNetworkNotFull IP(d115.dvdfab.cn), Result(1:-678337457
+).
+2026.05.28-13:29:57: Download_CheckDownload: ID(0), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.28-13:29:57: Download_CheckDownload: ID(1), Check Ping Invalid(true), time(27).
+2026.05.28-13:29:58: Download_GetDownloadFileLenth : result(272284066), url_err(0).
+2026.05.28-13:29:58: Download : GetNetworkNotFull IP(d17.dvdfab.cn), Result(1:
+1435461
+).
+2026.05.28-13:29:58: Download_CheckDownload: ID(1), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.28-13:29:58: Download_CheckDownload: ID(2), Check Ping Invalid(true), time(32).
+2026.05.28-13:29:59: Download_GetDownloadFileLenth : result(272284066), url_err(0).
+2026.05.28-13:29:59: Download : GetNetworkNotFull IP(d171.dvdfab.cn), Result(1:
+121853
+).
+2026.05.28-13:29:59: Download_CheckDownload: ID(2), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.28-13:29:59: Download_CheckDownload: ID(3), Check Ping Invalid(true), time(32).
+2026.05.28-13:30:00: Download_GetDownloadFileLenth : result(272284066), url_err(0).
+2026.05.28-13:30:00: Download : GetNetworkNotFull IP(d18.dvdfab.cn), Result(1:
+2598071
+).
+2026.05.28-13:30:00: Download_CheckDownload: ID(3), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.28-13:30:00: Download_CheckDownload: ID(4), Check Ping Invalid(true), time(36).
+2026.05.28-13:30:02: Download_GetDownloadFileLenth : result(272284066), url_err(0).
+2026.05.28-13:30:02: Download : GetNetworkNotFull IP(d217.dvdfab.cn), Result(1:
+1426007
+).
+2026.05.28-13:30:02: Download_CheckDownload: ID(4), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.28-13:30:02: Download_CheckDownload: ID(5), Check Ping Invalid(true), time(28).
+2026.05.28-13:30:03: Download_GetDownloadFileLenth : result(272284066), url_err(0).
+2026.05.28-13:30:03: Download : GetNetworkNotFull IP(d207.dvdfab.cn), Result(1:
+1824278
+).
+2026.05.28-13:30:03: Download_CheckDownload: ID(5), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.28-13:30:03: Download_CheckDownload: ID(6), Check Ping Invalid(true), time(29).
+2026.05.28-13:30:04: Download_GetDownloadFileLenth : result(272284066), url_err(0).
+2026.05.28-13:30:04: Download : GetNetworkNotFull IP(d223.dvdfab.cn), Result(1:
+1975916
+).
+2026.05.28-13:30:04: Download_CheckDownload: ID(6), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.28-13:30:04: Download_CheckDownload: ID(7), Check Ping Invalid(true), time(29).
+2026.05.28-13:30:05: Download_GetDownloadFileLenth : result(272284066), url_err(0).
+2026.05.28-13:30:06: Download : GetNetworkNotFull IP(d145.dvdfab.cn), Result(1:1678455
+).
+2026.05.28-13:30:06: Download_CheckDownload: ID(7), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.28-13:30:06: Download_CheckDownload: ID(8), Check Ping Invalid(true), time(30).
+2026.05.28-13:30:07: Download_GetDownloadFileLenth : result(272284066), url_err(0).
+2026.05.28-13:30:07: Download : GetNetworkNotFull IP(d74.dvdfab.cn), Result(1:1052805
+).
+2026.05.28-13:30:07: Download_CheckDownload: ID(8), FileSizeConsistent(true) NetworkNotFull(true).
+2026.05.28-13:30:07: Download_GetDownloadFileLenth : result(272284066), url_err(0).
+2026.05.28-13:30:07: Download_CloseFile.
+2026.05.28-13:30:07: Download_BeginDownload : OpenFile(0xfc34c500), FileSize(272284066), Mutex(0x8d4).
+2026.05.28-13:30:07: Download_BeginDownloadItem : id(0) thread(0x8d8) start(0) end(27228405).
+2026.05.28-13:30:07: Download_BeginDownloadItem : id(1) thread(0x814) start(27228406) end(54456811).
+2026.05.28-13:30:07: Download_BeginDownloadItem : id(2) thread(0x79c) start(54456812) end(81685217).
+2026.05.28-13:30:07: Download_BeginDownloadItem : id(3) thread(0x8bc) start(81685218) end(108913623).
+2026.05.28-13:30:07: Download_BeginDownloadItem : id(4) thread(0x8dc) start(108913624) end(136142029).
+2026.05.28-13:30:07: Download_BeginDownloadItem : id(5) thread(0x544) start(136142030) end(163370435).
+2026.05.28-13:30:07: Download_BeginDownloadItem : id(6) thread(0x928) start(163370436) end(190598841).
+2026.05.28-13:30:07: Download_BeginDownloadItem : id(7) thread(0x948) start(190598842) end(217827247).
+2026.05.28-13:30:07: Download_BeginDownloadItem : id(8) thread(0x950) start(217827248) end(245055653).
+2026.05.28-13:30:08: Download_BeginDownloadItem : id(9) thread(0x958) start(245055654) end(272284065).
+2026.05.28-13:30:08: Download_InitDownload : start download dispatch, thread handle(0x9a0).
+2026.05.28-13:30:08: Download_Dispatch Begining.
+2026.05.28-13:30:25: Thread_Download_Internal: curl request MAYBE errors, id(5) http code(206) .
+2026.05.28-13:30:25: Download_CheckFinish (5): begin.
+2026.05.28-13:30:25: Download_CheckFinish (5): continue. now wait (0).
+2026.05.28-13:30:25: Download_Internal Finish (5) OK.
+2026.05.28-13:30:26: Download_Dispatch: Found large download item (1) with remain size (12090411) bytes
+2026.05.28-13:30:26: Download_Dispatch: Split item (1) original range (27228406-54456811), to (27228406-48411605) and new (48411606-54456811)
+2026.05.28-13:30:26: Download_BeginDownloadItem : id(10) thread(0x920) start(48411606) end(54456811).
+2026.05.28-13:30:26: Thread_Download_Internal: curl request MAYBE errors, id(0) http code(206) .
+2026.05.28-13:30:26: Download_CheckFinish (0): begin.
+2026.05.28-13:30:26: Download_CheckFinish (0): continue. now wait (1).
+2026.05.28-13:30:26: Download_Internal Finish (0) OK.
+2026.05.28-13:30:26: Thread_Download_Internal: curl request MAYBE errors, id(9) http code(206) .
+2026.05.28-13:30:26: Download_CheckFinish (9): begin.
+2026.05.28-13:30:26: Download_CheckFinish (9): continue. now wait (1).
+2026.05.28-13:30:26: Download_Internal Finish (9) OK.
+2026.05.28-13:30:27: Thread_Download_Internal: curl request MAYBE errors, id(2) http code(206) .
+2026.05.28-13:30:27: Download_CheckFinish (2): begin.
+2026.05.28-13:30:27: Download_CheckFinish (2): continue. now wait (1).
+2026.05.28-13:30:27: Download_Internal Finish (2) OK.
+2026.05.28-13:30:28: Download_Dispatch: Found large download item (7) with remain size (10078319) bytes
+2026.05.28-13:30:28: Download_Dispatch: Split item (7) original range (190598842-217827247), to (190598842-212788087) and new (212788088-217827247)
+2026.05.28-13:30:28: Download_BeginDownloadItem : id(11) thread(0x8d0) start(212788088) end(217827247).
+2026.05.28-13:30:28: Download_Dispatch: Found large download item (6) with remain size (8117049) bytes
+2026.05.28-13:30:28: Download_Dispatch: Split item (6) original range (163370436-190598841), to (163370436-186540316) and new (186540317-190598841)
+2026.05.28-13:30:28: Download_BeginDownloadItem : id(12) thread(0x8c8) start(186540317) end(190598841).
+2026.05.28-13:30:28: Download_Dispatch: Found large download item (4) with remain size (5842125) bytes
+2026.05.28-13:30:28: Download_Dispatch: Split item (4) original range (108913624-136142029), to (108913624-133220966) and new (133220967-136142029)
+2026.05.28-13:30:28: Download_BeginDownloadItem : id(13) thread(0x8cc) start(133220967) end(136142029).
+2026.05.28-13:30:28: Thread_Download_Internal: curl request MAYBE errors, id(10) http code(206) .
+2026.05.28-13:30:28: Download_CheckFinish (10): begin.
+2026.05.28-13:30:28: Download_CheckFinish (10): continue. now wait (1).
+2026.05.28-13:30:28: Download_Internal Finish (10) OK.
+2026.05.28-13:30:28: Thread_Download_Internal: curl request MAYBE errors, id(3) http code(206) .
+2026.05.28-13:30:28: Download_CheckFinish (3): begin.
+2026.05.28-13:30:28: Download_CheckFinish (3): continue. now wait (1).
+2026.05.28-13:30:28: Download_Internal Finish (3) OK.
+2026.05.28-13:30:29: Thread_Download_Internal: curl request MAYBE errors, id(8) http code(206) .
+2026.05.28-13:30:29: Download_CheckFinish (8): begin.
+2026.05.28-13:30:29: Download_CheckFinish (8): continue. now wait (1).
+2026.05.28-13:30:29: Download_Internal Finish (8) OK.
+2026.05.28-13:30:29: Thread_Download_Internal: curl write partial range, id(4) http result(23)
+2026.05.28-13:30:29: Download_CheckFinish (4): begin.
+2026.05.28-13:30:29: Download_CheckFinish (4): continue. now wait (1).
+2026.05.28-13:30:29: Download_Internal Finish (4): Partial range download complete. result(23) start(108913624) end(133220966) url(d74.dvdfab.cn) .
+2026.05.28-13:30:29: Thread_Download_Internal: curl write partial range, id(1) http result(23)
+2026.05.28-13:30:29: Download_CheckFinish (1): begin.
+2026.05.28-13:30:29: Download_CheckFinish (1): continue. now wait (6).
+2026.05.28-13:30:29: Download_Internal Finish (1): Partial range download complete. result(23) start(27228406) end(48411605) url(d207.dvdfab.cn) .
+2026.05.28-13:30:30: Download_Dispatch: Found large download item (12) with remain size (2465785) bytes
+2026.05.28-13:30:30: Download_Dispatch: Split item (12) original range (186540317-190598841), to (186540317-189365948) and new (189365949-190598841)
+2026.05.28-13:30:30: Download_BeginDownloadItem : id(14) thread(0x890) start(189365949) end(190598841).
+2026.05.28-13:30:30: Download_Dispatch: Item (1) completed at pos (48411606)
+2026.05.28-13:30:30: Download_Dispatch: Found large download item (7) with remain size (2303031) bytes
+2026.05.28-13:30:30: Download_Dispatch: Split item (7) original range (190598842-212788087), to (190598842-211636571) and new (211636572-212788087)
+2026.05.28-13:30:30: Download_BeginDownloadItem : id(15) thread(0x924) start(211636572) end(212788087).
+2026.05.28-13:30:30: Download_Dispatch: Found large download item (11) with remain size (2119919) bytes
+2026.05.28-13:30:30: Download_Dispatch: Split item (11) original range (212788088-217827247), to (212788088-216767287) and new (216767288-217827247)
+2026.05.28-13:30:30: Download_BeginDownloadItem : id(16) thread(0x9c8) start(216767288) end(217827247).
+2026.05.28-13:30:30: Download_Dispatch: Item (4) completed at pos (133220967)
+2026.05.28-13:30:30: Download_Dispatch: Found large download item (14) with remain size (1232892) bytes
+2026.05.28-13:30:30: Thread_Download_Internal: curl request MAYBE errors, id(13) http code(206) .
+2026.05.28-13:30:30: Download_Dispatch: Split item (14) original range (189365949-190598841), to (189365949-189982394) and new (189982395-190598841)
+2026.05.28-13:30:30: Download_CheckFinish (13): begin.
+2026.05.28-13:30:30: Download_BeginDownloadItem : id(17) thread(0x938) start(189982395) end(190598841).
+2026.05.28-13:30:30: Thread_Download_Internal: curl write partial range, id(11) http result(23)
+2026.05.28-13:30:30: Download_CheckFinish (13): continue. now wait (6).
+2026.05.28-13:30:30: Download_Dispatch: Found large download item (15) with remain size (1151515) bytes
+2026.05.28-13:30:30: Download_CheckFinish (11): begin.
+2026.05.28-13:30:30: Download_Internal Finish (13) OK.
+2026.05.28-13:30:30: Download_Dispatch: Split item (15) original range (211636572-212788087), to (211636572-212212329) and new (212212330-212788087)
+2026.05.28-13:30:30: Download_CheckFinish (11): continue. now wait (6).
+2026.05.28-13:30:30: Download_BeginDownloadItem : id(18) thread(0x9e0) start(212212330) end(212788087).
+2026.05.28-13:30:30: Download_Internal Finish (11): Partial range download complete. result(23) start(212788088) end(216767287) url(d74.dvdfab.cn) .
+2026.05.28-13:30:30: Download_Dispatch: Found large download item (16) with remain size (1059959) bytes
+2026.05.28-13:30:30: Download_Dispatch: Split item (16) original range (216767288-217827247), to (216767288-217297267) and new (217297268-217827247)
+2026.05.28-13:30:30: Download_BeginDownloadItem : id(19) thread(0x9fc) start(217297268) end(217827247).
+2026.05.28-13:30:30: Download_Dispatch: Found large download item (6) with remain size (827228) bytes
+2026.05.28-13:30:30: Download_Dispatch: Split item (6) original range (163370436-186540316), to (163370436-186126701) and new (186126702-186540316)
+2026.05.28-13:30:30: Thread_Download_Internal: curl write partial range, id(12) http result(23)
+2026.05.28-13:30:30: Download_BeginDownloadItem : id(20) thread(0x930) start(186126702) end(186540316).
+2026.05.28-13:30:30: Download_CheckFinish (12): begin.
+2026.05.28-13:30:30: Download_Dispatch: Item (11) completed at pos (216767288)
+2026.05.28-13:30:30: Download_CheckFinish (12): continue. now wait (6).
+2026.05.28-13:30:30: Download_Dispatch: Item (12) completed at pos (189365949)
+2026.05.28-13:30:30: Download_Internal Finish (12): Partial range download complete. result(23) start(186540317) end(189365948) url(d223.dvdfab.cn) .
+2026.05.28-13:30:30: Download_Dispatch: Found large download item (17) with remain size (616446) bytes
+2026.05.28-13:30:30: Download_Dispatch: Split item (17) original range (189982395-190598841), to (189982395-190290617) and new (190290618-190598841)
+2026.05.28-13:30:30: Download_BeginDownloadItem : id(21) thread(0xa44) start(190290618) end(190598841).
+2026.05.28-13:30:30: Thread_Download_Internal: curl write partial range, id(7) http result(23)
+2026.05.28-13:30:30: Download_CheckFinish (7): begin.
+2026.05.28-13:30:30: Download_CheckFinish (7): continue. now wait (6).
+2026.05.28-13:30:30: Download_Internal Finish (7): Partial range download complete. result(23) start(190598842) end(211636571) url(d223.dvdfab.cn) .
+2026.05.28-13:30:30: Thread_Download_Internal: curl write partial range, id(6) http result(23)
+2026.05.28-13:30:30: Download_CheckFinish (6): begin.
+2026.05.28-13:30:30: Download_CheckFinish (6): continue. now wait (14).
+2026.05.28-13:30:30: Download_Internal Finish (6): Partial range download complete. result(23) start(163370436) end(186126701) url(d207.dvdfab.cn) .
+2026.05.28-13:30:31: Thread_Download_Internal: curl write partial range, id(15) http result(23)
+2026.05.28-13:30:31: Download_CheckFinish (15): begin.
+2026.05.28-13:30:31: Download_CheckFinish (15): continue. now wait (14).
+2026.05.28-13:30:31: Download_Internal Finish (15): Partial range download complete. result(23) start(211636572) end(212212329) url(d145.dvdfab.cn) .
+2026.05.28-13:30:31: Thread_Download_Internal: curl write partial range, id(14) http result(23)
+2026.05.28-13:30:31: Download_CheckFinish (14): begin.
+2026.05.28-13:30:31: Thread_Download_Internal: curl write partial range, id(16) http result(23)
+2026.05.28-13:30:31: Download_CheckFinish (14): continue. now wait (16).
+2026.05.28-13:30:31: Download_CheckFinish (16): begin.
+2026.05.28-13:30:31: Download_Internal Finish (14): Partial range download complete. result(23) start(189365949) end(189982394) url(d145.dvdfab.cn) .
+2026.05.28-13:30:31: Download_CheckFinish (16): continue. now wait (17).
+2026.05.28-13:30:31: Download_Internal Finish (16): Partial range download complete. result(23) start(216767288) end(217297267) url(d223.dvdfab.cn) .
+2026.05.28-13:30:31: Thread_Download_Internal: curl write partial range, id(17) http result(23)
+2026.05.28-13:30:31: Download_CheckFinish (17): begin.
+2026.05.28-13:30:31: Thread_Download_Internal: curl request MAYBE errors, id(21) http code(206) .
+2026.05.28-13:30:31: Thread_Download_Internal: curl request MAYBE errors, id(18) http code(206) .
+2026.05.28-13:30:31: Thread_Download_Internal: curl request MAYBE errors, id(20) http code(206) .
+2026.05.28-13:30:31: Thread_Download_Internal: curl request MAYBE errors, id(19) http code(206) .
+2026.05.28-13:30:31: Download_CheckFinish (17): continue. now wait (18).
+2026.05.28-13:30:31: Download_CheckFinish (21): begin.
+2026.05.28-13:30:31: Download_CheckFinish (18): begin.
+2026.05.28-13:30:31: Download_CheckFinish (20): begin.
+2026.05.28-13:30:31: Download_CheckFinish (19): begin.
+2026.05.28-13:30:31: Download_Internal Finish (17): Partial range download complete. result(23) start(189982395) end(190290617) url(d223.dvdfab.cn) .
+2026.05.28-13:30:32: Download_Dispatch: Item (6) completed at pos (186126702)
+2026.05.28-13:30:32: Download_Dispatch: Item (7) completed at pos (211636572)
+2026.05.28-13:30:32: Download_Dispatch: Item (14) completed at pos (189982395)
+2026.05.28-13:30:32: Download_Dispatch: Item (15) completed at pos (212212330)
+2026.05.28-13:30:32: Download_Dispatch: Item (16) completed at pos (217297268)
+2026.05.28-13:30:32: Download_Dispatch: Item (17) completed at pos (190290618)
+2026.05.28-13:30:33: Download_CheckFinish (21): Finish download.
+2026.05.28-13:30:33: Download_CloseFile.
+2026.05.28-13:30:34: CloseFile 0.
+2026.05.28-13:30:34: Download_Internal Finish (21) OK.
+2026.05.28-13:30:34: Download_Internal Finish (19) OK.
+2026.05.28-13:30:34: Download_Internal Finish (20) OK.
+2026.05.28-13:30:34: Download_Internal Finish (18) OK.
+2026.05.28-13:30:34: Download_Dispatch Endding.
+2026.05.28-13:32:24: 
+
+utility service module version=1.2 pid=103208 (2026/05/28  13:32:24) (X64)
+
+2026.05.28-13:32:24: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.28-15:29:03: 
+
+utility service module version=1.2 pid=22884 (2026/05/28  15:29:03) (X64)
+
+2026.05.28-15:29:03: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.28-20:35:07: 
+
+utility service module version=1.2 pid=21408 (2026/05/28  20:35:07) (X64)
+
+2026.05.28-20:35:07: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.29-03:03:27: 
+
+utility service module version=1.2 pid=20344 (2026/05/29  03:03:27) (X64)
+
+2026.05.29-03:03:27: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.29-11:15:27: 
+
+utility service module version=1.2 pid=19636 (2026/05/29  11:15:27) (X64)
+
+2026.05.29-11:15:27: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.05.29-13:37:53: 
+
+utility service module version=1.2 pid=15600 (2026/05/29  13:37:53) (X64)
+
+2026.05.29-13:37:53: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.06.01-21:16:06: 
+
+utility service module version=1.2 pid=10880 (2026/06/01  21:16:06) (X64)
+
+2026.06.01-21:16:06: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.06.01-21:40:41: Download_CheckDownload: ID(0), Check Ping Invalid(true), time(35).
+2026.06.01-21:40:42: Download_GetDownloadFileLenth : result(272209995), url_err(0).
+2026.06.01-21:40:42: Download : GetNetworkNotFull IP(d115.dvdfab.cn), Result(1:-678337457
+).
+2026.06.01-21:40:42: Download_CheckDownload: ID(0), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.01-21:40:42: Download_CheckDownload: ID(1), Check Ping Invalid(true), time(31).
+2026.06.01-21:40:43: Download_GetDownloadFileLenth : result(272209995), url_err(0).
+2026.06.01-21:40:43: Download : GetNetworkNotFull IP(d17.dvdfab.cn), Result(1:
+1435461
+).
+2026.06.01-21:40:43: Download_CheckDownload: ID(1), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.01-21:40:43: Download_CheckDownload: ID(2), Check Ping Invalid(true), time(33).
+2026.06.01-21:40:44: Download_GetDownloadFileLenth : result(272209995), url_err(0).
+2026.06.01-21:40:45: Download : GetNetworkNotFull IP(d171.dvdfab.cn), Result(1:
+121853
+).
+2026.06.01-21:40:45: Download_CheckDownload: ID(2), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.01-21:40:45: Download_CheckDownload: ID(3), Check Ping Invalid(true), time(31).
+2026.06.01-21:40:46: Download_GetDownloadFileLenth : result(272209995), url_err(0).
+2026.06.01-21:40:46: Download : GetNetworkNotFull IP(d18.dvdfab.cn), Result(1:
+2598071
+).
+2026.06.01-21:40:46: Download_CheckDownload: ID(3), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.01-21:40:46: Download_CheckDownload: ID(4), Check Ping Invalid(true), time(30).
+2026.06.01-21:40:47: Download_GetDownloadFileLenth : result(272209995), url_err(0).
+2026.06.01-21:40:47: Download : GetNetworkNotFull IP(d217.dvdfab.cn), Result(1:
+1426007
+).
+2026.06.01-21:40:47: Download_CheckDownload: ID(4), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.01-21:40:47: Download_CheckDownload: ID(5), Check Ping Invalid(true), time(28).
+2026.06.01-21:40:48: Download_GetDownloadFileLenth : result(272209995), url_err(0).
+2026.06.01-21:40:48: Download : GetNetworkNotFull IP(d207.dvdfab.cn), Result(1:
+1824278
+).
+2026.06.01-21:40:48: Download_CheckDownload: ID(5), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.01-21:40:49: Download_CheckDownload: ID(6), Check Ping Invalid(true), time(31).
+2026.06.01-21:40:50: Download_GetDownloadFileLenth : result(272209995), url_err(0).
+2026.06.01-21:40:50: Download : GetNetworkNotFull IP(d223.dvdfab.cn), Result(1:
+1975916
+).
+2026.06.01-21:40:50: Download_CheckDownload: ID(6), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.01-21:40:50: Download_CheckDownload: ID(7), Check Ping Invalid(true), time(35).
+2026.06.01-21:40:51: Download_GetDownloadFileLenth : result(272209995), url_err(0).
+2026.06.01-21:40:51: Download : GetNetworkNotFull IP(d145.dvdfab.cn), Result(1:1678455
+).
+2026.06.01-21:40:51: Download_CheckDownload: ID(7), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.01-21:40:51: Download_CheckDownload: ID(8), Check Ping Invalid(true), time(37).
+2026.06.01-21:40:52: Download_GetDownloadFileLenth : result(272209995), url_err(0).
+2026.06.01-21:40:52: Download : GetNetworkNotFull IP(d74.dvdfab.cn), Result(1:1052805
+).
+2026.06.01-21:40:52: Download_CheckDownload: ID(8), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.01-21:40:52: Download_GetDownloadFileLenth : result(272209995), url_err(0).
+2026.06.01-21:40:52: Download_CloseFile.
+2026.06.01-21:40:53: Download_BeginDownload : OpenFile(0xdf1dc500), FileSize(272209995), Mutex(0x904).
+2026.06.01-21:40:53: Download_BeginDownloadItem : id(0) thread(0x928) start(0) end(27220998).
+2026.06.01-21:40:53: Download_BeginDownloadItem : id(1) thread(0x678) start(27220999) end(54441997).
+2026.06.01-21:40:53: Download_BeginDownloadItem : id(2) thread(0x8d4) start(54441998) end(81662996).
+2026.06.01-21:40:53: Download_BeginDownloadItem : id(3) thread(0x970) start(81662997) end(108883995).
+2026.06.01-21:40:53: Download_BeginDownloadItem : id(4) thread(0x930) start(108883996) end(136104994).
+2026.06.01-21:40:53: Download_BeginDownloadItem : id(5) thread(0x8e0) start(136104995) end(163325993).
+2026.06.01-21:40:53: Download_BeginDownloadItem : id(6) thread(0x95c) start(163325994) end(190546992).
+2026.06.01-21:40:53: Download_BeginDownloadItem : id(7) thread(0x688) start(190546993) end(217767991).
+2026.06.01-21:40:53: Download_BeginDownloadItem : id(8) thread(0x958) start(217767992) end(244988990).
+2026.06.01-21:40:53: Download_BeginDownloadItem : id(9) thread(0x9c4) start(244988991) end(272209994).
+2026.06.01-21:40:53: Download_InitDownload : start download dispatch, thread handle(0x9dc).
+2026.06.01-21:40:53: Download_Dispatch Begining.
+2026.06.01-21:41:13: Thread_Download_Internal: curl request MAYBE errors, id(8) http code(206) .
+2026.06.01-21:41:13: Download_CheckFinish (8): begin.
+2026.06.01-21:41:13: Download_CheckFinish (8): continue. now wait (0).
+2026.06.01-21:41:13: Download_Internal Finish (8) OK.
+2026.06.01-21:41:15: Thread_Download_Internal: curl request MAYBE errors, id(3) http code(206) .
+2026.06.01-21:41:15: Download_CheckFinish (3): begin.
+2026.06.01-21:41:15: Download_CheckFinish (3): continue. now wait (0).
+2026.06.01-21:41:15: Download_Internal Finish (3) OK.
+2026.06.01-21:41:15: Download_Dispatch: Found large download item (2) with remain size (11260372) bytes
+2026.06.01-21:41:15: Download_Dispatch: Split item (2) original range (54441998-81662996), to (54441998-76032809) and new (76032810-81662996)
+2026.06.01-21:41:15: Thread_Download_Internal: curl request MAYBE errors, id(9) http code(206) .
+2026.06.01-21:41:15: Download_BeginDownloadItem : id(10) thread(0x680) start(76032810) end(81662996).
+2026.06.01-21:41:15: Download_CheckFinish (9): begin.
+2026.06.01-21:41:15: Download_Dispatch: Found large download item (0) with remain size (10609030) bytes
+2026.06.01-21:41:15: Thread_Download_Internal: curl request MAYBE errors, id(7) http code(206) .
+2026.06.01-21:41:15: Download_CheckFinish (9): continue. now wait (0).
+2026.06.01-21:41:15: Download_Dispatch: Split item (0) original range (0-27220998), to (0-21916482) and new (21916483-27220998)
+2026.06.01-21:41:15: Download_CheckFinish (7): begin.
+2026.06.01-21:41:15: Download_Internal Finish (9) OK.
+2026.06.01-21:41:15: Download_BeginDownloadItem : id(11) thread(0x9ec) start(21916483) end(27220998).
+2026.06.01-21:41:15: Download_CheckFinish (7): continue. now wait (0).
+2026.06.01-21:41:15: Download_Dispatch: Found large download item (1) with remain size (10125901) bytes
+2026.06.01-21:41:15: Download_Internal Finish (7) OK.
+2026.06.01-21:41:15: Download_Dispatch: Split item (1) original range (27220999-54441997), to (27220999-49379046) and new (49379047-54441997)
+2026.06.01-21:41:15: Download_BeginDownloadItem : id(12) thread(0xa08) start(49379047) end(54441997).
+2026.06.01-21:41:16: Thread_Download_Internal: curl request MAYBE errors, id(5) http code(206) .
+2026.06.01-21:41:16: Download_CheckFinish (5): begin.
+2026.06.01-21:41:16: Download_CheckFinish (5): continue. now wait (0).
+2026.06.01-21:41:16: Download_Internal Finish (5) OK.
+2026.06.01-21:41:18: Download_Dispatch: Found large download item (6) with remain size (5669360) bytes
+2026.06.01-21:41:18: Download_Dispatch: Split item (6) original range (163325994-190546992), to (163325994-187712311) and new (187712312-190546992)
+2026.06.01-21:41:18: Download_BeginDownloadItem : id(13) thread(0x9a4) start(187712312) end(190546992).
+2026.06.01-21:41:18: Download_Dispatch: Found large download item (11) with remain size (4427078) bytes
+2026.06.01-21:41:18: Download_Dispatch: Split item (11) original range (21916483-27220998), to (21916483-25007458) and new (25007459-27220998)
+2026.06.01-21:41:18: Thread_Download_Internal: curl request MAYBE errors, id(10) http code(206) .
+2026.06.01-21:41:18: Download_BeginDownloadItem : id(14) thread(0x770) start(25007459) end(27220998).
+2026.06.01-21:41:18: Thread_Download_Internal: curl write partial range, id(1) http result(23)
+2026.06.01-21:41:18: Download_CheckFinish (10): begin.
+2026.06.01-21:41:18: Download_Dispatch: Found large download item (12) with remain size (3769318) bytes
+2026.06.01-21:41:18: Download_CheckFinish (1): begin.
+2026.06.01-21:41:18: Download_Dispatch: Split item (12) original range (49379047-54441997), to (49379047-52557337) and new (52557338-54441997)
+2026.06.01-21:41:18: Download_CheckFinish (10): continue. now wait (0).
+2026.06.01-21:41:18: Download_CheckFinish (1): continue. now wait (0).
+2026.06.01-21:41:18: Download_Internal Finish (10) OK.
+2026.06.01-21:41:18: Download_BeginDownloadItem : id(15) thread(0x980) start(52557338) end(54441997).
+2026.06.01-21:41:18: Download_Dispatch: Found large download item (13) with remain size (2834680) bytes
+2026.06.01-21:41:18: Download_Internal Finish (1): Partial range download complete. result(23) start(27220999) end(49379046) url(d217.dvdfab.cn) .
+2026.06.01-21:41:18: Download_Dispatch: Split item (13) original range (187712312-190546992), to (187712312-189129651) and new (189129652-190546992)
+2026.06.01-21:41:19: Thread_Download_Internal: curl write partial range, id(2) http result(23)
+2026.06.01-21:41:19: Download_BeginDownloadItem : id(16) thread(0xa28) start(189129652) end(190546992).
+2026.06.01-21:41:19: Thread_Download_Internal: curl write partial range, id(0) http result(23)
+2026.06.01-21:41:19: Download_CheckFinish (2): begin.
+2026.06.01-21:41:19: Download_Dispatch: Found large download item (14) with remain size (2213539) bytes
+2026.06.01-21:41:19: Download_CheckFinish (0): begin.
+2026.06.01-21:41:19: Download_CheckFinish (2): continue. now wait (4).
+2026.06.01-21:41:19: Download_Dispatch: Split item (14) original range (25007459-27220998), to (25007459-26114228) and new (26114229-27220998)
+2026.06.01-21:41:19: Download_Internal Finish (2): Partial range download complete. result(23) start(54441998) end(76032809) url(d17.dvdfab.cn) .
+2026.06.01-21:41:19: Download_CheckFinish (0): continue. now wait (4).
+2026.06.01-21:41:19: Download_BeginDownloadItem : id(17) thread(0x968) start(26114229) end(27220998).
+2026.06.01-21:41:19: Download_Internal Finish (0): Partial range download complete. result(23) start(0) end(21916482) url(d207.dvdfab.cn) .
+2026.06.01-21:41:19: Download_Dispatch: Found large download item (15) with remain size (1884659) bytes
+2026.06.01-21:41:19: Download_Dispatch: Split item (15) original range (52557338-54441997), to (52557338-53499667) and new (53499668-54441997)
+2026.06.01-21:41:19: Download_BeginDownloadItem : id(18) thread(0x978) start(53499668) end(54441997).
+2026.06.01-21:41:19: Thread_Download_Internal: curl write partial range, id(6) http result(23)
+2026.06.01-21:41:19: Download_CheckFinish (6): begin.
+2026.06.01-21:41:19: Thread_Download_Internal: curl request MAYBE errors, id(4) http code(206) .
+2026.06.01-21:41:19: Download_CheckFinish (6): continue. now wait (4).
+2026.06.01-21:41:19: Download_CheckFinish (4): begin.
+2026.06.01-21:41:19: Download_Internal Finish (6): Partial range download complete. result(23) start(163325994) end(187712311) url(d217.dvdfab.cn) .
+2026.06.01-21:41:19: Download_CheckFinish (4): continue. now wait (11).
+2026.06.01-21:41:19: Download_Internal Finish (4) OK.
+2026.06.01-21:41:19: Thread_Download_Internal: curl write partial range, id(14) http result(23)
+2026.06.01-21:41:19: Thread_Download_Internal: curl write partial range, id(13) http result(23)
+2026.06.01-21:41:19: Download_CheckFinish (14): begin.
+2026.06.01-21:41:19: Thread_Download_Internal: curl write partial range, id(12) http result(23)
+2026.06.01-21:41:19: Download_CheckFinish (13): begin.
+2026.06.01-21:41:19: Download_CheckFinish (14): continue. now wait (11).
+2026.06.01-21:41:19: Download_CheckFinish (12): begin.
+2026.06.01-21:41:20: Download_Internal Finish (14): Partial range download complete. result(23) start(25007459) end(26114228) url(d207.dvdfab.cn) .
+2026.06.01-21:41:20: Download_CheckFinish (13): continue. now wait (11).
+2026.06.01-21:41:20: Download_Internal Finish (13): Partial range download complete. result(23) start(187712312) end(189129651) url(d18.dvdfab.cn) .
+2026.06.01-21:41:20: Download_CheckFinish (12): continue. now wait (11).
+2026.06.01-21:41:20: Download_Internal Finish (12): Partial range download complete. result(23) start(49379047) end(52557337) url(d17.dvdfab.cn) .
+2026.06.01-21:41:20: Thread_Download_Internal: curl write partial range, id(11) http result(23)
+2026.06.01-21:41:20: Download_CheckFinish (11): begin.
+2026.06.01-21:41:20: Download_CheckFinish (11): continue. now wait (15).
+2026.06.01-21:41:20: Thread_Download_Internal: curl write partial range, id(15) http result(23)
+2026.06.01-21:41:20: Download_Internal Finish (11): Partial range download complete. result(23) start(21916483) end(25007458) url(d17.dvdfab.cn) .
+2026.06.01-21:41:20: Download_CheckFinish (15): begin.
+2026.06.01-21:41:20: Download_CheckFinish (15): continue. now wait (16).
+2026.06.01-21:41:20: Thread_Download_Internal: curl request MAYBE errors, id(17) http code(206) .
+2026.06.01-21:41:20: Thread_Download_Internal: curl request MAYBE errors, id(18) http code(206) .
+2026.06.01-21:41:20: Download_Internal Finish (15): Partial range download complete. result(23) start(52557338) end(53499667) url(d18.dvdfab.cn) .
+2026.06.01-21:41:20: Thread_Download_Internal: curl request MAYBE errors, id(16) http code(206) .
+2026.06.01-21:41:20: Download_CheckFinish (17): begin.
+2026.06.01-21:41:21: Download_CheckFinish (18): begin.
+2026.06.01-21:41:21: Download_CheckFinish (16): begin.
+2026.06.01-21:41:21: Download_Dispatch: Item (0) completed at pos (21916483)
+2026.06.01-21:41:21: Download_Dispatch: Item (1) completed at pos (49379047)
+2026.06.01-21:41:21: Download_Dispatch: Item (2) completed at pos (76032810)
+2026.06.01-21:41:21: Download_Dispatch: Item (6) completed at pos (187712312)
+2026.06.01-21:41:21: Download_Dispatch: Item (11) completed at pos (25007459)
+2026.06.01-21:41:21: Download_Dispatch: Item (12) completed at pos (52557338)
+2026.06.01-21:41:21: Download_Dispatch: Item (13) completed at pos (189129652)
+2026.06.01-21:41:21: Download_Dispatch: Item (14) completed at pos (26114229)
+2026.06.01-21:41:21: Download_Dispatch: Item (15) completed at pos (53499668)
+2026.06.01-21:41:24: Download_CheckFinish (17): Finish download.
+2026.06.01-21:41:24: Download_CloseFile.
+2026.06.01-21:41:25: CloseFile 0.
+2026.06.01-21:41:25: Download_Internal Finish (17) OK.
+2026.06.01-21:41:25: Download_Internal Finish (18) OK.
+2026.06.01-21:41:25: Download_Internal Finish (16) OK.
+2026.06.01-21:41:25: Download_Dispatch Endding.
+2026.06.01-21:44:31: 
+
+utility service module version=1.2 pid=30524 (2026/06/01  21:44:31) (X64)
+
+2026.06.01-21:44:31: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.06.03-07:43:40: 
+
+utility service module version=1.2 pid=19940 (2026/06/03  07:43:40) (X64)
+
+2026.06.03-07:43:40: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.06.03-18:56:51: 
+
+utility service module version=1.2 pid=20456 (2026/06/03  18:56:51) (X64)
+
+2026.06.03-18:56:51: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.06.04-15:12:37: 
+
+utility service module version=1.2 pid=19560 (2026/06/04  15:12:37) (X64)
+
+2026.06.04-15:12:37: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.06.05-20:21:08: 
+
+utility service module version=1.2 pid=20888 (2026/06/05  20:21:08) (X64)
+
+2026.06.05-20:21:08: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.06.06-01:28:48: 
+
+utility service module version=1.2 pid=1720 (2026/06/06  01:28:48) (X64)
+
+2026.06.06-01:28:48: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.06.06-01:28:58: Download_CheckDownload: ID(0), Check Ping Invalid(true), time(31).
+2026.06.06-01:28:59: Download_GetDownloadFileLenth : result(302094774), url_err(0).
+2026.06.06-01:28:59: Download : GetNetworkNotFull IP(d115.dvdfab.cn), Result(1:-678337457
+).
+2026.06.06-01:28:59: Download_CheckDownload: ID(0), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.06-01:29:00: Download_CheckDownload: ID(1), Check Ping Invalid(true), time(31).
+2026.06.06-01:29:01: Download_GetDownloadFileLenth : result(302094774), url_err(0).
+2026.06.06-01:29:02: Download : GetNetworkNotFull IP(d17.dvdfab.cn), Result(1:
+1435461
+).
+2026.06.06-01:29:02: Download_CheckDownload: ID(1), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.06-01:29:02: Download_CheckDownload: ID(2), Check Ping Invalid(true), time(30).
+2026.06.06-01:29:03: Download_GetDownloadFileLenth : result(302094774), url_err(0).
+2026.06.06-01:29:03: Download : GetNetworkNotFull IP(d171.dvdfab.cn), Result(1:
+50657
+).
+2026.06.06-01:29:03: Download_CheckDownload: ID(2), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.06-01:29:03: Download_CheckDownload: ID(3), Check Ping Invalid(true), time(28).
+2026.06.06-01:29:04: Download_GetDownloadFileLenth : result(302094774), url_err(0).
+2026.06.06-01:29:04: Download : GetNetworkNotFull IP(d18.dvdfab.cn), Result(1:
+2598071
+).
+2026.06.06-01:29:04: Download_CheckDownload: ID(3), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.06-01:29:04: Download_CheckDownload: ID(4), Check Ping Invalid(true), time(27).
+2026.06.06-01:29:05: Download_GetDownloadFileLenth : result(302094774), url_err(0).
+2026.06.06-01:29:05: Download : GetNetworkNotFull IP(d217.dvdfab.cn), Result(1:
+1426007
+).
+2026.06.06-01:29:05: Download_CheckDownload: ID(4), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.06-01:29:05: Download_CheckDownload: ID(5), Check Ping Invalid(true), time(30).
+2026.06.06-01:29:06: Download_GetDownloadFileLenth : result(302094774), url_err(0).
+2026.06.06-01:29:06: Download : GetNetworkNotFull IP(d207.dvdfab.cn), Result(1:
+1824278
+).
+2026.06.06-01:29:06: Download_CheckDownload: ID(5), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.06-01:29:07: Download_CheckDownload: ID(6), Check Ping Invalid(true), time(28).
+2026.06.06-01:29:08: Download_GetDownloadFileLenth : result(302094774), url_err(0).
+2026.06.06-01:29:08: Download : GetNetworkNotFull IP(d223.dvdfab.cn), Result(1:
+1975916
+).
+2026.06.06-01:29:08: Download_CheckDownload: ID(6), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.06-01:29:08: Download_CheckDownload: ID(7), Check Ping Invalid(true), time(28).
+2026.06.06-01:29:09: Download_GetDownloadFileLenth : result(302094774), url_err(0).
+2026.06.06-01:29:09: Download : GetNetworkNotFull IP(d145.dvdfab.cn), Result(1:1678455
+).
+2026.06.06-01:29:09: Download_CheckDownload: ID(7), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.06-01:29:10: Download_CheckDownload: ID(8), Check Ping Invalid(true), time(31).
+2026.06.06-01:29:10: Download_GetDownloadFileLenth : result(302094774), url_err(0).
+2026.06.06-01:29:11: Download : GetNetworkNotFull IP(d74.dvdfab.cn), Result(1:1052805
+).
+2026.06.06-01:29:11: Download_CheckDownload: ID(8), FileSizeConsistent(true) NetworkNotFull(true).
+2026.06.06-01:29:11: Download_GetDownloadFileLenth : result(302094774), url_err(0).
+2026.06.06-01:29:11: Download_CloseFile.
+2026.06.06-01:29:11: Download_BeginDownload : OpenFile(0xc7ecc500), FileSize(302094774), Mutex(0x938).
+2026.06.06-01:29:11: Download_BeginDownloadItem : id(0) thread(0x940) start(0) end(30209476).
+2026.06.06-01:29:11: Download_BeginDownloadItem : id(1) thread(0x954) start(30209477) end(60418953).
+2026.06.06-01:29:11: Download_BeginDownloadItem : id(2) thread(0x918) start(60418954) end(90628430).
+2026.06.06-01:29:11: Download_BeginDownloadItem : id(3) thread(0x92c) start(90628431) end(120837907).
+2026.06.06-01:29:11: Download_BeginDownloadItem : id(4) thread(0x958) start(120837908) end(151047384).
+2026.06.06-01:29:11: Download_BeginDownloadItem : id(5) thread(0x978) start(151047385) end(181256861).
+2026.06.06-01:29:11: Download_BeginDownloadItem : id(6) thread(0x980) start(181256862) end(211466338).
+2026.06.06-01:29:11: Download_BeginDownloadItem : id(7) thread(0x98c) start(211466339) end(241675815).
+2026.06.06-01:29:11: Download_BeginDownloadItem : id(8) thread(0x9a4) start(241675816) end(271885292).
+2026.06.06-01:29:11: Download_BeginDownloadItem : id(9) thread(0x9c0) start(271885293) end(302094773).
+2026.06.06-01:29:11: Download_InitDownload : start download dispatch, thread handle(0x9e4).
+2026.06.06-01:29:11: Download_Dispatch Begining.
+2026.06.06-01:29:29: Thread_Download_Internal: curl request MAYBE errors, id(9) http code(206) .
+2026.06.06-01:29:29: Download_CheckFinish (9): begin.
+2026.06.06-01:29:30: Download_CheckFinish (9): continue. now wait (0).
+2026.06.06-01:29:30: Download_Internal Finish (9) OK.
+2026.06.06-01:29:30: Thread_Download_Internal: curl request MAYBE errors, id(7) http code(206) .
+2026.06.06-01:29:30: Download_CheckFinish (7): begin.
+2026.06.06-01:29:30: Download_CheckFinish (7): continue. now wait (0).
+2026.06.06-01:29:30: Download_Internal Finish (7) OK.
+2026.06.06-01:29:31: Download_Dispatch: Found large download item (2) with remain size (15513550) bytes
+2026.06.06-01:29:31: Download_Dispatch: Split item (2) original range (60418954-90628430), to (60418954-82871654) and new (82871655-90628430)
+2026.06.06-01:29:31: Download_BeginDownloadItem : id(10) thread(0x9fc) start(82871655) end(90628430).
+2026.06.06-01:29:31: Download_Dispatch: Found large download item (3) with remain size (9883667) bytes
+2026.06.06-01:29:31: Download_Dispatch: Split item (3) original range (90628431-120837907), to (90628431-115896073) and new (115896074-120837907)
+2026.06.06-01:29:31: Download_BeginDownloadItem : id(11) thread(0x994) start(115896074) end(120837907).
+2026.06.06-01:29:33: Thread_Download_Internal: curl request MAYBE errors, id(0) http code(206) .
+2026.06.06-01:29:33: Download_CheckFinish (0): begin.
+2026.06.06-01:29:33: Download_CheckFinish (0): continue. now wait (1).
+2026.06.06-01:29:33: Download_Internal Finish (0) OK.
+2026.06.06-01:29:33: Download_Dispatch: Found large download item (4) with remain size (5951320) bytes
+2026.06.06-01:29:33: Download_Dispatch: Split item (4) original range (120837908-151047384), to (120837908-148071723) and new (148071724-151047384)
+2026.06.06-01:29:33: Download_BeginDownloadItem : id(12) thread(0x974) start(148071724) end(151047384).
+2026.06.06-01:29:33: Thread_Download_Internal: curl request MAYBE errors, id(6) http code(206) .
+2026.06.06-01:29:33: Download_CheckFinish (6): begin.
+2026.06.06-01:29:33: Download_CheckFinish (6): continue. now wait (1).
+2026.06.06-01:29:33: Download_Internal Finish (6) OK.
+2026.06.06-01:29:34: Thread_Download_Internal: curl write partial range, id(3) http result(23)
+2026.06.06-01:29:34: Download_CheckFinish (3): begin.
+2026.06.06-01:29:34: Download_CheckFinish (3): continue. now wait (1).
+2026.06.06-01:29:34: Download_Internal Finish (3): Partial range download complete. result(23) start(90628431) end(115896073) url(d145.dvdfab.cn) .
+2026.06.06-01:29:35: Thread_Download_Internal: curl request MAYBE errors, id(12) http code(206) .
+2026.06.06-01:29:35: Download_CheckFinish (12): begin.
+2026.06.06-01:29:35: Download_CheckFinish (12): continue. now wait (1).
+2026.06.06-01:29:35: Download_Internal Finish (12) OK.
+2026.06.06-01:29:35: Thread_Download_Internal: curl request MAYBE errors, id(10) http code(206) .
+2026.06.06-01:29:35: Download_CheckFinish (10): begin.
+2026.06.06-01:29:35: Download_CheckFinish (10): continue. now wait (1).
+2026.06.06-01:29:35: Download_Internal Finish (10) OK.
+2026.06.06-01:29:35: Download_Dispatch: Found large download item (2) with remain size (2037798) bytes
+2026.06.06-01:29:35: Download_Dispatch: Split item (2) original range (60418954-82871654), to (60418954-81852754) and new (81852755-82871654)
+2026.06.06-01:29:35: Download_BeginDownloadItem : id(13) thread(0x9b4) start(81852755) end(82871654).
+2026.06.06-01:29:35: Download_Dispatch: Item (3) completed at pos (115896074)
+2026.06.06-01:29:35: Download_Dispatch: Found large download item (11) with remain size (1728787) bytes
+2026.06.06-01:29:36: Download_Dispatch: Split item (11) original range (115896074-120837907), to (115896074-119973513) and new (119973514-120837907)
+2026.06.06-01:29:36: Download_BeginDownloadItem : id(14) thread(0xa44) start(119973514) end(120837907).
+2026.06.06-01:29:36: Download_Dispatch: Found large download item (8) with remain size (1608044) bytes
+2026.06.06-01:29:36: Download_Dispatch: Split item (8) original range (241675816-271885292), to (241675816-271081269) and new (271081270-271885292)
+2026.06.06-01:29:36: Download_BeginDownloadItem : id(15) thread(0x960) start(271081270) end(271885292).
+2026.06.06-01:29:36: Download_Dispatch: Found large download item (1) with remain size (1195401) bytes
+2026.06.06-01:29:36: Download_Dispatch: Split item (1) original range (30209477-60418953), to (30209477-59821252) and new (59821253-60418953)
+2026.06.06-01:29:36: Download_BeginDownloadItem : id(16) thread(0x99c) start(59821253) end(60418953).
+2026.06.06-01:29:36: Thread_Download_Internal: curl write partial range, id(4) http result(23)
+2026.06.06-01:29:36: Download_CheckFinish (4): begin.
+2026.06.06-01:29:36: Thread_Download_Internal: curl request MAYBE errors, id(5) http code(206) .
+2026.06.06-01:29:36: Download_CheckFinish (4): continue. now wait (1).
+2026.06.06-01:29:36: Thread_Download_Internal: curl write partial range, id(8) http result(23)
+2026.06.06-01:29:36: Download_CheckFinish (5): begin.
+2026.06.06-01:29:36: Download_Internal Finish (4): Partial range download complete. result(23) start(120837908) end(148071723) url(d171.dvdfab.cn) .
+2026.06.06-01:29:36: Thread_Download_Internal: curl write partial range, id(2) http result(23)
+2026.06.06-01:29:36: Download_CheckFinish (8): begin.
+2026.06.06-01:29:36: Download_CheckFinish (5): continue. now wait (1).
+2026.06.06-01:29:36: Download_CheckFinish (2): begin.
+2026.06.06-01:29:36: Download_Internal Finish (5) OK.
+2026.06.06-01:29:36: Download_CheckFinish (8): continue. now wait (1).
+2026.06.06-01:29:36: Download_Internal Finish (8): Partial range download complete. result(23) start(241675816) end(271081269) url(d145.dvdfab.cn) .
+2026.06.06-01:29:36: Download_CheckFinish (2): continue. now wait (1).
+2026.06.06-01:29:36: Download_Internal Finish (2): Partial range download complete. result(23) start(60418954) end(81852754) url(d223.dvdfab.cn) .
+2026.06.06-01:29:36: Thread_Download_Internal: curl write partial range, id(1) http result(23)
+2026.06.06-01:29:36: Thread_Download_Internal: curl write partial range, id(11) http result(23)
+2026.06.06-01:29:36: Download_CheckFinish (1): begin.
+2026.06.06-01:29:36: Download_CheckFinish (11): begin.
+2026.06.06-01:29:36: Download_CheckFinish (1): continue. now wait (13).
+2026.06.06-01:29:36: Download_CheckFinish (11): continue. now wait (13).
+2026.06.06-01:29:36: Download_Internal Finish (1): Partial range download complete. result(23) start(30209477) end(59821252) url(d18.dvdfab.cn) .
+2026.06.06-01:29:36: Download_Internal Finish (11): Partial range download complete. result(23) start(115896074) end(119973513) url(d217.dvdfab.cn) .
+2026.06.06-01:29:36: Thread_Download_Internal: curl request MAYBE errors, id(13) http code(206) .
+2026.06.06-01:29:36: Download_CheckFinish (13): begin.
+2026.06.06-01:29:36: Download_CheckFinish (13): continue. now wait (14).
+2026.06.06-01:29:36: Download_Internal Finish (13) OK.
+2026.06.06-01:29:36: Thread_Download_Internal: curl request MAYBE errors, id(14) http code(206) .
+2026.06.06-01:29:36: Download_CheckFinish (14): begin.
+2026.06.06-01:29:36: Download_CheckFinish (14): continue. now wait (15).
+2026.06.06-01:29:36: Download_Internal Finish (14) OK.
+2026.06.06-01:29:36: Thread_Download_Internal: curl request MAYBE errors, id(16) http code(206) .
+2026.06.06-01:29:36: Download_CheckFinish (16): begin.
+2026.06.06-01:29:36: Thread_Download_Internal: curl request MAYBE errors, id(15) http code(206) .
+2026.06.06-01:29:37: Download_CheckFinish (16): continue. now wait (15).
+2026.06.06-01:29:37: Download_CheckFinish (15): begin.
+2026.06.06-01:29:37: Download_Internal Finish (16) OK.
+2026.06.06-01:29:38: Download_Dispatch: Item (1) completed at pos (59821253)
+2026.06.06-01:29:38: Download_Dispatch: Item (2) completed at pos (81852755)
+2026.06.06-01:29:38: Download_Dispatch: Item (4) completed at pos (148071724)
+2026.06.06-01:29:38: Download_Dispatch: Item (8) completed at pos (271081270)
+2026.06.06-01:29:38: Download_Dispatch: Item (11) completed at pos (119973514)
+2026.06.06-01:29:39: Download_CheckFinish (15): Finish download.
+2026.06.06-01:29:39: Download_CloseFile.
+2026.06.06-01:29:40: CloseFile 0.
+2026.06.06-01:29:40: Download_Internal Finish (15) OK.
+2026.06.06-01:29:42: Download_Dispatch Endding.
+2026.06.06-01:31:38: 
+
+utility service module version=1.2 pid=42752 (2026/06/06  01:31:38) (X64)
+
+2026.06.06-01:31:38: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.06.06-17:01:05: 
+
+utility service module version=1.2 pid=100628 (2026/06/06  17:01:05) (X64)
+
+2026.06.06-17:01:05: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.06.06-20:57:33: 
+
+utility service module version=1.2 pid=19008 (2026/06/06  20:57:33) (X64)
+
+2026.06.06-20:57:33: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 
+2026.06.06-21:43:19: 
+
+utility service module version=1.2 pid=888 (2026/06/06  21:43:19) (X64)
+
+2026.06.06-21:43:19: error: version not equal: header file version:20260410-0c7b552, dll version: 20250415-17ec823 

@@ -1,0 +1,1699 @@
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=24664 ThreadId=0x605c) Begin 2026-05-20 16:45:28.1 *--------------+
+
+05.20 16:45:28.3(24664 0x605c)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.20 16:45:28.3(24664 0x605c)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.20 16:45:28.3(24664 0x605c)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.20 16:45:28.6(24664 0x605c)L: 
+
+app info: app(version=2.1.1.3 pid=24664) start, compiled time Apr 10 2026 11:07:25
+05.20 16:45:28.6(24664 0x605c)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.20 16:45:28.6(24664 0x605c)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.20 16:45:28.6(24664 0x605c)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.20 16:45:28.6(24664 0x605c)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.20 16:45:28.6(24664 0x605c)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.20 16:45:28.6(24664 0x605c)L: brand name: DVDFab
+05.20 16:45:28.6(24664 0x605c)W: ProductDisplayName is null, use ProductName
+05.20 16:45:29.2(24664 0x6288)L: got local software info size: 1
+05.20 16:45:29.2(24664 0x605c)L: ad process: request ad update 2026-05-20 16:45:29 be push in queue
+05.20 16:45:29.2(24664 0x6288)L: Current software: 49 StreamFab (x64) 7.0.2.5
+05.20 16:45:29.2(24664 0x605c)L: ad process: start process the request ad event: 2026-05-20 16:45:29
+05.20 16:45:29.2(24664 0x605c)L: ad process: Start request control info ...
+05.20 16:45:29.2(24664 0x6288)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.20 16:45:29.2(24664 0x6288)I: check ServerSoftWareVersion 49
+05.20 16:45:30.8(24664 0x605c)L: ad process: get ad control info from recommed service,server return 0
+05.20 16:45:30.8(24664 0x605c)L: ad process: end ad control.
+05.20 16:45:30.8(24664 0x605c)L: ad process: start check update 2000 6cbc01ffad0224fa5eaf0efd4beed344
+05.20 16:45:30.8(24664 0x605c)L: ad process: end check update 2000 0
+05.20 16:45:30.8(24664 0x6288)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4111.cfg","version":"4120","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7025.cfg","version":"7025","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.20 16:45:30.8(24664 0x6288)I: local installed client id: QSet("49")
+05.20 16:45:30.8(24664 0x6288)I: local ignore client id: QSet("48", "49")
+05.20 16:45:30.8(24664 0x605c)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=24664 ThreadId=0x605c) End 2026-05-20 16:45:30.9 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=8740 ThreadId=0x1894) Begin 2026-05-20 17:53:03.0 *--------------+
+
+05.20 17:53:03.1(8740 0x1894)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.20 17:53:03.1(8740 0x1894)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.20 17:53:03.1(8740 0x1894)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.20 17:53:03.4(8740 0x1894)L: 
+
+app info: app(version=2.1.1.3 pid=8740) start, compiled time Apr 10 2026 11:07:25
+05.20 17:53:03.4(8740 0x1894)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.20 17:53:03.4(8740 0x1894)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.20 17:53:03.4(8740 0x1894)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.20 17:53:03.4(8740 0x1894)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.20 17:53:03.4(8740 0x1894)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.20 17:53:03.4(8740 0x1894)L: brand name: DVDFab
+05.20 17:53:03.4(8740 0x1894)W: ProductDisplayName is null, use ProductName
+05.20 17:53:03.8(8740 0x4938)L: got local software info size: 1
+05.20 17:53:03.8(8740 0x4938)L: Current software: 49 StreamFab (x64) 7.0.2.5
+05.20 17:53:03.8(8740 0x4938)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.20 17:53:03.8(8740 0x4938)I: check ServerSoftWareVersion 49
+05.20 17:53:03.8(8740 0x1894)L: ad process: request ad update 2026-05-20 17:53:03 be push in queue
+05.20 17:53:03.8(8740 0x1894)L: ad process: start process the request ad event: 2026-05-20 17:53:03
+05.20 17:53:03.8(8740 0x1894)L: ad process: Start request control info ...
+05.20 17:53:05.4(8740 0x1894)L: ad process: get ad control info from recommed service,server return 0
+05.20 17:53:05.4(8740 0x1894)L: ad process: end ad control.
+05.20 17:53:05.4(8740 0x1894)L: ad process: start check update 2000 6cbc01ffad0224fa5eaf0efd4beed344
+05.20 17:53:05.4(8740 0x1894)L: ad process: end check update 2000 0
+05.20 17:53:05.5(8740 0x4938)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4111.cfg","version":"4120","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7025.cfg","version":"7025","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.20 17:53:05.5(8740 0x4938)I: local installed client id: QSet("49")
+05.20 17:53:05.5(8740 0x4938)I: local ignore client id: QSet("49", "48")
+05.20 17:53:05.5(8740 0x1894)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=8740 ThreadId=0x1894) End 2026-05-20 17:53:05.5 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=22184 ThreadId=0x56ac) Begin 2026-05-21 13:40:37.6 *--------------+
+
+05.21 13:40:37.8(22184 0x56ac)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.21 13:40:37.8(22184 0x56ac)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.21 13:40:37.8(22184 0x56ac)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.21 13:40:38.1(22184 0x56ac)L: 
+
+app info: app(version=2.1.1.3 pid=22184) start, compiled time Apr 10 2026 11:07:25
+05.21 13:40:38.1(22184 0x56ac)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.21 13:40:38.1(22184 0x56ac)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.21 13:40:38.1(22184 0x56ac)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.21 13:40:38.1(22184 0x56ac)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.21 13:40:38.1(22184 0x56ac)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.21 13:40:38.1(22184 0x56ac)L: brand name: DVDFab
+05.21 13:40:38.1(22184 0x56ac)W: ProductDisplayName is null, use ProductName
+05.21 13:40:38.4(22184 0x5480)L: got local software info size: 1
+05.21 13:40:38.4(22184 0x5480)L: Current software: 49 StreamFab (x64) 7.0.2.5
+05.21 13:40:38.4(22184 0x5480)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.21 13:40:38.4(22184 0x5480)I: check ServerSoftWareVersion 49
+05.21 13:40:38.4(22184 0x56ac)L: ad process: request ad update 2026-05-21 13:40:38 be push in queue
+05.21 13:40:38.4(22184 0x56ac)L: ad process: start process the request ad event: 2026-05-21 13:40:38
+05.21 13:40:38.4(22184 0x56ac)L: ad process: Start request control info ...
+05.21 13:40:40.3(22184 0x56ac)L: ad process: get ad control info from recommed service,server return 0
+05.21 13:40:40.3(22184 0x56ac)L: ad process: end ad control.
+05.21 13:40:40.3(22184 0x56ac)L: ad process: start check update 2000 6cbc01ffad0224fa5eaf0efd4beed344
+05.21 13:40:40.4(22184 0x56ac)L: ad process: end check update 2000 0
+05.21 13:40:40.4(22184 0x5480)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4111.cfg","version":"4120","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7025.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.21 13:40:40.4(22184 0x5480)I: local installed client id: QSet("49")
+05.21 13:40:40.4(22184 0x5480)I: local ignore client id: QSet("49", "48")
+05.21 13:40:40.4(22184 0x56ac)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=22184 ThreadId=0x56ac) End 2026-05-21 13:40:40.4 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=22160 ThreadId=0x2fa4) Begin 2026-05-22 10:47:03.0 *--------------+
+
+05.22 10:47:03.0(22160 0x2fa4)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.22 10:47:03.0(22160 0x2fa4)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.22 10:47:03.0(22160 0x2fa4)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.22 10:47:03.2(22160 0x2fa4)L: 
+
+app info: app(version=2.1.1.3 pid=22160) start, compiled time Apr 10 2026 11:07:25
+05.22 10:47:03.2(22160 0x2fa4)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.22 10:47:03.2(22160 0x2fa4)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.22 10:47:03.2(22160 0x2fa4)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.22 10:47:03.2(22160 0x2fa4)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.22 10:47:03.2(22160 0x2fa4)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.22 10:47:03.2(22160 0x2fa4)L: brand name: DVDFab
+05.22 10:47:03.2(22160 0x2fa4)W: ProductDisplayName is null, use ProductName
+05.22 10:47:03.4(22160 0x4370)L: got local software info size: 1
+05.22 10:47:03.4(22160 0x4370)L: Current software: 49 StreamFab (x64) 7.0.2.5
+05.22 10:47:03.4(22160 0x4370)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.22 10:47:03.5(22160 0x4370)I: check ServerSoftWareVersion 49
+05.22 10:47:03.5(22160 0x2fa4)L: ad process: request ad update 2026-05-22 10:47:03 be push in queue
+05.22 10:47:03.5(22160 0x2fa4)L: ad process: start process the request ad event: 2026-05-22 10:47:03
+05.22 10:47:03.5(22160 0x2fa4)L: ad process: Start request control info ...
+05.22 10:47:05.0(22160 0x2fa4)L: ad process: get ad control info from recommed service,server return 0
+05.22 10:47:05.0(22160 0x2fa4)L: ad process: end ad control.
+05.22 10:47:05.0(22160 0x2fa4)L: ad process: start check update 2000 6cbc01ffad0224fa5eaf0efd4beed344
+05.22 10:47:05.0(22160 0x2fa4)L: ad process: end check update 2000 0
+05.22 10:47:05.0(22160 0x4370)L: Update version: 1.0
+05.22 10:47:05.0(22160 0x4370)L: Status is: 1
+05.22 10:47:05.0(22160 0x4370)L: Download url: https://www.dvdfab.cn/mlink/download.php?g=StreamFab_x64
+05.22 10:47:05.0(22160 0x4370)L: Cfg Download url: http://d217.dvdfab.cn/download/streamfab_x64_7026.cfg
+05.22 10:47:05.0(22160 0x4370)L: Increment cfg url: http://d17.dvdfab.cn/download/49_7025_7026/
+05.22 10:47:05.2(22160 0x4370)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4120.cfg","version":"4120","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7026.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.22 10:47:05.2(22160 0x4370)I: local installed client id: QSet("49")
+05.22 10:47:05.2(22160 0x4370)I: local ignore client id: QSet("48", "49")
+05.22 11:15:14.4(22160 0x2fa4)L: update: update 49
+05.22 11:15:14.5(22160 0x3fd4)L: download: begin Incremental Update zip 
+05.22 11:15:14.5(22160 0x3fd4)L: Start download file: update_x64.cfg
+05.22 11:15:15.3(22160 0x3fd4)L: Success download file: update_x64.cfg
+05.22 11:15:56.9(22160 0x3fd4)L: download: end Incremental Update zip 
+05.22 11:15:56.9(22160 0x2fa4)W: QString::arg: Argument missing: Wird installiert..., 
+05.22 11:15:57.1(22160 0x3fd4)L: Memzip unzip: vector size = 61 
+05.22 11:15:57.5(22160 0x3fd4)L: Memzip unzip: EntryData vector size = 61 
+05.22 11:16:00.7(22160 0x3fd4)L: bspatch: Patching Copy.exe ....
+05.22 11:16:00.8(22160 0x3fd4)L: bspatch: Patching CrashRpt.dll ....
+05.22 11:16:00.9(22160 0x3fd4)L: bspatch: Patching FabReport.exe ....
+05.22 11:16:01.1(22160 0x3fd4)L: bspatch: Patching FileOP.exe ....
+05.22 11:16:01.2(22160 0x3fd4)L: bspatch: Patching MediaLibraryAPI.dll ....
+05.22 11:16:01.4(22160 0x3fd4)L: bspatch: Patching QCef.exe ....
+05.22 11:16:04.6(22160 0x3fd4)L: bspatch: Patching RegOp.exe ....
+05.22 11:16:04.6(22160 0x3fd4)L: bspatch: Patching StreamClient.exe ....
+05.22 11:16:08.0(22160 0x3fd4)L: bspatch: Patching StreamFab64.exe ....
+05.22 11:16:12.4(22160 0x3fd4)L: bspatch: Patching StreamUpdate.exe ....
+05.22 11:16:12.6(22160 0x3fd4)L: bspatch: Patching VMProtectSDK64.dll ....
+05.22 11:16:12.7(22160 0x3fd4)L: bspatch: Patching YouTubeDL/ ....
+05.22 11:16:26.2(22160 0x3fd4)L: bspatch: Patching amd_ags_x64.dll ....
+05.22 11:16:26.4(22160 0x3fd4)L: bspatch: Patching avcodec-58.dll ....
+05.22 11:16:27.7(22160 0x3fd4)L: bspatch: Patching avdevice-58.dll ....
+05.22 11:16:27.9(22160 0x3fd4)L: bspatch: Patching avfilter-7.dll ....
+05.22 11:16:29.6(22160 0x3fd4)L: bspatch: Patching avformat-58.dll ....
+05.22 11:16:30.6(22160 0x3fd4)L: bspatch: Patching avresample-4.dll ....
+05.22 11:16:30.7(22160 0x3fd4)L: bspatch: Patching avutil-56.dll ....
+05.22 11:16:30.9(22160 0x3fd4)L: bspatch: Patching bootstrap.exe ....
+05.22 11:16:31.1(22160 0x3fd4)L: bspatch: Patching bootstrapc.exe ....
+05.22 11:16:31.2(22160 0x3fd4)L: bspatch: Patching ccextractor.exe ....
+05.22 11:16:31.3(22160 0x3fd4)L: bspatch: Patching chrome_elf.dll ....
+05.22 11:16:31.4(22160 0x3fd4)L: bspatch: Patching dash-mpd-cli.exe ....
+05.22 11:16:32.2(22160 0x3fd4)L: bspatch: Patching dxcompiler.dll ....
+05.22 11:16:32.7(22160 0x3fd4)L: bspatch: Patching dxil.dll ....
+05.22 11:16:32.9(22160 0x3fd4)L: bspatch: Patching fabcom.crt ....
+05.22 11:16:32.9(22160 0x3fd4)L: bspatch: Patching ffmpeg.exe ....
+05.22 11:16:37.6(22160 0x3fd4)L: bspatch: Patching ffprobe.exe ....
+05.22 11:16:42.7(22160 0x3fd4)L: bspatch: Patching libEGL.dll ....
+05.22 11:16:42.8(22160 0x3fd4)L: bspatch: Patching libGLESv2.dll ....
+05.22 11:16:43.1(22160 0x3fd4)L: bspatch: Patching libcef.dll ....
+05.22 11:16:47.8(22160 0x3fd4)L: bspatch: Patching libcefbase.dll ....
+05.22 11:16:50.8(22160 0x3fd4)L: bspatch: Patching libcefcommon.dll ....
+05.22 11:16:50.9(22160 0x3fd4)L: bspatch: Patching libcefmedia.dll ....
+05.22 11:16:51.0(22160 0x3fd4)L: bspatch: Patching libcrypto-1_1-x64.dll ....
+05.22 11:16:51.2(22160 0x3fd4)L: bspatch: Patching libcurl.dll ....
+05.22 11:16:51.2(22160 0x3fd4)L: bspatch: Patching libeay32.dll ....
+05.22 11:16:51.4(22160 0x3fd4)L: bspatch: Patching libssl-1_1-x64.dll ....
+05.22 11:16:51.5(22160 0x3fd4)L: bspatch: Patching libxml2.dll ....
+05.22 11:16:51.6(22160 0x3fd4)L: bspatch: Patching libxslt.dll ....
+05.22 11:16:51.7(22160 0x3fd4)L: bspatch: Patching mp4box.exe ....
+05.22 11:16:51.9(22160 0x3fd4)L: bspatch: Patching opengl32sw.dll ....
+05.22 11:16:53.1(22160 0x3fd4)L: bspatch: Patching postproc-55.dll ....
+05.22 11:16:53.2(22160 0x3fd4)L: bspatch: Patching shaka-packager.exe ....
+05.22 11:16:53.4(22160 0x3fd4)L: bspatch: Patching ssleay32.dll ....
+05.22 11:16:53.6(22160 0x3fd4)L: bspatch: Patching streamCustom.rcc ....
+05.22 11:16:53.6(22160 0x3fd4)L: bspatch: Patching subtitle_processor.dll ....
+05.22 11:16:53.7(22160 0x3fd4)L: bspatch: Patching swiftshader/ ....
+05.22 11:16:54.0(22160 0x3fd4)L: bspatch: Patching swresample-3.dll ....
+05.22 11:16:54.2(22160 0x3fd4)L: bspatch: Patching swscale-5.dll ....
+05.22 11:16:54.3(22160 0x3fd4)L: bspatch: Patching uninstall.exe ....
+05.22 11:16:54.4(22160 0x3fd4)L: bspatch: Patching uninstall.exe.bin ....
+05.22 11:16:54.4(22160 0x3fd4)L: bspatch: Patching utilities.dll ....
+05.22 11:16:54.5(22160 0x3fd4)L: bspatch: Patching vk_swiftshader.dll ....
+05.22 11:16:54.7(22160 0x3fd4)L: bspatch: Patching vulkan-1.dll ....
+05.22 11:16:55.0(22160 0x3fd4)L: copyexe : strCopyExePath C:/Program Files/DVDFab/StreamFab/ no isAbsolute
+05.22 11:16:55.1(22160 0x3fd4)L: copyexe Copy.exe path: C:/Program Files/DVDFab/StreamFab/Copy.exe
+05.22 11:16:55.2(22160 0x3fd4)I: kill extra process:  QList("QCef.exe")
+05.22 11:17:05.3(22160 0x3fd4)L: Run Copy.exe param is: C:/Users/Enrico/AppData/Local/Temp/liveUpdate.xml,true
+05.22 11:17:05.6(22160 0x2fa4)W: QString::arg: Argument missing: Wird installiert..., 
+
+
+UpdateCopy (version:2.0.0.0 curtime:2026/05/22  11:17:09)
+
+2026.05.22-11:17:09: Run param is: C:/Users/Enrico/AppData/Local/Temp/liveUpdate.xml
+2026.05.22-11:17:09: Remove update temp folder ...
+2026.05.22-11:17:09: Sync update file to install directory ...
+2026.05.22-11:17:09: Update file: C:/Program Files/DVDFab/StreamFab/Copy.exe
+2026.05.22-11:17:09: Update file: C:/Program Files/DVDFab/StreamFab/CrashRpt.dll
+2026.05.22-11:17:09: Update file: C:/Program Files/DVDFab/StreamFab/FabReport.exe
+2026.05.22-11:17:09: Update file: C:/Program Files/DVDFab/StreamFab/FileOP.exe
+2026.05.22-11:17:09: Update file: C:/Program Files/DVDFab/StreamFab/MediaLibraryAPI.dll
+2026.05.22-11:17:09: Update file: C:/Program Files/DVDFab/StreamFab/QCef.exe
+2026.05.22-11:17:09: Update file: C:/Program Files/DVDFab/StreamFab/RegOp.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/StreamClient.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/StreamFab64.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/VMProtectSDK64.dll
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/AtomicParsley.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/aria2c.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/phantomjs.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/yt-dlp.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/amd_ags_x64.dll
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/avcodec-58.dll
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/avdevice-58.dll
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/avfilter-7.dll
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/avformat-58.dll
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/avresample-4.dll
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/avutil-56.dll
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/bootstrap.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/bootstrapc.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/ccextractor.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/chrome_elf.dll
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/dash-mpd-cli.exe
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/dxcompiler.dll
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/dxil.dll
+2026.05.22-11:17:10: Update file: C:/Program Files/DVDFab/StreamFab/fabcom.crt
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/ffmpeg.exe
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/ffprobe.exe
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libEGL.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libGLESv2.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libcef.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libcefbase.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libcefcommon.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libcefmedia.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libcrypto-1_1-x64.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libcurl.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libeay32.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libssl-1_1-x64.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libxml2.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/libxslt.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/mp4box.exe
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/opengl32sw.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/postproc-55.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/shaka-packager.exe
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/ssleay32.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/streamCustom.rcc
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/subtitle_processor.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/swiftshader/libEGL.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/swiftshader/libGLESv2.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/swresample-3.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/swscale-5.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/uninstall.exe
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/uninstall.exe.bin
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/utilities.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/vk_swiftshader.dll
+2026.05.22-11:17:11: Update file: C:/Program Files/DVDFab/StreamFab/vulkan-1.dll
+2026.05.22-11:17:11: Error: source file is not exist, H:\streamfab\update\unzipTemp\update.xml
+2026.05.22-11:17:11: Update display name and version on control panel
+2026.05.22-11:17:11: Reg info: StreamFab (x64), StreamFab (x64), 7.0.2.6
+2026.05.22-11:17:11: Update display name successfully, 0.
+2026.05.22-11:17:11: Update install info for next update
+2026.05.22-11:17:11: liveupdate info: DVDFab, StreamFab (x64), 7.0.2.6
+2026.05.22-11:17:11: LiveUpdate change version success
+05.22 11:17:12.1(22160 0x2fa4)L: All install SuccessFinished
+ 
+05.22 11:17:12.1(22160 0x2fa4)L: bRestartedApp = 1
+ 
+
++--------------* AppEnd: LiveUpdate(pid=22160 ThreadId=0x2fa4) End 2026-05-22 11:17:15.1 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=25784 ThreadId=0xb80) Begin 2026-05-22 11:18:08.2 *--------------+
+
+05.22 11:18:08.2(25784 0xb80)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.22 11:18:08.2(25784 0xb80)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.22 11:18:08.2(25784 0xb80)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.22 11:18:08.3(25784 0xb80)L: 
+
+app info: app(version=2.1.1.3 pid=25784) start, compiled time Apr 10 2026 11:07:25
+05.22 11:18:08.3(25784 0xb80)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.22 11:18:08.3(25784 0xb80)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.22 11:18:08.3(25784 0xb80)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.22 11:18:08.3(25784 0xb80)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.22 11:18:08.3(25784 0xb80)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.22 11:18:08.3(25784 0xb80)L: brand name: DVDFab
+05.22 11:18:08.3(25784 0xb80)W: ProductDisplayName is null, use ProductName
+05.22 11:18:08.5(25784 0x4674)L: got local software info size: 1
+05.22 11:18:08.5(25784 0x4674)L: Current software: 49 StreamFab (x64) 7.0.2.6
+05.22 11:18:08.5(25784 0x4674)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.22 11:18:08.5(25784 0x4674)I: check ServerSoftWareVersion 49
+05.22 11:18:08.5(25784 0xb80)L: ad process: request ad update 2026-05-22 11:18:08 be push in queue
+05.22 11:18:08.5(25784 0xb80)L: ad process: start process the request ad event: 2026-05-22 11:18:08
+05.22 11:18:08.5(25784 0xb80)L: ad process: Start request control info ...
+05.22 11:18:09.9(25784 0xb80)L: ad process: get ad control info from recommed service,server return 0
+05.22 11:18:09.9(25784 0xb80)L: ad process: could not found the ad at position 2000
+05.22 11:18:09.9(25784 0xb80)L: ad process: end ad control.
+05.22 11:18:10.1(25784 0x4674)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4120.cfg","version":"4120","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7026.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.22 11:18:10.1(25784 0x4674)I: local installed client id: QSet("49")
+05.22 11:18:10.1(25784 0x4674)I: local ignore client id: QSet("49", "48")
+05.22 11:18:10.1(25784 0xb80)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=25784 ThreadId=0xb80) End 2026-05-22 11:18:10.1 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=1844 ThreadId=0x2638) Begin 2026-05-22 11:26:18.3 *--------------+
+
+05.22 11:26:18.3(1844 0x2638)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.22 11:26:18.3(1844 0x2638)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.22 11:26:18.3(1844 0x2638)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.22 11:26:18.5(1844 0x2638)L: 
+
+app info: app(version=2.1.1.3 pid=1844) start, compiled time Apr 10 2026 11:07:25
+05.22 11:26:18.5(1844 0x2638)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.22 11:26:18.5(1844 0x2638)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.22 11:26:18.5(1844 0x2638)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.22 11:26:18.5(1844 0x2638)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.22 11:26:18.5(1844 0x2638)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.22 11:26:18.5(1844 0x2638)L: brand name: DVDFab
+05.22 11:26:18.5(1844 0x2638)W: ProductDisplayName is null, use ProductName
+05.22 11:26:18.9(1844 0x2898)L: got local software info size: 1
+05.22 11:26:18.9(1844 0x2898)L: Current software: 49 StreamFab (x64) 7.0.2.6
+05.22 11:26:18.9(1844 0x2898)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.22 11:26:18.9(1844 0x2898)I: check ServerSoftWareVersion 49
+05.22 11:26:18.9(1844 0x2638)L: ad process: request ad update 2026-05-22 11:26:18 be push in queue
+05.22 11:26:18.9(1844 0x2638)L: ad process: start process the request ad event: 2026-05-22 11:26:18
+05.22 11:26:18.9(1844 0x2638)L: ad process: Start request control info ...
+05.22 11:26:20.4(1844 0x2638)L: ad process: get ad control info from recommed service,server return 0
+05.22 11:26:20.4(1844 0x2638)L: ad process: could not found the ad at position 2000
+05.22 11:26:20.4(1844 0x2638)L: ad process: end ad control.
+05.22 11:26:20.6(1844 0x2898)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4120.cfg","version":"4120","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7026.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.22 11:26:20.6(1844 0x2898)I: local installed client id: QSet("49")
+05.22 11:26:20.7(1844 0x2898)I: local ignore client id: QSet("49", "48")
+05.22 11:26:20.7(1844 0x2638)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=1844 ThreadId=0x2638) End 2026-05-22 11:26:20.7 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=54588 ThreadId=0xc060) Begin 2026-05-22 19:27:37.6 *--------------+
+
+05.22 19:27:37.7(54588 0xc060)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.22 19:27:37.7(54588 0xc060)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.22 19:27:37.7(54588 0xc060)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.22 19:27:37.7(54588 0xc060)L: 
+
+app info: app(version=2.1.1.3 pid=54588) start, compiled time Apr 10 2026 11:07:25
+05.22 19:27:37.7(54588 0xc060)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.22 19:27:37.7(54588 0xc060)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.22 19:27:37.7(54588 0xc060)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.22 19:27:37.7(54588 0xc060)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.22 19:27:37.7(54588 0xc060)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.22 19:27:37.7(54588 0xc060)L: brand name: DVDFab
+05.22 19:27:37.7(54588 0xc060)W: ProductDisplayName is null, use ProductName
+05.22 19:27:37.9(54588 0xd7bc)L: got local software info size: 1
+05.22 19:27:37.9(54588 0xd7bc)L: Current software: 49 StreamFab (x64) 7.0.2.6
+05.22 19:27:37.9(54588 0xd7bc)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.22 19:27:37.9(54588 0xd7bc)I: check ServerSoftWareVersion 49
+05.22 19:27:37.9(54588 0xc060)L: ad process: request ad update 2026-05-22 19:27:37 be push in queue
+05.22 19:27:37.9(54588 0xc060)L: ad process: start process the request ad event: 2026-05-22 19:27:37
+05.22 19:27:37.9(54588 0xc060)L: ad process: Start request control info ...
+05.22 19:27:39.4(54588 0xc060)L: ad process: get ad control info from recommed service,server return 0
+05.22 19:27:39.4(54588 0xc060)L: ad process: end ad control.
+05.22 19:27:39.4(54588 0xc060)L: ad process: start check update 2000 fe4db938f9f457e5503715666fa36d79
+05.22 19:27:39.4(54588 0xd7bc)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4120.cfg","version":"4120","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7026.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.22 19:27:39.4(54588 0xd7bc)I: local installed client id: QSet("49")
+05.22 19:27:39.4(54588 0xd7bc)I: local ignore client id: QSet("49", "48")
+05.22 19:27:39.4(54588 0xc060)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=54588 ThreadId=0xc060) End 2026-05-22 19:27:39.7 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=26052 ThreadId=0x65cc) Begin 2026-05-23 19:59:56.2 *--------------+
+
+05.23 19:59:56.2(26052 0x65cc)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.23 19:59:56.3(26052 0x65cc)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.23 19:59:56.3(26052 0x65cc)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.23 19:59:56.5(26052 0x65cc)L: 
+
+app info: app(version=2.1.1.3 pid=26052) start, compiled time Apr 10 2026 11:07:25
+05.23 19:59:56.5(26052 0x65cc)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.23 19:59:56.5(26052 0x65cc)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.23 19:59:56.5(26052 0x65cc)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.23 19:59:56.5(26052 0x65cc)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.23 19:59:56.5(26052 0x65cc)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.23 19:59:56.6(26052 0x65cc)L: brand name: DVDFab
+05.23 19:59:56.6(26052 0x65cc)W: ProductDisplayName is null, use ProductName
+05.23 19:59:57.5(26052 0x4db4)L: got local software info size: 1
+05.23 19:59:57.5(26052 0x4db4)L: Current software: 49 StreamFab (x64) 7.0.2.6
+05.23 19:59:57.5(26052 0x4db4)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.23 19:59:57.5(26052 0x4db4)I: check ServerSoftWareVersion 49
+05.23 19:59:57.5(26052 0x65cc)L: ad process: request ad update 2026-05-23 19:59:57 be push in queue
+05.23 19:59:57.5(26052 0x65cc)L: ad process: start process the request ad event: 2026-05-23 19:59:57
+05.23 19:59:57.5(26052 0x65cc)L: ad process: Start request control info ...
+05.23 19:59:59.2(26052 0x65cc)L: ad process: get ad control info from recommed service,server return 0
+05.23 19:59:59.2(26052 0x65cc)L: ad process: end ad control.
+05.23 19:59:59.2(26052 0x65cc)L: ad process: start check update 2000 fe4db938f9f457e5503715666fa36d79
+05.23 19:59:59.3(26052 0x65cc)L: ad process: end check update 2000 0
+05.23 19:59:59.3(26052 0x4db4)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4120.cfg","version":"4120","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7026.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.23 19:59:59.3(26052 0x4db4)I: local installed client id: QSet("49")
+05.23 19:59:59.3(26052 0x4db4)I: local ignore client id: QSet("49", "48")
+05.23 19:59:59.3(26052 0x65cc)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=26052 ThreadId=0x65cc) End 2026-05-23 19:59:59.3 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=22180 ThreadId=0x56a8) Begin 2026-05-23 20:04:53.4 *--------------+
+
+05.23 20:04:53.4(22180 0x56a8)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.23 20:04:53.4(22180 0x56a8)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.23 20:04:53.4(22180 0x56a8)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.23 20:04:53.5(22180 0x56a8)L: 
+
+app info: app(version=2.1.1.3 pid=22180) start, compiled time Apr 10 2026 11:07:25
+05.23 20:04:53.5(22180 0x56a8)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.23 20:04:53.5(22180 0x56a8)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.23 20:04:53.5(22180 0x56a8)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.23 20:04:53.5(22180 0x56a8)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.23 20:04:53.5(22180 0x56a8)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.23 20:04:53.5(22180 0x56a8)L: brand name: DVDFab
+05.23 20:04:53.5(22180 0x56a8)W: ProductDisplayName is null, use ProductName
+05.23 20:04:53.7(22180 0x56f0)L: got local software info size: 1
+05.23 20:04:53.7(22180 0x56f0)L: Current software: 49 StreamFab (x64) 7.0.2.6
+05.23 20:04:53.7(22180 0x56f0)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.23 20:04:53.7(22180 0x56f0)I: check ServerSoftWareVersion 49
+05.23 20:04:53.7(22180 0x56a8)L: ad process: request ad update 2026-05-23 20:04:53 be push in queue
+05.23 20:04:53.7(22180 0x56a8)L: ad process: start process the request ad event: 2026-05-23 20:04:53
+05.23 20:04:53.7(22180 0x56a8)L: ad process: Start request control info ...
+05.23 20:04:55.2(22180 0x56a8)L: ad process: get ad control info from recommed service,server return 0
+05.23 20:04:55.2(22180 0x56a8)L: ad process: end ad control.
+05.23 20:04:55.2(22180 0x56a8)L: ad process: start check update 2000 fe4db938f9f457e5503715666fa36d79
+05.23 20:04:55.2(22180 0x56a8)L: ad process: end check update 2000 0
+05.23 20:04:55.3(22180 0x56f0)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4120.cfg","version":"4120","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7026.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.23 20:04:55.3(22180 0x56f0)I: local installed client id: QSet("49")
+05.23 20:04:55.3(22180 0x56f0)I: local ignore client id: QSet("48", "49")
+05.23 20:04:55.3(22180 0x56a8)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=22180 ThreadId=0x56a8) End 2026-05-23 20:04:55.3 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=21924 ThreadId=0x51a0) Begin 2026-05-24 18:49:03.1 *--------------+
+
+05.24 18:49:03.1(21924 0x51a0)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.24 18:49:03.1(21924 0x51a0)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.24 18:49:03.1(21924 0x51a0)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.24 18:49:03.2(21924 0x51a0)L: 
+
+app info: app(version=2.1.1.3 pid=21924) start, compiled time Apr 10 2026 11:07:25
+05.24 18:49:03.2(21924 0x51a0)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.24 18:49:03.2(21924 0x51a0)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.24 18:49:03.2(21924 0x51a0)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.24 18:49:03.2(21924 0x51a0)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.24 18:49:03.2(21924 0x51a0)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.24 18:49:03.2(21924 0x51a0)L: brand name: DVDFab
+05.24 18:49:03.2(21924 0x51a0)W: ProductDisplayName is null, use ProductName
+05.24 18:49:03.8(21924 0x192c)L: got local software info size: 1
+05.24 18:49:03.8(21924 0x192c)L: Current software: 49 StreamFab (x64) 7.0.2.6
+05.24 18:49:03.8(21924 0x192c)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.24 18:49:03.8(21924 0x192c)I: check ServerSoftWareVersion 49
+05.24 18:49:03.9(21924 0x51a0)L: ad process: request ad update 2026-05-24 18:49:03 be push in queue
+05.24 18:49:03.9(21924 0x51a0)L: ad process: start process the request ad event: 2026-05-24 18:49:03
+05.24 18:49:03.9(21924 0x51a0)L: ad process: Start request control info ...
+05.24 18:49:05.3(21924 0x51a0)L: ad process: get ad control info from recommed service,server return 0
+05.24 18:49:05.3(21924 0x51a0)L: ad process: end ad control.
+05.24 18:49:05.4(21924 0x51a0)L: ad process: start check update 2000 fe4db938f9f457e5503715666fa36d79
+05.24 18:49:05.4(21924 0x51a0)L: ad process: end check update 2000 0
+05.24 18:49:05.5(21924 0x192c)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4120.cfg","version":"4120","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7026.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.24 18:49:05.5(21924 0x192c)I: local installed client id: QSet("49")
+05.24 18:49:05.5(21924 0x192c)I: local ignore client id: QSet("48", "49")
+05.24 18:49:05.5(21924 0x51a0)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=21924 ThreadId=0x51a0) End 2026-05-24 18:49:05.5 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=21944 ThreadId=0x55bc) Begin 2026-05-24 18:54:53.8 *--------------+
+
+05.24 18:54:53.8(21944 0x55bc)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.24 18:54:53.8(21944 0x55bc)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.24 18:54:53.8(21944 0x55bc)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.24 18:54:53.9(21944 0x55bc)L: 
+
+app info: app(version=2.1.1.3 pid=21944) start, compiled time Apr 10 2026 11:07:25
+05.24 18:54:53.9(21944 0x55bc)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.24 18:54:53.9(21944 0x55bc)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.24 18:54:53.9(21944 0x55bc)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.24 18:54:53.9(21944 0x55bc)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.24 18:54:53.9(21944 0x55bc)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.24 18:54:53.9(21944 0x55bc)L: brand name: DVDFab
+05.24 18:54:53.9(21944 0x55bc)W: ProductDisplayName is null, use ProductName
+05.24 18:54:54.2(21944 0x56bc)L: got local software info size: 1
+05.24 18:54:54.2(21944 0x56bc)L: Current software: 49 StreamFab (x64) 7.0.2.6
+05.24 18:54:54.2(21944 0x56bc)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.24 18:54:54.2(21944 0x56bc)I: check ServerSoftWareVersion 49
+05.24 18:54:54.2(21944 0x55bc)L: ad process: request ad update 2026-05-24 18:54:54 be push in queue
+05.24 18:54:54.2(21944 0x55bc)L: ad process: start process the request ad event: 2026-05-24 18:54:54
+05.24 18:54:54.2(21944 0x55bc)L: ad process: Start request control info ...
+05.24 18:54:55.8(21944 0x55bc)L: ad process: get ad control info from recommed service,server return 0
+05.24 18:54:55.8(21944 0x55bc)L: ad process: end ad control.
+05.24 18:54:55.8(21944 0x55bc)L: ad process: start check update 2000 fe4db938f9f457e5503715666fa36d79
+05.24 18:54:55.8(21944 0x55bc)L: ad process: end check update 2000 0
+05.24 18:54:56.0(21944 0x56bc)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4120.cfg","version":"4120","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7026.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.24 18:54:56.0(21944 0x56bc)I: local installed client id: QSet("49")
+05.24 18:54:56.0(21944 0x56bc)I: local ignore client id: QSet("48", "49")
+05.24 18:54:56.0(21944 0x55bc)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=21944 ThreadId=0x55bc) End 2026-05-24 18:54:56.0 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=19144 ThreadId=0x1304) Begin 2026-05-25 14:56:09.8 *--------------+
+
+05.25 14:56:09.9(19144 0x1304)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.25 14:56:09.9(19144 0x1304)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.25 14:56:09.9(19144 0x1304)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.25 14:56:10.0(19144 0x1304)L: 
+
+app info: app(version=2.1.1.3 pid=19144) start, compiled time Apr 10 2026 11:07:25
+05.25 14:56:10.0(19144 0x1304)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.25 14:56:10.0(19144 0x1304)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.25 14:56:10.0(19144 0x1304)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.25 14:56:10.0(19144 0x1304)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.25 14:56:10.0(19144 0x1304)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.25 14:56:10.1(19144 0x1304)L: brand name: DVDFab
+05.25 14:56:10.1(19144 0x1304)W: ProductDisplayName is null, use ProductName
+05.25 14:56:10.4(19144 0x5788)L: got local software info size: 1
+05.25 14:56:10.4(19144 0x5788)L: Current software: 49 StreamFab (x64) 7.0.2.6
+05.25 14:56:10.4(19144 0x5788)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.25 14:56:10.4(19144 0x5788)I: check ServerSoftWareVersion 49
+05.25 14:56:10.5(19144 0x1304)L: ad process: request ad update 2026-05-25 14:56:10 be push in queue
+05.25 14:56:10.5(19144 0x1304)L: ad process: start process the request ad event: 2026-05-25 14:56:10
+05.25 14:56:10.5(19144 0x1304)L: ad process: Start request control info ...
+05.25 14:56:12.2(19144 0x5788)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4121.cfg","version":"4121","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7026.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.25 14:56:12.2(19144 0x5788)I: local installed client id: QSet("49")
+05.25 14:56:12.2(19144 0x5788)I: local ignore client id: QSet("49", "48")
+05.25 14:56:12.2(19144 0x1304)L: ad process: get ad control info from recommed service,server return 0
+05.25 14:56:12.2(19144 0x1304)L: ad process: end ad control.
+05.25 14:56:12.2(19144 0x1304)L: ad process: start check update 2000 be4bda166b9a1b297be64b51865499b8
+05.25 14:56:12.2(19144 0x1304)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=19144 ThreadId=0x1304) End 2026-05-25 14:56:12.2 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=21344 ThreadId=0x5364) Begin 2026-05-25 22:20:22.5 *--------------+
+
+05.25 22:20:22.6(21344 0x5364)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.25 22:20:22.6(21344 0x5364)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.25 22:20:22.6(21344 0x5364)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.25 22:20:22.7(21344 0x5364)L: 
+
+app info: app(version=2.1.1.3 pid=21344) start, compiled time Apr 10 2026 11:07:25
+05.25 22:20:22.7(21344 0x5364)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.25 22:20:22.7(21344 0x5364)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.25 22:20:22.7(21344 0x5364)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.25 22:20:22.7(21344 0x5364)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.25 22:20:22.7(21344 0x5364)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.25 22:20:22.7(21344 0x5364)L: brand name: DVDFab
+05.25 22:20:22.7(21344 0x5364)W: ProductDisplayName is null, use ProductName
+05.25 22:20:22.9(21344 0x51d0)L: got local software info size: 1
+05.25 22:20:22.9(21344 0x51d0)L: Current software: 49 StreamFab (x64) 7.0.2.6
+05.25 22:20:22.9(21344 0x51d0)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.25 22:20:22.9(21344 0x51d0)I: check ServerSoftWareVersion 49
+05.25 22:20:22.9(21344 0x5364)L: ad process: request ad update 2026-05-25 22:20:22 be push in queue
+05.25 22:20:22.9(21344 0x5364)L: ad process: start process the request ad event: 2026-05-25 22:20:22
+05.25 22:20:22.9(21344 0x5364)L: ad process: Start request control info ...
+05.25 22:20:24.6(21344 0x5364)L: ad process: get ad control info from recommed service,server return 0
+05.25 22:20:24.6(21344 0x5364)L: ad process: end ad control.
+05.25 22:20:24.6(21344 0x5364)L: ad process: start check update 2000 be4bda166b9a1b297be64b51865499b8
+05.25 22:20:24.6(21344 0x5364)L: ad process: end check update 2000 0
+05.25 22:20:24.7(21344 0x51d0)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4121.cfg","version":"4121","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7026.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.25 22:20:24.7(21344 0x51d0)I: local installed client id: QSet("49")
+05.25 22:20:24.7(21344 0x51d0)I: local ignore client id: QSet("49", "48")
+05.25 22:20:24.7(21344 0x5364)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=21344 ThreadId=0x5364) End 2026-05-25 22:20:24.7 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=11360 ThreadId=0xd40) Begin 2026-05-26 23:51:47.1 *--------------+
+
+05.26 23:51:47.2(11360 0xd40)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.26 23:51:47.2(11360 0xd40)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.26 23:51:47.2(11360 0xd40)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.26 23:51:47.2(11360 0xd40)L: 
+
+app info: app(version=2.1.1.3 pid=11360) start, compiled time Apr 10 2026 11:07:25
+05.26 23:51:47.2(11360 0xd40)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.26 23:51:47.2(11360 0xd40)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.26 23:51:47.2(11360 0xd40)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.26 23:51:47.2(11360 0xd40)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.26 23:51:47.2(11360 0xd40)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.26 23:51:47.2(11360 0xd40)L: brand name: DVDFab
+05.26 23:51:47.2(11360 0xd40)W: ProductDisplayName is null, use ProductName
+05.26 23:51:47.5(11360 0x13b8)L: got local software info size: 1
+05.26 23:51:47.5(11360 0x13b8)L: Current software: 49 StreamFab (x64) 7.0.2.6
+05.26 23:51:47.5(11360 0x13b8)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.26 23:51:47.5(11360 0x13b8)I: check ServerSoftWareVersion 49
+05.26 23:51:47.5(11360 0xd40)L: ad process: request ad update 2026-05-26 23:51:47 be push in queue
+05.26 23:51:47.5(11360 0xd40)L: ad process: start process the request ad event: 2026-05-26 23:51:47
+05.26 23:51:47.5(11360 0xd40)L: ad process: Start request control info ...
+05.26 23:51:49.8(11360 0xd40)L: ad process: get ad control info from recommed service,server return 0
+05.26 23:51:49.8(11360 0xd40)L: ad process: end ad control.
+05.26 23:51:49.8(11360 0xd40)L: ad process: start check update 2000 be4bda166b9a1b297be64b51865499b8
+05.26 23:51:49.8(11360 0xd40)L: ad process: end check update 2000 0
+05.26 23:51:50.3(11360 0x13b8)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13060","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4121.cfg","version":"4130","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7026.cfg","version":"7026","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.26 23:51:50.3(11360 0x13b8)I: local installed client id: QSet("49")
+05.26 23:51:50.3(11360 0x13b8)I: local ignore client id: QSet("48", "49")
+05.26 23:51:50.3(11360 0xd40)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=11360 ThreadId=0xd40) End 2026-05-26 23:51:50.3 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=96964 ThreadId=0x18fb8) Begin 2026-05-28 13:29:37.0 *--------------+
+
+05.28 13:29:37.1(96964 0x18fb8)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.28 13:29:37.1(96964 0x18fb8)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.28 13:29:37.1(96964 0x18fb8)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.28 13:29:37.1(96964 0x18fb8)L: 
+
+app info: app(version=2.1.1.3 pid=96964) start, compiled time Apr 10 2026 11:07:25
+05.28 13:29:37.1(96964 0x18fb8)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.28 13:29:37.1(96964 0x18fb8)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.28 13:29:37.1(96964 0x18fb8)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.28 13:29:37.1(96964 0x18fb8)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.28 13:29:37.1(96964 0x18fb8)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.28 13:29:37.2(96964 0x18fb8)L: brand name: DVDFab
+05.28 13:29:37.2(96964 0x18fb8)W: ProductDisplayName is null, use ProductName
+05.28 13:29:37.3(96964 0x18d0c)L: got local software info size: 1
+05.28 13:29:37.3(96964 0x18d0c)L: Current software: 49 StreamFab (x64) 7.0.2.6
+05.28 13:29:37.3(96964 0x18d0c)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.28 13:29:37.3(96964 0x18d0c)I: check ServerSoftWareVersion 49
+05.28 13:29:37.4(96964 0x18fb8)L: ad process: request ad update 2026-05-28 13:29:37 be push in queue
+05.28 13:29:37.4(96964 0x18fb8)L: ad process: start process the request ad event: 2026-05-28 13:29:37
+05.28 13:29:37.4(96964 0x18fb8)L: ad process: Start request control info ...
+05.28 13:29:38.8(96964 0x18d0c)L: Update version: 1.0
+05.28 13:29:38.8(96964 0x18d0c)L: Status is: 1
+05.28 13:29:38.8(96964 0x18d0c)L: Download url: https://www.dvdfab.cn/mlink/download.php?g=StreamFab_x64
+05.28 13:29:38.8(96964 0x18d0c)L: Cfg Download url: http://d217.dvdfab.cn/download/streamfab_x64_7027.cfg
+05.28 13:29:38.8(96964 0x18d0c)L: Increment cfg url: http://d217.dvdfab.cn/download/49_7026_7027/
+05.28 13:29:38.9(96964 0x18fb8)L: ad process: get ad control info from recommed service,server return 0
+05.28 13:29:38.9(96964 0x18fb8)L: ad process: end ad control.
+05.28 13:29:38.9(96964 0x18fb8)L: ad process: start check update 2000 be4bda166b9a1b297be64b51865499b8
+05.28 13:29:38.9(96964 0x18fb8)L: ad process: end check update 2000 0
+05.28 13:29:39.1(96964 0x18d0c)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4121.cfg","version":"4130","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7027.cfg","version":"7027","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.28 13:29:39.1(96964 0x18d0c)I: local installed client id: QSet("49")
+05.28 13:29:39.1(96964 0x18d0c)I: local ignore client id: QSet("49", "48")
+05.28 13:29:54.6(96964 0x18fb8)L: update: update 49
+05.28 13:29:54.7(96964 0x184e8)L: download: begin Incremental Update zip 
+05.28 13:29:54.7(96964 0x184e8)L: Start download file: update_x64.cfg
+05.28 13:29:55.6(96964 0x184e8)L: Success download file: update_x64.cfg
+05.28 13:30:34.7(96964 0x184e8)L: download: end Incremental Update zip 
+05.28 13:30:34.9(96964 0x18fb8)W: QString::arg: Argument missing: Wird installiert..., 
+05.28 13:30:35.0(96964 0x184e8)L: Memzip unzip: vector size = 60 
+05.28 13:30:35.3(96964 0x184e8)L: Memzip unzip: EntryData vector size = 60 
+05.28 13:30:38.8(96964 0x184e8)L: bspatch: Patching Copy.exe ....
+05.28 13:30:38.9(96964 0x184e8)L: bspatch: Patching CrashRpt.dll ....
+05.28 13:30:38.9(96964 0x184e8)L: bspatch: Patching FabReport.exe ....
+05.28 13:30:39.1(96964 0x184e8)L: bspatch: Patching FileOP.exe ....
+05.28 13:30:39.2(96964 0x184e8)L: bspatch: Patching MediaLibraryAPI.dll ....
+05.28 13:30:39.4(96964 0x184e8)L: bspatch: Patching QCef.exe ....
+05.28 13:30:42.4(96964 0x184e8)L: bspatch: Patching RegOp.exe ....
+05.28 13:30:42.5(96964 0x184e8)L: bspatch: Patching StreamClient.exe ....
+05.28 13:30:46.4(96964 0x184e8)L: bspatch: Patching StreamFab64.exe ....
+05.28 13:30:50.8(96964 0x184e8)L: bspatch: Patching StreamUpdate.exe ....
+05.28 13:30:51.0(96964 0x184e8)L: bspatch: Patching VMProtectSDK64.dll ....
+05.28 13:30:51.1(96964 0x184e8)L: bspatch: Patching YouTubeDL/ ....
+05.28 13:31:05.2(96964 0x184e8)L: bspatch: Patching amd_ags_x64.dll ....
+05.28 13:31:05.3(96964 0x184e8)L: bspatch: Patching avcodec-58.dll ....
+05.28 13:31:06.9(96964 0x184e8)L: bspatch: Patching avdevice-58.dll ....
+05.28 13:31:07.1(96964 0x184e8)L: bspatch: Patching avfilter-7.dll ....
+05.28 13:31:08.8(96964 0x184e8)L: bspatch: Patching avformat-58.dll ....
+05.28 13:31:09.9(96964 0x184e8)L: bspatch: Patching avresample-4.dll ....
+05.28 13:31:10.0(96964 0x184e8)L: bspatch: Patching avutil-56.dll ....
+05.28 13:31:10.2(96964 0x184e8)L: bspatch: Patching bootstrap.exe ....
+05.28 13:31:10.4(96964 0x184e8)L: bspatch: Patching bootstrapc.exe ....
+05.28 13:31:10.5(96964 0x184e8)L: bspatch: Patching ccextractor.exe ....
+05.28 13:31:10.7(96964 0x184e8)L: bspatch: Patching chrome_elf.dll ....
+05.28 13:31:10.7(96964 0x184e8)L: bspatch: Patching dash-mpd-cli.exe ....
+05.28 13:31:11.6(96964 0x184e8)L: bspatch: Patching dxcompiler.dll ....
+05.28 13:31:12.1(96964 0x184e8)L: bspatch: Patching dxil.dll ....
+05.28 13:31:12.2(96964 0x184e8)L: bspatch: Patching ffmpeg.exe ....
+05.28 13:31:17.2(96964 0x184e8)L: bspatch: Patching ffprobe.exe ....
+05.28 13:31:22.6(96964 0x184e8)L: bspatch: Patching libEGL.dll ....
+05.28 13:31:22.7(96964 0x184e8)L: bspatch: Patching libGLESv2.dll ....
+05.28 13:31:22.9(96964 0x184e8)L: bspatch: Patching libcef.dll ....
+05.28 13:31:24.3(96964 0x18fb8)W: QString::arg: Argument missing: Wird installiert..., 
+05.28 13:31:28.1(96964 0x184e8)L: bspatch: Patching libcefbase.dll ....
+05.28 13:31:29.1(96964 0x18fb8)W: QString::arg: Argument missing: Wird installiert..., 
+05.28 13:31:32.1(96964 0x184e8)L: bspatch: Patching libcefcommon.dll ....
+05.28 13:31:32.2(96964 0x184e8)L: bspatch: Patching libcefmedia.dll ....
+05.28 13:31:32.3(96964 0x184e8)L: bspatch: Patching libcrypto-1_1-x64.dll ....
+05.28 13:31:32.5(96964 0x184e8)L: bspatch: Patching libcurl.dll ....
+05.28 13:31:32.6(96964 0x184e8)L: bspatch: Patching libeay32.dll ....
+05.28 13:31:32.8(96964 0x184e8)L: bspatch: Patching libssl-1_1-x64.dll ....
+05.28 13:31:32.9(96964 0x184e8)L: bspatch: Patching libxml2.dll ....
+05.28 13:31:33.0(96964 0x184e8)L: bspatch: Patching libxslt.dll ....
+05.28 13:31:33.1(96964 0x184e8)L: bspatch: Patching mp4box.exe ....
+05.28 13:31:33.4(96964 0x184e8)L: bspatch: Patching opengl32sw.dll ....
+05.28 13:31:34.7(96964 0x184e8)L: bspatch: Patching postproc-55.dll ....
+05.28 13:31:34.8(96964 0x184e8)L: bspatch: Patching script/ ....
+05.28 13:31:34.9(96964 0x184e8)L: bspatch: Patching shaka-packager.exe ....
+05.28 13:31:35.1(96964 0x184e8)L: bspatch: Patching ssleay32.dll ....
+05.28 13:31:35.3(96964 0x184e8)L: bspatch: Patching subtitle_processor.dll ....
+05.28 13:31:35.4(96964 0x184e8)L: bspatch: Patching swiftshader/ ....
+05.28 13:31:35.7(96964 0x184e8)L: bspatch: Patching swresample-3.dll ....
+05.28 13:31:35.9(96964 0x184e8)L: bspatch: Patching swscale-5.dll ....
+05.28 13:31:36.0(96964 0x184e8)L: bspatch: Patching uninstall.exe ....
+05.28 13:31:36.2(96964 0x184e8)L: bspatch: Patching uninstall.exe.bin ....
+05.28 13:31:36.2(96964 0x184e8)L: bspatch: Patching utilities.dll ....
+05.28 13:31:36.4(96964 0x184e8)L: bspatch: Patching vk_swiftshader.dll ....
+05.28 13:31:36.5(96964 0x184e8)L: bspatch: Patching vulkan-1.dll ....
+05.28 13:31:36.8(96964 0x184e8)L: copyexe : strCopyExePath C:/Program Files/DVDFab/StreamFab/ no isAbsolute
+05.28 13:31:36.8(96964 0x184e8)L: copyexe Copy.exe path: C:/Program Files/DVDFab/StreamFab/Copy.exe
+05.28 13:31:37.0(96964 0x184e8)I: kill extra process:  QList("QCef.exe")
+05.28 13:31:47.6(96964 0x184e8)L: Run Copy.exe param is: C:/Users/Enrico/AppData/Local/Temp/liveUpdate.xml,true
+05.28 13:31:48.3(96964 0x18fb8)W: QString::arg: Argument missing: Wird installiert..., 
+
+
+UpdateCopy (version:2.0.0.0 curtime:2026/05/28  13:31:51)
+
+2026.05.28-13:31:51: Run param is: C:/Users/Enrico/AppData/Local/Temp/liveUpdate.xml
+2026.05.28-13:31:51: Remove update temp folder ...
+2026.05.28-13:31:51: Sync update file to install directory ...
+2026.05.28-13:31:51: Update file: C:/Program Files/DVDFab/StreamFab/Copy.exe
+2026.05.28-13:31:51: Update file: C:/Program Files/DVDFab/StreamFab/CrashRpt.dll
+2026.05.28-13:31:51: Update file: C:/Program Files/DVDFab/StreamFab/FabReport.exe
+2026.05.28-13:31:51: Update file: C:/Program Files/DVDFab/StreamFab/FileOP.exe
+2026.05.28-13:31:51: Update file: C:/Program Files/DVDFab/StreamFab/MediaLibraryAPI.dll
+2026.05.28-13:31:51: Update file: C:/Program Files/DVDFab/StreamFab/QCef.exe
+2026.05.28-13:31:51: Update file: C:/Program Files/DVDFab/StreamFab/RegOp.exe
+2026.05.28-13:31:52: Update file: C:/Program Files/DVDFab/StreamFab/StreamClient.exe
+2026.05.28-13:31:54: Update file: C:/Program Files/DVDFab/StreamFab/StreamFab64.exe
+2026.05.28-13:31:54: Update file: C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe
+2026.05.28-13:31:54: Update file: C:/Program Files/DVDFab/StreamFab/VMProtectSDK64.dll
+2026.05.28-13:31:55: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/AtomicParsley.exe
+2026.05.28-13:31:55: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/aria2c.exe
+2026.05.28-13:31:55: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/phantomjs.exe
+2026.05.28-13:31:55: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/yt-dlp.exe
+2026.05.28-13:31:55: Update file: C:/Program Files/DVDFab/StreamFab/amd_ags_x64.dll
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/avcodec-58.dll
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/avdevice-58.dll
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/avfilter-7.dll
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/avformat-58.dll
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/avresample-4.dll
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/avutil-56.dll
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/bootstrap.exe
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/bootstrapc.exe
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/ccextractor.exe
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/chrome_elf.dll
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/dash-mpd-cli.exe
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/dxcompiler.dll
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/dxil.dll
+2026.05.28-13:31:56: Update file: C:/Program Files/DVDFab/StreamFab/ffmpeg.exe
+2026.05.28-13:31:57: Update file: C:/Program Files/DVDFab/StreamFab/ffprobe.exe
+2026.05.28-13:31:57: Update file: C:/Program Files/DVDFab/StreamFab/libEGL.dll
+2026.05.28-13:31:57: Update file: C:/Program Files/DVDFab/StreamFab/libGLESv2.dll
+2026.05.28-13:31:57: Update file: C:/Program Files/DVDFab/StreamFab/libcef.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/libcefbase.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/libcefcommon.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/libcefmedia.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/libcrypto-1_1-x64.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/libcurl.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/libeay32.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/libssl-1_1-x64.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/libxml2.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/libxslt.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/mp4box.exe
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/opengl32sw.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/postproc-55.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/script/amazon_get_seasons_info.py
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/shaka-packager.exe
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/ssleay32.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/subtitle_processor.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/swiftshader/libEGL.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/swiftshader/libGLESv2.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/swresample-3.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/swscale-5.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/uninstall.exe
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/uninstall.exe.bin
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/utilities.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/vk_swiftshader.dll
+2026.05.28-13:31:58: Update file: C:/Program Files/DVDFab/StreamFab/vulkan-1.dll
+2026.05.28-13:31:58: Error: source file is not exist, H:\streamfab\update\unzipTemp\update.xml
+2026.05.28-13:31:58: Update display name and version on control panel
+2026.05.28-13:31:58: Reg info: StreamFab (x64), StreamFab (x64), 7.0.2.7
+2026.05.28-13:31:58: Update display name successfully, 0.
+2026.05.28-13:31:58: Update install info for next update
+2026.05.28-13:31:58: liveupdate info: DVDFab, StreamFab (x64), 7.0.2.7
+2026.05.28-13:31:58: LiveUpdate change version success
+05.28 13:31:59.0(96964 0x18fb8)L: All install SuccessFinished
+ 
+05.28 13:31:59.0(96964 0x18fb8)L: bRestartedApp = 1
+ 
+
++--------------* AppEnd: LiveUpdate(pid=96964 ThreadId=0x18fb8) End 2026-05-28 13:32:02.1 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=103208 ThreadId=0x1858c) Begin 2026-05-28 13:32:24.2 *--------------+
+
+05.28 13:32:24.3(103208 0x1858c)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.28 13:32:24.3(103208 0x1858c)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.28 13:32:24.3(103208 0x1858c)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.28 13:32:24.3(103208 0x1858c)L: 
+
+app info: app(version=2.1.1.3 pid=103208) start, compiled time Apr 10 2026 11:07:25
+05.28 13:32:24.3(103208 0x1858c)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.28 13:32:24.3(103208 0x1858c)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.28 13:32:24.3(103208 0x1858c)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.28 13:32:24.3(103208 0x1858c)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.28 13:32:24.3(103208 0x1858c)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.28 13:32:24.4(103208 0x1858c)L: brand name: DVDFab
+05.28 13:32:24.4(103208 0x1858c)W: ProductDisplayName is null, use ProductName
+05.28 13:32:24.5(103208 0x19d7c)L: got local software info size: 1
+05.28 13:32:24.5(103208 0x19d7c)L: Current software: 49 StreamFab (x64) 7.0.2.7
+05.28 13:32:24.5(103208 0x19d7c)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.28 13:32:24.5(103208 0x19d7c)I: check ServerSoftWareVersion 49
+05.28 13:32:24.5(103208 0x1858c)L: ad process: request ad update 2026-05-28 13:32:24 be push in queue
+05.28 13:32:24.5(103208 0x1858c)L: ad process: start process the request ad event: 2026-05-28 13:32:24
+05.28 13:32:24.5(103208 0x1858c)L: ad process: Start request control info ...
+05.28 13:32:26.1(103208 0x19d7c)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4121.cfg","version":"4130","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7027.cfg","version":"7027","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.28 13:32:26.1(103208 0x19d7c)I: local installed client id: QSet("49")
+05.28 13:32:26.1(103208 0x19d7c)I: local ignore client id: QSet("48", "49")
+05.28 13:32:26.1(103208 0x1858c)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=103208 ThreadId=0x1858c) End 2026-05-28 13:32:26.1 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=22884 ThreadId=0x5968) Begin 2026-05-28 15:29:02.6 *--------------+
+
+05.28 15:29:02.7(22884 0x5968)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.28 15:29:02.7(22884 0x5968)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.28 15:29:02.7(22884 0x5968)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.28 15:29:03.1(22884 0x5968)L: 
+
+app info: app(version=2.1.1.3 pid=22884) start, compiled time Apr 10 2026 11:07:25
+05.28 15:29:03.1(22884 0x5968)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.28 15:29:03.1(22884 0x5968)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.28 15:29:03.1(22884 0x5968)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.28 15:29:03.1(22884 0x5968)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.28 15:29:03.1(22884 0x5968)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.28 15:29:03.8(22884 0x5968)L: brand name: DVDFab
+05.28 15:29:03.8(22884 0x5968)W: ProductDisplayName is null, use ProductName
+05.28 15:29:04.5(22884 0x3b90)L: got local software info size: 1
+05.28 15:29:04.5(22884 0x3b90)L: Current software: 49 StreamFab (x64) 7.0.2.7
+05.28 15:29:04.5(22884 0x3b90)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.28 15:29:04.5(22884 0x3b90)I: check ServerSoftWareVersion 49
+05.28 15:29:04.5(22884 0x5968)L: ad process: request ad update 2026-05-28 15:29:04 be push in queue
+05.28 15:29:04.5(22884 0x5968)L: ad process: start process the request ad event: 2026-05-28 15:29:04
+05.28 15:29:04.5(22884 0x5968)L: ad process: Start request control info ...
+05.28 15:29:06.1(22884 0x5968)L: ad process: get ad control info from recommed service,server return 0
+05.28 15:29:06.1(22884 0x5968)L: ad process: could not found the ad at position 2000
+05.28 15:29:06.1(22884 0x5968)L: ad process: end ad control.
+05.28 15:29:06.1(22884 0x3b90)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4121.cfg","version":"4130","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7027.cfg","version":"7027","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.28 15:29:06.1(22884 0x3b90)I: local installed client id: QSet("49")
+05.28 15:29:06.1(22884 0x3b90)I: local ignore client id: QSet("49", "48")
+05.28 15:29:06.1(22884 0x5968)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=22884 ThreadId=0x5968) End 2026-05-28 15:29:06.1 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=21408 ThreadId=0x5390) Begin 2026-05-28 20:35:06.8 *--------------+
+
+05.28 20:35:06.8(21408 0x5390)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.28 20:35:06.8(21408 0x5390)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.28 20:35:06.8(21408 0x5390)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.28 20:35:07.0(21408 0x5390)L: 
+
+app info: app(version=2.1.1.3 pid=21408) start, compiled time Apr 10 2026 11:07:25
+05.28 20:35:07.0(21408 0x5390)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.28 20:35:07.0(21408 0x5390)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.28 20:35:07.0(21408 0x5390)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.28 20:35:07.0(21408 0x5390)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.28 20:35:07.0(21408 0x5390)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.28 20:35:07.1(21408 0x5390)L: brand name: DVDFab
+05.28 20:35:07.1(21408 0x5390)W: ProductDisplayName is null, use ProductName
+05.28 20:35:07.4(21408 0x50b0)L: got local software info size: 1
+05.28 20:35:07.4(21408 0x50b0)L: Current software: 49 StreamFab (x64) 7.0.2.7
+05.28 20:35:07.4(21408 0x50b0)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.28 20:35:07.4(21408 0x50b0)I: check ServerSoftWareVersion 49
+05.28 20:35:07.4(21408 0x5390)L: ad process: request ad update 2026-05-28 20:35:07 be push in queue
+05.28 20:35:07.4(21408 0x5390)L: ad process: start process the request ad event: 2026-05-28 20:35:07
+05.28 20:35:07.4(21408 0x5390)L: ad process: Start request control info ...
+05.28 20:35:09.1(21408 0x50b0)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4130.cfg","version":"4130","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7027.cfg","version":"7027","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.28 20:35:09.1(21408 0x50b0)I: local installed client id: QSet("49")
+05.28 20:35:09.1(21408 0x50b0)I: local ignore client id: QSet("48", "49")
+05.28 20:35:09.1(21408 0x5390)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=21408 ThreadId=0x5390) End 2026-05-28 20:35:09.3 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=20344 ThreadId=0x4f80) Begin 2026-05-29 03:03:27.0 *--------------+
+
+05.29 03:03:27.0(20344 0x4f80)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.29 03:03:27.0(20344 0x4f80)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.29 03:03:27.0(20344 0x4f80)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.29 03:03:27.2(20344 0x4f80)L: 
+
+app info: app(version=2.1.1.3 pid=20344) start, compiled time Apr 10 2026 11:07:25
+05.29 03:03:27.2(20344 0x4f80)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.29 03:03:27.2(20344 0x4f80)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.29 03:03:27.2(20344 0x4f80)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.29 03:03:27.2(20344 0x4f80)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.29 03:03:27.2(20344 0x4f80)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.29 03:03:27.2(20344 0x4f80)L: brand name: DVDFab
+05.29 03:03:27.2(20344 0x4f80)W: ProductDisplayName is null, use ProductName
+05.29 03:03:27.7(20344 0x50a4)L: got local software info size: 1
+05.29 03:03:27.7(20344 0x50a4)L: Current software: 49 StreamFab (x64) 7.0.2.7
+05.29 03:03:27.7(20344 0x50a4)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.29 03:03:27.7(20344 0x50a4)I: check ServerSoftWareVersion 49
+05.29 03:03:27.7(20344 0x4f80)L: ad process: request ad update 2026-05-29 03:03:27 be push in queue
+05.29 03:03:27.7(20344 0x4f80)L: ad process: start process the request ad event: 2026-05-29 03:03:27
+05.29 03:03:27.7(20344 0x4f80)L: ad process: Start request control info ...
+05.29 03:03:29.4(20344 0x4f80)L: ad process: get ad control info from recommed service,server return 0
+05.29 03:03:29.4(20344 0x4f80)L: ad process: could not found the ad at position 2000
+05.29 03:03:29.4(20344 0x4f80)L: ad process: end ad control.
+05.29 03:03:29.5(20344 0x50a4)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4130.cfg","version":"4130","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7027.cfg","version":"7027","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.29 03:03:29.5(20344 0x50a4)I: local installed client id: QSet("49")
+05.29 03:03:29.5(20344 0x50a4)I: local ignore client id: QSet("48", "49")
+05.29 03:03:29.5(20344 0x4f80)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=20344 ThreadId=0x4f80) End 2026-05-29 03:03:29.5 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=19636 ThreadId=0x4cb8) Begin 2026-05-29 11:15:26.9 *--------------+
+
+05.29 11:15:27.0(19636 0x4cb8)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.29 11:15:27.0(19636 0x4cb8)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.29 11:15:27.0(19636 0x4cb8)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.29 11:15:27.1(19636 0x4cb8)L: 
+
+app info: app(version=2.1.1.3 pid=19636) start, compiled time Apr 10 2026 11:07:25
+05.29 11:15:27.1(19636 0x4cb8)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.29 11:15:27.1(19636 0x4cb8)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.29 11:15:27.1(19636 0x4cb8)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.29 11:15:27.1(19636 0x4cb8)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.29 11:15:27.1(19636 0x4cb8)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.29 11:15:27.1(19636 0x4cb8)L: brand name: DVDFab
+05.29 11:15:27.1(19636 0x4cb8)W: ProductDisplayName is null, use ProductName
+05.29 11:15:27.4(19636 0x4d34)L: got local software info size: 1
+05.29 11:15:27.4(19636 0x4d34)L: Current software: 49 StreamFab (x64) 7.0.2.7
+05.29 11:15:27.4(19636 0x4d34)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.29 11:15:27.4(19636 0x4d34)I: check ServerSoftWareVersion 49
+05.29 11:15:27.4(19636 0x4cb8)L: ad process: request ad update 2026-05-29 11:15:27 be push in queue
+05.29 11:15:27.4(19636 0x4cb8)L: ad process: start process the request ad event: 2026-05-29 11:15:27
+05.29 11:15:27.4(19636 0x4cb8)L: ad process: Start request control info ...
+05.29 11:15:29.0(19636 0x4cb8)L: ad process: get ad control info from recommed service,server return 0
+05.29 11:15:29.0(19636 0x4cb8)L: ad process: could not found the ad at position 2000
+05.29 11:15:29.0(19636 0x4cb8)L: ad process: end ad control.
+05.29 11:15:29.0(19636 0x4d34)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13060.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4130.cfg","version":"4130","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7027.cfg","version":"7028","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.29 11:15:29.0(19636 0x4d34)I: local installed client id: QSet("49")
+05.29 11:15:29.0(19636 0x4d34)I: local ignore client id: QSet("48", "49")
+05.29 11:15:29.0(19636 0x4cb8)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=19636 ThreadId=0x4cb8) End 2026-05-29 11:15:29.1 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=15600 ThreadId=0x4a2c) Begin 2026-05-29 13:37:52.8 *--------------+
+
+05.29 13:37:52.9(15600 0x4a2c)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+05.29 13:37:52.9(15600 0x4a2c)I: app: config file: "H:/streamfab/update/update_config.xml"
+05.29 13:37:52.9(15600 0x4a2c)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+05.29 13:37:53.0(15600 0x4a2c)L: 
+
+app info: app(version=2.1.1.3 pid=15600) start, compiled time Apr 10 2026 11:07:25
+05.29 13:37:53.0(15600 0x4a2c)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+05.29 13:37:53.0(15600 0x4a2c)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+05.29 13:37:53.0(15600 0x4a2c)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+05.29 13:37:53.0(15600 0x4a2c)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+05.29 13:37:53.0(15600 0x4a2c)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+05.29 13:37:53.1(15600 0x4a2c)L: brand name: DVDFab
+05.29 13:37:53.1(15600 0x4a2c)W: ProductDisplayName is null, use ProductName
+05.29 13:37:53.4(15600 0x51dc)L: got local software info size: 1
+05.29 13:37:53.4(15600 0x51dc)L: Current software: 49 StreamFab (x64) 7.0.2.7
+05.29 13:37:53.4(15600 0x51dc)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+05.29 13:37:53.4(15600 0x51dc)I: check ServerSoftWareVersion 49
+05.29 13:37:53.4(15600 0x4a2c)L: ad process: request ad update 2026-05-29 13:37:53 be push in queue
+05.29 13:37:53.4(15600 0x4a2c)L: ad process: start process the request ad event: 2026-05-29 13:37:53
+05.29 13:37:53.4(15600 0x4a2c)L: ad process: Start request control info ...
+05.29 13:37:57.1(15600 0x51dc)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4130.cfg","version":"4130","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7027.cfg","version":"7028","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+05.29 13:37:57.1(15600 0x51dc)I: local installed client id: QSet("49")
+05.29 13:37:57.1(15600 0x51dc)I: local ignore client id: QSet("49", "48")
+05.29 13:37:57.1(15600 0x4a2c)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=15600 ThreadId=0x4a2c) End 2026-05-29 13:37:57.3 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=10880 ThreadId=0x2a94) Begin 2026-06-01 21:16:06.4 *--------------+
+
+06.01 21:16:06.4(10880 0x2a94)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+06.01 21:16:06.4(10880 0x2a94)I: app: config file: "H:/streamfab/update/update_config.xml"
+06.01 21:16:06.4(10880 0x2a94)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+06.01 21:16:06.5(10880 0x2a94)L: 
+
+app info: app(version=2.1.1.3 pid=10880) start, compiled time Apr 10 2026 11:07:25
+06.01 21:16:06.5(10880 0x2a94)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+06.01 21:16:06.5(10880 0x2a94)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+06.01 21:16:06.5(10880 0x2a94)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+06.01 21:16:06.5(10880 0x2a94)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+06.01 21:16:06.5(10880 0x2a94)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+06.01 21:16:06.6(10880 0x2a94)L: brand name: DVDFab
+06.01 21:16:06.6(10880 0x2a94)W: ProductDisplayName is null, use ProductName
+06.01 21:16:06.9(10880 0x41b0)L: got local software info size: 1
+06.01 21:16:06.9(10880 0x41b0)L: Current software: 49 StreamFab (x64) 7.0.2.7
+06.01 21:16:06.9(10880 0x41b0)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+06.01 21:16:06.9(10880 0x41b0)I: check ServerSoftWareVersion 49
+06.01 21:16:07.0(10880 0x2a94)L: ad process: request ad update 2026-06-01 21:16:06 be push in queue
+06.01 21:16:07.0(10880 0x2a94)L: ad process: start process the request ad event: 2026-06-01 21:16:06
+06.01 21:16:07.0(10880 0x2a94)L: ad process: Start request control info ...
+06.01 21:16:08.4(10880 0x41b0)L: Update version: 1.0
+06.01 21:16:08.4(10880 0x41b0)L: Status is: 1
+06.01 21:16:08.4(10880 0x41b0)L: Download url: https://www.dvdfab.cn/mlink/download.php?g=StreamFab_x64
+06.01 21:16:08.4(10880 0x41b0)L: Cfg Download url: http://d217.dvdfab.cn/download/streamfab_x64_7028.cfg
+06.01 21:16:08.4(10880 0x41b0)L: Increment cfg url: http://d17.dvdfab.cn/download/49_7027_7028/
+06.01 21:16:08.5(10880 0x2a94)L: ad process: get ad control info from recommed service,server return 0
+06.01 21:16:08.5(10880 0x2a94)L: ad process: could not found the ad at position 2000
+06.01 21:16:08.5(10880 0x2a94)L: ad process: end ad control.
+06.01 21:16:08.6(10880 0x41b0)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4131.cfg","version":"4131","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7028.cfg","version":"7029","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+06.01 21:16:08.6(10880 0x41b0)I: local installed client id: QSet("49")
+06.01 21:16:08.6(10880 0x41b0)I: local ignore client id: QSet("48", "49")
+06.01 21:40:39.9(10880 0x2a94)L: update: update 49
+06.01 21:40:39.9(10880 0x2a94)W: QPixmap::scaled: Pixmap is a null pixmap
+06.01 21:40:39.9(10880 0x6ad8)L: download: begin Incremental Update zip 
+06.01 21:40:39.9(10880 0x6ad8)L: Start download file: update_x64.cfg
+06.01 21:40:41.1(10880 0x6ad8)L: Success download file: update_x64.cfg
+06.01 21:41:25.5(10880 0x6ad8)L: download: end Incremental Update zip 
+06.01 21:41:25.5(10880 0x2a94)W: QString::arg: Argument missing: Wird installiert..., 
+06.01 21:41:25.8(10880 0x6ad8)L: Memzip unzip: vector size = 59 
+06.01 21:41:26.3(10880 0x6ad8)L: Memzip unzip: EntryData vector size = 59 
+06.01 21:41:30.4(10880 0x6ad8)L: bspatch: Patching Copy.exe ....
+06.01 21:41:30.8(10880 0x6ad8)L: bspatch: Patching CrashRpt.dll ....
+06.01 21:41:31.5(10880 0x6ad8)L: bspatch: Patching FabReport.exe ....
+06.01 21:41:32.0(10880 0x6ad8)L: bspatch: Patching FileOP.exe ....
+06.01 21:41:32.3(10880 0x6ad8)L: bspatch: Patching MediaLibraryAPI.dll ....
+06.01 21:41:32.6(10880 0x6ad8)L: bspatch: Patching QCef.exe ....
+06.01 21:41:43.0(10880 0x6ad8)L: bspatch: Patching RegOp.exe ....
+06.01 21:41:43.1(10880 0x6ad8)L: bspatch: Patching StreamClient.exe ....
+06.01 21:41:54.8(10880 0x6ad8)L: bspatch: Patching StreamFab64.exe ....
+06.01 21:42:00.8(10880 0x6ad8)L: bspatch: Patching StreamUpdate.exe ....
+06.01 21:42:01.2(10880 0x6ad8)L: bspatch: Patching VMProtectSDK64.dll ....
+06.01 21:42:01.4(10880 0x6ad8)L: bspatch: Patching YouTubeDL/ ....
+06.01 21:42:29.0(10880 0x6ad8)L: bspatch: Patching amd_ags_x64.dll ....
+06.01 21:42:29.3(10880 0x6ad8)L: bspatch: Patching avcodec-58.dll ....
+06.01 21:42:31.4(10880 0x6ad8)L: bspatch: Patching avdevice-58.dll ....
+06.01 21:42:31.9(10880 0x6ad8)L: bspatch: Patching avfilter-7.dll ....
+06.01 21:42:35.7(10880 0x6ad8)L: bspatch: Patching avformat-58.dll ....
+06.01 21:42:37.9(10880 0x6ad8)L: bspatch: Patching avresample-4.dll ....
+06.01 21:42:38.1(10880 0x6ad8)L: bspatch: Patching avutil-56.dll ....
+06.01 21:42:38.5(10880 0x6ad8)L: bspatch: Patching bootstrap.exe ....
+06.01 21:42:38.8(10880 0x6ad8)L: bspatch: Patching bootstrapc.exe ....
+06.01 21:42:39.0(10880 0x6ad8)L: bspatch: Patching ccextractor.exe ....
+06.01 21:42:39.4(10880 0x6ad8)L: bspatch: Patching chrome_elf.dll ....
+06.01 21:42:39.6(10880 0x6ad8)L: bspatch: Patching dash-mpd-cli.exe ....
+06.01 21:42:41.1(10880 0x6ad8)L: bspatch: Patching dxcompiler.dll ....
+06.01 21:42:41.9(10880 0x6ad8)L: bspatch: Patching dxil.dll ....
+06.01 21:42:42.1(10880 0x6ad8)L: bspatch: Patching ffmpeg.exe ....
+06.01 21:42:51.4(10880 0x6ad8)L: bspatch: Patching ffprobe.exe ....
+06.01 21:42:59.7(10880 0x6ad8)L: bspatch: Patching libEGL.dll ....
+06.01 21:43:00.2(10880 0x6ad8)L: bspatch: Patching libGLESv2.dll ....
+06.01 21:43:00.9(10880 0x6ad8)L: bspatch: Patching libcef.dll ....
+06.01 21:43:08.1(10880 0x6ad8)L: bspatch: Patching libcefbase.dll ....
+06.01 21:43:14.6(10880 0x6ad8)L: bspatch: Patching libcefcommon.dll ....
+06.01 21:43:14.8(10880 0x6ad8)L: bspatch: Patching libcefmedia.dll ....
+06.01 21:43:14.9(10880 0x6ad8)L: bspatch: Patching libcrypto-1_1-x64.dll ....
+06.01 21:43:15.2(10880 0x6ad8)L: bspatch: Patching libcurl.dll ....
+06.01 21:43:15.4(10880 0x6ad8)L: bspatch: Patching libeay32.dll ....
+06.01 21:43:15.6(10880 0x6ad8)L: bspatch: Patching libssl-1_1-x64.dll ....
+06.01 21:43:15.8(10880 0x6ad8)L: bspatch: Patching libxml2.dll ....
+06.01 21:43:16.0(10880 0x6ad8)L: bspatch: Patching libxslt.dll ....
+06.01 21:43:16.2(10880 0x6ad8)L: bspatch: Patching mp4box.exe ....
+06.01 21:43:16.5(10880 0x6ad8)L: bspatch: Patching opengl32sw.dll ....
+06.01 21:43:18.4(10880 0x6ad8)L: bspatch: Patching postproc-55.dll ....
+06.01 21:43:18.5(10880 0x6ad8)L: bspatch: Patching shaka-packager.exe ....
+06.01 21:43:18.9(10880 0x6ad8)L: bspatch: Patching ssleay32.dll ....
+06.01 21:43:19.1(10880 0x6ad8)L: bspatch: Patching subtitle_processor.dll ....
+06.01 21:43:19.4(10880 0x6ad8)L: bspatch: Patching swiftshader/ ....
+06.01 21:43:19.9(10880 0x6ad8)L: bspatch: Patching swresample-3.dll ....
+06.01 21:43:20.2(10880 0x6ad8)L: bspatch: Patching swscale-5.dll ....
+06.01 21:43:20.4(10880 0x6ad8)L: bspatch: Patching uninstall.exe ....
+06.01 21:43:20.6(10880 0x6ad8)L: bspatch: Patching uninstall.exe.bin ....
+06.01 21:43:20.6(10880 0x6ad8)L: bspatch: Patching utilities.dll ....
+06.01 21:43:20.9(10880 0x6ad8)L: bspatch: Patching vk_swiftshader.dll ....
+06.01 21:43:21.2(10880 0x6ad8)L: bspatch: Patching vulkan-1.dll ....
+06.01 21:43:21.6(10880 0x6ad8)L: copyexe : strCopyExePath C:/Program Files/DVDFab/StreamFab/ no isAbsolute
+06.01 21:43:21.7(10880 0x6ad8)L: copyexe Copy.exe path: C:/Program Files/DVDFab/StreamFab/Copy.exe
+06.01 21:43:22.2(10880 0x6ad8)I: kill extra process:  QList("QCef.exe")
+06.01 21:43:32.5(10880 0x6ad8)L: Run Copy.exe param is: C:/Users/Enrico/AppData/Local/Temp/liveUpdate.xml,true
+06.01 21:43:33.7(10880 0x2a94)W: QString::arg: Argument missing: Wird installiert..., 
+
+
+UpdateCopy (version:2.0.0.0 curtime:2026/06/01  21:43:43)
+
+2026.06.01-21:43:43: Run param is: C:/Users/Enrico/AppData/Local/Temp/liveUpdate.xml
+2026.06.01-21:43:44: Remove update temp folder ...
+2026.06.01-21:43:44: Sync update file to install directory ...
+2026.06.01-21:43:44: Update file: C:/Program Files/DVDFab/StreamFab/Copy.exe
+2026.06.01-21:43:44: Update file: C:/Program Files/DVDFab/StreamFab/CrashRpt.dll
+2026.06.01-21:43:44: Update file: C:/Program Files/DVDFab/StreamFab/FabReport.exe
+2026.06.01-21:43:44: Update file: C:/Program Files/DVDFab/StreamFab/FileOP.exe
+2026.06.01-21:43:44: Update file: C:/Program Files/DVDFab/StreamFab/MediaLibraryAPI.dll
+2026.06.01-21:43:44: Update file: C:/Program Files/DVDFab/StreamFab/QCef.exe
+2026.06.01-21:43:44: Update file: C:/Program Files/DVDFab/StreamFab/RegOp.exe
+2026.06.01-21:43:45: Update file: C:/Program Files/DVDFab/StreamFab/StreamClient.exe
+2026.06.01-21:43:48: Update file: C:/Program Files/DVDFab/StreamFab/StreamFab64.exe
+2026.06.01-21:43:48: Update file: C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe
+2026.06.01-21:43:48: Update file: C:/Program Files/DVDFab/StreamFab/VMProtectSDK64.dll
+2026.06.01-21:43:48: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/AtomicParsley.exe
+2026.06.01-21:43:48: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/aria2c.exe
+2026.06.01-21:43:48: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/phantomjs.exe
+2026.06.01-21:43:49: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/yt-dlp.exe
+2026.06.01-21:43:49: Update file: C:/Program Files/DVDFab/StreamFab/amd_ags_x64.dll
+2026.06.01-21:43:50: Update file: C:/Program Files/DVDFab/StreamFab/avcodec-58.dll
+2026.06.01-21:43:50: Update file: C:/Program Files/DVDFab/StreamFab/avdevice-58.dll
+2026.06.01-21:43:50: Update file: C:/Program Files/DVDFab/StreamFab/avfilter-7.dll
+2026.06.01-21:43:50: Update file: C:/Program Files/DVDFab/StreamFab/avformat-58.dll
+2026.06.01-21:43:50: Update file: C:/Program Files/DVDFab/StreamFab/avresample-4.dll
+2026.06.01-21:43:50: Update file: C:/Program Files/DVDFab/StreamFab/avutil-56.dll
+2026.06.01-21:43:50: Update file: C:/Program Files/DVDFab/StreamFab/bootstrap.exe
+2026.06.01-21:43:50: Update file: C:/Program Files/DVDFab/StreamFab/bootstrapc.exe
+2026.06.01-21:43:50: Update file: C:/Program Files/DVDFab/StreamFab/ccextractor.exe
+2026.06.01-21:43:50: Update file: C:/Program Files/DVDFab/StreamFab/chrome_elf.dll
+2026.06.01-21:43:50: Update file: C:/Program Files/DVDFab/StreamFab/dash-mpd-cli.exe
+2026.06.01-21:43:51: Update file: C:/Program Files/DVDFab/StreamFab/dxcompiler.dll
+2026.06.01-21:43:51: Update file: C:/Program Files/DVDFab/StreamFab/dxil.dll
+2026.06.01-21:43:53: Update file: C:/Program Files/DVDFab/StreamFab/ffmpeg.exe
+2026.06.01-21:43:56: Update file: C:/Program Files/DVDFab/StreamFab/ffprobe.exe
+2026.06.01-21:43:56: Update file: C:/Program Files/DVDFab/StreamFab/libEGL.dll
+2026.06.01-21:43:56: Update file: C:/Program Files/DVDFab/StreamFab/libGLESv2.dll
+2026.06.01-21:43:57: Update file: C:/Program Files/DVDFab/StreamFab/libcef.dll
+2026.06.01-21:43:57: Update file: C:/Program Files/DVDFab/StreamFab/libcefbase.dll
+2026.06.01-21:43:57: Update file: C:/Program Files/DVDFab/StreamFab/libcefcommon.dll
+2026.06.01-21:43:57: Update file: C:/Program Files/DVDFab/StreamFab/libcefmedia.dll
+2026.06.01-21:43:57: Update file: C:/Program Files/DVDFab/StreamFab/libcrypto-1_1-x64.dll
+2026.06.01-21:43:57: Update file: C:/Program Files/DVDFab/StreamFab/libcurl.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/libeay32.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/libssl-1_1-x64.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/libxml2.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/libxslt.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/mp4box.exe
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/opengl32sw.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/postproc-55.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/shaka-packager.exe
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/ssleay32.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/subtitle_processor.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/swiftshader/libEGL.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/swiftshader/libGLESv2.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/swresample-3.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/swscale-5.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/uninstall.exe
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/uninstall.exe.bin
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/utilities.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/vk_swiftshader.dll
+2026.06.01-21:43:58: Update file: C:/Program Files/DVDFab/StreamFab/vulkan-1.dll
+2026.06.01-21:43:58: Error: source file is not exist, H:\streamfab\update\unzipTemp\update.xml
+2026.06.01-21:43:58: Update display name and version on control panel
+2026.06.01-21:43:58: Reg info: StreamFab (x64), StreamFab (x64), 7.0.2.8
+2026.06.01-21:43:58: Update display name successfully, 0.
+2026.06.01-21:43:58: Update install info for next update
+2026.06.01-21:43:58: liveupdate info: DVDFab, StreamFab (x64), 7.0.2.8
+2026.06.01-21:43:58: LiveUpdate change version success
+06.01 21:43:59.3(10880 0x2a94)L: All install SuccessFinished
+ 
+06.01 21:43:59.4(10880 0x2a94)L: bRestartedApp = 1
+ 
+
++--------------* AppEnd: LiveUpdate(pid=10880 ThreadId=0x2a94) End 2026-06-01 21:44:02.5 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=30524 ThreadId=0x436c) Begin 2026-06-01 21:44:31.8 *--------------+
+
+06.01 21:44:31.9(30524 0x436c)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+06.01 21:44:31.9(30524 0x436c)I: app: config file: "H:/streamfab/update/update_config.xml"
+06.01 21:44:31.9(30524 0x436c)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+06.01 21:44:32.0(30524 0x436c)L: 
+
+app info: app(version=2.1.1.3 pid=30524) start, compiled time Apr 10 2026 11:07:25
+06.01 21:44:32.0(30524 0x436c)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+06.01 21:44:32.0(30524 0x436c)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+06.01 21:44:32.0(30524 0x436c)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+06.01 21:44:32.0(30524 0x436c)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+06.01 21:44:32.0(30524 0x436c)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+06.01 21:44:32.0(30524 0x436c)L: brand name: DVDFab
+06.01 21:44:32.0(30524 0x436c)W: ProductDisplayName is null, use ProductName
+06.01 21:44:32.4(30524 0x77c8)L: got local software info size: 1
+06.01 21:44:32.4(30524 0x77c8)L: Current software: 49 StreamFab (x64) 7.0.2.8
+06.01 21:44:32.4(30524 0x77c8)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+06.01 21:44:32.4(30524 0x77c8)I: check ServerSoftWareVersion 49
+06.01 21:44:32.4(30524 0x436c)L: ad process: request ad update 2026-06-01 21:44:32 be push in queue
+06.01 21:44:32.4(30524 0x436c)L: ad process: start process the request ad event: 2026-06-01 21:44:32
+06.01 21:44:32.4(30524 0x436c)L: ad process: Start request control info ...
+06.01 21:44:33.9(30524 0x436c)L: ad process: get ad control info from recommed service,server return 0
+06.01 21:44:33.9(30524 0x436c)L: ad process: could not found the ad at position 2000
+06.01 21:44:33.9(30524 0x436c)L: ad process: end ad control.
+06.01 21:44:34.0(30524 0x77c8)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4131.cfg","version":"4131","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7028.cfg","version":"7029","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+06.01 21:44:34.0(30524 0x77c8)I: local installed client id: QSet("49")
+06.01 21:44:34.0(30524 0x77c8)I: local ignore client id: QSet("49", "48")
+06.01 21:44:34.0(30524 0x436c)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=30524 ThreadId=0x436c) End 2026-06-01 21:44:34.0 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=19940 ThreadId=0x4de8) Begin 2026-06-03 07:43:40.3 *--------------+
+
+06.03 07:43:40.3(19940 0x4de8)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+06.03 07:43:40.3(19940 0x4de8)I: app: config file: "H:/streamfab/update/update_config.xml"
+06.03 07:43:40.3(19940 0x4de8)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+06.03 07:43:40.4(19940 0x4de8)L: 
+
+app info: app(version=2.1.1.3 pid=19940) start, compiled time Apr 10 2026 11:07:25
+06.03 07:43:40.4(19940 0x4de8)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+06.03 07:43:40.4(19940 0x4de8)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+06.03 07:43:40.4(19940 0x4de8)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+06.03 07:43:40.4(19940 0x4de8)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+06.03 07:43:40.4(19940 0x4de8)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+06.03 07:43:40.4(19940 0x4de8)L: brand name: DVDFab
+06.03 07:43:40.4(19940 0x4de8)W: ProductDisplayName is null, use ProductName
+06.03 07:43:40.7(19940 0x4ed0)L: got local software info size: 1
+06.03 07:43:40.7(19940 0x4ed0)L: Current software: 49 StreamFab (x64) 7.0.2.8
+06.03 07:43:40.7(19940 0x4ed0)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+06.03 07:43:40.7(19940 0x4ed0)I: check ServerSoftWareVersion 49
+06.03 07:43:40.7(19940 0x4de8)L: ad process: request ad update 2026-06-03 07:43:40 be push in queue
+06.03 07:43:40.7(19940 0x4de8)L: ad process: start process the request ad event: 2026-06-03 07:43:40
+06.03 07:43:40.7(19940 0x4de8)L: ad process: Start request control info ...
+06.03 07:43:42.3(19940 0x4de8)L: ad process: get ad control info from recommed service,server return 0
+06.03 07:43:42.3(19940 0x4de8)L: ad process: could not found the ad at position 2000
+06.03 07:43:42.3(19940 0x4de8)L: ad process: end ad control.
+06.03 07:43:42.4(19940 0x4ed0)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4131.cfg","version":"4131","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7028.cfg","version":"7029","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+06.03 07:43:42.4(19940 0x4ed0)I: local installed client id: QSet("49")
+06.03 07:43:42.4(19940 0x4ed0)I: local ignore client id: QSet("49", "48")
+06.03 07:43:42.4(19940 0x4de8)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=19940 ThreadId=0x4de8) End 2026-06-03 07:43:42.5 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=20456 ThreadId=0x4fec) Begin 2026-06-03 18:56:51.8 *--------------+
+
+06.03 18:56:51.9(20456 0x4fec)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+06.03 18:56:51.9(20456 0x4fec)I: app: config file: "H:/streamfab/update/update_config.xml"
+06.03 18:56:51.9(20456 0x4fec)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+06.03 18:56:52.0(20456 0x4fec)L: 
+
+app info: app(version=2.1.1.3 pid=20456) start, compiled time Apr 10 2026 11:07:25
+06.03 18:56:52.0(20456 0x4fec)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+06.03 18:56:52.0(20456 0x4fec)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+06.03 18:56:52.0(20456 0x4fec)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+06.03 18:56:52.0(20456 0x4fec)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+06.03 18:56:52.0(20456 0x4fec)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+06.03 18:56:52.0(20456 0x4fec)L: brand name: DVDFab
+06.03 18:56:52.0(20456 0x4fec)W: ProductDisplayName is null, use ProductName
+06.03 18:56:52.3(20456 0x4e0c)L: got local software info size: 1
+06.03 18:56:52.3(20456 0x4e0c)L: Current software: 49 StreamFab (x64) 7.0.2.8
+06.03 18:56:52.3(20456 0x4e0c)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+06.03 18:56:52.3(20456 0x4e0c)I: check ServerSoftWareVersion 49
+06.03 18:56:52.3(20456 0x4fec)L: ad process: request ad update 2026-06-03 18:56:52 be push in queue
+06.03 18:56:52.3(20456 0x4fec)L: ad process: start process the request ad event: 2026-06-03 18:56:52
+06.03 18:56:52.3(20456 0x4fec)L: ad process: Start request control info ...
+06.03 18:56:53.8(20456 0x4fec)L: ad process: get ad control info from recommed service,server return 0
+06.03 18:56:53.8(20456 0x4fec)L: ad process: could not found the ad at position 2000
+06.03 18:56:53.8(20456 0x4fec)L: ad process: end ad control.
+06.03 18:56:53.9(20456 0x4e0c)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4131.cfg","version":"4131","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7028.cfg","version":"7029","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+06.03 18:56:53.9(20456 0x4e0c)I: local installed client id: QSet("49")
+06.03 18:56:53.9(20456 0x4e0c)I: local ignore client id: QSet("49", "48")
+06.03 18:56:53.9(20456 0x4fec)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=20456 ThreadId=0x4fec) End 2026-06-03 18:56:53.9 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=19560 ThreadId=0x4ffc) Begin 2026-06-04 15:12:36.8 *--------------+
+
+06.04 15:12:36.9(19560 0x4ffc)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+06.04 15:12:36.9(19560 0x4ffc)I: app: config file: "H:/streamfab/update/update_config.xml"
+06.04 15:12:36.9(19560 0x4ffc)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+06.04 15:12:37.1(19560 0x4ffc)L: 
+
+app info: app(version=2.1.1.3 pid=19560) start, compiled time Apr 10 2026 11:07:25
+06.04 15:12:37.1(19560 0x4ffc)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+06.04 15:12:37.1(19560 0x4ffc)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+06.04 15:12:37.1(19560 0x4ffc)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+06.04 15:12:37.1(19560 0x4ffc)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+06.04 15:12:37.1(19560 0x4ffc)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+06.04 15:12:37.2(19560 0x4ffc)L: brand name: DVDFab
+06.04 15:12:37.2(19560 0x4ffc)W: ProductDisplayName is null, use ProductName
+06.04 15:12:37.8(19560 0x4ffc)L: ad process: request ad update 2026-06-04 15:12:37 be push in queue
+06.04 15:12:37.8(19560 0x4ffc)L: ad process: start process the request ad event: 2026-06-04 15:12:37
+06.04 15:12:37.8(19560 0x4ffc)L: ad process: Start request control info ...
+06.04 15:12:37.8(19560 0x501c)L: got local software info size: 1
+06.04 15:12:37.8(19560 0x501c)L: Current software: 49 StreamFab (x64) 7.0.2.8
+06.04 15:12:37.8(19560 0x501c)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+06.04 15:12:37.8(19560 0x501c)I: check ServerSoftWareVersion 49
+06.04 15:12:39.5(19560 0x4ffc)L: ad process: get ad control info from recommed service,server return 0
+06.04 15:12:39.5(19560 0x4ffc)L: ad process: could not found the ad at position 2000
+06.04 15:12:39.5(19560 0x4ffc)L: ad process: end ad control.
+06.04 15:12:39.7(19560 0x501c)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4131.cfg","version":"4132","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7028.cfg","version":"7029","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+06.04 15:12:39.7(19560 0x501c)I: local installed client id: QSet("49")
+06.04 15:12:39.7(19560 0x501c)I: local ignore client id: QSet("49", "48")
+06.04 15:12:39.7(19560 0x4ffc)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=19560 ThreadId=0x4ffc) End 2026-06-04 15:12:39.7 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=20888 ThreadId=0x519c) Begin 2026-06-05 20:21:08.4 *--------------+
+
+06.05 20:21:08.5(20888 0x519c)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+06.05 20:21:08.5(20888 0x519c)I: app: config file: "H:/streamfab/update/update_config.xml"
+06.05 20:21:08.5(20888 0x519c)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+06.05 20:21:08.6(20888 0x519c)L: 
+
+app info: app(version=2.1.1.3 pid=20888) start, compiled time Apr 10 2026 11:07:25
+06.05 20:21:08.6(20888 0x519c)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+06.05 20:21:08.6(20888 0x519c)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+06.05 20:21:08.6(20888 0x519c)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+06.05 20:21:08.6(20888 0x519c)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+06.05 20:21:08.6(20888 0x519c)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+06.05 20:21:08.6(20888 0x519c)L: brand name: DVDFab
+06.05 20:21:08.6(20888 0x519c)W: ProductDisplayName is null, use ProductName
+06.05 20:21:09.0(20888 0x525c)L: got local software info size: 1
+06.05 20:21:09.0(20888 0x525c)L: Current software: 49 StreamFab (x64) 7.0.2.8
+06.05 20:21:09.0(20888 0x525c)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+06.05 20:21:09.0(20888 0x525c)I: check ServerSoftWareVersion 49
+06.05 20:21:09.0(20888 0x519c)L: ad process: request ad update 2026-06-05 20:21:09 be push in queue
+06.05 20:21:09.0(20888 0x519c)L: ad process: start process the request ad event: 2026-06-05 20:21:09
+06.05 20:21:09.0(20888 0x519c)L: ad process: Start request control info ...
+06.05 20:21:10.6(20888 0x525c)L: Update version: 1.0
+06.05 20:21:10.6(20888 0x525c)L: Status is: 1
+06.05 20:21:10.6(20888 0x525c)L: Download url: https://www.dvdfab.cn/mlink/download.php?g=StreamFab_x64
+06.05 20:21:10.6(20888 0x525c)L: Cfg Download url: http://d217.dvdfab.cn/download/streamfab_x64_7030.cfg
+06.05 20:21:10.6(20888 0x525c)L: Increment cfg url: http://d18.dvdfab.cn/download/49_7028_7030/
+06.05 20:21:10.7(20888 0x519c)L: ad process: get ad control info from recommed service,server return 0
+06.05 20:21:10.7(20888 0x519c)L: ad process: could not found the ad at position 2000
+06.05 20:21:10.7(20888 0x519c)L: ad process: end ad control.
+06.05 20:21:10.9(20888 0x525c)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4132.cfg","version":"4132","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7030.cfg","version":"7030","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+06.05 20:21:10.9(20888 0x525c)I: local installed client id: QSet("49")
+06.05 20:21:10.9(20888 0x525c)I: local ignore client id: QSet("49", "48")
+
++--------------* AppEnd: LiveUpdate(pid=20888 ThreadId=0x519c) End 2026-06-05 20:21:15.0 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=1720 ThreadId=0xbd68) Begin 2026-06-06 01:28:48.5 *--------------+
+
+06.06 01:28:48.6(1720 0xbd68)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+06.06 01:28:48.6(1720 0xbd68)I: app: config file: "H:/streamfab/update/update_config.xml"
+06.06 01:28:48.6(1720 0xbd68)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+06.06 01:28:48.6(1720 0xbd68)L: 
+
+app info: app(version=2.1.1.3 pid=1720) start, compiled time Apr 10 2026 11:07:25
+06.06 01:28:48.6(1720 0xbd68)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+06.06 01:28:48.6(1720 0xbd68)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+06.06 01:28:48.6(1720 0xbd68)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+06.06 01:28:48.6(1720 0xbd68)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+06.06 01:28:48.6(1720 0xbd68)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+06.06 01:28:48.6(1720 0xbd68)L: brand name: DVDFab
+06.06 01:28:48.6(1720 0xbd68)W: ProductDisplayName is null, use ProductName
+06.06 01:28:48.8(1720 0xb9e8)L: got local software info size: 1
+06.06 01:28:48.8(1720 0xb9e8)L: Current software: 49 StreamFab (x64) 7.0.2.8
+06.06 01:28:48.8(1720 0xb9e8)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+06.06 01:28:48.8(1720 0xb9e8)I: check ServerSoftWareVersion 49
+06.06 01:28:48.8(1720 0xbd68)L: ad process: request ad update 2026-06-06 01:28:48 be push in queue
+06.06 01:28:48.8(1720 0xbd68)L: ad process: start process the request ad event: 2026-06-06 01:28:48
+06.06 01:28:48.8(1720 0xbd68)L: ad process: Start request control info ...
+06.06 01:28:50.2(1720 0xb9e8)L: Update version: 1.0
+06.06 01:28:50.2(1720 0xb9e8)L: Status is: 1
+06.06 01:28:50.2(1720 0xb9e8)L: Download url: https://www.dvdfab.cn/mlink/download.php?g=StreamFab_x64
+06.06 01:28:50.2(1720 0xb9e8)L: Cfg Download url: http://d217.dvdfab.cn/download/streamfab_x64_7030.cfg
+06.06 01:28:50.2(1720 0xb9e8)L: Increment cfg url: http://d18.dvdfab.cn/download/49_7028_7030/
+06.06 01:28:50.2(1720 0xbd68)L: ad process: get ad control info from recommed service,server return 0
+06.06 01:28:50.2(1720 0xbd68)L: ad process: could not found the ad at position 2000
+06.06 01:28:50.2(1720 0xbd68)L: ad process: end ad control.
+06.06 01:28:50.4(1720 0xb9e8)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4132.cfg","version":"4132","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7030.cfg","version":"7030","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+06.06 01:28:50.4(1720 0xb9e8)I: local installed client id: QSet("49")
+06.06 01:28:50.4(1720 0xb9e8)I: local ignore client id: QSet("48", "49")
+06.06 01:28:57.6(1720 0xbd68)L: update: update 49
+06.06 01:28:57.7(1720 0x6c50)L: download: begin Incremental Update zip 
+06.06 01:28:57.7(1720 0xbd68)W: QPixmap::scaled: Pixmap is a null pixmap
+06.06 01:28:57.7(1720 0x6c50)L: Start download file: update_x64.cfg
+06.06 01:28:58.6(1720 0x6c50)L: Success download file: update_x64.cfg
+06.06 01:29:40.7(1720 0x6c50)L: download: end Incremental Update zip 
+06.06 01:29:40.8(1720 0xbd68)W: QString::arg: Argument missing: Wird installiert..., 
+06.06 01:29:40.9(1720 0x6c50)L: Memzip unzip: vector size = 92 
+06.06 01:29:41.3(1720 0x6c50)L: Memzip unzip: EntryData vector size = 92 
+06.06 01:29:45.3(1720 0x6c50)L: bspatch: Patching Copy.exe ....
+06.06 01:29:45.4(1720 0x6c50)L: bspatch: Patching CrashRpt.dll ....
+06.06 01:29:45.5(1720 0x6c50)L: bspatch: Patching FabReport.exe ....
+06.06 01:29:45.6(1720 0x6c50)L: bspatch: Patching FileOP.exe ....
+06.06 01:29:45.8(1720 0x6c50)L: bspatch: Patching MediaInfo.dll ....
+06.06 01:29:45.8(1720 0x6c50)L: bspatch: Patching MediaLibraryAPI.dll ....
+06.06 01:29:46.0(1720 0x6c50)L: bspatch: Patching QCef.exe ....
+06.06 01:29:50.3(1720 0x6c50)L: bspatch: Patching QLanguage/ ....
+06.06 01:29:51.3(1720 0x6c50)L: bspatch: Patching RegOp.exe ....
+06.06 01:29:51.4(1720 0x6c50)L: bspatch: Patching StreamClient.exe ....
+06.06 01:29:55.3(1720 0x6c50)L: bspatch: Patching StreamFab64.exe ....
+06.06 01:30:00.3(1720 0x6c50)L: bspatch: Patching StreamUpdate.exe ....
+06.06 01:30:00.6(1720 0x6c50)L: bspatch: Patching VMProtectSDK64.dll ....
+06.06 01:30:00.7(1720 0x6c50)L: bspatch: Patching YouTubeDL/ ....
+06.06 01:30:15.4(1720 0x6c50)L: bspatch: Patching amd_ags_x64.dll ....
+06.06 01:30:15.5(1720 0x6c50)L: bspatch: Patching avcodec-58.dll ....
+06.06 01:30:17.2(1720 0x6c50)L: bspatch: Patching avdevice-58.dll ....
+06.06 01:30:17.5(1720 0x6c50)L: bspatch: Patching avfilter-7.dll ....
+06.06 01:30:19.3(1720 0x6c50)L: bspatch: Patching avformat-58.dll ....
+06.06 01:30:20.0(1720 0x6c50)L: bspatch: Patching avresample-4.dll ....
+06.06 01:30:20.1(1720 0x6c50)L: bspatch: Patching avutil-56.dll ....
+06.06 01:30:20.3(1720 0x6c50)L: bspatch: Patching bootstrap.exe ....
+06.06 01:30:20.4(1720 0x6c50)L: bspatch: Patching bootstrapc.exe ....
+06.06 01:30:20.6(1720 0x6c50)L: bspatch: Patching ccextractor.exe ....
+06.06 01:30:20.8(1720 0x6c50)L: bspatch: Patching chrome_elf.dll ....
+06.06 01:30:20.9(1720 0x6c50)L: bspatch: Patching dash-mpd-cli.exe ....
+06.06 01:30:21.9(1720 0x6c50)L: bspatch: Patching dxcompiler.dll ....
+06.06 01:30:22.4(1720 0x6c50)L: bspatch: Patching dxil.dll ....
+06.06 01:30:22.5(1720 0x6c50)L: bspatch: Patching ffmpeg.exe ....
+06.06 01:30:27.9(1720 0x6c50)L: bspatch: Patching ffprobe.exe ....
+06.06 01:30:33.6(1720 0x6c50)L: bspatch: Patching libEGL.dll ....
+06.06 01:30:33.7(1720 0x6c50)L: bspatch: Patching libGLESv2.dll ....
+06.06 01:30:33.9(1720 0x6c50)L: bspatch: Patching libcef.dll ....
+06.06 01:30:40.8(1720 0x6c50)L: bspatch: Patching libcefbase.dll ....
+06.06 01:30:44.2(1720 0x6c50)L: bspatch: Patching libcefcommon.dll ....
+06.06 01:30:44.3(1720 0x6c50)L: bspatch: Patching libcefmedia.dll ....
+06.06 01:30:44.3(1720 0x6c50)L: bspatch: Patching libcrypto-1_1-x64.dll ....
+06.06 01:30:44.5(1720 0x6c50)L: bspatch: Patching libcurl.dll ....
+06.06 01:30:44.6(1720 0x6c50)L: bspatch: Patching libeay32.dll ....
+06.06 01:30:44.7(1720 0x6c50)L: bspatch: Patching libssl-1_1-x64.dll ....
+06.06 01:30:44.8(1720 0x6c50)L: bspatch: Patching libxml2.dll ....
+06.06 01:30:45.0(1720 0x6c50)L: bspatch: Patching libxslt.dll ....
+06.06 01:30:45.1(1720 0x6c50)L: bspatch: Patching mp4box.exe ....
+06.06 01:30:45.3(1720 0x6c50)L: bspatch: Patching opengl32sw.dll ....
+06.06 01:30:46.6(1720 0x6c50)L: bspatch: Patching postproc-55.dll ....
+06.06 01:30:46.7(1720 0x6c50)L: bspatch: Patching script/ ....
+06.06 01:30:46.8(1720 0x6c50)L: bspatch: Patching shaka-packager.exe ....
+06.06 01:30:47.0(1720 0x6c50)L: bspatch: Patching ssleay32.dll ....
+06.06 01:30:47.1(1720 0x6c50)L: bspatch: Patching stream.rcc ....
+06.06 01:30:47.4(1720 0x6c50)L: bspatch: Patching stream_dark.rcc ....
+06.06 01:30:47.8(1720 0x6c50)L: bspatch: Patching stream_golden.rcc ....
+06.06 01:30:48.0(1720 0x6c50)L: bspatch: Patching subtitle_processor.dll ....
+06.06 01:30:48.1(1720 0x6c50)L: bspatch: Patching swiftshader/ ....
+06.06 01:30:48.4(1720 0x6c50)L: bspatch: Patching swresample-3.dll ....
+06.06 01:30:48.5(1720 0x6c50)L: bspatch: Patching swscale-5.dll ....
+06.06 01:30:48.6(1720 0x6c50)L: bspatch: Patching uninstall.exe ....
+06.06 01:30:48.8(1720 0x6c50)L: bspatch: Patching uninstall.exe.bin ....
+06.06 01:30:48.8(1720 0x6c50)L: bspatch: Patching utilities.dll ....
+06.06 01:30:48.8(1720 0x6c50)L: bspatch: Patching vk_swiftshader.dll ....
+06.06 01:30:49.0(1720 0x6c50)L: bspatch: Patching vulkan-1.dll ....
+06.06 01:30:49.4(1720 0x6c50)L: copyexe : strCopyExePath C:/Program Files/DVDFab/StreamFab/ no isAbsolute
+06.06 01:30:49.4(1720 0x6c50)L: copyexe Copy.exe path: C:/Program Files/DVDFab/StreamFab/Copy.exe
+06.06 01:30:49.6(1720 0x6c50)I: kill extra process:  QList("QCef.exe")
+06.06 01:30:59.6(1720 0x6c50)L: Run Copy.exe param is: C:/Users/Enrico/AppData/Local/Temp/liveUpdate.xml,true
+06.06 01:30:59.9(1720 0xbd68)W: QString::arg: Argument missing: Wird installiert..., 
+
+
+UpdateCopy (version:2.0.0.0 curtime:2026/06/06  01:31:02)
+
+2026.06.06-01:31:02: Run param is: C:/Users/Enrico/AppData/Local/Temp/liveUpdate.xml
+2026.06.06-01:31:02: Remove update temp folder ...
+2026.06.06-01:31:02: Sync update file to install directory ...
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/Copy.exe
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/CrashRpt.dll
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/FabReport.exe
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/FileOP.exe
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/MediaInfo.dll
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/MediaLibraryAPI.dll
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QCef.exe
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_ARA.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_BGR.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_BRA.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_CHS.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_CHT.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_CSY.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_DAN.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_ELL.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_ESP.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_FIN.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_FRA.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_GER.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_HRV.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_HUN.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_ITA.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_JPN.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_KOR.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_NLB.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_NLD.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_NOR.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_PTG.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_ROM.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_RUS.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_SKY.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_SVE.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_TUR.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_UKR.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/QLanguage/Downloader_VAL.qm
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/RegOp.exe
+2026.06.06-01:31:02: Update file: C:/Program Files/DVDFab/StreamFab/StreamClient.exe
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/StreamFab64.exe
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/VMProtectSDK64.dll
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/AtomicParsley.exe
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/aria2c.exe
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/phantomjs.exe
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/YouTubeDL/yt-dlp.exe
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/amd_ags_x64.dll
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/avcodec-58.dll
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/avdevice-58.dll
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/avfilter-7.dll
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/avformat-58.dll
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/avresample-4.dll
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/avutil-56.dll
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/bootstrap.exe
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/bootstrapc.exe
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/ccextractor.exe
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/chrome_elf.dll
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/dash-mpd-cli.exe
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/dxcompiler.dll
+2026.06.06-01:31:03: Update file: C:/Program Files/DVDFab/StreamFab/dxil.dll
+2026.06.06-01:31:04: Update file: C:/Program Files/DVDFab/StreamFab/ffmpeg.exe
+2026.06.06-01:31:04: Update file: C:/Program Files/DVDFab/StreamFab/ffprobe.exe
+2026.06.06-01:31:04: Update file: C:/Program Files/DVDFab/StreamFab/libEGL.dll
+2026.06.06-01:31:04: Update file: C:/Program Files/DVDFab/StreamFab/libGLESv2.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/libcef.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/libcefbase.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/libcefcommon.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/libcefmedia.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/libcrypto-1_1-x64.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/libcurl.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/libeay32.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/libssl-1_1-x64.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/libxml2.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/libxslt.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/mp4box.exe
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/opengl32sw.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/postproc-55.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/script/amazon_get_seasons_info.py
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/shaka-packager.exe
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/ssleay32.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/stream.rcc
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/stream_dark.rcc
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/stream_golden.rcc
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/subtitle_processor.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/swiftshader/libEGL.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/swiftshader/libGLESv2.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/swresample-3.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/swscale-5.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/uninstall.exe
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/uninstall.exe.bin
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/utilities.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/vk_swiftshader.dll
+2026.06.06-01:31:05: Update file: C:/Program Files/DVDFab/StreamFab/vulkan-1.dll
+2026.06.06-01:31:05: Error: source file is not exist, H:\streamfab\update\unzipTemp\update.xml
+2026.06.06-01:31:05: Update display name and version on control panel
+2026.06.06-01:31:05: Reg info: StreamFab (x64), StreamFab (x64), 7.0.3.0
+2026.06.06-01:31:05: Update display name successfully, 0.
+2026.06.06-01:31:05: Update install info for next update
+2026.06.06-01:31:06: liveupdate info: DVDFab, StreamFab (x64), 7.0.3.0
+2026.06.06-01:31:06: LiveUpdate change version success
+06.06 01:31:06.3(1720 0xbd68)L: All install SuccessFinished
+ 
+06.06 01:31:06.3(1720 0xbd68)L: bRestartedApp = 1
+ 
+
++--------------* AppEnd: LiveUpdate(pid=1720 ThreadId=0xbd68) End 2026-06-06 01:31:09.3 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=42752 ThreadId=0x4254) Begin 2026-06-06 01:31:38.3 *--------------+
+
+06.06 01:31:38.3(42752 0x4254)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+06.06 01:31:38.3(42752 0x4254)I: app: config file: "H:/streamfab/update/update_config.xml"
+06.06 01:31:38.3(42752 0x4254)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+06.06 01:31:38.4(42752 0x4254)L: 
+
+app info: app(version=2.1.1.3 pid=42752) start, compiled time Apr 10 2026 11:07:25
+06.06 01:31:38.4(42752 0x4254)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+06.06 01:31:38.4(42752 0x4254)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+06.06 01:31:38.4(42752 0x4254)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+06.06 01:31:38.4(42752 0x4254)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+06.06 01:31:38.4(42752 0x4254)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+06.06 01:31:38.4(42752 0x4254)L: brand name: DVDFab
+06.06 01:31:38.4(42752 0x4254)W: ProductDisplayName is null, use ProductName
+06.06 01:31:38.6(42752 0x6f6c)L: got local software info size: 1
+06.06 01:31:38.6(42752 0x6f6c)L: Current software: 49 StreamFab (x64) 7.0.3.0
+06.06 01:31:38.6(42752 0x6f6c)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+06.06 01:31:38.6(42752 0x6f6c)I: check ServerSoftWareVersion 49
+06.06 01:31:38.6(42752 0x4254)L: ad process: request ad update 2026-06-06 01:31:38 be push in queue
+06.06 01:31:38.6(42752 0x4254)L: ad process: start process the request ad event: 2026-06-06 01:31:38
+06.06 01:31:38.6(42752 0x4254)L: ad process: Start request control info ...
+06.06 01:31:40.0(42752 0x4254)L: ad process: get ad control info from recommed service,server return 0
+06.06 01:31:40.0(42752 0x4254)L: ad process: could not found the ad at position 2000
+06.06 01:31:40.0(42752 0x4254)L: ad process: end ad control.
+06.06 01:31:40.1(42752 0x6f6c)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4132.cfg","version":"4132","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7030.cfg","version":"7030","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+06.06 01:31:40.1(42752 0x6f6c)I: local installed client id: QSet("49")
+06.06 01:31:40.1(42752 0x6f6c)I: local ignore client id: QSet("48", "49")
+06.06 01:31:40.1(42752 0x4254)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=42752 ThreadId=0x4254) End 2026-06-06 01:31:40.1 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=100628 ThreadId=0x1847c) Begin 2026-06-06 17:01:05.6 *--------------+
+
+06.06 17:01:05.6(100628 0x1847c)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+06.06 17:01:05.6(100628 0x1847c)I: app: config file: "H:/streamfab/update/update_config.xml"
+06.06 17:01:05.6(100628 0x1847c)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+06.06 17:01:05.7(100628 0x1847c)L: 
+
+app info: app(version=2.1.1.3 pid=100628) start, compiled time Apr 10 2026 11:07:25
+06.06 17:01:05.7(100628 0x1847c)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+06.06 17:01:05.7(100628 0x1847c)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+06.06 17:01:05.7(100628 0x1847c)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+06.06 17:01:05.7(100628 0x1847c)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+06.06 17:01:05.7(100628 0x1847c)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+06.06 17:01:05.7(100628 0x1847c)L: brand name: DVDFab
+06.06 17:01:05.7(100628 0x1847c)W: ProductDisplayName is null, use ProductName
+06.06 17:01:05.9(100628 0x43c4)L: got local software info size: 1
+06.06 17:01:05.9(100628 0x43c4)L: Current software: 49 StreamFab (x64) 7.0.3.0
+06.06 17:01:05.9(100628 0x43c4)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+06.06 17:01:05.9(100628 0x43c4)I: check ServerSoftWareVersion 49
+06.06 17:01:05.9(100628 0x1847c)L: ad process: request ad update 2026-06-06 17:01:05 be push in queue
+06.06 17:01:05.9(100628 0x1847c)L: ad process: start process the request ad event: 2026-06-06 17:01:05
+06.06 17:01:05.9(100628 0x1847c)L: ad process: Start request control info ...
+06.06 17:01:07.4(100628 0x1847c)L: ad process: get ad control info from recommed service,server return 0
+06.06 17:01:07.4(100628 0x1847c)L: ad process: could not found the ad at position 2000
+06.06 17:01:07.4(100628 0x1847c)L: ad process: end ad control.
+06.06 17:01:07.4(100628 0x43c4)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4132.cfg","version":"4132","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7030.cfg","version":"7030","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+06.06 17:01:07.4(100628 0x43c4)I: local installed client id: QSet("49")
+06.06 17:01:07.4(100628 0x43c4)I: local ignore client id: QSet("48", "49")
+06.06 17:01:07.4(100628 0x1847c)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=100628 ThreadId=0x1847c) End 2026-06-06 17:01:07.4 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=19008 ThreadId=0x3a60) Begin 2026-06-06 20:57:33.5 *--------------+
+
+06.06 20:57:33.6(19008 0x3a60)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+06.06 20:57:33.6(19008 0x3a60)I: app: config file: "H:/streamfab/update/update_config.xml"
+06.06 20:57:33.6(19008 0x3a60)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+06.06 20:57:33.7(19008 0x3a60)L: 
+
+app info: app(version=2.1.1.3 pid=19008) start, compiled time Apr 10 2026 11:07:25
+06.06 20:57:33.7(19008 0x3a60)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+06.06 20:57:33.7(19008 0x3a60)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+06.06 20:57:33.7(19008 0x3a60)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+06.06 20:57:33.7(19008 0x3a60)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+06.06 20:57:33.7(19008 0x3a60)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+06.06 20:57:33.7(19008 0x3a60)L: brand name: DVDFab
+06.06 20:57:33.7(19008 0x3a60)W: ProductDisplayName is null, use ProductName
+06.06 20:57:33.9(19008 0x47d8)L: got local software info size: 1
+06.06 20:57:33.9(19008 0x47d8)L: Current software: 49 StreamFab (x64) 7.0.3.0
+06.06 20:57:33.9(19008 0x47d8)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+06.06 20:57:33.9(19008 0x47d8)I: check ServerSoftWareVersion 49
+06.06 20:57:33.9(19008 0x3a60)L: ad process: request ad update 2026-06-06 20:57:33 be push in queue
+06.06 20:57:33.9(19008 0x3a60)L: ad process: start process the request ad event: 2026-06-06 20:57:33
+06.06 20:57:33.9(19008 0x3a60)L: ad process: Start request control info ...
+06.06 20:57:35.4(19008 0x3a60)L: ad process: get ad control info from recommed service,server return 0
+06.06 20:57:35.4(19008 0x3a60)L: ad process: could not found the ad at position 2000
+06.06 20:57:35.4(19008 0x3a60)L: ad process: end ad control.
+06.06 20:57:35.5(19008 0x47d8)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4132.cfg","version":"4132","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7030.cfg","version":"7030","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+06.06 20:57:35.5(19008 0x47d8)I: local installed client id: QSet("49")
+06.06 20:57:35.5(19008 0x47d8)I: local ignore client id: QSet("49", "48")
+06.06 20:57:35.5(19008 0x3a60)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=19008 ThreadId=0x3a60) End 2026-06-06 20:57:35.5 *--------------+
+
+
++--------------* AppStart: LiveUpdate 2.1.1.3 (C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid)(pid=888 ThreadId=0x380) Begin 2026-06-06 21:43:18.9 *--------------+
+
+06.06 21:43:19.0(888 0x380)I: app: modify log path  "C:/Users/Enrico/AppData/Roaming/DVDFab/ClientLiveUpdate/updateLog/LiveUpdateBrand.log" to "H:/streamfab/update/updateLog/LiveUpdate.log"
+06.06 21:43:19.0(888 0x380)I: app: config file: "H:/streamfab/update/update_config.xml"
+06.06 21:43:19.0(888 0x380)L: IUtilityServiceAdatper dll exist C:/Program Files/DVDFab/StreamFab/utilities.dll.
+06.06 21:43:19.1(888 0x380)L: 
+
+app info: app(version=2.1.1.3 pid=888) start, compiled time Apr 10 2026 11:07:25
+06.06 21:43:19.1(888 0x380)I: app: applicationFilePath= "C:/Program Files/DVDFab/StreamFab/StreamUpdate.exe"
+06.06 21:43:19.1(888 0x380)I: app: app_args= QList("C:\\Program Files\\DVDFab\\StreamFab\\StreamUpdate.exe", "--config_file", "H:/streamfab/update/update_config.xml", "--url_suffix=clientusertype=paid", "--user_type", "paid")
+06.06 21:43:19.1(888 0x380)L: app: cmd_line: "C:\Program Files\DVDFab\StreamFab\StreamUpdate.exe"  --config_file H:/streamfab/update/update_config.xml --url_suffix=clientusertype=paid --user_type paid
+06.06 21:43:19.1(888 0x380)L: Mac: 00-d8-61-59-71-67:a4-c3-f0-ba-aa-04
+06.06 21:43:19.1(888 0x380)L: ad ui: add AdvertisementPostion PositionID=2000 adType=1
+06.06 21:43:19.2(888 0x380)L: brand name: DVDFab
+06.06 21:43:19.2(888 0x380)W: ProductDisplayName is null, use ProductName
+06.06 21:43:19.4(888 0x508)L: got local software info size: 1
+06.06 21:43:19.4(888 0x508)L: Current software: 49 StreamFab (x64) 7.0.3.0
+06.06 21:43:19.4(888 0x508)L: Download setup.exe file, Load configure failed! H:/streamfab/update/downloadTemp_\update_x64.cfg
+06.06 21:43:19.4(888 0x508)I: check ServerSoftWareVersion 49
+06.06 21:43:19.4(888 0x380)L: ad process: request ad update 2026-06-06 21:43:19 be push in queue
+06.06 21:43:19.4(888 0x380)L: ad process: start process the request ad event: 2026-06-06 21:43:19
+06.06 21:43:19.4(888 0x380)L: ad process: Start request control info ...
+06.06 21:43:21.0(888 0x380)L: ad process: get ad control info from recommed service,server return 0
+06.06 21:43:21.0(888 0x380)L: ad process: could not found the ad at position 2000
+06.06 21:43:21.0(888 0x380)L: ad process: end ad control.
+06.06 21:43:21.0(888 0x508)I: RecommendSoftWare server return:  {"cscode":0,"version":1,"enable":true,"data":[{"name":"DVDFab 13","page_link":"https:\/\/www.dvdfab.cn\/all-in-one.htm","client_id":67,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/dvdfab13_x64_13061.cfg","version":"13061","description":"Komplettl\u00f6sung f\u00fcr die Sicherung, Konvertierung und Erstellung von DVD\/(4K UHD) Blu-ray Discs."},{"name":"PlayerFab","page_link":"https:\/\/www.dvdfab.cn\/media-player.htm","client_id":31,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/playerfab_7054.cfg","version":"7055","description":"Spielen Sie DVD\/(4K UHD) Blu-ray Discs\/Videos mit Navigationsmen\u00fcs ab und organisieren Sie Ihre Film\/Musik-Mediathek intelligent."},{"name":"UniFab","page_link":"https:\/\/www.dvdfab.cn\/unifab.htm","client_id":99,"download_cfg_link":"http:\/\/d217.unifab.ai\/download\/unifab_x64_4132.cfg","version":"4132","description":"Eine auf AI-basierende Videoverbesserungsl\u00f6sung zum Verbessern der Videoqualit\u00e4t und Vergr\u00f6\u00dfern der Videoaufl\u00f6sung."},{"name":"StreamFab","page_link":"https:\/\/www.dvdfab.cn\/downloader.htm","client_id":49,"download_cfg_link":"http:\/\/d217.dvdfab.cn\/download\/streamfab_x64_7030.cfg","version":"7030","description":"Downloadet Videos von Amazon, Netflix, Disney+, Hulu, YouTube und anderen 1000+ Webseiten."}]}
+06.06 21:43:21.0(888 0x508)I: local installed client id: QSet("49")
+06.06 21:43:21.0(888 0x508)I: local ignore client id: QSet("49", "48")
+06.06 21:43:21.0(888 0x380)L: No HaveNewVersion, app quit!
+
++--------------* AppEnd: LiveUpdate(pid=888 ThreadId=0x380) End 2026-06-06 21:43:21.0 *--------------+
+

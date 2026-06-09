@@ -1,0 +1,35 @@
+{
+    "code": 20000,
+    "data": [
+        {
+            "content": "Aufgrund aktueller Änderungen auf der <%sv_name%>-Website ist <%app_name%> vorübergehend nicht in der Lage, das Video zu analysieren.\n\nUnser Team arbeitet bereits an einer Lösung - bitte achten Sie auf das Changelog für Updates in den kommenden Versionen. Vielen Dank für Ihre Geduld!",
+            "title": "Die Engine für die Videoanalyse funktioniert nicht richtig.",
+            "type": "az_error"
+        },
+        {
+            "content": "Aufgrund aktueller Änderungen auf der <%sv_name%>-Website ist <%app_name%> vorübergehend nicht in der Lage, das Video herunterzuladen.\n\nUnser Team arbeitet bereits an einer Lösung. Bitte achten Sie auf das Changelog für Updates in den kommenden Versionen. Vielen Dank für Ihre Geduld!",
+            "title": "Die Engine zum Video-Download funktioniert nicht richtig.",
+            "type": "dl_error"
+        },
+        {
+            "content": "Es scheint, dass die neuesten DRM-Updates die Möglichkeit beeinträchtigt haben, neu veröffentlichte Videos herunterzuladen.\n\nUnser Team arbeitet mit Hochdruck daran, dieses Problem zu beheben - bitte achten Sie auf das Changelog in zukünftigen Updates. Vielen Dank für Ihre Geduld!",
+            "title": "Neu veröffentlichte Videos (nach 30.04.2025) werden noch nicht zum Download unterstützt.",
+            "type": "drm_error"
+        },
+        {
+            "content": "Gute Nachrichten! Die Probleme beim Herunterladen von Videos sind in der neuesten Version behoben worden.\n\nAktualisieren Sie einfach <%app_name%>, um wieder reibungslose Downloads von Ihren Lieblingsvideos zu genießen!",
+            "title": "Die Engine für Video-Download ist in der <%app_name%> Version <%version%> korrigiert worden.",
+            "type": "dl_recover"
+        },
+        {
+            "content": "Gute Nachrichten! Die Probleme mit der Videoanalyse sind in der neuesten Version behoben worden.\n\nAktualisieren Sie einfach <%app_name%>, um wieder reibungslose Downloads Ihrer Lieblingsvideos zu genießen!",
+            "title": "Die Engine zur Videoanalyse ist in der <%app_name%> Version <%version%> korrigiert worden.",
+            "type": "az_recover"
+        },
+        {
+            "content": "Gute Nachrichten! Die DRM-Probleme sind in der neuesten Version behoben worden.\n\nAktualisieren Sie einfach <%app_name%>, um wieder reibungslose Downloads Ihrer Lieblingsvideos zu genießen!",
+            "title": "Der DRM-Fehler ist in der <%app_name%> Version <%version%> behoben worden.",
+            "type": "drm_recover"
+        }
+    ]
+}

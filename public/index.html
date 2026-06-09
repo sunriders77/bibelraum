@@ -12,6 +12,9 @@
   </script>
   <!-- Socket.IO Client -->
   <script src="/socket.io/socket.io.js"></script>
+  <!-- LiveKit Client SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@livekit/components-styling@1.3/dist/livekit-components-styling.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/livekit-client@2.9/dist/livekit-client.umd.min.js"></script>
 
   <!-- VR-Controller-Steuerung für Quest 3 – DIREKT WebXR API + enter-vr Event -->
   <script>
@@ -182,7 +185,7 @@
         <span id="user-count">0</span>
       </div>
       <div id="toolbar-right">
-        <button id="toggle-jitsi" title="Bildschirm/Webcam">📺 Bildschirm</button>
+        <button id="toggle-cam" title="Webcam einschalten">📹 Kamera</button>
         <button id="toggle-chat" title="Chat öffnen">💬 Chat</button>
         <button id="copy-link" title="Link kopieren">🔗 Link kopieren</button>
         <button id="leave-btn" title="Raum verlassen">🚪 Verlassen</button>
@@ -190,9 +193,12 @@
     </div>
   </div>
 
-  <!-- Jitsi-Seitenleiste für PC (ausgeklappt) -->
-  <div id="jitsi-container" class="hidden">
-    <div id="jitsi-meeting"></div>
+  <!-- Hidden Canvas für LiveKit Video-Raster -->
+  <canvas id="video-grid-canvas" style="display:none" width="1280" height="720"></canvas>
+
+  <!-- Video-Galerie-Seitenleiste (Desktop-UI als Ergänzung) -->
+  <div id="livekit-container" class="hidden">
+    <div id="livekit-grid"></div>
   </div>
 
   <!-- Chat-Panel -->
@@ -337,16 +343,28 @@
     <!-- Bühne / Leinwand-Bereich vorne -->
     <a-plane position="0 0.5 -4.5" width="4" height="0.1" color="#3E2723" rotation="-90 0 0"></a-plane>
 
-    <!-- Große Videoleinwand für Jitsi (auch in VR sichtbar) -->
+    <!-- Große Videoleinwand für Inhalte (vorne) – später Bibeltext -->
     <a-entity id="screen-frame" position="0 2 -4.7">
       <!-- Rahmen -->
       <a-box depth="0.1" height="2.5" width="3.5" color="#2C1810" position="0 0 0"></a-box>
-      <!-- Die Leinwand - zeigt Webcam in VR (wenn aktiv) -->
+      <!-- Die Leinwand -->
       <a-plane id="video-screen" depth="0.01" height="2.2" width="3.2" color="#1a1a2e"
         position="0 0 0.06" material="side: double"></a-plane>
-      <!-- Status-Text (verschwindet wenn Video aktiv) -->
+      <!-- Status-Text -->
       <a-text id="screen-text" value="📺 Bibelstunde" position="0 0 0.08" align="center"
         color="#888" width="3" negate="false"></a-text>
+    </a-entity>
+
+    <!-- Große Videoleinwand für Webcams (linke Wand, gegenüber den Bildern) -->
+    <a-entity id="video-grid-frame" position="-5.8 2.2 0" rotation="0 90 0">
+      <!-- Rahmen -->
+      <a-box depth="0.1" height="2.8" width="4.5" color="#2C1810" position="0 0 0"></a-box>
+      <!-- Die Leinwand – zeigt das Canvas mit allen Webcams -->
+      <a-plane id="video-grid-screen" depth="0.01" height="2.6" width="4.3" color="#1a1a2e"
+        position="0 0 0.06" material="src: #video-grid-canvas; side: double"></a-plane>
+      <!-- Status-Text -->
+      <a-text id="grid-text" value="📹 Webcams" position="0 0 0.08" align="center"
+        color="#888" width="4" negate="false"></a-text>
     </a-entity>
 
     <!-- Container für fremde Avatare -->
@@ -506,9 +524,9 @@
     #toolbar-right button:hover {
       background: #5C4033;
     }
-    #jitsi-container {
+    #livekit-container {
       position: fixed;
-      top: 10px;
+      bottom: 10px;
       right: 10px;
       width: 320px;
       height: 240px;
@@ -520,16 +538,24 @@
       pointer-events: all;
       transition: all 0.3s ease;
     }
-    #jitsi-container.hidden {
+    #livekit-container.hidden {
       display: none;
     }
-    #jitsi-container.resizable {
-      resize: both;
-      overflow: auto;
-    }
-    #jitsi-meeting {
+    #livekit-grid {
       width: 100%;
       height: 100%;
+      background: #111;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+    #livekit-grid video {
+      width: 50%;
+      height: 50%;
+      object-fit: cover;
+      border-radius: 4px;
     }
     .toast {
       position: fixed;
