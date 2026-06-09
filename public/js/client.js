@@ -386,6 +386,7 @@ async function joinLiveKitRoom(userName) {
     const room = new LivekitClient.Room({
       adaptiveStream: false,
       dynacast: true,
+      autoSubscribe: true,
       videoCaptureDefaults: { resolution: LivekitClient.VideoPresets.h360 },
     });
 
@@ -477,6 +478,14 @@ async function joinLiveKitRoom(userName) {
 
     // Bereits verbundene Teilnehmer aktiv scannen
     scanAllRemoteTracks(room);
+
+    // ★ Starte periodischen Scan nach Remote-Tracks (Sicherheitsnetz!)
+    if (window._remoteTrackScanner) clearInterval(window._remoteTrackScanner);
+    window._remoteTrackScanner = setInterval(function() {
+      if (livekitRoom && livekitConnected) {
+        scanAllRemoteTracks(livekitRoom);
+      }
+    }, 2000);
 
     livekitRoom = room;
     livekitConnected = true;
@@ -622,12 +631,7 @@ function setupLocalVideo(userName, track) {
 
     addToDesktopGrid(userName, localVideoEl);
     console.log('📹 Lokaler LiveKit-Track geladen');
-
-    // ★ Eigenes Video auf die Leinwand (für den Start)
-    var leinwand = document.getElementById('video-grid-screen');
-    if (leinwand) {
-      leinwand.setAttribute('material', 'shader: flat; src: #lk-video-' + userName + '; color: #ffffff');
-    }
+    // Lokales Video NIEMALS auf die Leinwand – nur Remote!
   } catch(e) {
     console.warn('⚠️ Lokaler Video-Track nicht verfügbar:', e);
   }
