@@ -409,8 +409,9 @@ async function joinLiveKitRoom(userName) {
         videoEl.playsInline = true;
         videoEl.muted = true;
         // NIEMALS display:none – Browser pausiert dann den Stream!
-        // Stattdessen unsichtbar aber aktiv im Render-Tree
-        videoEl.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
+        // Auch nicht ausserhalb des Viewports – Browser rendert dann schwarze Frames!
+        // → GANZ KLEIN im Viewport platzieren
+        videoEl.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;';
         document.body.appendChild(videoEl);
         videoEl.play().catch(function(e) { console.warn('⚠️ Video play error:', e); });
 
@@ -618,7 +619,7 @@ function setupLocalVideo(userName, track) {
     localVideoEl.autoplay = true;
     localVideoEl.playsInline = true;
     localVideoEl.muted = true;
-    localVideoEl.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
+    localVideoEl.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;';
     document.body.appendChild(localVideoEl);
     localVideoEl.play().catch(function(e) { console.warn('⚠️ Lokales Video play error:', e); });
 
@@ -742,6 +743,9 @@ function startVideoGridRendering() {
         if (mat && mat.map) {
           // ★ WICHTIG: Premultiplied Alpha deaktivieren – sonst wird das Bild schwarz/dunkel!
           mat.map.premultiplyAlpha = false;
+          // ★ WICHTIG: ColorSpace auf sRGB setzen – sonst wird der Farbraum falsch interpretiert!
+          if (mat.map.colorSpace) mat.map.colorSpace = 'srgb';
+          else if (mat.map.encoding) mat.map.encoding = 3001; // THREE.sRGBEncoding Legacy
           mat.map.needsUpdate = true;
         }
       } catch(e) {}
