@@ -637,7 +637,7 @@ function setupLocalVideo(userName, track) {
   }
 }
 
-// === REMOTE VIDEO-TRACK VERARBEITEN (nach Gemini Pro) ===
+// === REMOTE VIDEO-TRACK VERARBEITEN (nach Gemini Pro V2) ===
 function handleRemoteVideoTrack(track, participant) {
   // Prüfen ob schon ein Video-Element existiert
   var existing = document.getElementById('lk-video-' + participant.identity);
@@ -646,20 +646,59 @@ function handleRemoteVideoTrack(track, participant) {
     return;
   }
 
-  // ★ track.attach() – LiveKits eigene Methode (wie von Gemini Pro empfohlen)
-  var videoEl = track.attach();
-  videoEl.id = 'lk-video-' + participant.identity;
-  videoEl.muted = true;
-  videoEl.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;';
-  document.body.appendChild(videoEl);
-  videoEl.play().catch(function(e) { console.warn('⚠️ Remote Video play error:', e); });
+  console.log('📹 Empfange Video von ' + participant.identity);
 
-  // ★ DIREKT auf die A-Frame-Leinwand legen (wie Gemini Pro empfohlen)
+  // 1. LiveKit erstellt das Video-Element
+  var videoEl = track.attach();
+  var videoId = 'lk-video-' + participant.identity;
+  videoEl.id = videoId;
+  videoEl.setAttribute('playsinline', 'true');
+  videoEl.setAttribute('webkit-playsinline', 'true');
+  videoEl.muted = true;
+
+  // Unsichtbar im HTML-Hintergrund (Gemini sagt: display:none ist OK wenn play() läuft)
+  videoEl.style.display = 'none';
+  document.body.appendChild(videoEl);
+
+  // 2. Video explizit STARTEN (löst Autoplay-Problem)
   var leinwand = document.getElementById('video-grid-screen');
-  if (leinwand) {
-    leinwand.setAttribute('material', 'shader: flat; src: #lk-video-' + participant.identity + '; color: #ffffff');
-    showToast('📹 ' + participant.identity + ' ist jetzt zu sehen!');
-  }
+  videoEl.play().then(function() {
+    console.log('✅ Video von ' + participant.identity + ' spielt jetzt ab.');
+
+    // 3. Erst WENN es spielt, an die A-Frame Leinwand übergeben
+    if (leinwand) {
+      leinwand.setAttribute('material', 'shader: flat; src: #' + videoId + '; color: #ffffff');
+      console.log('🎯 Leinwand auf ' + participant.identity + ' gesetzt');
+
+      // 4. A-Frame zwingen, die Textur sofort zu aktualisieren (der "Texture-Schubs")
+      setTimeout(function() {
+        try {
+          if (leinwand.getObject3D) {
+            var mesh = leinwand.getObject3D('mesh');
+            if (mesh && mesh.material && mesh.material.map) {
+              mesh.material.map.premultiplyAlpha = false;
+              if (mesh.material.map.colorSpace) mesh.material.map.colorSpace = 'srgb';
+              mesh.material.map.needsUpdate = true;
+              console.log('🎨 Texture aktualisiert (getObject3D)');
+            }
+          }
+        } catch(e) { console.warn('Texture-Schubs fehlgeschlagen:', e); }
+      }, 100);
+
+      showToast('📹 ' + participant.identity + ' ist jetzt zu sehen!');
+    }
+  }).catch(function(err) {
+    console.error('⚠️ Browser blockiert Autoplay:', err);
+    // Fallback: muted setzen und nochmal versuchen
+    videoEl.muted = true;
+    videoEl.play().then(function() {
+      if (leinwand) {
+        leinwand.setAttribute('material', 'shader: flat; src: #' + videoId + '; color: #ffffff');
+      }
+    }).catch(function(e) {
+      console.error('❌ Auch mit muted kein Autoplay:', e);
+    });
+  });
 
   if (!livekitParticipantTracks[participant.identity]) {
     livekitParticipantTracks[participant.identity] = { video: null, name: participant.identity };
@@ -668,7 +707,6 @@ function handleRemoteVideoTrack(track, participant) {
   livekitParticipantTracks[participant.identity].name = participant.identity;
 
   addToDesktopGrid(participant.identity, videoEl);
-  console.log('📹 Remote Track geladen (direkt auf Leinwand): ' + participant.identity);
 }
 
 // === AKTIVE SUCHE NACH REMOTE TRACKS ===
