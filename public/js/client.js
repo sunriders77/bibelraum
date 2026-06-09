@@ -613,6 +613,7 @@ function startVideoGridRendering() {
       ctx.font = '24px Arial';
       ctx.textAlign = 'center';
       ctx.fillText('📹 Kamera einschalten...', canvas.width/2, canvas.height/2);
+      updateCanvasTexture();
       canvasAnimFrame = requestAnimationFrame(render);
       return;
     }
@@ -669,29 +670,26 @@ function startVideoGridRendering() {
       ctx.fillText(p.name, x + 10, y + cellH - 10);
     });
 
+    // ★ WICHTIG: A-Frame-Texture nach jedem Frame aktualisieren!
+    updateCanvasTexture();
+
     canvasAnimFrame = requestAnimationFrame(render);
   }
 
-  // Canvas-Texture für A-Frame aktualisieren
-  function updateTexture() {
+  // A-Frame Canvas-Texture aktualisieren
+  function updateCanvasTexture() {
     const gridScreen = document.getElementById('video-grid-screen');
     if (gridScreen && gridScreen.components && gridScreen.components.material) {
-      const mat = gridScreen.components.material.material;
-      if (mat && mat.map) {
-        mat.map.needsUpdate = true;
-      }
+      try {
+        const mat = gridScreen.components.material.material;
+        if (mat && mat.map) {
+          mat.map.needsUpdate = true;
+        }
+      } catch(e) {}
     }
   }
 
-  // Doppelte Aktualisierung: Canvas zeichnen + Texture-Update
-  function renderLoop() {
-    render();
-    updateTexture();
-    // A-Frame braucht expliziten Texture-Refresh
-    setTimeout(updateTexture, 50);
-  }
-
-  renderLoop();
+  render();
   updateGridText();
 }
 
