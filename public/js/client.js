@@ -404,7 +404,7 @@ async function joinLiveKitRoom(userName) {
       if (track.kind === 'video' || track.kind === 'audio') {
         const videoEl = document.createElement('video');
         videoEl.id = 'lk-video-' + participant.identity;
-        videoEl.srcObject = new MediaStream([track]);
+        videoEl.srcObject = new MediaStream([track.mediaStreamTrack || track]);
         videoEl.autoplay = true;
         videoEl.playsInline = true;
         videoEl.muted = true;
@@ -427,38 +427,40 @@ async function joinLiveKitRoom(userName) {
       removeLiveKitParticipant(participant.identity);
     });
 
-    // Eigene Kamera + Mikrofon
-    const localVideo = new LivekitClient.LocalVideoTrack();
-    const localAudio = new LivekitClient.LocalAudioTrack();
-
+    // Zum Server verbinden
     await room.connect(data.host, data.token);
     console.log('✅ LiveKit verbunden: ' + roomName);
 
-    // Lokale Webcam publishen
-    const camPub = await room.localParticipant.enableCameraAndMicrophone();
+    // Lokale Webcam + Mikrofon aktivieren
+    await room.localParticipant.setCameraEnabled(true);
+    await room.localParticipant.setMicrophoneEnabled(true);
     console.log('📷 Kamera publisht');
 
-    // Lokales Video-Element für die eigene Vorschau in der Desktop-Galerie
-    if (room.localParticipant.videoTrackPublications.size > 0) {
-      const trackPub = Array.from(room.localParticipant.videoTrackPublications.values())[0];
-      if (trackPub && trackPub.track) {
-        const localVideoEl = document.createElement('video');
-        localVideoEl.id = 'lk-video-' + userName;
-        localVideoEl.srcObject = new MediaStream([trackPub.track.mediaStreamTrack]);
-        localVideoEl.autoplay = true;
-        localVideoEl.playsInline = true;
-        localVideoEl.muted = true;
-        localVideoEl.style.display = 'none';
-        document.body.appendChild(localVideoEl);
+    // Warten bis der Track wirklich da ist
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
-        if (!livekitParticipantTracks[userName]) {
-          livekitParticipantTracks[userName] = { video: null, name: userName };
-        }
-        livekitParticipantTracks[userName].video = localVideoEl;
-        livekitParticipantTracks[userName].name = userName;
+    // Lokales Video-Element für die eigene Vorschau
+    // Versuche, den eigenen Video-Stream über getUserMedia zu bekommen
+    try {
+      const localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      const localVideoEl = document.createElement('video');
+      localVideoEl.id = 'lk-video-' + userName;
+      localVideoEl.srcObject = localStream;
+      localVideoEl.autoplay = true;
+      localVideoEl.playsInline = true;
+      localVideoEl.muted = true;
+      localVideoEl.style.display = 'none';
+      document.body.appendChild(localVideoEl);
 
-        addToDesktopGrid(userName, localVideoEl);
+      if (!livekitParticipantTracks[userName]) {
+        livekitParticipantTracks[userName] = { video: null, name: userName };
       }
+      livekitParticipantTracks[userName].video = localVideoEl;
+      livekitParticipantTracks[userName].name = userName;
+
+      addToDesktopGrid(userName, localVideoEl);
+    } catch(e) {
+      console.warn('Eigene Kamera nicht verfügbar (Desktop-Galerie):', e);
     }
 
     // Bereits verbundene Teilnehmer abholen
