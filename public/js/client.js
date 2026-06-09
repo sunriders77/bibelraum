@@ -392,6 +392,7 @@ async function joinLiveKitRoom(userName) {
 
     room.on('participantConnected', (participant) => {
       console.log('👤 LiveKit: ' + participant.identity + ' beigetreten');
+      showToast('👤 ' + participant.identity + ' ist dem LiveKit-Raum beigetreten!');
       addLiveKitParticipant(participant);
       // Sofort nach Tracks suchen (für Teilnehmer die Kamera bereits an haben)
       participant.trackPublications.forEach(function(pub) {
@@ -402,6 +403,7 @@ async function joinLiveKitRoom(userName) {
       // Zusätzlich auf trackSubscribed für diesen Teilnehmer hören
       participant.on('trackSubscribed', function(track, pub) {
         if (track.kind === 'video') {
+          showToast('📹 ' + participant.identity + ' hat Video geteilt (per participant)!');
           console.log('📹 Remote Track subscribed (per participant): ' + participant.identity);
           handleRemoteVideoTrack(track, participant);
         }
@@ -415,6 +417,7 @@ async function joinLiveKitRoom(userName) {
 
     room.on('trackSubscribed', (track, publication, participant) => {
       console.log('📹 LiveKit Track subscribed (per room): ' + track.kind + ' von ' + participant.identity);
+      showToast('📹 Track subscribed per room: ' + participant.identity);
       if (track.kind === 'video') {
         handleRemoteVideoTrack(track, participant);
       }
