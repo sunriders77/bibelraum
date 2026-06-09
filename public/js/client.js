@@ -599,8 +599,8 @@ async function leaveLiveKitRoom() {
   // Canvas leeren
   const canvas = document.getElementById('video-grid-canvas');
   if (canvas) {
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#1a1a2e';
+    const ctx = canvas.getContext('2d', { alpha: false });
+    ctx.fillStyle = '#0a0a1e';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
@@ -640,7 +640,7 @@ function startVideoGridRendering() {
   const canvas = document.getElementById('video-grid-canvas');
   if (!canvas) return;
 
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { alpha: false });
 
   function render() {
     if (!livekitConnected) return;
@@ -648,7 +648,7 @@ function startVideoGridRendering() {
     const participants = Object.entries(livekitParticipantTracks).filter(([id, p]) => p.video !== null);
     const count = participants.length;
 
-    ctx.fillStyle = '#1a1a2e';
+    ctx.fillStyle = '#0a0a1e';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     if (count === 0) {
