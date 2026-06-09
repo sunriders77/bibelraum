@@ -497,7 +497,7 @@ async function joinLiveKitRoom(userName) {
     const lkContainer = document.getElementById('livekit-container');
     if (lkContainer) lkContainer.classList.remove('hidden');
 
-    showToast('📹 Kamera aktiv – ' + Object.keys(livekitParticipantTracks).length + ' Teilnehmer');
+    showToast('📹 Kamera aktiv – wird an alle übertragen!');
 
     // Status-Text auf der Content-Leinwand
     var screenText = document.getElementById('screen-text');
@@ -631,26 +631,6 @@ function setupLocalVideo(userName, track) {
 
     addToDesktopGrid(userName, localVideoEl);
     console.log('📹 Lokaler LiveKit-Track geladen');
-
-    // ★ DIREKT auf die A-Frame-Leinwand legen (Canvas umgehen!)
-    var gridScreen = document.getElementById('video-grid-screen');
-    if (gridScreen) {
-      gridScreen.setAttribute('material', 'shader: flat; src: #lk-video-' + userName + '; color: #ffffff');
-            console.log('🎯 Video direkt auf Leinwand gesetzt (flat shader): #lk-video-' + userName);
-      // ★ ColorSpace der Video-Textur auf sRGB setzen!
-      setTimeout(function() {
-        try {
-          var mat = gridScreen.components.material.material;
-          if (mat && mat.map) {
-            mat.map.premultiplyAlpha = false;
-            if (mat.map.colorSpace) mat.map.colorSpace = 'srgb';
-            else if (mat.map.encoding) mat.map.encoding = 3001;
-            mat.map.needsUpdate = true;
-            console.log('🎨 ColorSpace korrigiert: srgb');
-          }
-        } catch(e) { console.warn('ColorSpace-Fix fehlgeschlagen:', e); }
-      }, 500);
-    }
   } catch(e) {
     console.warn('⚠️ Lokaler Video-Track nicht verfügbar:', e);
   }
