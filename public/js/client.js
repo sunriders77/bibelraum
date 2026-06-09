@@ -671,26 +671,40 @@ function startVideoGridRendering() {
       const x = col * cellW;
       const y = row * cellH;
 
-      // Video zeichnen (falls verfügbar)
-      if (p.video && p.video.readyState >= 2) {
+      // Video zeichnen (immer, auch wenn readyState < 2)
+      if (p.video) {
         try {
-          // Seitenverhältnis beibehalten
-          const vidRatio = p.video.videoWidth / p.video.videoHeight;
-          const cellRatio = cellW / cellH;
-          let sx, sy, sw, sh;
-          if (vidRatio > cellRatio) {
-            sh = p.video.videoHeight;
-            sw = sh * cellRatio;
-            sx = (p.video.videoWidth - sw) / 2;
-            sy = 0;
+          // drawImage klappt auch ohne play() – zeigt dann Standbild
+          if (p.video.videoWidth > 0 && p.video.videoHeight > 0) {
+            // Seitenverhältnis beibehalten
+            const vidRatio = p.video.videoWidth / p.video.videoHeight;
+            const cellRatio = cellW / cellH;
+            let sx, sy, sw, sh;
+            if (vidRatio > cellRatio) {
+              sh = p.video.videoHeight;
+              sw = sh * cellRatio;
+              sx = (p.video.videoWidth - sw) / 2;
+              sy = 0;
+            } else {
+              sw = p.video.videoWidth;
+              sh = sw / cellRatio;
+              sx = 0;
+              sy = (p.video.videoHeight - sh) / 2;
+            }
+            ctx.drawImage(p.video, sx, sy, sw, sh, x, y, cellW, cellH);
           } else {
-            sw = p.video.videoWidth;
-            sh = sw / cellRatio;
-            sx = 0;
-            sy = (p.video.videoHeight - sh) / 2;
+            // Video hat (noch) keine Maße – trotzdem versuchen
+            ctx.drawImage(p.video, x, y, cellW, cellH);
           }
-          ctx.drawImage(p.video, sx, sy, sw, sh, x, y, cellW, cellH);
-        } catch(e) {}
+        } catch(e) {
+          // Platzhalter bei Fehler
+          ctx.fillStyle = '#333';
+          ctx.fillRect(x + 4, y + 4, cellW - 8, cellH - 8);
+          ctx.fillStyle = '#888';
+          ctx.font = '12px Arial';
+          ctx.textAlign = 'center';
+          ctx.fillText('⏳', x + cellW/2, y + cellH/2 + 4);
+        }
       } else {
         // Platzhalter
         ctx.fillStyle = '#333';
