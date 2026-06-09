@@ -410,6 +410,7 @@ async function joinLiveKitRoom(userName) {
         videoEl.muted = true;
         videoEl.style.display = 'none';
         document.body.appendChild(videoEl);
+        videoEl.play().catch(function(e) { console.warn('⚠️ Video play error:', e); });
 
         if (!livekitParticipantTracks[participant.identity]) {
           livekitParticipantTracks[participant.identity] = { video: null, name: participant.identity };
@@ -440,28 +441,8 @@ async function joinLiveKitRoom(userName) {
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     // Lokales Video-Element für die eigene Vorschau
-    // Versuche, den eigenen Video-Stream über getUserMedia zu bekommen
-    try {
-      const localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-      const localVideoEl = document.createElement('video');
-      localVideoEl.id = 'lk-video-' + userName;
-      localVideoEl.srcObject = localStream;
-      localVideoEl.autoplay = true;
-      localVideoEl.playsInline = true;
-      localVideoEl.muted = true;
-      localVideoEl.style.display = 'none';
-      document.body.appendChild(localVideoEl);
-
-      if (!livekitParticipantTracks[userName]) {
-        livekitParticipantTracks[userName] = { video: null, name: userName };
-      }
-      livekitParticipantTracks[userName].video = localVideoEl;
-      livekitParticipantTracks[userName].name = userName;
-
-      addToDesktopGrid(userName, localVideoEl);
-    } catch(e) {
-      console.warn('Eigene Kamera nicht verfügbar (Desktop-Galerie):', e);
-    }
+    // Hole den LiveKit-eigenen lokalen Video-Track (KEIN zweites getUserMedia!)
+    await waitForLocalLiveKitTrack(room, userName);
 
     // Bereits verbundene Teilnehmer abholen
     room.remoteParticipants.forEach((participant) => {
@@ -590,6 +571,68 @@ async function leaveLiveKitRoom() {
   if (screenText) screenText.setAttribute('value', '📺 Bibelstunde');
 
   updateGridText();
+}
+
+// === LOKALEN LIVEKIT-VIDEO-TRACK HOLEN (statt getUserMedia) ===
+async function waitForLocalLiveKitTrack(room, userName) {
+  return new Promise(function(resolve) {
+    // Zuerst prüfen, ob der Track bereits verfügbar ist
+    var pubs = Array.from(room.localParticipant.videoTrackPublications.values());
+    for (var i = 0; i < pubs.length; i++) {
+      var pub = pubs[i];
+      if (pub.track && pub.track.mediaStreamTrack) {
+        setupLocalVideo(room, userName, pub.track);
+        resolve();
+        return;
+      }
+    }
+
+    // Sonst auf trackPublished warten
+    room.localParticipant.on('trackPublished', function(pub) {
+      if (pub.track && pub.track.kind === 'video') {
+        // Warten bis mediaStreamTrack verfügbar ist
+        var checkTrack = function() {
+          if (pub.track && pub.track.mediaStreamTrack) {
+            setupLocalVideo(room, userName, pub.track);
+            resolve();
+          } else {
+            setTimeout(checkTrack, 200);
+          }
+        };
+        setTimeout(checkTrack, 500);
+      }
+    });
+
+    // Timeout nach 8 Sekunden – dann trotzdem weitermachen
+    setTimeout(function() {
+      resolve();
+    }, 8000);
+  });
+}
+
+function setupLocalVideo(room, userName, track) {
+  try {
+    var localVideoEl = document.createElement('video');
+    localVideoEl.id = 'lk-video-' + userName;
+    localVideoEl.srcObject = new MediaStream([track.mediaStreamTrack]);
+    localVideoEl.autoplay = true;
+    localVideoEl.playsInline = true;
+    localVideoEl.muted = true;
+    localVideoEl.style.display = 'none';
+    document.body.appendChild(localVideoEl);
+    localVideoEl.play().catch(function(e) { console.warn('⚠️ Lokales Video play error:', e); });
+
+    if (!livekitParticipantTracks[userName]) {
+      livekitParticipantTracks[userName] = { video: null, name: userName };
+    }
+    livekitParticipantTracks[userName].video = localVideoEl;
+    livekitParticipantTracks[userName].name = userName;
+
+    addToDesktopGrid(userName, localVideoEl);
+    console.log('📹 Lokaler LiveKit-Track geladen');
+  } catch(e) {
+    console.warn('⚠️ Lokaler Video-Track nicht verfügbar:', e);
+  }
 }
 
 // === VIDEO-RASTER AUF CANVAS ZEICHNEN (für die 3D-Leinwand) ===
