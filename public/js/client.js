@@ -408,7 +408,9 @@ async function joinLiveKitRoom(userName) {
         videoEl.autoplay = true;
         videoEl.playsInline = true;
         videoEl.muted = true;
-        videoEl.style.display = 'none';
+        // NIEMALS display:none – Browser pausiert dann den Stream!
+        // Stattdessen unsichtbar aber aktiv im Render-Tree
+        videoEl.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
         document.body.appendChild(videoEl);
         videoEl.play().catch(function(e) { console.warn('⚠️ Video play error:', e); });
 
@@ -616,7 +618,7 @@ function setupLocalVideo(userName, track) {
     localVideoEl.autoplay = true;
     localVideoEl.playsInline = true;
     localVideoEl.muted = true;
-    localVideoEl.style.display = 'none';
+    localVideoEl.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
     document.body.appendChild(localVideoEl);
     localVideoEl.play().catch(function(e) { console.warn('⚠️ Lokales Video play error:', e); });
 
