@@ -384,7 +384,7 @@ async function joinLiveKitRoom(userName) {
     }
 
     const room = new LivekitClient.Room({
-      adaptiveStream: true,
+      adaptiveStream: false,
       dynacast: true,
       videoCaptureDefaults: { resolution: LivekitClient.VideoPresets.h360 },
     });
