@@ -88,7 +88,7 @@ app.get('/api/bot/status', (req, res) => {
 // === LIVEKIT KONFIGURATION ===
 const LIVEKIT_API_KEY = process.env.LIVEKIT_API_KEY || '';
 const LIVEKIT_API_SECRET = process.env.LIVEKIT_API_SECRET || '';
-const LIVEKIT_HOST = process.env.LIVEKIT_HOST || '';
+const LIVEKIT_HOST = process.env.LIVEKIT_HOST || process.env.LIVEKIT_URL || '';
 
 // LiveKit-Token ausstellen (wird vom Client aufgerufen)
 app.get('/api/livekit/token', (req, res) => {
