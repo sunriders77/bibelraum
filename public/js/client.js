@@ -635,8 +635,8 @@ function setupLocalVideo(userName, track) {
     // ★ DIREKT auf die A-Frame-Leinwand legen (Canvas umgehen!)
     var gridScreen = document.getElementById('video-grid-screen');
     if (gridScreen) {
-      gridScreen.setAttribute('material', 'src: #lk-video-' + userName + '; side: double; transparent: false');
-      console.log('🎯 Video direkt auf Leinwand gesetzt: #lk-video-' + userName);
+      gridScreen.setAttribute('material', 'shader: flat; src: #lk-video-' + userName + '; color: #ffffff');
+            console.log('🎯 Video direkt auf Leinwand gesetzt (flat shader): #lk-video-' + userName);
       // ★ ColorSpace der Video-Textur auf sRGB setzen!
       setTimeout(function() {
         try {
