@@ -432,17 +432,41 @@ async function joinLiveKitRoom(userName) {
     await room.connect(data.host, data.token);
     console.log('✅ LiveKit verbunden: ' + roomName);
 
+    // ★ Listener für den lokalen Track VOR setCameraEnabled setzen!
+    var localVideoReady = false;
+    room.localParticipant.on('trackPublished', function(trackPub) {
+      if (trackPub.track && trackPub.track.kind === 'video') {
+        console.log('📹 Lokaler Track published (Event)');
+        setupLocalVideo(userName, trackPub.track);
+        localVideoReady = true;
+      }
+    });
+
     // Lokale Webcam + Mikrofon aktivieren
     await room.localParticipant.setCameraEnabled(true);
     await room.localParticipant.setMicrophoneEnabled(true);
     console.log('📷 Kamera publisht');
 
-    // Warten bis der Track wirklich da ist
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-    // Lokales Video-Element für die eigene Vorschau
-    // Hole den LiveKit-eigenen lokalen Video-Track (KEIN zweites getUserMedia!)
-    await waitForLocalLiveKitTrack(room, userName);
+    // Auf lokalen Track warten (Polling als Backup, falls Event schon gefeuert)
+    for (var attempts = 0; attempts < 30; attempts++) {
+      if (localVideoReady) break;
+      var pubs = room.localParticipant.videoTrackPublications;
+      for (var j = 0; j < pubs.length; j++) {
+        var pub = pubs[j];
+        if (pub && pub.track && pub.track.mediaStreamTrack && pub.track.kind === 'video') {
+          console.log('📹 Lokaler Track gefunden (Polling)');
+          setupLocalVideo(userName, pub.track);
+          localVideoReady = true;
+          break;
+        }
+      }
+      if (localVideoReady) break;
+      await new Promise(function(r) { setTimeout(r, 300); });
+    }
+    if (!localVideoReady) {
+      console.warn('⚠️ Kein lokaler Video-Track nach 9s – Kamera evtl. blockiert');
+      showToast('⚠️ Kamera nicht verfügbar – Berechtigung prüfen');
+    }
 
     // Bereits verbundene Teilnehmer abholen
     room.remoteParticipants.forEach((participant) => {
@@ -573,44 +597,7 @@ async function leaveLiveKitRoom() {
   updateGridText();
 }
 
-// === LOKALEN LIVEKIT-VIDEO-TRACK HOLEN (statt getUserMedia) ===
-async function waitForLocalLiveKitTrack(room, userName) {
-  return new Promise(function(resolve) {
-    // Zuerst prüfen, ob der Track bereits verfügbar ist
-    var pubs = Array.from(room.localParticipant.videoTrackPublications.values());
-    for (var i = 0; i < pubs.length; i++) {
-      var pub = pubs[i];
-      if (pub.track && pub.track.mediaStreamTrack) {
-        setupLocalVideo(room, userName, pub.track);
-        resolve();
-        return;
-      }
-    }
-
-    // Sonst auf trackPublished warten
-    room.localParticipant.on('trackPublished', function(pub) {
-      if (pub.track && pub.track.kind === 'video') {
-        // Warten bis mediaStreamTrack verfügbar ist
-        var checkTrack = function() {
-          if (pub.track && pub.track.mediaStreamTrack) {
-            setupLocalVideo(room, userName, pub.track);
-            resolve();
-          } else {
-            setTimeout(checkTrack, 200);
-          }
-        };
-        setTimeout(checkTrack, 500);
-      }
-    });
-
-    // Timeout nach 8 Sekunden – dann trotzdem weitermachen
-    setTimeout(function() {
-      resolve();
-    }, 8000);
-  });
-}
-
-function setupLocalVideo(room, userName, track) {
+function setupLocalVideo(userName, track) {
   try {
     var localVideoEl = document.createElement('video');
     localVideoEl.id = 'lk-video-' + userName;
