@@ -622,12 +622,18 @@ function setupLocalVideo(userName, track) {
 
     addToDesktopGrid(userName, localVideoEl);
     console.log('📹 Lokaler LiveKit-Track geladen');
+
+    // ★ Eigenes Video auf die Leinwand (für den Start)
+    var leinwand = document.getElementById('video-grid-screen');
+    if (leinwand) {
+      leinwand.setAttribute('material', 'shader: flat; src: #lk-video-' + userName + '; color: #ffffff');
+    }
   } catch(e) {
     console.warn('⚠️ Lokaler Video-Track nicht verfügbar:', e);
   }
 }
 
-// === REMOTE VIDEO-TRACK VERARBEITEN ===
+// === REMOTE VIDEO-TRACK VERARBEITEN (nach Gemini Pro) ===
 function handleRemoteVideoTrack(track, participant) {
   // Prüfen ob schon ein Video-Element existiert
   var existing = document.getElementById('lk-video-' + participant.identity);
@@ -636,15 +642,20 @@ function handleRemoteVideoTrack(track, participant) {
     return;
   }
 
-  var videoEl = document.createElement('video');
+  // ★ track.attach() – LiveKits eigene Methode (wie von Gemini Pro empfohlen)
+  var videoEl = track.attach();
   videoEl.id = 'lk-video-' + participant.identity;
-  videoEl.srcObject = new MediaStream([track.mediaStreamTrack || track]);
-  videoEl.autoplay = true;
-  videoEl.playsInline = true;
   videoEl.muted = true;
   videoEl.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;';
   document.body.appendChild(videoEl);
   videoEl.play().catch(function(e) { console.warn('⚠️ Remote Video play error:', e); });
+
+  // ★ DIREKT auf die A-Frame-Leinwand legen (wie Gemini Pro empfohlen)
+  var leinwand = document.getElementById('video-grid-screen');
+  if (leinwand) {
+    leinwand.setAttribute('material', 'shader: flat; src: #lk-video-' + participant.identity + '; color: #ffffff');
+    showToast('📹 ' + participant.identity + ' ist jetzt zu sehen!');
+  }
 
   if (!livekitParticipantTracks[participant.identity]) {
     livekitParticipantTracks[participant.identity] = { video: null, name: participant.identity };
@@ -653,7 +664,7 @@ function handleRemoteVideoTrack(track, participant) {
   livekitParticipantTracks[participant.identity].name = participant.identity;
 
   addToDesktopGrid(participant.identity, videoEl);
-  console.log('📹 Remote Track geladen: ' + participant.identity);
+  console.log('📹 Remote Track geladen (direkt auf Leinwand): ' + participant.identity);
 }
 
 // === AKTIVE SUCHE NACH REMOTE TRACKS ===
