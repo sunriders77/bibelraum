@@ -372,7 +372,7 @@ async function joinLiveKitRoom(userName) {
   if (livekitConnected) return;
 
   try {
-    const roomName = 'bibelraum-' + (myId ? myId.slice(0, 6) : 'default');
+    const roomName = 'bibelraum-live'; // ★ FESTER Raum-Name – alle im gleichen Raum!
 
     // Token vom Server holen
     const resp = await fetch(`/api/livekit/token?name=${encodeURIComponent(userName)}&room=${encodeURIComponent(roomName)}`);
