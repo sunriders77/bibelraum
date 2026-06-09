@@ -631,6 +631,13 @@ function setupLocalVideo(userName, track) {
 
     addToDesktopGrid(userName, localVideoEl);
     console.log('📹 Lokaler LiveKit-Track geladen');
+
+    // ★ DIREKT auf die A-Frame-Leinwand legen (Canvas umgehen!)
+    var gridScreen = document.getElementById('video-grid-screen');
+    if (gridScreen) {
+      gridScreen.setAttribute('material', 'src: #lk-video-' + userName + '; side: double; transparent: false');
+      console.log('🎯 Video direkt auf Leinwand gesetzt: #lk-video-' + userName);
+    }
   } catch(e) {
     console.warn('⚠️ Lokaler Video-Track nicht verfügbar:', e);
   }
