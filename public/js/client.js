@@ -740,6 +740,8 @@ function startVideoGridRendering() {
       try {
         const mat = gridScreen.components.material.material;
         if (mat && mat.map) {
+          // ★ WICHTIG: Premultiplied Alpha deaktivieren – sonst wird das Bild schwarz/dunkel!
+          mat.map.premultiplyAlpha = false;
           mat.map.needsUpdate = true;
         }
       } catch(e) {}
