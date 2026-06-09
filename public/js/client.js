@@ -392,6 +392,19 @@ async function joinLiveKitRoom(userName) {
     room.on('participantConnected', (participant) => {
       console.log('👤 LiveKit: ' + participant.identity + ' beigetreten');
       addLiveKitParticipant(participant);
+      // Sofort nach Tracks suchen (für Teilnehmer die Kamera bereits an haben)
+      participant.trackPublications.forEach(function(pub) {
+        if (pub.track && pub.track.kind === 'video') {
+          handleRemoteVideoTrack(pub.track, participant);
+        }
+      });
+      // Zusätzlich auf trackSubscribed für diesen Teilnehmer hören
+      participant.on('trackSubscribed', function(track, pub) {
+        if (track.kind === 'video') {
+          console.log('📹 Remote Track subscribed (per participant): ' + participant.identity);
+          handleRemoteVideoTrack(track, participant);
+        }
+      });
     });
 
     room.on('participantDisconnected', (participant) => {
@@ -400,29 +413,9 @@ async function joinLiveKitRoom(userName) {
     });
 
     room.on('trackSubscribed', (track, publication, participant) => {
-      console.log('📹 LiveKit Track subscribed: ' + track.kind + ' von ' + participant.identity);
-      if (track.kind === 'video' || track.kind === 'audio') {
-        const videoEl = document.createElement('video');
-        videoEl.id = 'lk-video-' + participant.identity;
-        videoEl.srcObject = new MediaStream([track.mediaStreamTrack || track]);
-        videoEl.autoplay = true;
-        videoEl.playsInline = true;
-        videoEl.muted = true;
-        // NIEMALS display:none – Browser pausiert dann den Stream!
-        // Auch nicht ausserhalb des Viewports – Browser rendert dann schwarze Frames!
-        // → GANZ KLEIN im Viewport platzieren
-        videoEl.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;';
-        document.body.appendChild(videoEl);
-        videoEl.play().catch(function(e) { console.warn('⚠️ Video play error:', e); });
-
-        if (!livekitParticipantTracks[participant.identity]) {
-          livekitParticipantTracks[participant.identity] = { video: null, name: participant.identity };
-        }
-        livekitParticipantTracks[participant.identity].video = videoEl;
-        livekitParticipantTracks[participant.identity].name = participant.identity;
-
-        // Auch zur Desktop-Galerie hinzufügen
-        addToDesktopGrid(participant.identity, videoEl);
+      console.log('📹 LiveKit Track subscribed (per room): ' + track.kind + ' von ' + participant.identity);
+      if (track.kind === 'video') {
+        handleRemoteVideoTrack(track, participant);
       }
     });
 
@@ -482,10 +475,8 @@ async function joinLiveKitRoom(userName) {
       showToast('⚠️ Kamera nicht verfügbar – Berechtigung prüfen');
     }
 
-    // Bereits verbundene Teilnehmer abholen
-    room.remoteParticipants.forEach((participant) => {
-      addLiveKitParticipant(participant);
-    });
+    // Bereits verbundene Teilnehmer aktiv scannen
+    scanAllRemoteTracks(room);
 
     livekitRoom = room;
     livekitConnected = true;
@@ -634,6 +625,47 @@ function setupLocalVideo(userName, track) {
   } catch(e) {
     console.warn('⚠️ Lokaler Video-Track nicht verfügbar:', e);
   }
+}
+
+// === REMOTE VIDEO-TRACK VERARBEITEN ===
+function handleRemoteVideoTrack(track, participant) {
+  // Prüfen ob schon ein Video-Element existiert
+  var existing = document.getElementById('lk-video-' + participant.identity);
+  if (existing) {
+    console.log('⏩ Remote Track übersprungen (existiert bereits): ' + participant.identity);
+    return;
+  }
+
+  var videoEl = document.createElement('video');
+  videoEl.id = 'lk-video-' + participant.identity;
+  videoEl.srcObject = new MediaStream([track.mediaStreamTrack || track]);
+  videoEl.autoplay = true;
+  videoEl.playsInline = true;
+  videoEl.muted = true;
+  videoEl.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;';
+  document.body.appendChild(videoEl);
+  videoEl.play().catch(function(e) { console.warn('⚠️ Remote Video play error:', e); });
+
+  if (!livekitParticipantTracks[participant.identity]) {
+    livekitParticipantTracks[participant.identity] = { video: null, name: participant.identity };
+  }
+  livekitParticipantTracks[participant.identity].video = videoEl;
+  livekitParticipantTracks[participant.identity].name = participant.identity;
+
+  addToDesktopGrid(participant.identity, videoEl);
+  console.log('📹 Remote Track geladen: ' + participant.identity);
+}
+
+// === AKTIVE SUCHE NACH REMOTE TRACKS ===
+function scanAllRemoteTracks(room) {
+  room.remoteParticipants.forEach(function(participant) {
+    console.log('🔍 Scanne Remote: ' + participant.identity);
+    participant.trackPublications.forEach(function(pub) {
+      if (pub.track && pub.track.kind === 'video') {
+        handleRemoteVideoTrack(pub.track, participant);
+      }
+    });
+  });
 }
 
 // === VIDEO-RASTER AUF CANVAS ZEICHNEN (für die 3D-Leinwand) ===
