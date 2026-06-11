@@ -367,12 +367,12 @@ let localStream = null;
 let livekitConnected = false;
 let canvasAnimFrame = null;
 
-// LiveKit-Raum beitreten
+// LiveKit-Raum beitreten (AUTOMATISCH nach Login – ohne eigene Kamera!)
 async function joinLiveKitRoom(userName) {
   if (livekitConnected) return;
 
   try {
-    const roomName = 'bibelraum-live'; // ★ FESTER Raum-Name – alle im gleichen Raum!
+    const roomName = 'bibelraum-live';
 
     // Token vom Server holen
     const resp = await fetch(`/api/livekit/token?name=${encodeURIComponent(userName)}&room=${encodeURIComponent(roomName)}`);
@@ -387,23 +387,19 @@ async function joinLiveKitRoom(userName) {
       adaptiveStream: false,
       dynacast: true,
       autoSubscribe: true,
-      videoCaptureDefaults: { resolution: LivekitClient.VideoPresets.h360 },
     });
 
     room.on('participantConnected', (participant) => {
       console.log('👤 LiveKit: ' + participant.identity + ' beigetreten');
       showToast('👤 ' + participant.identity + ' ist dem LiveKit-Raum beigetreten!');
       addLiveKitParticipant(participant);
-      // Sofort nach Tracks suchen (für Teilnehmer die Kamera bereits an haben)
       participant.trackPublications.forEach(function(pub) {
         if (pub.track && pub.track.kind === 'video') {
           handleRemoteVideoTrack(pub.track, participant);
         }
       });
-      // Zusätzlich auf trackSubscribed für diesen Teilnehmer hören
       participant.on('trackSubscribed', function(track, pub) {
         if (track.kind === 'video') {
-          showToast('📹 ' + participant.identity + ' hat Video geteilt (per participant)!');
           console.log('📹 Remote Track subscribed (per participant): ' + participant.identity);
           handleRemoteVideoTrack(track, participant);
         }
@@ -417,7 +413,6 @@ async function joinLiveKitRoom(userName) {
 
     room.on('trackSubscribed', (track, publication, participant) => {
       console.log('📹 LiveKit Track subscribed (per room): ' + track.kind + ' von ' + participant.identity);
-      showToast('📹 Track subscribed per room: ' + participant.identity);
       if (track.kind === 'video') {
         handleRemoteVideoTrack(track, participant);
       }
@@ -428,61 +423,14 @@ async function joinLiveKitRoom(userName) {
       removeLiveKitParticipant(participant.identity);
     });
 
-    // Zum Server verbinden
+    // Zum Server verbinden (NUR als Zuschauer – KEINE eigene Kamera!)
     await room.connect(data.host, data.token);
-    console.log('✅ LiveKit verbunden: ' + roomName);
-
-    // ★ Listener für den lokalen Track VOR setCameraEnabled setzen!
-    var localVideoReady = false;
-    room.localParticipant.on('trackPublished', function(trackPub) {
-      if (trackPub.track && trackPub.track.kind === 'video') {
-        console.log('📹 Lokaler Track published (Event)');
-        setupLocalVideo(userName, trackPub.track);
-        localVideoReady = true;
-      }
-    });
-
-    // Lokale Webcam + Mikrofon aktivieren
-    await room.localParticipant.setCameraEnabled(true);
-    await room.localParticipant.setMicrophoneEnabled(true);
-    console.log('📷 Kamera publisht');
-
-    // Auf lokalen Track warten (Polling als Backup, falls Event schon gefeuert)
-    for (var attempts = 0; attempts < 30; attempts++) {
-      if (localVideoReady) break;
-      var pubIter = room.localParticipant.videoTrackPublications;
-      // Kann Map (LiveKit 2.x) oder Array sein – beide verarbeiten
-      if (pubIter.forEach) {
-        pubIter.forEach(function(pub) {
-          if (pub && pub.track && pub.track.mediaStreamTrack && pub.track.kind === 'video') {
-            console.log('📹 Lokaler Track gefunden (Polling)');
-            setupLocalVideo(userName, pub.track);
-            localVideoReady = true;
-          }
-        });
-      } else {
-        for (var j = 0; j < pubIter.length; j++) {
-          var pub = pubIter[j];
-          if (pub && pub.track && pub.track.mediaStreamTrack && pub.track.kind === 'video') {
-            console.log('📹 Lokaler Track gefunden (Polling)');
-            setupLocalVideo(userName, pub.track);
-            localVideoReady = true;
-            break;
-          }
-        }
-      }
-      if (localVideoReady) break;
-      await new Promise(function(r) { setTimeout(r, 300); });
-    }
-    if (!localVideoReady) {
-      console.warn('⚠️ Kein lokaler Video-Track nach 9s – Kamera evtl. blockiert');
-      showToast('⚠️ Kamera nicht verfügbar – Berechtigung prüfen');
-    }
+    console.log('✅ LiveKit verbunden (Zuschauer): ' + roomName);
 
     // Bereits verbundene Teilnehmer aktiv scannen
     scanAllRemoteTracks(room);
 
-    // ★ Starte periodischen Scan nach Remote-Tracks (Sicherheitsnetz!)
+    // Periodischer Scan (Sicherheitsnetz)
     if (window._remoteTrackScanner) clearInterval(window._remoteTrackScanner);
     window._remoteTrackScanner = setInterval(function() {
       if (livekitRoom && livekitConnected) {
@@ -493,21 +441,35 @@ async function joinLiveKitRoom(userName) {
     livekitRoom = room;
     livekitConnected = true;
 
-    // Canvas-Rendering starten
-    rebuildVideoGrid();
-
     // Desktop-Galerie anzeigen
     const lkContainer = document.getElementById('livekit-container');
     if (lkContainer) lkContainer.classList.remove('hidden');
 
-    showToast('📹 Kamera aktiv – wird an alle übertragen!');
-
-    // Status-Text auf der Content-Leinwand
-    var screenText = document.getElementById('screen-text');
-    if (screenText) screenText.setAttribute('value', '📺 Live: ' + userName);
+    showToast('🔗 Mit LiveKit-Raum verbunden');
   } catch (e) {
     console.error('LiveKit-Fehler:', e);
     showToast('⚠️ LiveKit-Fehler: ' + e.message);
+  }
+}
+
+// Eigene Kamera ein-/ausschalten (OHNE den LiveKit-Raum zu verlassen)
+async function toggleOwnCamera(enable) {
+  if (!livekitRoom || !livekitConnected) {
+    showToast('⚠️ Nicht mit LiveKit verbunden');
+    return;
+  }
+  try {
+    await livekitRoom.localParticipant.setCameraEnabled(enable);
+    if (enable) {
+      console.log('📷 Eigene Kamera EINGESCHALTET');
+      showToast('📷 Kamera an');
+    } else {
+      console.log('📷 Eigene Kamera AUSGESCHALTET');
+      showToast('📷 Kamera aus');
+    }
+  } catch (e) {
+    console.warn('⚠️ Kamera-Umschaltung fehlgeschlagen:', e);
+    showToast('⚠️ Kamera-Fehler: ' + e.message);
   }
 }
 
@@ -843,7 +805,9 @@ document.addEventListener('DOMContentLoaded', () => {
         initMovement();
         initPositionSync();
         checkVR();
-        // Jitsi wird nur geladen wenn der Button geklickt wird
+
+        // ★ LIVEKIT AUTOMATISCH BEITRETEN (ohne Kamera!)
+        joinLiveKitRoom(myName);
       }, 500);
     });
   });
@@ -860,16 +824,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') enterBtn.click();
   });
 
-  // Toolbar-Buttons
+  // Kamera-Button: Nur Kamera ein/aus (OHNE LiveKit-Raum zu verlassen!)
+  var myCameraEnabled = false;
   document.getElementById('toggle-cam')?.addEventListener('click', () => {
-    if (livekitConnected) {
-      leaveLiveKitRoom();
-      document.getElementById('toggle-cam').textContent = '📹 Kamera';
-      stopCamOnScreen();
-    } else {
-      joinLiveKitRoom(myName);
-      document.getElementById('toggle-cam').textContent = '📹 Aus';
-    }
+    myCameraEnabled = !myCameraEnabled;
+    toggleOwnCamera(myCameraEnabled);
+    document.getElementById('toggle-cam').textContent = myCameraEnabled ? '📹 Aus' : '📹 Kamera';
   });
 
   // Chat-Toggle
