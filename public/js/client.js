@@ -15,24 +15,10 @@ let lastRotation = { x: 0, y: 0, z: 0 };
 let posUpdateInterval = null;
 let cameraRig, camera;
 
-// === FARBEN + STYLE-VORLAGEN FÜR AVATARE ===
+// === FARBEN FÜR AVATARE ===
 const AVATAR_COLORS = [
   '#E57373', '#64B5F6', '#81C784', '#FFB74D', '#BA68C8',
   '#4DD0E1', '#FF8A65', '#AED581', '#F06292', '#7986CB'
-];
-
-// 10 verschiedene Avatar-Designs (Frisur, Bart, Brille, Kleidung)
-const AVATAR_STYLES = [
-  { hair: 'none', beard: false, glasses: false, hat: false, shirtColor: '#FFFFFF' },  // 0: Glatze
-  { hair: 'short', beard: false, glasses: false, hat: false, shirtColor: '#E0E0E0' }, // 1: Kurzhaar
-  { hair: 'long', beard: false, glasses: false, hat: false, shirtColor: '#FFCDD2' },   // 2: Lange Haare
-  { hair: 'short', beard: true, glasses: false, hat: false, shirtColor: '#C8E6C9' },   // 3: Kurzhaar+Bart
-  { hair: 'none', beard: false, glasses: true, hat: false, shirtColor: '#BBDEFB' },     // 4: Glatze+Brille
-  { hair: 'short', beard: false, glasses: true, hat: false, shirtColor: '#FFF9C4' },    // 5: Kurzhaar+Brille
-  { hair: 'long', beard: false, glasses: false, hat: true, shirtColor: '#D1C4E9' },     // 6: Lange Haare+Mütze
-  { hair: 'short', beard: true, glasses: true, hat: false, shirtColor: '#DCEDC8' },     // 7: Kurz+Bart+Brille
-  { hair: 'curly', beard: false, glasses: false, hat: false, shirtColor: '#FFE0B2' },   // 8: Locken
-  { hair: 'none', beard: true, glasses: false, hat: true, shirtColor: '#B2EBF2' },      // 9: Glatze+Bart+Mütze
 ];
 
 // geteilte Socket-Instanz für die Login-Benutzerliste
@@ -76,20 +62,6 @@ function connectSocket() {
   socket.on('connect', () => {
     console.log('✅ Mit Server verbunden:', socket.id);
     myId = socket.id;
-    // Loading-Screen ausblenden
-    var ls = document.getElementById('loading-screen');
-    if (ls) ls.classList.add('hidden');
-  });
-
-  socket.on('connect_error', (err) => {
-    console.error('❌ Verbindungsfehler:', err.message);
-    var le = document.getElementById('loading-error');
-    if (le) {
-      le.style.display = 'block';
-      le.textContent = '❌ Keine Verbindung zum Server. Server wacht auf... bitte Seite neu laden.';
-    }
-    var lt = document.getElementById('loading-text');
-    if (lt) lt.textContent = '⏳ Server startet... (kann bis zu 30s dauern)';
   });
 
   socket.on('room:init', (data) => {
@@ -123,6 +95,17 @@ function connectSocket() {
     updateRemoteAvatarName(data.id, data.name);
   });
 
+  // Avatar-Wechsel eines anderen Users
+  socket.on('user:avatar', (data) => {
+    const el = document.getElementById(`avatar-${data.id}`);
+    if (el) {
+      const model = el.querySelector('[gltf-model]');
+      if (model) {
+        model.setAttribute('gltf-model', data.avatarUrl);
+      }
+    }
+  });
+
   // Bot-Nachrichten (Sprechblase)
   socket.on('bot:message', (text) => {
     const bubble = document.getElementById('bot-bubble');
@@ -145,95 +128,7 @@ function connectSocket() {
 }
 
 // === AVATAR ERSTELLEN ===
-// Hilfsfunktion: Dekorationen (Frisur, Bart, Brille, Hut) zum Avatar hinzufügen
-function decorateAvatar(entity, bodyColor, styleIndex) {
-  var style = AVATAR_STYLES[styleIndex % AVATAR_STYLES.length];
-  var headPos = '0 0.75 0';
-
-  // Frisur
-  if (style.hair === 'short') {
-    var hair = document.createElement('a-sphere');
-    hair.setAttribute('radius', '0.14');
-    hair.setAttribute('color', '#5D4037');
-    hair.setAttribute('position', '0 0.88 0');
-    hair.setAttribute('scale', '1 0.3 1');
-    entity.appendChild(hair);
-  } else if (style.hair === 'long') {
-    var hair = document.createElement('a-sphere');
-    hair.setAttribute('radius', '0.18');
-    hair.setAttribute('color', '#5D4037');
-    hair.setAttribute('position', '0 0.86 0');
-    hair.setAttribute('scale', '1 0.35 1');
-    entity.appendChild(hair);
-    // Seitenhaare
-    var sideL = document.createElement('a-sphere');
-    sideL.setAttribute('radius', '0.06');
-    sideL.setAttribute('color', '#5D4037');
-    sideL.setAttribute('position', '-0.19 0.73 0');
-    entity.appendChild(sideL);
-    var sideR = document.createElement('a-sphere');
-    sideR.setAttribute('radius', '0.06');
-    sideR.setAttribute('color', '#5D4037');
-    sideR.setAttribute('position', '0.19 0.73 0');
-    entity.appendChild(sideR);
-  } else if (style.hair === 'curly') {
-    for (var i = 0; i < 5; i++) {
-      var curl = document.createElement('a-sphere');
-      curl.setAttribute('radius', '0.06');
-      curl.setAttribute('color', '#8D6E63');
-      var angle = (i / 5) * Math.PI * 2;
-      curl.setAttribute('position', (Math.cos(angle) * 0.15) + ' ' + (0.86 + Math.sin(angle) * 0.04) + ' ' + (Math.sin(angle) * 0.12));
-      entity.appendChild(curl);
-    }
-  }
-
-  // Bart
-  if (style.beard) {
-    var beard = document.createElement('a-box');
-    beard.setAttribute('depth', '0.08');
-    beard.setAttribute('height', '0.1');
-    beard.setAttribute('width', '0.15');
-    beard.setAttribute('color', '#5D4037');
-    beard.setAttribute('position', '0 0.62 0.17');
-    entity.appendChild(beard);
-  }
-
-  // Brille
-  if (style.glasses) {
-    var frame = document.createElement('a-ring');
-    frame.setAttribute('radius-inner', '0.04');
-    frame.setAttribute('radius-outer', '0.055');
-    frame.setAttribute('color', '#333');
-    frame.setAttribute('position', '-0.08 0.77 0.19');
-    frame.setAttribute('rotation', '90 0 0');
-    entity.appendChild(frame);
-    var frame2 = document.createElement('a-ring');
-    frame2.setAttribute('radius-inner', '0.04');
-    frame2.setAttribute('radius-outer', '0.055');
-    frame2.setAttribute('color', '#333');
-    frame2.setAttribute('position', '0.08 0.77 0.19');
-    frame2.setAttribute('rotation', '90 0 0');
-    entity.appendChild(frame2);
-    var bridge = document.createElement('a-box');
-    bridge.setAttribute('depth', '0.02');
-    bridge.setAttribute('height', '0.02');
-    bridge.setAttribute('width', '0.06');
-    bridge.setAttribute('color', '#333');
-    bridge.setAttribute('position', '0 0.77 0.19');
-    entity.appendChild(bridge);
-  }
-
-  // Kragem/Hemd
-  var collar = document.createElement('a-box');
-  collar.setAttribute('depth', '0.3');
-  collar.setAttribute('height', '0.08');
-  collar.setAttribute('width', '0.3');
-  collar.setAttribute('color', style.shirtColor);
-  collar.setAttribute('position', '0 0.55 0');
-  entity.appendChild(collar);
-}
-
-function createOwnAvatar(name, avatarColor) {
+function createOwnAvatar(name, avatarUrl) {
   if (!myId) return;
 
   const scene = document.querySelector('a-scene');
@@ -245,53 +140,22 @@ function createOwnAvatar(name, avatarColor) {
     container.removeChild(container.firstChild);
   }
 
-  // Farb-Index + Style-Index basierend auf User-ID
-  var charCode = myId.charCodeAt(myId.length - 1);
-  const color = avatarColor || AVATAR_COLORS[charCode % AVATAR_COLORS.length];
-  var styleIndex = charCode % AVATAR_STYLES.length;
-
   myAvatar = document.createElement('a-entity');
   myAvatar.setAttribute('id', 'my-avatar-body');
 
-  // Körper
-  const body = document.createElement('a-box');
-  body.setAttribute('depth', '0.4');
-  body.setAttribute('height', '0.6');
-  body.setAttribute('width', '0.4');
-  body.setAttribute('color', color);
-  body.setAttribute('position', '0 0.3 0');
-  body.setAttribute('material', 'roughness: 0.7');
-  myAvatar.appendChild(body);
-
-  // Kopf
-  const head = document.createElement('a-sphere');
-  head.setAttribute('radius', '0.18');
-  head.setAttribute('color', '#FFDCB5');
-  head.setAttribute('position', '0 0.75 0');
-  myAvatar.appendChild(head);
-
-  // Augen
-  const eyeL = document.createElement('a-sphere');
-  eyeL.setAttribute('radius', '0.04');
-  eyeL.setAttribute('color', '#333');
-  eyeL.setAttribute('position', '-0.08 0.78 0.17');
-  myAvatar.appendChild(eyeL);
-
-  const eyeR = document.createElement('a-sphere');
-  eyeR.setAttribute('radius', '0.04');
-  eyeR.setAttribute('color', '#333');
-  eyeR.setAttribute('position', '0.08 0.78 0.17');
-  myAvatar.appendChild(eyeR);
-
-  // Style-Dekorationen (Frisur, Bart, Brille, Hut)
-  decorateAvatar(myAvatar, color, styleIndex);
+  // GLB-Avatar laden
+  const model = document.createElement('a-entity');
+  model.setAttribute('gltf-model', avatarUrl || '/avatare/superhero_male.glb');
+  model.setAttribute('scale', '1.2 1.2 1.2');
+  model.setAttribute('position', '0 -0.5 0');
+  myAvatar.appendChild(model);
 
   container.appendChild(myAvatar);
 
   // Namenslabel aktualisieren
   const nameLabel = document.getElementById('my-avatar-name');
   if (nameLabel) {
-    nameLabel.setAttribute('text', `value: ${name}; align: center; color: ${color}; negate: false`);
+    nameLabel.setAttribute('text', `value: ${name}; align: center; color: #fff; negate: false`);
   }
 
   // Avatar-Position an Kamera binden
@@ -305,54 +169,26 @@ function createRemoteAvatar(user) {
   const container = document.getElementById('remote-avatars');
   if (!container) return;
 
-  // Bot bekommt feste Farbe (pink) + Style 0
-  var charCode = user.id.charCodeAt(user.id.length - 1);
-  const color = user.isBot ? '#F06292' : AVATAR_COLORS[charCode % AVATAR_COLORS.length];
-  var styleIndex = user.isBot ? 0 : (charCode % AVATAR_STYLES.length);
+  const avatarUrl = user.avatarUrl || '/avatare/superhero_male.glb';
 
   const entity = document.createElement('a-entity');
   entity.setAttribute('id', `avatar-${user.id}`);
+
   entity.setAttribute('position', `${user.position.x} ${user.position.y} ${user.position.z}`);
 
-  // Körper
-  const body = document.createElement('a-box');
-  body.setAttribute('depth', '0.4');
-  body.setAttribute('height', '0.6');
-  body.setAttribute('width', '0.4');
-  body.setAttribute('color', color);
-  body.setAttribute('position', '0 0.3 0');
-  body.setAttribute('material', 'roughness: 0.7');
-  entity.appendChild(body);
-
-  // Kopf
-  const head = document.createElement('a-sphere');
-  head.setAttribute('radius', '0.18');
-  head.setAttribute('color', '#FFDCB5');
-  head.setAttribute('position', '0 0.75 0');
-  entity.appendChild(head);
-
-  // Augen
-  const eyeL = document.createElement('a-sphere');
-  eyeL.setAttribute('radius', '0.04');
-  eyeL.setAttribute('color', '#333');
-  eyeL.setAttribute('position', '-0.08 0.78 0.17');
-  entity.appendChild(eyeL);
-
-  const eyeR = document.createElement('a-sphere');
-  eyeR.setAttribute('radius', '0.04');
-  eyeR.setAttribute('color', '#333');
-  eyeR.setAttribute('position', '0.08 0.78 0.17');
-  entity.appendChild(eyeR);
-
-  // Style-Dekorationen
-  decorateAvatar(entity, color, styleIndex);
+  // GLB-Avatar
+  const model = document.createElement('a-entity');
+  model.setAttribute('gltf-model', avatarUrl);
+  model.setAttribute('scale', '1.2 1.2 1.2');
+  model.setAttribute('position', '0 -0.5 0');
+  entity.appendChild(model);
 
   // Namenslabel
   const label = document.createElement('a-text');
   label.setAttribute('id', `label-${user.id}`);
   label.setAttribute('value', user.name || 'Gast');
   label.setAttribute('align', 'center');
-  label.setAttribute('color', color);
+  label.setAttribute('color', '#fff');
   label.setAttribute('negate', 'false');
   label.setAttribute('position', '0 1.2 0');
   label.setAttribute('scale', '0.4 0.4 0.4');
@@ -493,12 +329,12 @@ let localStream = null;
 let livekitConnected = false;
 let canvasAnimFrame = null;
 
-// LiveKit-Raum beitreten (AUTOMATISCH nach Login – ohne eigene Kamera!)
+// LiveKit-Raum beitreten
 async function joinLiveKitRoom(userName) {
   if (livekitConnected) return;
 
   try {
-    const roomName = 'bibelraum-live';
+    const roomName = 'bibelraum-' + (myId ? myId.slice(0, 6) : 'default');
 
     // Token vom Server holen
     const resp = await fetch(`/api/livekit/token?name=${encodeURIComponent(userName)}&room=${encodeURIComponent(roomName)}`);
@@ -510,35 +346,14 @@ async function joinLiveKitRoom(userName) {
     }
 
     const room = new LivekitClient.Room({
-      adaptiveStream: false,
+      adaptiveStream: true,
       dynacast: true,
-      autoSubscribe: true,
+      videoCaptureDefaults: { resolution: LivekitClient.VideoPresets.h360 },
     });
 
     room.on('participantConnected', (participant) => {
       console.log('👤 LiveKit: ' + participant.identity + ' beigetreten');
-      showToast('👤 ' + participant.identity + ' ist dem LiveKit-Raum beigetreten!');
       addLiveKitParticipant(participant);
-      participant.trackPublications.forEach(function(pub) {
-        if (pub.track && pub.track.kind === 'video') {
-          // Screen-Share und Kamera unterscheiden
-          if (pub.source === 'screen_share') {
-            handleScreenShareTrack(pub.track, participant);
-          } else {
-            handleRemoteVideoTrack(pub.track, participant);
-          }
-        }
-      });
-      participant.on('trackSubscribed', function(track, pub) {
-        if (track.kind === 'video') {
-          console.log('📹 Remote Track subscribed (per participant): ' + participant.identity);
-          if (pub && pub.source === 'screen_share') {
-            handleScreenShareTrack(track, participant);
-          } else {
-            handleRemoteVideoTrack(track, participant);
-          }
-        }
-      });
     });
 
     room.on('participantDisconnected', (participant) => {
@@ -547,149 +362,93 @@ async function joinLiveKitRoom(userName) {
     });
 
     room.on('trackSubscribed', (track, publication, participant) => {
-      console.log('📹 LiveKit Track subscribed (per room): ' + track.kind + ' von ' + participant.identity);
-      if (track.kind === 'video') {
-        if (publication && publication.source === 'screen_share') {
-          handleScreenShareTrack(track, participant);
-        } else {
-          handleRemoteVideoTrack(track, participant);
+      console.log('📹 LiveKit Track subscribed: ' + track.kind + ' von ' + participant.identity);
+      if (track.kind === 'video' || track.kind === 'audio') {
+        const videoEl = document.createElement('video');
+        videoEl.id = 'lk-video-' + participant.identity;
+        videoEl.srcObject = new MediaStream([track.mediaStreamTrack || track]);
+        videoEl.autoplay = true;
+        videoEl.playsInline = true;
+        videoEl.muted = true;
+        videoEl.style.display = 'none';
+        document.body.appendChild(videoEl);
+
+        if (!livekitParticipantTracks[participant.identity]) {
+          livekitParticipantTracks[participant.identity] = { video: null, name: participant.identity };
         }
+        livekitParticipantTracks[participant.identity].video = videoEl;
+        livekitParticipantTracks[participant.identity].name = participant.identity;
+
+        // Auch zur Desktop-Galerie hinzufügen
+        addToDesktopGrid(participant.identity, videoEl);
       }
     });
 
     room.on('trackUnsubscribed', (track, publication, participant) => {
       console.log('📹 LiveKit Track unsubscribed: ' + participant.identity);
-      if (publication && publication.source === 'screen_share') {
-        clearScreenShare();
-      } else {
-        removeLiveKitParticipant(participant.identity);
-      }
+      removeLiveKitParticipant(participant.identity);
     });
 
-    // Zum Server verbinden (NUR als Zuschauer – KEINE eigene Kamera!)
+    // Zum Server verbinden
     await room.connect(data.host, data.token);
-    console.log('✅ LiveKit verbunden (Zuschauer): ' + roomName);
+    console.log('✅ LiveKit verbunden: ' + roomName);
 
-    // Bereits verbundene Teilnehmer aktiv scannen
-    scanAllRemoteTracks(room);
+    // Lokale Webcam + Mikrofon aktivieren
+    await room.localParticipant.setCameraEnabled(true);
+    await room.localParticipant.setMicrophoneEnabled(true);
+    console.log('📷 Kamera publisht');
 
-    // Periodischer Scan (Sicherheitsnetz)
-    if (window._remoteTrackScanner) clearInterval(window._remoteTrackScanner);
-    window._remoteTrackScanner = setInterval(function() {
-      if (livekitRoom && livekitConnected) {
-        scanAllRemoteTracks(livekitRoom);
+    // Warten bis der Track wirklich da ist
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    // Lokales Video-Element für die eigene Vorschau
+    // Versuche, den eigenen Video-Stream über getUserMedia zu bekommen
+    try {
+      const localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      const localVideoEl = document.createElement('video');
+      localVideoEl.id = 'lk-video-' + userName;
+      localVideoEl.srcObject = localStream;
+      localVideoEl.autoplay = true;
+      localVideoEl.playsInline = true;
+      localVideoEl.muted = true;
+      localVideoEl.style.display = 'none';
+      document.body.appendChild(localVideoEl);
+
+      if (!livekitParticipantTracks[userName]) {
+        livekitParticipantTracks[userName] = { video: null, name: userName };
       }
-    }, 2000);
+      livekitParticipantTracks[userName].video = localVideoEl;
+      livekitParticipantTracks[userName].name = userName;
+
+      addToDesktopGrid(userName, localVideoEl);
+    } catch(e) {
+      console.warn('Eigene Kamera nicht verfügbar (Desktop-Galerie):', e);
+    }
+
+    // Bereits verbundene Teilnehmer abholen
+    room.remoteParticipants.forEach((participant) => {
+      addLiveKitParticipant(participant);
+    });
 
     livekitRoom = room;
     livekitConnected = true;
+
+    // Canvas-Rendering starten
+    startVideoGridRendering();
 
     // Desktop-Galerie anzeigen
     const lkContainer = document.getElementById('livekit-container');
     if (lkContainer) lkContainer.classList.remove('hidden');
 
-    showToast('🔗 Mit LiveKit-Raum verbunden');
+    showToast('📹 Kamera aktiv – ' + Object.keys(livekitParticipantTracks).length + ' Teilnehmer');
+
+    // Status-Text auf der Content-Leinwand
+    var screenText = document.getElementById('screen-text');
+    if (screenText) screenText.setAttribute('value', '📺 Live: ' + userName);
   } catch (e) {
     console.error('LiveKit-Fehler:', e);
     showToast('⚠️ LiveKit-Fehler: ' + e.message);
   }
-}
-
-// Eigene Kamera ein-/ausschalten (OHNE den LiveKit-Raum zu verlassen)
-async function toggleOwnCamera(enable) {
-  if (!livekitRoom || !livekitConnected) {
-    showToast('⚠️ Nicht mit LiveKit verbunden');
-    return;
-  }
-  try {
-    await livekitRoom.localParticipant.setCameraEnabled(enable);
-    if (enable) {
-      console.log('📷 Eigene Kamera EINGESCHALTET');
-      showToast('📷 Kamera an');
-    } else {
-      console.log('📷 Eigene Kamera AUSGESCHALTET');
-      showToast('📷 Kamera aus');
-    }
-  } catch (e) {
-    console.warn('⚠️ Kamera-Umschaltung fehlgeschlagen:', e);
-    showToast('⚠️ Kamera-Fehler: ' + e.message);
-  }
-}
-
-// Eigenen Bildschirm teilen ein/aus
-async function toggleOwnScreen(enable) {
-  if (!livekitRoom || !livekitConnected) {
-    showToast('⚠️ Nicht mit LiveKit verbunden');
-    return;
-  }
-  try {
-    await livekitRoom.localParticipant.setScreenShareEnabled(enable);
-    if (enable) {
-      console.log('📺 Bildschirm wird geteilt');
-      showToast('📺 Bildschirm wird geteilt');
-      document.getElementById('screen-share-bar').style.display = 'block';
-    } else {
-      console.log('📺 Bildschirm-Sharing beendet');
-      showToast('📺 Teilen beendet');
-      document.getElementById('screen-share-bar').style.display = 'none';
-      // Vordere Leinwand zurücksetzen
-      var screen = document.getElementById('video-screen');
-      if (screen) screen.setAttribute('material', 'color: #1a1a2e');
-    }
-  } catch (e) {
-    console.warn('⚠️ Screen-Share fehlgeschlagen:', e);
-    showToast('⚠️ Screen-Share-Fehler: ' + e.message);
-  }
-}
-
-// Screen-Share-Track empfangen (auf die VORDERE Leinwand!)
-function handleScreenShareTrack(track, participant) {
-  var identity = participant.identity;
-  console.log('📺 Screen-Share empfangen von ' + identity);
-  showToast('📺 ' + identity + ' teilt den Bildschirm');
-
-  // Festes Video-Element nutzen (livekit-client attach in bestehendes Element)
-  var videoEl = document.getElementById('screen-share-video');
-  if (!videoEl) return;
-
-  track.attach(videoEl);
-  videoEl.play().catch(function(e) {
-    console.warn('⚠️ Screen-Share play error:', e);
-  });
-
-  // Auf die VORDERE Leinwand legen
-  var screen = document.getElementById('video-screen');
-  if (screen) {
-    screen.setAttribute('material', 'shader: flat; src: #screen-share-video; color: #ffffff');
-    // Texture-Schubs
-    setTimeout(function() {
-      try {
-        var mesh = screen.getObject3D('mesh');
-        if (mesh && mesh.material && mesh.material.map) {
-          mesh.material.map.premultiplyAlpha = false;
-          mesh.material.map.colorSpace = 'srgb';
-          mesh.material.map.needsUpdate = true;
-        }
-      } catch(e) {}
-    }, 100);
-  }
-
-  // Screen-Share-Text auf der Content-Leinwand
-  var screenText = document.getElementById('screen-text');
-  if (screenText) screenText.setAttribute('value', '📺 ' + identity + ' teilt');
-}
-
-// Screen-Share beenden (vordere Leinwand zurücksetzen)
-function clearScreenShare() {
-  var videoEl = document.getElementById('screen-share-video');
-  if (videoEl && videoEl.srcObject) {
-    videoEl.srcObject = null;
-  }
-  var screen = document.getElementById('video-screen');
-  if (screen) screen.setAttribute('material', 'color: #1a1a2e');
-  var screenText = document.getElementById('screen-text');
-  if (screenText) screenText.setAttribute('value', '📺 Bibelstunde');
-  document.getElementById('screen-share-bar').style.display = 'none';
 }
 
 function addLiveKitParticipant(participant) {
@@ -710,16 +469,9 @@ function removeLiveKitParticipant(identity) {
   if (tile) tile.remove();
 
   updateGridText();
-
-  // A-Frame-Kacheln neu aufbauen
-  rebuildVideoGrid();
 }
 
 function addToDesktopGrid(identity, videoEl) {
-  // Prüfen ob schon ein Tile existiert
-  var existingTile = document.getElementById('lk-tile-' + identity);
-  if (existingTile) return;
-
   const grid = document.getElementById('livekit-grid');
   if (!grid) return;
 
@@ -727,10 +479,13 @@ function addToDesktopGrid(identity, videoEl) {
   tile.id = 'lk-tile-' + identity;
   tile.style.cssText = 'width:50%;height:50%;position:relative;background:#222;overflow:hidden;border-radius:4px;';
 
-  // ECHTES Video-Element in den Tile verschieben (nicht klonen!)
-  videoEl.id = 'lk-tile-video-' + identity;
-  videoEl.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;opacity:1;position:relative;';
-  tile.appendChild(videoEl);
+  const clone = videoEl.cloneNode(false);
+  clone.id = 'lk-tile-video-' + identity;
+  clone.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+  clone.autoplay = true;
+  clone.playsInline = true;
+  clone.muted = true;
+  tile.appendChild(clone);
 
   // Mikrofon-Status
   const micBadge = document.createElement('div');
@@ -745,6 +500,14 @@ function addToDesktopGrid(identity, videoEl) {
   tile.appendChild(nameLabel);
 
   grid.appendChild(tile);
+
+  // Video-Element synchronisieren
+  setTimeout(() => {
+    const cv = document.getElementById('lk-tile-video-' + identity);
+    if (cv && videoEl.srcObject) {
+      cv.srcObject = videoEl.srcObject;
+    }
+  }, 200);
 }
 
 function updateGridText() {
@@ -780,8 +543,8 @@ async function leaveLiveKitRoom() {
   // Canvas leeren
   const canvas = document.getElementById('video-grid-canvas');
   if (canvas) {
-    const ctx = canvas.getContext('2d', { alpha: false });
-    ctx.fillStyle = '#0a0a1e';
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#1a1a2e';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
@@ -791,149 +554,106 @@ async function leaveLiveKitRoom() {
   updateGridText();
 }
 
-function setupLocalVideo(userName, track) {
-  try {
-    var localVideoEl = document.createElement('video');
-    localVideoEl.id = 'lk-video-' + userName;
-    localVideoEl.srcObject = new MediaStream([track.mediaStreamTrack]);
-    localVideoEl.autoplay = true;
-    localVideoEl.playsInline = true;
-    localVideoEl.muted = true;
-    localVideoEl.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;';
-    document.body.appendChild(localVideoEl);
-    localVideoEl.play().catch(function(e) { console.warn('⚠️ Lokales Video play error:', e); });
+// === VIDEO-RASTER AUF CANVAS ZEICHNEN (für die 3D-Leinwand) ===
+function startVideoGridRendering() {
+  const canvas = document.getElementById('video-grid-canvas');
+  if (!canvas) return;
 
-    if (!livekitParticipantTracks[userName]) {
-      livekitParticipantTracks[userName] = { video: null, name: userName };
+  const ctx = canvas.getContext('2d');
+
+  function render() {
+    if (!livekitConnected) return;
+
+    const participants = Object.entries(livekitParticipantTracks).filter(([id, p]) => p.video !== null);
+    const count = participants.length;
+
+    ctx.fillStyle = '#1a1a2e';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    if (count === 0) {
+      ctx.fillStyle = '#555';
+      ctx.font = '24px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('📹 Kamera einschalten...', canvas.width/2, canvas.height/2);
+      canvasAnimFrame = requestAnimationFrame(render);
+      return;
     }
-    livekitParticipantTracks[userName].video = localVideoEl;
-    livekitParticipantTracks[userName].name = userName;
 
-    addToDesktopGrid(userName, localVideoEl);
-    console.log('📹 Lokaler LiveKit-Track geladen');
-    rebuildVideoGrid();
-    // Lokales Video NIEMALS auf die Leinwand – nur Remote!
-  } catch(e) {
-    console.warn('⚠️ Lokaler Video-Track nicht verfügbar:', e);
-  }
-}
+    // Raster-Berechnung
+    const cols = Math.ceil(Math.sqrt(count));
+    const rows = Math.ceil(count / cols);
+    const cellW = canvas.width / cols;
+    const cellH = canvas.height / rows;
 
-// === REMOTE VIDEO-TRACK EMPFANGEN (Gemini Pro Methode) ===
-function handleRemoteVideoTrack(track, participant) {
-  var identity = participant.identity;
+    participants.forEach(([identity, p], index) => {
+      const col = index % cols;
+      const row = Math.floor(index / cols);
+      const x = col * cellW;
+      const y = row * cellH;
 
-  // Prüfen ob schon verarbeitet
-  if (document.getElementById('lk-tile-' + identity)) {
-    console.log('⏩ Remote Track übersprungen (existiert bereits): ' + identity);
-    return;
-  }
-
-  console.log('📹 Empfange Video von ' + identity);
-
-  // ★ GEMINI FIX: Video-Element SELBST erstellen & ins DOM einfügen BEVOR track.attach()
-  var videoEl = document.createElement('video');
-  videoEl.id = 'lk-tile-video-' + identity;  // Feste ID – A-Frame referenziert diese!
-  videoEl.autoplay = true;
-  videoEl.playsInline = true;
-  videoEl.webkitPlaysInline = true;
-  videoEl.muted = true;
-  // Unsichtbar im Body
-  videoEl.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;';
-  document.body.appendChild(videoEl);
-
-  // ★ GEMINI FIX: track.attach(videoEl) – Stream in BESTEHENDES Element leiten!
-  track.attach(videoEl);
-
-  // Video starten
-  videoEl.play().catch(function(err) {
-    console.warn('⚠️ Remote Autoplay-Fehler: ' + identity, err);
-  });
-
-  // In Datenstruktur speichern
-  if (!livekitParticipantTracks[identity]) {
-    livekitParticipantTracks[identity] = { video: null, name: identity };
-  }
-  livekitParticipantTracks[identity].video = videoEl;
-  livekitParticipantTracks[identity].name = identity;
-
-  console.log('✅ Remote Video von ' + identity + ' gespeichert');
-  showToast('📹 ' + identity + ' Kamera empfangen');
-
-  // Desktop-Galerie (das Video-Element in einen Tile legen)
-  addToDesktopGrid(identity, videoEl);
-
-  // ★ A-Frame-Kacheln NEU aufbauen – Video ist BEREITS im DOM, A-Frame erkennt es!
-  rebuildVideoGrid();
-}
-
-// === AKTIVE SUCHE NACH REMOTE TRACKS ===
-function scanAllRemoteTracks(room) {
-  room.remoteParticipants.forEach(function(participant) {
-    console.log('🔍 Scanne Remote: ' + participant.identity);
-    participant.trackPublications.forEach(function(pub) {
-      if (pub.track && pub.track.kind === 'video') {
-        if (pub.source === 'screen_share') {
-          handleScreenShareTrack(pub.track, participant);
-        } else {
-          handleRemoteVideoTrack(pub.track, participant);
-        }
+      // Video zeichnen (falls verfügbar)
+      if (p.video && p.video.readyState >= 2) {
+        try {
+          // Seitenverhältnis beibehalten
+          const vidRatio = p.video.videoWidth / p.video.videoHeight;
+          const cellRatio = cellW / cellH;
+          let sx, sy, sw, sh;
+          if (vidRatio > cellRatio) {
+            sh = p.video.videoHeight;
+            sw = sh * cellRatio;
+            sx = (p.video.videoWidth - sw) / 2;
+            sy = 0;
+          } else {
+            sw = p.video.videoWidth;
+            sh = sw / cellRatio;
+            sx = 0;
+            sy = (p.video.videoHeight - sh) / 2;
+          }
+          ctx.drawImage(p.video, sx, sy, sw, sh, x, y, cellW, cellH);
+        } catch(e) {}
+      } else {
+        // Platzhalter
+        ctx.fillStyle = '#333';
+        ctx.fillRect(x + 4, y + 4, cellW - 8, cellH - 8);
       }
+
+      // Rahmen
+      ctx.strokeStyle = '#FFD700';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(x + 2, y + 2, cellW - 4, cellH - 4);
+
+      // Namenslabel
+      ctx.fillStyle = 'rgba(0,0,0,0.6)';
+      ctx.fillRect(x + 4, y + cellH - 30, cellW - 8, 26);
+      ctx.fillStyle = '#fff';
+      ctx.font = '14px Arial';
+      ctx.textAlign = 'left';
+      ctx.fillText(p.name, x + 10, y + cellH - 10);
     });
-  });
-}
 
-// === VIDEO-KACHELN AUF DER LINKEN WAND ===
-// Jede Kamera bekommt eine eigene A-Frame-Plane mit dem Video direkt als Textur
-function rebuildVideoGrid() {
-  const container = document.getElementById('video-grid-container');
-  if (!container) return;
-
-  // Alte Kacheln entfernen
-  while (container.firstChild) {
-    container.removeChild(container.firstChild);
+    canvasAnimFrame = requestAnimationFrame(render);
   }
 
-  // Teilnehmer mit Video holen
-  const participants = Object.entries(livekitParticipantTracks).filter(([id, p]) => p.video !== null);
-  const count = participants.length;
-
-  if (count === 0) {
-    updateGridText();
-    return;
-  }
-
-  // Raster berechnen
-  const cols = Math.ceil(Math.sqrt(count));
-  const rows = Math.ceil(count / cols);
-  const tileW = 4.3 / cols;
-  const tileH = 2.6 / rows;
-
-  participants.forEach(([identity, p], index) => {
-    const col = index % cols;
-    const row = Math.floor(index / cols);
-    const x = -4.3/2 + col * tileW + tileW/2;
-    const y = 2.6/2 - row * tileH - tileH/2;
-
-    // Plane für diese Kamera erstellen
-    const plane = document.createElement('a-plane');
-    plane.setAttribute('depth', '0.01');
-    plane.setAttribute('width', (tileW - 0.1).toString());
-    plane.setAttribute('height', (tileH - 0.1).toString());
-    plane.setAttribute('position', x + ' ' + y + ' 0');
-
-    // Video direkt als Textur setzen (KEIN Canvas!)
-    var videoId = 'lk-tile-video-' + identity;
-    var videoEl = document.getElementById(videoId);
-    if (videoEl && videoEl.srcObject) {
-      plane.setAttribute('material', 'shader: flat; src: #' + videoId + '; color: #ffffff');
-    } else {
-      // Fallback: schwarze Kachel
-      plane.setAttribute('material', 'color: #1a1a2e');
+  // Canvas-Texture für A-Frame aktualisieren
+  function updateTexture() {
+    const gridScreen = document.getElementById('video-grid-screen');
+    if (gridScreen && gridScreen.components && gridScreen.components.material) {
+      const mat = gridScreen.components.material.material;
+      if (mat && mat.map) {
+        mat.map.needsUpdate = true;
+      }
     }
+  }
 
-    container.appendChild(plane);
-  });
+  // Doppelte Aktualisierung: Canvas zeichnen + Texture-Update
+  function renderLoop() {
+    render();
+    updateTexture();
+    // A-Frame braucht expliziten Texture-Refresh
+    setTimeout(updateTexture, 50);
+  }
 
+  renderLoop();
   updateGridText();
 }
 
@@ -1009,10 +729,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = nameInput.value.trim() || 'Gast';
     myName = name;
 
-    // Ausgewählte Avatar-Farbe holen
-    var avatarColor = '#E57373';
+    // Ausgewählten Avatar holen
+    var avatarUrl = '/avatare/superhero_male.glb';
     var selected = document.querySelector('.av-choice.selected');
-    if (selected) avatarColor = selected.getAttribute('data-color') || avatarColor;
+    if (selected) avatarUrl = selected.getAttribute('data-avatar') || avatarUrl;
 
     loginBox.style.display = 'none';
     toolbar.style.display = 'flex';
@@ -1024,13 +744,12 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('connect', () => {
       setTimeout(() => {
         socket.emit('user:name', myName);
-        createOwnAvatar(myName, avatarColor);
+        socket.emit('user:avatar', avatarUrl);
+        createOwnAvatar(myName, avatarUrl);
         initMovement();
         initPositionSync();
         checkVR();
-
-        // ★ LIVEKIT AUTOMATISCH BEITRETEN (ohne Kamera!)
-        joinLiveKitRoom(myName);
+        // Jitsi wird nur geladen wenn der Button geklickt wird
       }, 500);
     });
   });
@@ -1047,20 +766,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') enterBtn.click();
   });
 
-  // Kamera-Button: Nur Kamera ein/aus (OHNE LiveKit-Raum zu verlassen!)
-  var myCameraEnabled = false;
+  // Toolbar-Buttons
   document.getElementById('toggle-cam')?.addEventListener('click', () => {
-    myCameraEnabled = !myCameraEnabled;
-    toggleOwnCamera(myCameraEnabled);
-    document.getElementById('toggle-cam').textContent = myCameraEnabled ? '📹 Aus' : '📹 Kamera';
-  });
-
-  // Screen-Share-Button: Bildschirm teilen
-  var myScreenEnabled = false;
-  document.getElementById('toggle-screen')?.addEventListener('click', () => {
-    myScreenEnabled = !myScreenEnabled;
-    toggleOwnScreen(myScreenEnabled);
-    document.getElementById('toggle-screen').textContent = myScreenEnabled ? '📺 Stop' : '📺 Teilen';
+    if (livekitConnected) {
+      leaveLiveKitRoom();
+      document.getElementById('toggle-cam').textContent = '📹 Kamera';
+      stopCamOnScreen();
+    } else {
+      joinLiveKitRoom(myName);
+      document.getElementById('toggle-cam').textContent = '📹 Aus';
+    }
   });
 
   // Chat-Toggle
@@ -1089,20 +804,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('copy-link')?.addEventListener('click', copyRoomLink);
-
-  // VR-Button: Manuell in VR wechseln (für PC VR User)
-  document.getElementById('toggle-vr')?.addEventListener('click', () => {
-    var scene = document.querySelector('a-scene');
-    if (scene) {
-      if (scene.is('vr-mode')) {
-        scene.exitVR();
-        document.getElementById('toggle-vr').textContent = '🥽 VR';
-      } else {
-        scene.enterVR();
-        document.getElementById('toggle-vr').textContent = '🥽 Verlassen';
-      }
-    }
-  });
 
   // Verlassen-Button: sauber ausloggen
   document.getElementById('leave-btn')?.addEventListener('click', leaveRoom);

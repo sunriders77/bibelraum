@@ -185,22 +185,11 @@ io.on('connection', (socket) => {
   console.log(`🔵 Benutzer verbunden: ${socket.id}`);
 
   // Benutzer initialisieren
-  // Startpositionen im Halbkreis (an den Stühlen)
-  var startPositions = [
-    { x: -2.5, z: -1.5 },
-    { x: -1.5, z: -2.5 },
-    { x: 0.5, z: -2.2 },  // geändert – kein Konflikt mit Bot (0, 1.0, -3)
-    { x: 1.5, z: -2.5 },
-    { x: 2.5, z: -1.5 },
-    { x: -3, z: 1 },
-  ];
-  var posIndex = connectedUsers.size % startPositions.length;
-  var startPos = startPositions[posIndex];
-
   const user = {
     id: socket.id,
     name: `Gast ${socket.id.slice(0, 4)}`,
-    position: { x: startPos.x, y: 0.5, z: startPos.z },
+    avatarUrl: '/avatare/superhero_male.glb',
+    position: { x: 0, y: 0.5, z: 0 },
     rotation: { x: 0, y: 0, z: 0 },
     hasVideo: false,
     isVR: false
@@ -243,6 +232,18 @@ io.on('connection', (socket) => {
         name: name
       });
       broadcastUserList();
+    }
+  });
+
+  // Benutzer wählt Avatar
+  socket.on('user:avatar', (avatarUrl) => {
+    const userData = connectedUsers.get(socket.id);
+    if (userData) {
+      userData.avatarUrl = avatarUrl;
+      socket.broadcast.emit('user:avatar', {
+        id: socket.id,
+        avatarUrl: avatarUrl
+      });
     }
   });
 
