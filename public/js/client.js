@@ -690,128 +690,133 @@ function scanAllRemoteTracks(room) {
   });
 }
 
-// === VIDEO-RASTER AUF CANVAS ZEICHNEN (für die 3D-Leinwand) ===
+// === VIDEO-RASTER AUF CANVAS ZEICHNEN (THREE.js direkt) ===
 function startVideoGridRendering() {
   const canvas = document.getElementById('video-grid-canvas');
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d', { alpha: false });
+  let threeTexture = null;
+  let threeMaterial = null;
+
+  // Einmalig die THREE.js-Textur initialisieren (NICHT über setAttribute!)
+  function initThreeTexture() {
+    const gridScreen = document.getElementById('video-grid-screen');
+    if (!gridScreen) return false;
+    try {
+      var mesh = gridScreen.getObject3D('mesh');
+      if (!mesh) return false;
+      // Canvas-Textur direkt auf das THREE.Material setzen
+      threeTexture = new THREE.CanvasTexture(canvas);
+      threeTexture.minFilter = THREE.LinearFilter;
+      threeTexture.magFilter = THREE.LinearFilter;
+      threeTexture.premultiplyAlpha = false;
+      threeTexture.colorSpace = THREE.SRGBColorSpace;
+      threeTexture.needsUpdate = true;
+      mesh.material.map = threeTexture;
+      mesh.material.color.setHex(0xffffff);
+      mesh.material.needsUpdate = true;
+      threeMaterial = mesh.material;
+      console.log('🎨 Canvas-Textur initialisiert (THREE.js direkt)');
+      return true;
+    } catch(e) {
+      console.warn('⚠️ THREE.js Init fehlgeschlagen:', e);
+      return false;
+    }
+  }
 
   function render() {
-    if (!livekitConnected) {
-      canvasAnimFrame = requestAnimationFrame(render);
-      return;
-    }
-
     try {
+      // Texture ggf. nachinitialisieren
+      if (!threeTexture || !threeMaterial) {
+        if (!initThreeTexture()) {
+          // A-Frame noch nicht fertig – später wieder versuchen
+          canvasAnimFrame = requestAnimationFrame(render);
+          return;
+        }
+      }
+
       const participants = Object.entries(livekitParticipantTracks).filter(([id, p]) => p.video !== null);
       const count = participants.length;
 
       ctx.fillStyle = '#0a0a1e';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      if (count === 0) {
-        ctx.fillStyle = '#555';
-        ctx.font = '24px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('📹 Kamera einschalten...', canvas.width/2, canvas.height/2);
-        updateCanvasTexture();
-        canvasAnimFrame = requestAnimationFrame(render);
-        return;
+      if (count > 0) {
+        const cols = Math.ceil(Math.sqrt(count));
+        const rows = Math.ceil(count / cols);
+        const cellW = canvas.width / cols;
+        const cellH = canvas.height / rows;
+
+        participants.forEach(([identity, p], index) => {
+          const col = index % cols;
+          const row = Math.floor(index / cols);
+          const x = col * cellW;
+          const y = row * cellH;
+
+          if (p.video) {
+            try {
+              // Video spielen falls pausiert
+              if (p.video.paused && p.video.readyState > 0) {
+                p.video.play().catch(function(){});
+              }
+              if (p.video.videoWidth > 0 && p.video.videoHeight > 0) {
+                const vidRatio = p.video.videoWidth / p.video.videoHeight;
+                const cellRatio = cellW / cellH;
+                let sx, sy, sw, sh;
+                if (vidRatio > cellRatio) {
+                  sh = p.video.videoHeight;
+                  sw = sh * cellRatio;
+                  sx = (p.video.videoWidth - sw) / 2;
+                  sy = 0;
+                } else {
+                  sw = p.video.videoWidth;
+                  sh = sw / cellRatio;
+                  sx = 0;
+                  sy = (p.video.videoHeight - sh) / 2;
+                }
+                ctx.drawImage(p.video, sx, sy, sw, sh, x, y, cellW, cellH);
+              } else {
+                ctx.drawImage(p.video, x, y, cellW, cellH);
+              }
+            } catch(e) {}
+          }
+
+          // Rahmen
+          ctx.strokeStyle = '#FFD700';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(x + 2, y + 2, cellW - 4, cellH - 4);
+
+          // Namenslabel
+          ctx.fillStyle = 'rgba(0,0,0,0.6)';
+          ctx.fillRect(x + 4, y + cellH - 30, cellW - 8, 26);
+          ctx.fillStyle = '#fff';
+          ctx.font = '14px Arial';
+          ctx.textAlign = 'left';
+          ctx.fillText(p.name, x + 10, y + cellH - 10);
+        });
       }
 
-      // Raster-Berechnung
-      const cols = Math.ceil(Math.sqrt(count));
-      const rows = Math.ceil(count / cols);
-      const cellW = canvas.width / cols;
-      const cellH = canvas.height / rows;
-
-      participants.forEach(([identity, p], index) => {
-        const col = index % cols;
-        const row = Math.floor(index / cols);
-        const x = col * cellW;
-        const y = row * cellH;
-
-        // Video zeichnen
-        if (p.video) {
-          try {
-            // Video zum Spielen bringen falls pausiert
-            if (p.video.paused && p.video.readyState > 0) {
-              p.video.play().catch(function(){});
-            }
-            if (p.video.videoWidth > 0 && p.video.videoHeight > 0) {
-              // Seitenverhältnis beibehalten
-              const vidRatio = p.video.videoWidth / p.video.videoHeight;
-              const cellRatio = cellW / cellH;
-              let sx, sy, sw, sh;
-              if (vidRatio > cellRatio) {
-                sh = p.video.videoHeight;
-                sw = sh * cellRatio;
-                sx = (p.video.videoWidth - sw) / 2;
-                sy = 0;
-              } else {
-                sw = p.video.videoWidth;
-                sh = sw / cellRatio;
-                sx = 0;
-                sy = (p.video.videoHeight - sh) / 2;
-              }
-              ctx.drawImage(p.video, sx, sy, sw, sh, x, y, cellW, cellH);
-            } else {
-              ctx.drawImage(p.video, x, y, cellW, cellH);
-            }
-          } catch(e) {
-            ctx.fillStyle = '#333';
-            ctx.fillRect(x + 4, y + 4, cellW - 8, cellH - 8);
-          }
-        } else {
-          ctx.fillStyle = '#333';
-          ctx.fillRect(x + 4, y + 4, cellW - 8, cellH - 8);
-        }
-
-        // Rahmen
-        ctx.strokeStyle = '#FFD700';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(x + 2, y + 2, cellW - 4, cellH - 4);
-
-        // Namenslabel
-        ctx.fillStyle = 'rgba(0,0,0,0.6)';
-        ctx.fillRect(x + 4, y + cellH - 30, cellW - 8, 26);
-        ctx.fillStyle = '#fff';
-        ctx.font = '14px Arial';
-        ctx.textAlign = 'left';
-        ctx.fillText(p.name, x + 10, y + cellH - 10);
-      });
-
-      updateCanvasTexture();
+      // ★ DIRECT: THREE.js-Textur zum Neu-Laden zwingen
+      if (threeTexture) {
+        threeTexture.needsUpdate = true;
+      }
+      if (threeMaterial) {
+        threeMaterial.needsUpdate = true;
+      }
     } catch(e) {
       console.warn('Canvas-Render-Fehler:', e);
     }
 
-    // ★ GANZ WICHTIG: requestAnimationFrame AUẞERHALB des try/catch!
-    // So läuft die Schleife WEITER, selbst wenn ein Fehler fliegt!
     canvasAnimFrame = requestAnimationFrame(render);
   }
 
-  // A-Frame Canvas-Texture aktualisieren
-  function updateCanvasTexture() {
-    const gridScreen = document.getElementById('video-grid-screen');
-    if (gridScreen && gridScreen.components && gridScreen.components.material) {
-      try {
-        const mat = gridScreen.components.material.material;
-        if (mat && mat.map) {
-          // ★ WICHTIG: Premultiplied Alpha deaktivieren – sonst wird das Bild schwarz/dunkel!
-          mat.map.premultiplyAlpha = false;
-          // ★ WICHTIG: ColorSpace auf sRGB setzen – sonst wird der Farbraum falsch interpretiert!
-          if (mat.map.colorSpace) mat.map.colorSpace = 'srgb';
-          else if (mat.map.encoding) mat.map.encoding = 3001; // THREE.sRGBEncoding Legacy
-          mat.map.needsUpdate = true;
-        }
-      } catch(e) {}
-    }
-  }
-
-  render();
-  updateGridText();
+  // AM START: Sofort initialisieren (A-Frame ist zu dem Zeitpunkt schon geladen)
+  setTimeout(function() {
+    initThreeTexture();
+    render();
+    updateGridText();
+  }, 500);
 }
 
 // === LOKALE WEBCAM FÜR DIE CONTENT-LEINWAND (vorne) ===
