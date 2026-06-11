@@ -497,7 +497,7 @@ async function toggleOwnScreen(enable) {
     return;
   }
   try {
-    await livekitRoom.localParticipant.setScreenEnabled(enable);
+    await livekitRoom.localParticipant.setScreenShareEnabled(enable);
     if (enable) {
       console.log('📺 Bildschirm wird geteilt');
       showToast('📺 Bildschirm wird geteilt');
