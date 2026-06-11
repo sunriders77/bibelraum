@@ -143,8 +143,29 @@
   <script>document.getElementById('page-status').textContent = '✅ VR-Controls registriert';</script>
 
   <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Loading-Spinner (immer sichtbar bis alles geladen ist) -->
+  <style>
+    #loading-screen {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 999999; background: #1a1a2e;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-family: 'Segoe UI', sans-serif; transition: opacity 0.5s;
+    }
+    #loading-screen.hidden { opacity: 0; pointer-events: none; }
+    .spinner { width: 48px; height: 48px; border: 4px solid #FFD70033; border-top: 4px solid #FFD700; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #loading-text { color: #aaa; margin-top: 24px; font-size: 18px; }
+    #loading-error { color: #ff6b6b; margin-top: 12px; font-size: 14px; display: none; }
+  </style>
 </head>
 <body>
+  <!-- Loading-Screen -->
+  <div id="loading-screen">
+    <div class="spinner"></div>
+    <div id="loading-text">✝️ Bibelraum wird geladen...</div>
+    <div id="loading-error"></div>
+  </div>
   <!-- STATUS-ANZEIGE (sofort sichtbar, blendet nach 5s aus) -->
   <div id="page-status" style="position:fixed;top:0;left:0;z-index:99999;background:#444;color:#0f0;padding:12px 20px;font-size:24px;font-family:Arial,sans-serif;width:100%;text-align:center;transition:opacity 1s">⏳ Lade...</div>
   <script>setTimeout(function(){var s=document.getElementById('page-status');if(s)s.style.opacity='0';},5000);</script>

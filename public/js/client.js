@@ -62,6 +62,20 @@ function connectSocket() {
   socket.on('connect', () => {
     console.log('✅ Mit Server verbunden:', socket.id);
     myId = socket.id;
+    // Loading-Screen ausblenden
+    var ls = document.getElementById('loading-screen');
+    if (ls) ls.classList.add('hidden');
+  });
+
+  socket.on('connect_error', (err) => {
+    console.error('❌ Verbindungsfehler:', err.message);
+    var le = document.getElementById('loading-error');
+    if (le) {
+      le.style.display = 'block';
+      le.textContent = '❌ Keine Verbindung zum Server. Server wacht auf... bitte Seite neu laden.';
+    }
+    var lt = document.getElementById('loading-text');
+    if (lt) lt.textContent = '⏳ Server startet... (kann bis zu 30s dauern)';
   });
 
   socket.on('room:init', (data) => {
