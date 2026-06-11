@@ -15,10 +15,24 @@ let lastRotation = { x: 0, y: 0, z: 0 };
 let posUpdateInterval = null;
 let cameraRig, camera;
 
-// === FARBEN FÜR AVATARE ===
+// === FARBEN + STYLE-VORLAGEN FÜR AVATARE ===
 const AVATAR_COLORS = [
   '#E57373', '#64B5F6', '#81C784', '#FFB74D', '#BA68C8',
   '#4DD0E1', '#FF8A65', '#AED581', '#F06292', '#7986CB'
+];
+
+// 10 verschiedene Avatar-Designs (Frisur, Bart, Brille, Kleidung)
+const AVATAR_STYLES = [
+  { hair: 'none', beard: false, glasses: false, hat: false, shirtColor: '#FFFFFF' },  // 0: Glatze
+  { hair: 'short', beard: false, glasses: false, hat: false, shirtColor: '#E0E0E0' }, // 1: Kurzhaar
+  { hair: 'long', beard: false, glasses: false, hat: false, shirtColor: '#FFCDD2' },   // 2: Lange Haare
+  { hair: 'short', beard: true, glasses: false, hat: false, shirtColor: '#C8E6C9' },   // 3: Kurzhaar+Bart
+  { hair: 'none', beard: false, glasses: true, hat: false, shirtColor: '#BBDEFB' },     // 4: Glatze+Brille
+  { hair: 'short', beard: false, glasses: true, hat: false, shirtColor: '#FFF9C4' },    // 5: Kurzhaar+Brille
+  { hair: 'long', beard: false, glasses: false, hat: true, shirtColor: '#D1C4E9' },     // 6: Lange Haare+Mütze
+  { hair: 'short', beard: true, glasses: true, hat: false, shirtColor: '#DCEDC8' },     // 7: Kurz+Bart+Brille
+  { hair: 'curly', beard: false, glasses: false, hat: false, shirtColor: '#FFE0B2' },   // 8: Locken
+  { hair: 'none', beard: true, glasses: false, hat: true, shirtColor: '#B2EBF2' },      // 9: Glatze+Bart+Mütze
 ];
 
 // geteilte Socket-Instanz für die Login-Benutzerliste
@@ -131,6 +145,94 @@ function connectSocket() {
 }
 
 // === AVATAR ERSTELLEN ===
+// Hilfsfunktion: Dekorationen (Frisur, Bart, Brille, Hut) zum Avatar hinzufügen
+function decorateAvatar(entity, bodyColor, styleIndex) {
+  var style = AVATAR_STYLES[styleIndex % AVATAR_STYLES.length];
+  var headPos = '0 0.75 0';
+
+  // Frisur
+  if (style.hair === 'short') {
+    var hair = document.createElement('a-sphere');
+    hair.setAttribute('radius', '0.14');
+    hair.setAttribute('color', '#5D4037');
+    hair.setAttribute('position', '0 0.88 0');
+    hair.setAttribute('scale', '1 0.3 1');
+    entity.appendChild(hair);
+  } else if (style.hair === 'long') {
+    var hair = document.createElement('a-sphere');
+    hair.setAttribute('radius', '0.18');
+    hair.setAttribute('color', '#5D4037');
+    hair.setAttribute('position', '0 0.86 0');
+    hair.setAttribute('scale', '1 0.35 1');
+    entity.appendChild(hair);
+    // Seitenhaare
+    var sideL = document.createElement('a-sphere');
+    sideL.setAttribute('radius', '0.06');
+    sideL.setAttribute('color', '#5D4037');
+    sideL.setAttribute('position', '-0.19 0.73 0');
+    entity.appendChild(sideL);
+    var sideR = document.createElement('a-sphere');
+    sideR.setAttribute('radius', '0.06');
+    sideR.setAttribute('color', '#5D4037');
+    sideR.setAttribute('position', '0.19 0.73 0');
+    entity.appendChild(sideR);
+  } else if (style.hair === 'curly') {
+    for (var i = 0; i < 5; i++) {
+      var curl = document.createElement('a-sphere');
+      curl.setAttribute('radius', '0.06');
+      curl.setAttribute('color', '#8D6E63');
+      var angle = (i / 5) * Math.PI * 2;
+      curl.setAttribute('position', (Math.cos(angle) * 0.15) + ' ' + (0.86 + Math.sin(angle) * 0.04) + ' ' + (Math.sin(angle) * 0.12));
+      entity.appendChild(curl);
+    }
+  }
+
+  // Bart
+  if (style.beard) {
+    var beard = document.createElement('a-box');
+    beard.setAttribute('depth', '0.08');
+    beard.setAttribute('height', '0.1');
+    beard.setAttribute('width', '0.15');
+    beard.setAttribute('color', '#5D4037');
+    beard.setAttribute('position', '0 0.62 0.17');
+    entity.appendChild(beard);
+  }
+
+  // Brille
+  if (style.glasses) {
+    var frame = document.createElement('a-ring');
+    frame.setAttribute('radius-inner', '0.04');
+    frame.setAttribute('radius-outer', '0.055');
+    frame.setAttribute('color', '#333');
+    frame.setAttribute('position', '-0.08 0.77 0.19');
+    frame.setAttribute('rotation', '90 0 0');
+    entity.appendChild(frame);
+    var frame2 = document.createElement('a-ring');
+    frame2.setAttribute('radius-inner', '0.04');
+    frame2.setAttribute('radius-outer', '0.055');
+    frame2.setAttribute('color', '#333');
+    frame2.setAttribute('position', '0.08 0.77 0.19');
+    frame2.setAttribute('rotation', '90 0 0');
+    entity.appendChild(frame2);
+    var bridge = document.createElement('a-box');
+    bridge.setAttribute('depth', '0.02');
+    bridge.setAttribute('height', '0.02');
+    bridge.setAttribute('width', '0.06');
+    bridge.setAttribute('color', '#333');
+    bridge.setAttribute('position', '0 0.77 0.19');
+    entity.appendChild(bridge);
+  }
+
+  // Kragem/Hemd
+  var collar = document.createElement('a-box');
+  collar.setAttribute('depth', '0.3');
+  collar.setAttribute('height', '0.08');
+  collar.setAttribute('width', '0.3');
+  collar.setAttribute('color', style.shirtColor);
+  collar.setAttribute('position', '0 0.55 0');
+  entity.appendChild(collar);
+}
+
 function createOwnAvatar(name, avatarColor) {
   if (!myId) return;
 
@@ -143,7 +245,10 @@ function createOwnAvatar(name, avatarColor) {
     container.removeChild(container.firstChild);
   }
 
-  const color = avatarColor || AVATAR_COLORS[myId.charCodeAt(myId.length-1) % AVATAR_COLORS.length];
+  // Farb-Index + Style-Index basierend auf User-ID
+  var charCode = myId.charCodeAt(myId.length - 1);
+  const color = avatarColor || AVATAR_COLORS[charCode % AVATAR_COLORS.length];
+  var styleIndex = charCode % AVATAR_STYLES.length;
 
   myAvatar = document.createElement('a-entity');
   myAvatar.setAttribute('id', 'my-avatar-body');
@@ -178,6 +283,9 @@ function createOwnAvatar(name, avatarColor) {
   eyeR.setAttribute('position', '0.08 0.78 0.17');
   myAvatar.appendChild(eyeR);
 
+  // Style-Dekorationen (Frisur, Bart, Brille, Hut)
+  decorateAvatar(myAvatar, color, styleIndex);
+
   container.appendChild(myAvatar);
 
   // Namenslabel aktualisieren
@@ -197,12 +305,13 @@ function createRemoteAvatar(user) {
   const container = document.getElementById('remote-avatars');
   if (!container) return;
 
-  // Bot bekommt feste Farbe (pink), andere User per ID
-  const color = user.isBot ? '#F06292' : AVATAR_COLORS[user.id.charCodeAt(user.id.length-1) % AVATAR_COLORS.length];
+  // Bot bekommt feste Farbe (pink) + Style 0
+  var charCode = user.id.charCodeAt(user.id.length - 1);
+  const color = user.isBot ? '#F06292' : AVATAR_COLORS[charCode % AVATAR_COLORS.length];
+  var styleIndex = user.isBot ? 0 : (charCode % AVATAR_STYLES.length);
 
   const entity = document.createElement('a-entity');
   entity.setAttribute('id', `avatar-${user.id}`);
-
   entity.setAttribute('position', `${user.position.x} ${user.position.y} ${user.position.z}`);
 
   // Körper
@@ -234,6 +343,9 @@ function createRemoteAvatar(user) {
   eyeR.setAttribute('color', '#333');
   eyeR.setAttribute('position', '0.08 0.78 0.17');
   entity.appendChild(eyeR);
+
+  // Style-Dekorationen
+  decorateAvatar(entity, color, styleIndex);
 
   // Namenslabel
   const label = document.createElement('a-text');
