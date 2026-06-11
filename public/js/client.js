@@ -637,37 +637,38 @@ function setupLocalVideo(userName, track) {
   }
 }
 
-// === REMOTE VIDEO-TRACK EMPFANGEN (NUR speichern, NICHT auf Leinwand) ===
+// === REMOTE VIDEO-TRACK EMPFANGEN (Gemini Pro Methode) ===
 function handleRemoteVideoTrack(track, participant) {
   var identity = participant.identity;
 
-  // Prüfen ob schon verarbeitet (Tile existiert bereits)
-  var existingTile = document.getElementById('lk-tile-' + identity);
-  var existing = document.getElementById('lk-video-' + identity);
-  if (existingTile || existing) {
+  // Prüfen ob schon verarbeitet
+  if (document.getElementById('lk-tile-' + identity)) {
     console.log('⏩ Remote Track übersprungen (existiert bereits): ' + identity);
     return;
   }
 
   console.log('📹 Empfange Video von ' + identity);
 
-  // 1. LiveKit erstellt das Video-Element
-  var videoEl = track.attach();
-  videoEl.id = 'lk-video-' + identity;
-  videoEl.setAttribute('playsinline', 'true');
-  videoEl.setAttribute('webkit-playsinline', 'true');
+  // ★ GEMINI FIX: Video-Element SELBST erstellen & ins DOM einfügen BEVOR track.attach()
+  var videoEl = document.createElement('video');
+  videoEl.id = 'lk-tile-video-' + identity;  // Feste ID – A-Frame referenziert diese!
+  videoEl.autoplay = true;
+  videoEl.playsInline = true;
+  videoEl.webkitPlaysInline = true;
   videoEl.muted = true;
-
-  // Unsichtbar im DOM – nur das Canvas-Rendering nutzt es später
+  // Unsichtbar im Body
   videoEl.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;';
   document.body.appendChild(videoEl);
 
-  // 2. Video starten (muted = Autoplay erlaubt)
+  // ★ GEMINI FIX: track.attach(videoEl) – Stream in BESTEHENDES Element leiten!
+  track.attach(videoEl);
+
+  // Video starten
   videoEl.play().catch(function(err) {
     console.warn('⚠️ Remote Autoplay-Fehler: ' + identity, err);
   });
 
-  // 3. In Datenstruktur speichern – Canvas-Rendering und Desktop-Grid ziehen es von hier!
+  // In Datenstruktur speichern
   if (!livekitParticipantTracks[identity]) {
     livekitParticipantTracks[identity] = { video: null, name: identity };
   }
@@ -677,10 +678,10 @@ function handleRemoteVideoTrack(track, participant) {
   console.log('✅ Remote Video von ' + identity + ' gespeichert');
   showToast('📹 ' + identity + ' Kamera empfangen');
 
-  // 4. Zur Desktop-Galerie hinzufügen
+  // Desktop-Galerie (das Video-Element in einen Tile legen)
   addToDesktopGrid(identity, videoEl);
 
-  // 5. A-Frame-Kachel auf der linken Wand neu aufbauen
+  // ★ A-Frame-Kacheln NEU aufbauen – Video ist BEREITS im DOM, A-Frame erkennt es!
   rebuildVideoGrid();
 }
 
