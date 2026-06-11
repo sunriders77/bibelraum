@@ -37,6 +37,7 @@ let botMessage = '👋 Hallo, ich bin Melanie!';
 const botUser = {
   id: BOT_ID,
   name: '🤖 Melanie (Bot)',
+  avatarUrl: '/avatare/superhero_female.glb',
   position: { x: 0, y: 1.0, z: -3 },
   rotation: { x: 0, y: 0, z: 0 },
   isBot: true,
