@@ -698,93 +698,97 @@ function startVideoGridRendering() {
   const ctx = canvas.getContext('2d', { alpha: false });
 
   function render() {
-    if (!livekitConnected) return;
-
-    const participants = Object.entries(livekitParticipantTracks).filter(([id, p]) => p.video !== null);
-    const count = participants.length;
-
-    ctx.fillStyle = '#0a0a1e';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    if (count === 0) {
-      ctx.fillStyle = '#555';
-      ctx.font = '24px Arial';
-      ctx.textAlign = 'center';
-      ctx.fillText('📹 Kamera einschalten...', canvas.width/2, canvas.height/2);
-      updateCanvasTexture();
+    if (!livekitConnected) {
       canvasAnimFrame = requestAnimationFrame(render);
       return;
     }
 
-    // Raster-Berechnung
-    const cols = Math.ceil(Math.sqrt(count));
-    const rows = Math.ceil(count / cols);
-    const cellW = canvas.width / cols;
-    const cellH = canvas.height / rows;
+    try {
+      const participants = Object.entries(livekitParticipantTracks).filter(([id, p]) => p.video !== null);
+      const count = participants.length;
 
-    participants.forEach(([identity, p], index) => {
-      const col = index % cols;
-      const row = Math.floor(index / cols);
-      const x = col * cellW;
-      const y = row * cellH;
+      ctx.fillStyle = '#0a0a1e';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Video zeichnen (immer, auch wenn readyState < 2)
-      if (p.video) {
-        try {
-          // drawImage klappt auch ohne play() – zeigt dann Standbild
-          if (p.video.videoWidth > 0 && p.video.videoHeight > 0) {
-            // Seitenverhältnis beibehalten
-            const vidRatio = p.video.videoWidth / p.video.videoHeight;
-            const cellRatio = cellW / cellH;
-            let sx, sy, sw, sh;
-            if (vidRatio > cellRatio) {
-              sh = p.video.videoHeight;
-              sw = sh * cellRatio;
-              sx = (p.video.videoWidth - sw) / 2;
-              sy = 0;
-            } else {
-              sw = p.video.videoWidth;
-              sh = sw / cellRatio;
-              sx = 0;
-              sy = (p.video.videoHeight - sh) / 2;
-            }
-            ctx.drawImage(p.video, sx, sy, sw, sh, x, y, cellW, cellH);
-          } else {
-            // Video hat (noch) keine Maße – trotzdem versuchen
-            ctx.drawImage(p.video, x, y, cellW, cellH);
-          }
-        } catch(e) {
-          // Platzhalter bei Fehler
-          ctx.fillStyle = '#333';
-          ctx.fillRect(x + 4, y + 4, cellW - 8, cellH - 8);
-          ctx.fillStyle = '#888';
-          ctx.font = '12px Arial';
-          ctx.textAlign = 'center';
-          ctx.fillText('⏳', x + cellW/2, y + cellH/2 + 4);
-        }
-      } else {
-        // Platzhalter
-        ctx.fillStyle = '#333';
-        ctx.fillRect(x + 4, y + 4, cellW - 8, cellH - 8);
+      if (count === 0) {
+        ctx.fillStyle = '#555';
+        ctx.font = '24px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('📹 Kamera einschalten...', canvas.width/2, canvas.height/2);
+        updateCanvasTexture();
+        canvasAnimFrame = requestAnimationFrame(render);
+        return;
       }
 
-      // Rahmen
-      ctx.strokeStyle = '#FFD700';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(x + 2, y + 2, cellW - 4, cellH - 4);
+      // Raster-Berechnung
+      const cols = Math.ceil(Math.sqrt(count));
+      const rows = Math.ceil(count / cols);
+      const cellW = canvas.width / cols;
+      const cellH = canvas.height / rows;
 
-      // Namenslabel
-      ctx.fillStyle = 'rgba(0,0,0,0.6)';
-      ctx.fillRect(x + 4, y + cellH - 30, cellW - 8, 26);
-      ctx.fillStyle = '#fff';
-      ctx.font = '14px Arial';
-      ctx.textAlign = 'left';
-      ctx.fillText(p.name, x + 10, y + cellH - 10);
-    });
+      participants.forEach(([identity, p], index) => {
+        const col = index % cols;
+        const row = Math.floor(index / cols);
+        const x = col * cellW;
+        const y = row * cellH;
 
-    // ★ WICHTIG: A-Frame-Texture nach jedem Frame aktualisieren!
-    updateCanvasTexture();
+        // Video zeichnen
+        if (p.video) {
+          try {
+            // Video zum Spielen bringen falls pausiert
+            if (p.video.paused && p.video.readyState > 0) {
+              p.video.play().catch(function(){});
+            }
+            if (p.video.videoWidth > 0 && p.video.videoHeight > 0) {
+              // Seitenverhältnis beibehalten
+              const vidRatio = p.video.videoWidth / p.video.videoHeight;
+              const cellRatio = cellW / cellH;
+              let sx, sy, sw, sh;
+              if (vidRatio > cellRatio) {
+                sh = p.video.videoHeight;
+                sw = sh * cellRatio;
+                sx = (p.video.videoWidth - sw) / 2;
+                sy = 0;
+              } else {
+                sw = p.video.videoWidth;
+                sh = sw / cellRatio;
+                sx = 0;
+                sy = (p.video.videoHeight - sh) / 2;
+              }
+              ctx.drawImage(p.video, sx, sy, sw, sh, x, y, cellW, cellH);
+            } else {
+              ctx.drawImage(p.video, x, y, cellW, cellH);
+            }
+          } catch(e) {
+            ctx.fillStyle = '#333';
+            ctx.fillRect(x + 4, y + 4, cellW - 8, cellH - 8);
+          }
+        } else {
+          ctx.fillStyle = '#333';
+          ctx.fillRect(x + 4, y + 4, cellW - 8, cellH - 8);
+        }
 
+        // Rahmen
+        ctx.strokeStyle = '#FFD700';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x + 2, y + 2, cellW - 4, cellH - 4);
+
+        // Namenslabel
+        ctx.fillStyle = 'rgba(0,0,0,0.6)';
+        ctx.fillRect(x + 4, y + cellH - 30, cellW - 8, 26);
+        ctx.fillStyle = '#fff';
+        ctx.font = '14px Arial';
+        ctx.textAlign = 'left';
+        ctx.fillText(p.name, x + 10, y + cellH - 10);
+      });
+
+      updateCanvasTexture();
+    } catch(e) {
+      console.warn('Canvas-Render-Fehler:', e);
+    }
+
+    // ★ GANZ WICHTIG: requestAnimationFrame AUẞERHALB des try/catch!
+    // So läuft die Schleife WEITER, selbst wenn ein Fehler fliegt!
     canvasAnimFrame = requestAnimationFrame(render);
   }
 
