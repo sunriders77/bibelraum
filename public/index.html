@@ -166,6 +166,13 @@
     <div id="loading-text">✝️ Bibelraum wird geladen...</div>
     <div id="loading-error"></div>
   </div>
+  <script>
+    // Loading-Screen nach 5s ausblenden (auch ohne Server-Verbindung)
+    setTimeout(function() {
+      var ls = document.getElementById('loading-screen');
+      if (ls) ls.classList.add('hidden');
+    }, 5000);
+  </script>
   <!-- STATUS-ANZEIGE (sofort sichtbar, blendet nach 5s aus) -->
   <div id="page-status" style="position:fixed;top:0;left:0;z-index:99999;background:#444;color:#0f0;padding:12px 20px;font-size:24px;font-family:Arial,sans-serif;width:100%;text-align:center;transition:opacity 1s">⏳ Lade...</div>
   <script>setTimeout(function(){var s=document.getElementById('page-status');if(s)s.style.opacity='0';},5000);</script>
