@@ -532,6 +532,10 @@ function removeLiveKitParticipant(identity) {
 }
 
 function addToDesktopGrid(identity, videoEl) {
+  // Prüfen ob schon ein Tile existiert
+  var existingTile = document.getElementById('lk-tile-' + identity);
+  if (existingTile) return;
+
   const grid = document.getElementById('livekit-grid');
   if (!grid) return;
 
@@ -539,13 +543,10 @@ function addToDesktopGrid(identity, videoEl) {
   tile.id = 'lk-tile-' + identity;
   tile.style.cssText = 'width:50%;height:50%;position:relative;background:#222;overflow:hidden;border-radius:4px;';
 
-  const clone = videoEl.cloneNode(false);
-  clone.id = 'lk-tile-video-' + identity;
-  clone.style.cssText = 'width:100%;height:100%;object-fit:cover;';
-  clone.autoplay = true;
-  clone.playsInline = true;
-  clone.muted = true;
-  tile.appendChild(clone);
+  // ECHTES Video-Element in den Tile verschieben (nicht klonen!)
+  videoEl.id = 'lk-tile-video-' + identity;
+  videoEl.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;opacity:1;position:relative;';
+  tile.appendChild(videoEl);
 
   // Mikrofon-Status
   const micBadge = document.createElement('div');
@@ -560,14 +561,6 @@ function addToDesktopGrid(identity, videoEl) {
   tile.appendChild(nameLabel);
 
   grid.appendChild(tile);
-
-  // Video-Element synchronisieren
-  setTimeout(() => {
-    const cv = document.getElementById('lk-tile-video-' + identity);
-    if (cv && videoEl.srcObject) {
-      cv.srcObject = videoEl.srcObject;
-    }
-  }, 200);
 }
 
 function updateGridText() {
@@ -640,76 +633,49 @@ function setupLocalVideo(userName, track) {
   }
 }
 
-// === REMOTE VIDEO-TRACK VERARBEITEN (nach Gemini Pro V2) ===
+// === REMOTE VIDEO-TRACK EMPFANGEN (NUR speichern, NICHT auf Leinwand) ===
 function handleRemoteVideoTrack(track, participant) {
-  // Prüfen ob schon ein Video-Element existiert
-  var existing = document.getElementById('lk-video-' + participant.identity);
-  if (existing) {
-    console.log('⏩ Remote Track übersprungen (existiert bereits): ' + participant.identity);
+  var identity = participant.identity;
+
+  // Prüfen ob schon verarbeitet (Tile existiert bereits)
+  var existingTile = document.getElementById('lk-tile-' + identity);
+  var existing = document.getElementById('lk-video-' + identity);
+  if (existingTile || existing) {
+    console.log('⏩ Remote Track übersprungen (existiert bereits): ' + identity);
     return;
   }
 
-  console.log('📹 Empfange Video von ' + participant.identity);
+  console.log('📹 Empfange Video von ' + identity);
 
   // 1. LiveKit erstellt das Video-Element
   var videoEl = track.attach();
-  var videoId = 'lk-video-' + participant.identity;
-  videoEl.id = videoId;
+  videoEl.id = 'lk-video-' + identity;
   videoEl.setAttribute('playsinline', 'true');
   videoEl.setAttribute('webkit-playsinline', 'true');
   videoEl.muted = true;
 
-  // Unsichtbar im HTML-Hintergrund (Gemini sagt: display:none ist OK wenn play() läuft)
-  videoEl.style.display = 'none';
+  // Unsichtbar im DOM – nur das Canvas-Rendering nutzt es später
+  videoEl.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;';
   document.body.appendChild(videoEl);
 
-  // 2. Video explizit STARTEN (löst Autoplay-Problem)
-  var leinwand = document.getElementById('video-grid-screen');
-  videoEl.play().then(function() {
-    console.log('✅ Video von ' + participant.identity + ' spielt jetzt ab.');
-
-    // 3. Erst WENN es spielt, an die A-Frame Leinwand übergeben
-    if (leinwand) {
-      leinwand.setAttribute('material', 'shader: flat; src: #' + videoId + '; color: #ffffff');
-      console.log('🎯 Leinwand auf ' + participant.identity + ' gesetzt');
-
-      // 4. A-Frame zwingen, die Textur sofort zu aktualisieren (der "Texture-Schubs")
-      setTimeout(function() {
-        try {
-          if (leinwand.getObject3D) {
-            var mesh = leinwand.getObject3D('mesh');
-            if (mesh && mesh.material && mesh.material.map) {
-              mesh.material.map.premultiplyAlpha = false;
-              if (mesh.material.map.colorSpace) mesh.material.map.colorSpace = 'srgb';
-              mesh.material.map.needsUpdate = true;
-              console.log('🎨 Texture aktualisiert (getObject3D)');
-            }
-          }
-        } catch(e) { console.warn('Texture-Schubs fehlgeschlagen:', e); }
-      }, 100);
-
-      showToast('📹 ' + participant.identity + ' ist jetzt zu sehen!');
-    }
-  }).catch(function(err) {
-    console.error('⚠️ Browser blockiert Autoplay:', err);
-    // Fallback: muted setzen und nochmal versuchen
-    videoEl.muted = true;
-    videoEl.play().then(function() {
-      if (leinwand) {
-        leinwand.setAttribute('material', 'shader: flat; src: #' + videoId + '; color: #ffffff');
-      }
-    }).catch(function(e) {
-      console.error('❌ Auch mit muted kein Autoplay:', e);
-    });
+  // 2. Video starten (muted = Autoplay erlaubt)
+  videoEl.play().catch(function(err) {
+    console.warn('⚠️ Remote Autoplay-Fehler: ' + identity, err);
   });
 
-  if (!livekitParticipantTracks[participant.identity]) {
-    livekitParticipantTracks[participant.identity] = { video: null, name: participant.identity };
+  // 3. In Datenstruktur speichern – Canvas-Rendering und Desktop-Grid ziehen es von hier!
+  if (!livekitParticipantTracks[identity]) {
+    livekitParticipantTracks[identity] = { video: null, name: identity };
   }
-  livekitParticipantTracks[participant.identity].video = videoEl;
-  livekitParticipantTracks[participant.identity].name = participant.identity;
+  livekitParticipantTracks[identity].video = videoEl;
+  livekitParticipantTracks[identity].name = identity;
 
-  addToDesktopGrid(participant.identity, videoEl);
+  console.log('✅ Remote Video von ' + identity + ' gespeichert');
+  showToast('📹 ' + identity + ' Kamera empfangen');
+  updateGridText();
+
+  // 4. Zur Desktop-Galerie hinzufügen
+  addToDesktopGrid(identity, videoEl);
 }
 
 // === AKTIVE SUCHE NACH REMOTE TRACKS ===
