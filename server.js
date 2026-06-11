@@ -185,10 +185,22 @@ io.on('connection', (socket) => {
   console.log(`🔵 Benutzer verbunden: ${socket.id}`);
 
   // Benutzer initialisieren
+  // Startpositionen im Halbkreis (an den Stühlen)
+  var startPositions = [
+    { x: -2.5, z: -1.5 },
+    { x: -1.5, z: -2.5 },
+    { x: 0, z: -3 },
+    { x: 1.5, z: -2.5 },
+    { x: 2.5, z: -1.5 },
+    { x: -3, z: 1 },
+  ];
+  var posIndex = connectedUsers.size % startPositions.length;
+  var startPos = startPositions[posIndex];
+
   const user = {
     id: socket.id,
     name: `Gast ${socket.id.slice(0, 4)}`,
-    position: { x: 0, y: 0.5, z: 0 },
+    position: { x: startPos.x, y: 0.5, z: startPos.z },
     rotation: { x: 0, y: 0, z: 0 },
     hasVideo: false,
     isVR: false

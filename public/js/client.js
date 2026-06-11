@@ -964,6 +964,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('copy-link')?.addEventListener('click', copyRoomLink);
 
+  // VR-Button: Manuell in VR wechseln (für PC VR User)
+  document.getElementById('toggle-vr')?.addEventListener('click', () => {
+    var scene = document.querySelector('a-scene');
+    if (scene) {
+      if (scene.is('vr-mode')) {
+        scene.exitVR();
+        document.getElementById('toggle-vr').textContent = '🥽 VR';
+      } else {
+        scene.enterVR();
+        document.getElementById('toggle-vr').textContent = '🥽 Verlassen';
+      }
+    }
+  });
+
   // Verlassen-Button: sauber ausloggen
   document.getElementById('leave-btn')?.addEventListener('click', leaveRoom);
 
