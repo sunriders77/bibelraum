@@ -186,6 +186,7 @@
       </div>
       <div id="toolbar-right">
         <button id="toggle-cam" title="Webcam einschalten">📹 Kamera</button>
+        <button id="toggle-screen" title="Bildschirm teilen">📺 Teilen</button>
         <button id="toggle-chat" title="Chat öffnen">💬 Chat</button>
         <button id="copy-link" title="Link kopieren">🔗 Link kopieren</button>
         <button id="leave-btn" title="Raum verlassen">🚪 Verlassen</button>
@@ -193,8 +194,11 @@
     </div>
   </div>
 
-  <!-- Hidden Canvas für LiveKit Video-Raster -->
-  <canvas id="video-grid-canvas" style="display:none" width="1280" height="720"></canvas>
+  <!-- Festes Video-Element für Screen-Share (wichtig: VOR A-Frame initialisieren!) -->
+  <video id="screen-share-video" autoplay playsinline webkit-playsinline muted style="display:none;"></video>
+
+  <!-- Screen-Share-Status (Desktop) -->
+  <div id="screen-share-bar" class="hidden" style="position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:999;background:rgba(0,0,0,0.8);color:#fff;padding:8px 16px;border-radius:8px;font-size:14px;display:none;">📺 Bildschirm wird geteilt</div>
 
   <!-- Video-Galerie-Seitenleiste (Desktop-UI als Ergänzung) -->
   <div id="livekit-container" class="hidden">

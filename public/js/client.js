@@ -395,13 +395,22 @@ async function joinLiveKitRoom(userName) {
       addLiveKitParticipant(participant);
       participant.trackPublications.forEach(function(pub) {
         if (pub.track && pub.track.kind === 'video') {
-          handleRemoteVideoTrack(pub.track, participant);
+          // Screen-Share und Kamera unterscheiden
+          if (pub.source === 'screen_share') {
+            handleScreenShareTrack(pub.track, participant);
+          } else {
+            handleRemoteVideoTrack(pub.track, participant);
+          }
         }
       });
       participant.on('trackSubscribed', function(track, pub) {
         if (track.kind === 'video') {
           console.log('📹 Remote Track subscribed (per participant): ' + participant.identity);
-          handleRemoteVideoTrack(track, participant);
+          if (pub && pub.source === 'screen_share') {
+            handleScreenShareTrack(track, participant);
+          } else {
+            handleRemoteVideoTrack(track, participant);
+          }
         }
       });
     });
@@ -414,13 +423,21 @@ async function joinLiveKitRoom(userName) {
     room.on('trackSubscribed', (track, publication, participant) => {
       console.log('📹 LiveKit Track subscribed (per room): ' + track.kind + ' von ' + participant.identity);
       if (track.kind === 'video') {
-        handleRemoteVideoTrack(track, participant);
+        if (publication && publication.source === 'screen_share') {
+          handleScreenShareTrack(track, participant);
+        } else {
+          handleRemoteVideoTrack(track, participant);
+        }
       }
     });
 
     room.on('trackUnsubscribed', (track, publication, participant) => {
       console.log('📹 LiveKit Track unsubscribed: ' + participant.identity);
-      removeLiveKitParticipant(participant.identity);
+      if (publication && publication.source === 'screen_share') {
+        clearScreenShare();
+      } else {
+        removeLiveKitParticipant(participant.identity);
+      }
     });
 
     // Zum Server verbinden (NUR als Zuschauer – KEINE eigene Kamera!)
@@ -471,6 +488,82 @@ async function toggleOwnCamera(enable) {
     console.warn('⚠️ Kamera-Umschaltung fehlgeschlagen:', e);
     showToast('⚠️ Kamera-Fehler: ' + e.message);
   }
+}
+
+// Eigenen Bildschirm teilen ein/aus
+async function toggleOwnScreen(enable) {
+  if (!livekitRoom || !livekitConnected) {
+    showToast('⚠️ Nicht mit LiveKit verbunden');
+    return;
+  }
+  try {
+    await livekitRoom.localParticipant.setScreenEnabled(enable);
+    if (enable) {
+      console.log('📺 Bildschirm wird geteilt');
+      showToast('📺 Bildschirm wird geteilt');
+      document.getElementById('screen-share-bar').style.display = 'block';
+    } else {
+      console.log('📺 Bildschirm-Sharing beendet');
+      showToast('📺 Teilen beendet');
+      document.getElementById('screen-share-bar').style.display = 'none';
+      // Vordere Leinwand zurücksetzen
+      var screen = document.getElementById('video-screen');
+      if (screen) screen.setAttribute('material', 'color: #1a1a2e');
+    }
+  } catch (e) {
+    console.warn('⚠️ Screen-Share fehlgeschlagen:', e);
+    showToast('⚠️ Screen-Share-Fehler: ' + e.message);
+  }
+}
+
+// Screen-Share-Track empfangen (auf die VORDERE Leinwand!)
+function handleScreenShareTrack(track, participant) {
+  var identity = participant.identity;
+  console.log('📺 Screen-Share empfangen von ' + identity);
+  showToast('📺 ' + identity + ' teilt den Bildschirm');
+
+  // Festes Video-Element nutzen (livekit-client attach in bestehendes Element)
+  var videoEl = document.getElementById('screen-share-video');
+  if (!videoEl) return;
+
+  track.attach(videoEl);
+  videoEl.play().catch(function(e) {
+    console.warn('⚠️ Screen-Share play error:', e);
+  });
+
+  // Auf die VORDERE Leinwand legen
+  var screen = document.getElementById('video-screen');
+  if (screen) {
+    screen.setAttribute('material', 'shader: flat; src: #screen-share-video; color: #ffffff');
+    // Texture-Schubs
+    setTimeout(function() {
+      try {
+        var mesh = screen.getObject3D('mesh');
+        if (mesh && mesh.material && mesh.material.map) {
+          mesh.material.map.premultiplyAlpha = false;
+          mesh.material.map.colorSpace = 'srgb';
+          mesh.material.map.needsUpdate = true;
+        }
+      } catch(e) {}
+    }, 100);
+  }
+
+  // Screen-Share-Text auf der Content-Leinwand
+  var screenText = document.getElementById('screen-text');
+  if (screenText) screenText.setAttribute('value', '📺 ' + identity + ' teilt');
+}
+
+// Screen-Share beenden (vordere Leinwand zurücksetzen)
+function clearScreenShare() {
+  var videoEl = document.getElementById('screen-share-video');
+  if (videoEl && videoEl.srcObject) {
+    videoEl.srcObject = null;
+  }
+  var screen = document.getElementById('video-screen');
+  if (screen) screen.setAttribute('material', 'color: #1a1a2e');
+  var screenText = document.getElementById('screen-text');
+  if (screenText) screenText.setAttribute('value', '📺 Bibelstunde');
+  document.getElementById('screen-share-bar').style.display = 'none';
 }
 
 function addLiveKitParticipant(participant) {
@@ -653,7 +746,11 @@ function scanAllRemoteTracks(room) {
     console.log('🔍 Scanne Remote: ' + participant.identity);
     participant.trackPublications.forEach(function(pub) {
       if (pub.track && pub.track.kind === 'video') {
-        handleRemoteVideoTrack(pub.track, participant);
+        if (pub.source === 'screen_share') {
+          handleScreenShareTrack(pub.track, participant);
+        } else {
+          handleRemoteVideoTrack(pub.track, participant);
+        }
       }
     });
   });
@@ -830,6 +927,14 @@ document.addEventListener('DOMContentLoaded', () => {
     myCameraEnabled = !myCameraEnabled;
     toggleOwnCamera(myCameraEnabled);
     document.getElementById('toggle-cam').textContent = myCameraEnabled ? '📹 Aus' : '📹 Kamera';
+  });
+
+  // Screen-Share-Button: Bildschirm teilen
+  var myScreenEnabled = false;
+  document.getElementById('toggle-screen')?.addEventListener('click', () => {
+    myScreenEnabled = !myScreenEnabled;
+    toggleOwnScreen(myScreenEnabled);
+    document.getElementById('toggle-screen').textContent = myScreenEnabled ? '📺 Stop' : '📺 Teilen';
   });
 
   // Chat-Toggle
