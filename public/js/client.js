@@ -494,7 +494,7 @@ async function joinLiveKitRoom(userName) {
     livekitConnected = true;
 
     // Canvas-Rendering starten
-    startVideoGridRendering();
+    rebuildVideoGrid();
 
     // Desktop-Galerie anzeigen
     const lkContainer = document.getElementById('livekit-container');
@@ -529,6 +529,9 @@ function removeLiveKitParticipant(identity) {
   if (tile) tile.remove();
 
   updateGridText();
+
+  // A-Frame-Kacheln neu aufbauen
+  rebuildVideoGrid();
 }
 
 function addToDesktopGrid(identity, videoEl) {
@@ -627,6 +630,7 @@ function setupLocalVideo(userName, track) {
 
     addToDesktopGrid(userName, localVideoEl);
     console.log('📹 Lokaler LiveKit-Track geladen');
+    rebuildVideoGrid();
     // Lokales Video NIEMALS auf die Leinwand – nur Remote!
   } catch(e) {
     console.warn('⚠️ Lokaler Video-Track nicht verfügbar:', e);
@@ -672,10 +676,12 @@ function handleRemoteVideoTrack(track, participant) {
 
   console.log('✅ Remote Video von ' + identity + ' gespeichert');
   showToast('📹 ' + identity + ' Kamera empfangen');
-  updateGridText();
 
   // 4. Zur Desktop-Galerie hinzufügen
   addToDesktopGrid(identity, videoEl);
+
+  // 5. A-Frame-Kachel auf der linken Wand neu aufbauen
+  rebuildVideoGrid();
 }
 
 // === AKTIVE SUCHE NACH REMOTE TRACKS ===
@@ -690,133 +696,59 @@ function scanAllRemoteTracks(room) {
   });
 }
 
-// === VIDEO-RASTER AUF CANVAS ZEICHNEN (THREE.js direkt) ===
-function startVideoGridRendering() {
-  const canvas = document.getElementById('video-grid-canvas');
-  if (!canvas) return;
+// === VIDEO-KACHELN AUF DER LINKEN WAND ===
+// Jede Kamera bekommt eine eigene A-Frame-Plane mit dem Video direkt als Textur
+function rebuildVideoGrid() {
+  const container = document.getElementById('video-grid-container');
+  if (!container) return;
 
-  const ctx = canvas.getContext('2d', { alpha: false });
-  let threeTexture = null;
-  let threeMaterial = null;
-
-  // Einmalig die THREE.js-Textur initialisieren (NICHT über setAttribute!)
-  function initThreeTexture() {
-    const gridScreen = document.getElementById('video-grid-screen');
-    if (!gridScreen) return false;
-    try {
-      var mesh = gridScreen.getObject3D('mesh');
-      if (!mesh) return false;
-      // Canvas-Textur direkt auf das THREE.Material setzen
-      threeTexture = new THREE.CanvasTexture(canvas);
-      threeTexture.minFilter = THREE.LinearFilter;
-      threeTexture.magFilter = THREE.LinearFilter;
-      threeTexture.premultiplyAlpha = false;
-      threeTexture.colorSpace = THREE.SRGBColorSpace;
-      threeTexture.needsUpdate = true;
-      mesh.material.map = threeTexture;
-      mesh.material.color.setHex(0xffffff);
-      mesh.material.needsUpdate = true;
-      threeMaterial = mesh.material;
-      console.log('🎨 Canvas-Textur initialisiert (THREE.js direkt)');
-      return true;
-    } catch(e) {
-      console.warn('⚠️ THREE.js Init fehlgeschlagen:', e);
-      return false;
-    }
+  // Alte Kacheln entfernen
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
   }
 
-  function render() {
-    try {
-      // Texture ggf. nachinitialisieren
-      if (!threeTexture || !threeMaterial) {
-        if (!initThreeTexture()) {
-          // A-Frame noch nicht fertig – später wieder versuchen
-          canvasAnimFrame = requestAnimationFrame(render);
-          return;
-        }
-      }
+  // Teilnehmer mit Video holen
+  const participants = Object.entries(livekitParticipantTracks).filter(([id, p]) => p.video !== null);
+  const count = participants.length;
 
-      const participants = Object.entries(livekitParticipantTracks).filter(([id, p]) => p.video !== null);
-      const count = participants.length;
-
-      ctx.fillStyle = '#0a0a1e';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      if (count > 0) {
-        const cols = Math.ceil(Math.sqrt(count));
-        const rows = Math.ceil(count / cols);
-        const cellW = canvas.width / cols;
-        const cellH = canvas.height / rows;
-
-        participants.forEach(([identity, p], index) => {
-          const col = index % cols;
-          const row = Math.floor(index / cols);
-          const x = col * cellW;
-          const y = row * cellH;
-
-          if (p.video) {
-            try {
-              // Video spielen falls pausiert
-              if (p.video.paused && p.video.readyState > 0) {
-                p.video.play().catch(function(){});
-              }
-              if (p.video.videoWidth > 0 && p.video.videoHeight > 0) {
-                const vidRatio = p.video.videoWidth / p.video.videoHeight;
-                const cellRatio = cellW / cellH;
-                let sx, sy, sw, sh;
-                if (vidRatio > cellRatio) {
-                  sh = p.video.videoHeight;
-                  sw = sh * cellRatio;
-                  sx = (p.video.videoWidth - sw) / 2;
-                  sy = 0;
-                } else {
-                  sw = p.video.videoWidth;
-                  sh = sw / cellRatio;
-                  sx = 0;
-                  sy = (p.video.videoHeight - sh) / 2;
-                }
-                ctx.drawImage(p.video, sx, sy, sw, sh, x, y, cellW, cellH);
-              } else {
-                ctx.drawImage(p.video, x, y, cellW, cellH);
-              }
-            } catch(e) {}
-          }
-
-          // Rahmen
-          ctx.strokeStyle = '#FFD700';
-          ctx.lineWidth = 2;
-          ctx.strokeRect(x + 2, y + 2, cellW - 4, cellH - 4);
-
-          // Namenslabel
-          ctx.fillStyle = 'rgba(0,0,0,0.6)';
-          ctx.fillRect(x + 4, y + cellH - 30, cellW - 8, 26);
-          ctx.fillStyle = '#fff';
-          ctx.font = '14px Arial';
-          ctx.textAlign = 'left';
-          ctx.fillText(p.name, x + 10, y + cellH - 10);
-        });
-      }
-
-      // ★ DIRECT: THREE.js-Textur zum Neu-Laden zwingen
-      if (threeTexture) {
-        threeTexture.needsUpdate = true;
-      }
-      if (threeMaterial) {
-        threeMaterial.needsUpdate = true;
-      }
-    } catch(e) {
-      console.warn('Canvas-Render-Fehler:', e);
-    }
-
-    canvasAnimFrame = requestAnimationFrame(render);
-  }
-
-  // AM START: Sofort initialisieren (A-Frame ist zu dem Zeitpunkt schon geladen)
-  setTimeout(function() {
-    initThreeTexture();
-    render();
+  if (count === 0) {
     updateGridText();
-  }, 500);
+    return;
+  }
+
+  // Raster berechnen
+  const cols = Math.ceil(Math.sqrt(count));
+  const rows = Math.ceil(count / cols);
+  const tileW = 4.3 / cols;
+  const tileH = 2.6 / rows;
+
+  participants.forEach(([identity, p], index) => {
+    const col = index % cols;
+    const row = Math.floor(index / cols);
+    const x = -4.3/2 + col * tileW + tileW/2;
+    const y = 2.6/2 - row * tileH - tileH/2;
+
+    // Plane für diese Kamera erstellen
+    const plane = document.createElement('a-plane');
+    plane.setAttribute('depth', '0.01');
+    plane.setAttribute('width', (tileW - 0.1).toString());
+    plane.setAttribute('height', (tileH - 0.1).toString());
+    plane.setAttribute('position', x + ' ' + y + ' 0');
+
+    // Video direkt als Textur setzen (KEIN Canvas!)
+    var videoId = 'lk-tile-video-' + identity;
+    var videoEl = document.getElementById(videoId);
+    if (videoEl && videoEl.srcObject) {
+      plane.setAttribute('material', 'shader: flat; src: #' + videoId + '; color: #ffffff');
+    } else {
+      // Fallback: schwarze Kachel
+      plane.setAttribute('material', 'color: #1a1a2e');
+    }
+
+    container.appendChild(plane);
+  });
+
+  updateGridText();
 }
 
 // === LOKALE WEBCAM FÜR DIE CONTENT-LEINWAND (vorne) ===

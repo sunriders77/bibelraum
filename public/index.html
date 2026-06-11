@@ -353,13 +353,12 @@
         color="#888" width="3" negate="false"></a-text>
     </a-entity>
 
-    <!-- Große Videoleinwand für Webcams (linke Wand, gegenüber den Bildern) -->
+    <!-- Große Videoleinwand für Webcams (linke Wand) -->
     <a-entity id="video-grid-frame" position="-5.8 2.2 0" rotation="0 90 0">
       <!-- Rahmen -->
       <a-box depth="0.1" height="2.8" width="4.5" color="#2C1810" position="0 0 0"></a-box>
-      <!-- Die Leinwand – zeigt das Canvas mit allen Webcams -->
-      <a-plane id="video-grid-screen" depth="0.01" height="2.6" width="4.3"
-        position="0 0 0.07" material="shader: flat; src: #video-grid-canvas; color: #ffffff"></a-plane>
+      <!-- Container für dynamische Video-Kacheln (jede Kamera bekommt eigene Plane) -->
+      <a-entity id="video-grid-container" position="0 0 0.07"></a-entity>
       <!-- Status-Text -->
       <a-text id="grid-text" value="📹 Webcams" position="0 -1.4 0.08" align="center"
         color="#888" width="4" negate="false"></a-text>
