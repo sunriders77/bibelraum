@@ -189,7 +189,7 @@ io.on('connection', (socket) => {
   var startPositions = [
     { x: -2.5, z: -1.5 },
     { x: -1.5, z: -2.5 },
-    { x: 0, z: -3 },
+    { x: 0.5, z: -2.2 },  // geändert – kein Konflikt mit Bot (0, 1.0, -3)
     { x: 1.5, z: -2.5 },
     { x: 2.5, z: -1.5 },
     { x: -3, z: 1 },
